@@ -4,7 +4,6 @@ target/
 ### Eclipse & STS ###
 .apt_generated
 .factorypath
-.settings
 .springBeans
 
 ### IntelliJ IDEA ###
