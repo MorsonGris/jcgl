@@ -16,6 +16,15 @@
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>
 
+	<filter>
+		<filter-name>LoginFilter</filter-name>
+		<filter-class>com.xin.commons.utils.LoginFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>LoginFilter</filter-name>
+		<url-pattern>/views/login.jsp</url-pattern>
+	</filter-mapping>
+
     <!-- Character Encoding filter 解决中文问题 -->
     <filter>
         <filter-name>encodingFilter</filter-name>
