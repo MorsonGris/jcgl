@@ -5,6 +5,9 @@ target/
 .apt_generated
 .factorypath
 .springBeans
+.classpath
+.project
+.settings
 
 ### IntelliJ IDEA ###
 .idea
