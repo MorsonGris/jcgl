@@ -3,7 +3,7 @@
 <mapper namespace="com.xin.mapper.FinanceMapper">
 
 	<!-- 通用查询映射结果 -->
-	<resultMap id="BaseResultMap" type="com.xin.model.Finance">
+	<resultMap id="BaseResultMap" type="com.xin.bean.Finance">
 		<id column="f_id" property="fId" />
 		<result column="stu_id" property="stuId" />
 		<result column="tea_class" property="teaClass" />

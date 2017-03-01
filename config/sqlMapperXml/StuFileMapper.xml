@@ -3,7 +3,7 @@
 <mapper namespace="com.xin.mapper.StuFileMapper">
 
 	<!-- 通用查询映射结果 -->
-	<resultMap id="BaseResultMap" type="com.xin.model.StuFile">
+	<resultMap id="BaseResultMap" type="com.xin.bean.StuFile">
 		<id column="sf_id" property="sfId" />
 		<result column="stu_id" property="stuId" />
 		<result column="sf_photo" property="sfPhoto" />

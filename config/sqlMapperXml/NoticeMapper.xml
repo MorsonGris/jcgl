@@ -3,7 +3,7 @@
 <mapper namespace="com.xin.mapper.NoticeMapper">
 
 	<!-- 通用查询映射结果 -->
-	<resultMap id="BaseResultMap" type="com.xin.model.Notice">
+	<resultMap id="BaseResultMap" type="com.xin.bean.Notice">
 		<id column="n_id" property="nId" />
 		<result column="n_title" property="nTitle" />
 		<result column="n_content" property="nContent" />

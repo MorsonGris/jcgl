@@ -3,7 +3,7 @@
 <mapper namespace="com.xin.mapper.ApplyTypeMapper">
 
 	<!-- 通用查询映射结果 -->
-	<resultMap id="BaseResultMap" type="com.xin.model.ApplyType">
+	<resultMap id="BaseResultMap" type="com.xin.bean.ApplyType">
 		<id column="at_id" property="atId" />
 		<result column="at_name" property="atName" />
 		<result column="at_icon" property="atIcon" />

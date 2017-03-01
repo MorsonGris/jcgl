@@ -3,7 +3,7 @@
 <mapper namespace="com.xin.mapper.AcademyMapper">
 
 	<!-- 通用查询映射结果 -->
-	<resultMap id="BaseResultMap" type="com.xin.model.Academy">
+	<resultMap id="BaseResultMap" type="com.xin.bean.Academy">
 		<id column="a_id" property="aId" />
 		<result column="a_school" property="aSchool" />
 		<result column="a_major" property="aMajor" />

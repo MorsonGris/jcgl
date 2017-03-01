@@ -3,7 +3,7 @@
 <mapper namespace="com.xin.mapper.StudentMapper">
 
 	<!-- 通用查询映射结果 -->
-	<resultMap id="BaseResultMap" type="com.xin.model.Student">
+	<resultMap id="BaseResultMap" type="com.xin.bean.Student">
 		<id column="s_id" property="sId" />
 		<result column="s_name" property="sName" />
 		<result column="user_id" property="userId" />

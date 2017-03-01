@@ -3,7 +3,7 @@
 <mapper namespace="com.xin.mapper.RelationMapper">
 
 	<!-- 通用查询映射结果 -->
-	<resultMap id="BaseResultMap" type="com.xin.model.Relation">
+	<resultMap id="BaseResultMap" type="com.xin.bean.Relation">
 		<id column="r_id" property="rId" />
 		<result column="r_qq" property="rQq" />
 		<result column="r_content" property="rContent" />

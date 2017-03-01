@@ -3,7 +3,7 @@
 <mapper namespace="com.xin.mapper.ScheduleMapper">
 
 	<!-- 通用查询映射结果 -->
-	<resultMap id="BaseResultMap" type="com.xin.model.Schedule">
+	<resultMap id="BaseResultMap" type="com.xin.bean.Schedule">
 		<id column="s_id" property="sId" />
 		<result column="user_id" property="userId" />
 		<result column="s_content" property="sContent" />
