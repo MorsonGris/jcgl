@@ -35,7 +35,6 @@ public class UserController extends BaseController {
 
     /**
      * 用户管理页
-     *
      * @return
      */
     @GetMapping("/manager")
