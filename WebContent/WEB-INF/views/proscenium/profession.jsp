@@ -7,6 +7,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>信考网-职业培训</title>
+    <link rel="shortcut icon" href="<%=path %>/static/proscenium/logo/favicon2.ico" /> 
     <link href="<%=path%>/static/proscenium/css/bootstrap.min.css" rel="stylesheet">
     <link href="<%=path%>/static/proscenium/css/style.css" rel="stylesheet">
 </head>

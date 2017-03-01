@@ -2,7 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta http-equiv="X-UA-Compatible" content="edge" />
-<link rel="shortcut icon" href="${staticPath }/static/style/images/favicon.ico" />
+<link rel="shortcut icon" href="${staticPath }/static/proscenium/logo/favicon2.ico" /> 
 <%-- [my97日期时间控件] --%>
 <script type="text/javascript" src="${staticPath }/static/My97DatePicker/WdatePicker.js" charset="utf-8"></script>
 <%-- [jQuery] --%>
