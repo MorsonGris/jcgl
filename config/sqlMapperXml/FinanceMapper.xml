@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xin.mapper.FinanceMapper">
+
+	<!-- 通用查询映射结果 -->
+	<resultMap id="BaseResultMap" type="com.xin.model.Finance">
+		<id column="f_id" property="fId" />
+		<result column="stu_id" property="stuId" />
+		<result column="tea_class" property="teaClass" />
+		<result column="need_money" property="needMoney" />
+		<result column="practical_money" property="practicalMoney" />
+		<result column="f_date" property="fDate" />
+		<result column="f_way" property="fWay" />
+		<result column="f_accumulative" property="fAccumulative" />
+		<result column="f_state" property="fState" />
+		<result column="f_obligate" property="fObligate" />
+	</resultMap>
+
+</mapper>

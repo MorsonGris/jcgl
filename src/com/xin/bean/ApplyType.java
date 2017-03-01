@@ -6,12 +6,10 @@ import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.annotations.TableName;
 import java.io.Serializable;
 
-
 /**
  * <p>
- * 
+ * 报名分类
  * </p>
- *
  * @author com.xin
  * @since 2017-02-28
  */
@@ -24,7 +22,8 @@ public class ApplyType extends Model<ApplyType> {
 	private Integer atId;
 	@TableField("at_name")
 	private String atName;
-
+	@TableField("at_icon")
+	private String aticon;
 
 	public Integer getAtId() {
 		return atId;
@@ -45,6 +44,14 @@ public class ApplyType extends Model<ApplyType> {
 	@Override
 	protected Serializable pkVal() {
 		return this.atId;
+	}
+
+	public String getAticon() {
+		return aticon;
+	}
+
+	public void setAticon(String aticon) {
+		this.aticon = aticon;
 	}
 
 }

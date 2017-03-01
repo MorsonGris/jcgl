@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xin.mapper.ScheduleMapper">
+
+	<!-- 通用查询映射结果 -->
+	<resultMap id="BaseResultMap" type="com.xin.model.Schedule">
+		<id column="s_id" property="sId" />
+		<result column="user_id" property="userId" />
+		<result column="s_content" property="sContent" />
+		<result column="s_date" property="sDate" />
+		<result column="s_flag" property="sFlag" />
+	</resultMap>
+
+</mapper>
