@@ -27,6 +27,7 @@ import com.xin.commons.utils.StringUtils;
  */
 @Controller
 public class LoginController extends BaseController {
+	
     /**
      * 首页
      *
@@ -34,7 +35,7 @@ public class LoginController extends BaseController {
      */
     @GetMapping("/admin")
     public String index() {
-        return "redirect:/index";
+    	return "redirect:/admin/index";
     }
     
     
@@ -52,7 +53,7 @@ public class LoginController extends BaseController {
      * @param model
      * @return
      */
-    @GetMapping("/index")
+    @GetMapping("/admin/index")
     public String index(Model model) {
         return "index";
     }
@@ -66,7 +67,7 @@ public class LoginController extends BaseController {
     public String login() {
         logger.info("GET请求登录");
         if (SecurityUtils.getSubject().isAuthenticated()) {
-            return "redirect:/index";
+            return "redirect:/admin/index";
         }
         return "login";
     }
