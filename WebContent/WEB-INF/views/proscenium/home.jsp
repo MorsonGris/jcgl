@@ -11,7 +11,7 @@
     <link href="<%=path %>/static/proscenium/css/bootstrap.min.css" rel="stylesheet">
     <link href="<%=path %>/static/proscenium/css/style.css" rel="stylesheet">
     <style>
-        .float{
+       .float{
             width:80px;
             height:160px;
             text-align: right;
@@ -37,9 +37,9 @@
             display: none;
             position: absolute;
             top: 9%;
-            left: 50%;
-            width: 40%;
-            height: 90%;
+            left: 5%;
+            width: 80%;
+            height: 50%;
             border: 1px solid #999999;
             background-color: white;
             z-index:1002;
@@ -123,24 +123,28 @@
             <div class="col-xs-3">
                 <a href="index/apply">
                     <img alt="80x80" src="<%=path %>/static/proscenium/phoneIcon/blimp.png" class="img-circle home-ico" />
+                    <br>
                     <span class="home_operation">学生报名</span>
                 </a>
             </div>
             <div class="col-xs-3 column">
                 <a href="home.html">
                     <img alt="80x80" src="<%=path %>/static/proscenium/phoneIcon/compose.png" class="img-circle home-ico" />
+                    <br>
                     <span class="home_operation">缴费查询</span>
                 </a>
             </div>
             <div class="col-xs-3 column">
                 <a href="home.html">
                     <img alt="80x80" src="<%=path %>/static/proscenium/phoneIcon/gear.png" class="img-circle home-ico" />
+                    <br>
                     <span class="home_operation">学籍查询</span>
                 </a>
             </div>
             <div class="col-xs-3 column">
                 <a href="home.html">
                     <img alt="80x80" src="<%=path %>/static/proscenium/phoneIcon/speaker.png" class="img-circle home-ico" />
+                    <br>
                     <span class="home_operation">网上学习</span>
                 </a>
             </div>
@@ -149,24 +153,28 @@
             <div class="col-xs-3 column">
                 <a href="home.html">
                     <img alt="80x80" src="<%=path %>/static/proscenium/phoneIcon/flame.png" class="img-circle home-ico" />
+                    <br>
                     <span class="home_operation">上传文件</span>
                 </a>
             </div>
             <div class="col-xs-3 column">
                 <a href="home.html">
                     <img alt="80x80" src="<%=path %>/static/proscenium/phoneIcon/phone.png" class="img-circle home-ico" />
+                    <br>
                     <span class="home_operation">培训管理</span>
                 </a>
             </div>
             <div class="col-xs-3 column">
                 <a href="eguide">
                     <img alt="140x140" src="<%=path %>/static/proscenium/phoneIcon/image.png" class="img-circle home-ico" />
+                    <br>
                     <span class="home_operation">招生简章</span>
                 </a>
             </div>
             <div class="col-xs-3 column">
                 <a href="home.html">
                     <img alt="80x80" src="<%=path %>/static/proscenium/phoneIcon/present.png" class="img-circle home-ico" />
+                    <br>
                     <span class="home_operation">工作助手</span>
                 </a>
             </div>
@@ -310,49 +318,57 @@
     </p>
 
 </div>
-<div id="light" class="white_content">
+<div id="light" class="white_content float">
     <div class="phone-head" style="text-align: right;background-color: #2acb6b;">
         <a href = "javascript:void(0)" id="closePhone">
             <img src="<%=path %>/static/proscenium/images/close.png" style="margin-right: 10px;">
         </a>
     </div>
     <div class="phone-body" style="text-align: center;">
-        <p><span>成考</span></p>
-        <p>
-            <span>李老师： </span>
-            <img src="<%=path %>/static/proscenium/images/qq1.png" style="">
-        </p>
-        <p>
-            <img src="<%=path %>/static/proscenium/images/phone8.png" style="">
-            <span>1889765413</span>
-        </p>
-        <p><span>远程</span></p>
-        <p>
-            <span>张老师： </span>
-            <img src="<%=path %>/static/proscenium/images/qq1.png" style="">
-        </p>
-        <p>
-            <img src="<%=path %>/static/proscenium/images/phone8.png" style="">
-            <span>1889765413</span>
-        </p>
-        <p><span>财务</span></p>
-        <p>
-            <span>赖老师： </span>
-            <img src="<%=path %>/static/proscenium/images/qq1.png" style="">
-        </p>
-        <p>
-            <img src="<%=path %>/static/proscenium/images/phone8.png" style="">
-            <span>1889765413</span>
-        </p>
-        <p><span>学籍</span></p>
-        <p>
-            <span>王老师： </span>
-            <img src="<%=path %>/static/proscenium/images/qq1.png" style="">
-        </p>
-        <p>
-            <img src="<%=path %>/static/proscenium/images/phone8.png" style="">
-            <span>1889765413</span>
-        </p>
+    	<div class="container">
+    		<div class ="row">
+	    		<div class="col-xs-6 column">
+	    			<p><span>成考</span></p>
+			        <p>
+			            <span>李老师： </span>
+			            <img src="<%=path %>/static/proscenium/images/qq1.png" style="">
+			        </p>
+			        <p>
+			            <img src="<%=path %>/static/proscenium/images/phone8.png" style="">
+			            <span>1889765413</span>
+			        </p>
+			        <p><span>远程</span></p>
+			        <p>
+			            <span>张老师： </span>
+			            <img src="<%=path %>/static/proscenium/images/qq1.png" style="">
+			        </p>
+			        <p>
+			            <img src="<%=path %>/static/proscenium/images/phone8.png" style="">
+			            <span>1889765413</span>
+			        </p>
+	    		</div>
+	    		<div class="col-xs-6 column">
+	    			<p><span>财务</span></p>
+			        <p>
+			            <span>赖老师： </span>
+			            <img src="<%=path %>/static/proscenium/images/qq1.png" style="">
+			        </p>
+			        <p>
+			            <img src="<%=path %>/static/proscenium/images/phone8.png" style="">
+			            <span>1889765413</span>
+			        </p>
+			        <p><span>学籍</span></p>
+			        <p>
+			            <span>王老师： </span>
+			            <img src="<%=path %>/static/proscenium/images/qq1.png" style="">
+			        </p>
+			        <p>
+			            <img src="<%=path %>/static/proscenium/images/phone8.png" style="">
+			            <span>1889765413</span>
+			        </p>
+	    		</div>
+	    	</div>   
+    	</div>
     </div>
 </div>
 <!--<div id="fade" class="black_overlay"></div>-->
