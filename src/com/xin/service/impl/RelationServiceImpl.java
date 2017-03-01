@@ -4,6 +4,8 @@ import com.xin.bean.Relation;
 import com.xin.mapper.RelationMapper;
 import com.xin.service.IRelationService;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -16,5 +18,9 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class RelationServiceImpl extends ServiceImpl<RelationMapper, Relation> implements IRelationService {
+	
+	@Autowired
+	private RelationMapper relationMapper;
+	
 	
 }
