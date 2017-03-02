@@ -1,10 +1,9 @@
 package com.xin.bean;
 
-import com.baomidou.mybatisplus.activerecord.Model;
 import java.util.Date;
-import com.baomidou.mybatisplus.annotations.TableId;
+
 import com.baomidou.mybatisplus.annotations.TableField;
-import java.io.Serializable;
+import com.baomidou.mybatisplus.annotations.TableId;
 
 
 /**
@@ -15,9 +14,7 @@ import java.io.Serializable;
  * @author com.xin
  * @since 2017-02-28
  */
-public class Student extends Model<Student> {
-
-    private static final long serialVersionUID = 1L;
+public class Student{
 
 	@TableId("s_id")
 	private Integer sId;
@@ -120,10 +117,4 @@ public class Student extends Model<Student> {
 	public void setSDate(Date sDate) {
 		this.sDate = sDate;
 	}
-
-	@Override
-	protected Serializable pkVal() {
-		return this.sId;
-	}
-
 }

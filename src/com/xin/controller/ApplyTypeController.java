@@ -2,12 +2,14 @@ package com.xin.controller;
 
 import java.util.HashMap;
 import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
+
 import com.xin.bean.ApplyType;
 import com.xin.commons.base.BaseController;
 import com.xin.commons.utils.PageInfo;
@@ -26,13 +28,18 @@ public class ApplyTypeController extends BaseController{
     
     @Autowired private IApplyTypeService applyTypeService;
     
+    @GetMapping("/apply")
+    public String applyType(){
+    	return "admin/student/applyType";
+    }
+    
     /**
      * 添加页面
      * @return
      */
     @GetMapping("/addpage")
     public String addpage(){
-    	return "student/applyTypeAdd";
+    	return "admin/student/applyTypeAdd";
     }
     
     /**
@@ -42,8 +49,12 @@ public class ApplyTypeController extends BaseController{
     @RequestMapping("/add")
     @ResponseBody
     public Object add(ApplyType applyType){
-    	applyTypeService.insert(applyType);
-    	return renderSuccess("添加成功");
+    	boolean result = applyTypeService.insertByid(applyType);
+    	if(result == true){
+    		return renderSuccess("添加成功");
+    	}
+    	return renderError("添加失败");
+    	
     }
     
     /**
@@ -52,9 +63,12 @@ public class ApplyTypeController extends BaseController{
      */
     @RequestMapping("/delete")
     @ResponseBody
-    public Object delete(ApplyType applyType){
-    	applyTypeService.deleteById(applyType);
-    	return renderSuccess("删除成功");
+    public Object delete(int id){
+    	boolean result = applyTypeService.deleteById(id);
+    	if(result == true){
+    		return renderSuccess("删除成功");
+    	}
+    	return renderError("删除失败");
     }
     
     /**
@@ -84,10 +98,10 @@ public class ApplyTypeController extends BaseController{
      * @return
      */
     @GetMapping("/editpage")
-    public String edit(ModelAndView modelAndView, int id){
+    public String edit(Model model, int id){
     	ApplyType applyType = applyTypeService.selectById(id);
-    	modelAndView.addObject("applyType", applyType);
-    	return "student/applyTypeEdit";
+    	model.addAttribute("applyType", applyType);
+    	return "admin/student/applyTypeEdit";
     }
     
     /**
@@ -97,7 +111,11 @@ public class ApplyTypeController extends BaseController{
     @RequestMapping("/edit")
     @ResponseBody
     public Object edit(ApplyType applyType){
-    	applyTypeService.updateById(applyType);
-    	return renderSuccess("修改成功");
+    	System.out.println(applyType.getAtId());
+    	boolean result = applyTypeService.updateById(applyType);
+    	if(result == true){
+    		return renderSuccess("修改成功");
+    	}
+    	return renderError("修改失败");
     }
 }

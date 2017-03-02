@@ -1,10 +1,9 @@
 package com.xin.mapper;
 
-import com.xin.bean.ApplyType;
 import java.util.List;
 import java.util.Map;
-import com.baomidou.mybatisplus.mapper.BaseMapper;
 import com.baomidou.mybatisplus.plugins.pagination.Pagination;
+import com.xin.bean.ApplyType;
 
 /**
  * <p>
@@ -13,6 +12,10 @@ import com.baomidou.mybatisplus.plugins.pagination.Pagination;
  * @author com.xin
  * @since 2017-02-28
  */
-public interface ApplyTypeMapper extends BaseMapper<ApplyType> {
-	 List<ApplyType> selectPage(Pagination page, Map<String, Object> params);
+public interface ApplyTypeMapper{
+	boolean deleteById(int id);
+	ApplyType selectById(int id);
+	boolean updateById(ApplyType applyType);
+	boolean insertByid(ApplyType applyType);
+	List<ApplyType> selectPage(Pagination page, Map<String, Object> params);
 }
