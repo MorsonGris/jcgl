@@ -46,4 +46,8 @@
 		</set>
 		where r_id=#{rId}
 	</update>
+	
+	<delete id="deleteRelation" parameterType="Integer">
+		delete from relation where r_id=#{rId}
+	</delete>
 </mapper>

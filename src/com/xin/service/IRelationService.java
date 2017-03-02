@@ -17,4 +17,8 @@ public interface IRelationService {
 	int addRelation(Relation relaiton);
 	
 	Relation selectRelationById(int id);
+	
+	int updateRelation(Relation relation);
+	
+	void deleteRelation(int id);
 }

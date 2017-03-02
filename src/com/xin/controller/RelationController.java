@@ -96,14 +96,27 @@ public class RelationController extends BaseController{
      * @param Relation
      * @return
      */
-    /*@PostMapping("/edit")
+    @PostMapping("/edit")
     @ResponseBody
     public Object edit(Relation relation) {
-    	boolean result = relationService.updateById(relation);
-    	if(result) {
+    	int result = relationService.updateRelation(relation);
+    	if(result>0) {
     		return renderSuccess("添加成功");
     	}else {
     		return renderSuccess("添加失败");
     	}
-    }*/
+    }
+    
+    /**
+     * 删除用户
+     *
+     * @param id
+     * @return
+     */
+    @RequestMapping("/delete")
+    @ResponseBody
+    public Object delete(int id) {
+        relationService.deleteRelation(id);
+        return renderSuccess("删除成功！");
+    }
 }

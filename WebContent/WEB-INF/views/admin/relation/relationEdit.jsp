@@ -17,7 +17,7 @@
                 progressClose();
                 result = $.parseJSON(result);
                 if (result.success) {
-                    parent.$.modalDialog.openner_treeGrid.treegrid('reload');//之所以能在这里调用到parent.$.modalDialog.openner_treeGrid这个对象，是因为organization.jsp页面预定义好了
+                	parent.$.modalDialog.openner_dataGrid.datagrid('reload'); //之所以能在这里调用到parent.$.modalDialog.openner_treeGrid这个对象，是因为organization.jsp页面预定义好了
                     parent.$.modalDialog.handler.dialog('close');
                 }
             }
@@ -30,7 +30,10 @@
         <table class="grid">
             <tr>
                     <td>联系类型</td>
-                    <td><input name="rEffect" type="text" placeholder="请输入联系类型" class="easyui-validatebox" data-options="required:true" value="${relation.REffect}"></td>
+                    <td>
+                    	<input name="rId" type="hidden"  value="${relation.RId}">
+                    	<input name="rEffect" type="text" placeholder="请输入联系类型" class="easyui-validatebox" data-options="required:true" value="${relation.REffect}">
+                    </td>
                 </tr>
                 <tr>
                     <td>QQ号码</td>
