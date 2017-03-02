@@ -6,8 +6,44 @@
 	<resultMap id="BaseResultMap" type="com.xin.bean.Relation">
 		<id column="r_id" property="rId" />
 		<result column="r_qq" property="rQq" />
+		<result column="r_phone" property="rPhone" />
 		<result column="r_content" property="rContent" />
 		<result column="r_effect" property="rEffect" />
 	</resultMap>
-
+	
+	<select id="selectRelationPage" resultMap="BaseResultMap">
+		select r_id,r_qq,r_phone,r_content,r_effect from relation
+	</select>
+	
+	<select id="selectRelationById" parameterType="Integer" resultMap="BaseResultMap">
+		select r_id,r_qq,r_phone,r_content,r_effect from relation where r_id = #{id}
+	</select>
+	
+	<insert id="relationInsert" parameterType="com.xin.bean.Relation">
+		INSERT INTO RELATION(R_QQ,R_PHONE,R_CONTENT,R_EFFECT) VALUES(
+			#{rQq},
+			#{rPhone},
+			#{rContent},
+			#{rEffect}
+		)
+	</insert>
+	
+	<update id="updateRelation" parameterType="com.xin.bean.Relation">
+		update relation 
+		<set>
+			<if test="rQq!=null and rQq!='' ">
+				r_qq=#{rQq},
+			</if>
+			<if test="rPhone!=null and rPhone!='' ">
+				r_phone=#{rPhone},
+			</if>
+			<if test="rContent!=null and rContent!='' ">
+				r_content=#{rContent},
+			</if>
+			<if test="rEffect!=null and rEffect!='' ">
+				r_effect=#{rEffect},
+			</if>
+		</set>
+		where r_id=#{rId}
+	</update>
 </mapper>

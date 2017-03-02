@@ -18,10 +18,12 @@ public class Relation extends Model<Relation> {
 
     private static final long serialVersionUID = 1L;
 
-	@TableId("r_id")
+/*	@TableId("r_id")*/
 	private Integer rId;
 	@TableField("r_qq")
 	private String rQq;
+	@TableField("r_phone")
+	private String rPhone;
 	@TableField("r_content")
 	private String rContent;
 	@TableField("r_effect")
@@ -63,6 +65,14 @@ public class Relation extends Model<Relation> {
 	@Override
 	protected Serializable pkVal() {
 		return this.rId;
+	}
+
+	public String getRPhone() {
+		return rPhone;
+	}
+
+	public void setRPhone(String rPhone) {
+		this.rPhone = rPhone;
 	}
 
 }

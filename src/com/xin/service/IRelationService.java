@@ -1,7 +1,7 @@
 package com.xin.service;
 
 import com.xin.bean.Relation;
-import com.baomidou.mybatisplus.service.IService;
+import com.xin.commons.utils.PageInfo;
 
 /**
  * <p>
@@ -11,6 +11,10 @@ import com.baomidou.mybatisplus.service.IService;
  * @author com.xin
  * @since 2017-02-28
  */
-public interface IRelationService extends IService<Relation> {
+public interface IRelationService {
+	void selectDataGrid(PageInfo pageInfo);
 	
+	int addRelation(Relation relaiton);
+	
+	Relation selectRelationById(int id);
 }
