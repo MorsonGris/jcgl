@@ -15,5 +15,52 @@
 		<result column="s_systme" property="sSystme" />
 		<result column="s_date" property="sDate" />
 	</resultMap>
+	
+	<sql id="Studentcolumn">
+		s_name,user_id,id_number,s_phone,s_content,academy_id,s_gradations,s_systme,s_date
+	</sql>
+	
+	<sql id="Studentproperty">
+		sName,userId,idNumber,sPhone,sContent,academyId,sGradations,sSystme,sDate
+	</sql>
+
+	<insert id="insertByid" >
+		INSERT INTO apply_type(<include refid="Studentcolumn" />) 
+		VALUES(<include refid="Studentproperty"></include>)
+	</insert>
+	
+	<select id="selectById" resultMap="BaseResultMap">
+		SELECT * FROM student WHERE s_id = #{sId}
+	</select>
+	
+	<delete id="deleteById">
+		DELETE FROM student WHERE s_id = #{sId}
+	</delete>
+	
+	<update id="updateById">
+		UPDATE student SET 
+			s_name = #{sName},
+			user_id = #{userId},
+			id_number = #{idNumber},
+			s_phone = #{sPhone},
+			s_content = #{sContent},
+			academy_id = #{academyId},
+			s_gradations = #{sGradations},
+			s_systme = #{sSystme},
+			s_date = #{sDate}
+		 WHERE 
+		 	s_id = #{sId}
+	</update>
+    
+    <select id="selectPage" resultMap="BaseResultMap">
+    	SELECT *
+    	FROM student
+    	<where>
+    		<if test="name != null and name != '' ">
+    			at_name = #{name}
+    		</if>
+    	</where>
+    </select>
+    
 
 </mapper>

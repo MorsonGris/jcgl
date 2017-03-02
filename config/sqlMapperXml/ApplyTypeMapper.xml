@@ -8,5 +8,31 @@
 		<result column="at_name" property="atName" />
 		<result column="at_icon" property="atIcon" />
 	</resultMap>
-
+	
+	<insert id="insertByid" >
+		INSERT INTO apply_type(at_name,at_icon) VALUES(#{atName},#{atIcon})
+	</insert>
+	
+	<select id="selectById" resultMap="BaseResultMap">
+		SELECT * FROM apply_type WHERE at_id = #{atId}
+	</select>
+	
+	<delete id="deleteById">
+		DELETE FROM apply_type WHERE at_id = #{atId}
+	</delete>
+	
+	<update id="updateById">
+		UPDATE apply_type SET at_name = #{atName},at_icon = #{atIcon} WHERE at_id = #{atId}
+	</update>
+    
+    <select id="selectPage" resultMap="BaseResultMap">
+    	SELECT at_id, at_name, at_icon 
+    	FROM apply_type
+    	<where>
+    		<if test="name != null and name != '' ">
+    			at_name = #{name}
+    		</if>
+    	</where>
+    </select>
+    
 </mapper>
