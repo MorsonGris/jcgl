@@ -10,5 +10,58 @@
 		<result column="n_date" property="nDate" />
 		<result column="n_flag" property="nFlag" />
 	</resultMap>
-
+	
+	<select id="selectNoticePage" resultMap="BaseResultMap">
+		select n_id,n_title,n_content,n_date,n_flag from notice 
+		<where>
+            <if test=" nTitle != null and nTitle != '' ">
+                n_title = #{nTitle}
+            </if>
+            <if test=" nFlag != null ">
+              	n_flag = #{nFlag}
+            </if>
+            <if test=" startTime != null ">
+                <![CDATA[ and n_date >= #{startTime} ]]>
+            </if>
+            <if test=" endTime != null ">
+                <![CDATA[ and n_date <= #{endTime} ]]>
+            </if>
+        </where>
+	</select>
+	
+	<select id="selectNoticeById" parameterType="Integer" resultMap="BaseResultMap">
+		select n_id,n_title,n_content,n_date,n_flag from notice where n_id = #{id}
+	</select>
+	
+	<insert id="noticeInsert" parameterType="com.xin.bean.Notice">
+		INSERT INTO NOTICE(n_title,n_content,n_date,n_flag) VALUES(
+			#{nTitle},
+			#{nContent},
+			#{nDate},
+			#{nFlag}
+		)
+	</insert>
+	
+	<update id="updateNotice" parameterType="com.xin.bean.Notice">
+		update notice 
+		<set>
+			<if test="nTitle!=null and nTitle!='' ">
+				n_title=#{nTitle},
+			</if>
+			<if test="nContent!=null and nContent!='' ">
+				n_content=#{nContent},
+			</if>
+			<!-- <if test="nDate!=null and nDate!='' ">
+				n_date=#{nDate},
+			</if> -->
+			<if test="nFlag!=null and nFlag!='' ">
+				n_flag=#{nFlag},
+			</if>
+		</set>
+		where n_id=#{nId}
+	</update>
+	
+	<delete id="deleteNotice" parameterType="Integer">
+		delete from notice where n_id=#{nId}
+	</delete>
 </mapper>

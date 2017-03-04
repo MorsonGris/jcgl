@@ -1,16 +1,25 @@
 package com.xin.mapper;
 
 import com.xin.bean.Notice;
-import com.baomidou.mybatisplus.mapper.BaseMapper;
+
+import java.util.List;
+import java.util.Map;
+
+import com.baomidou.mybatisplus.plugins.pagination.Pagination;
 
 /**
- * <p>
-  *  Mapper 接口
- * </p>
  *
- * @author com.xin
- * @since 2017-02-28
+ * @author Mr. Lin
+ * @date 2017-3-2
  */
-public interface NoticeMapper extends BaseMapper<Notice> {
-
+public interface NoticeMapper {
+	List<Notice> selectNoticePage(Pagination page, Map<String, Object> params);
+	
+	int noticeInsert(Notice notice);
+	
+	Notice selectNoticeById(int id);
+	
+	int updateNotice(Notice notice);
+	
+	void deleteNotice(int id);
 }
