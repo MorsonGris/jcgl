@@ -51,5 +51,10 @@ public class StudentServiceImpl implements IStudentService {
 		pageInfo.setRows(list);
 		pageInfo.setTotal(page.getTotal());
 	}
+
+	@Override
+	public List<Student> selectAll() {
+		return Studentmapper.selectAll();
+	}
 	
 }

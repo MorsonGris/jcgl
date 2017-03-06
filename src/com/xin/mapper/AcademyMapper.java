@@ -1,7 +1,10 @@
 package com.xin.mapper;
 
+import java.util.List;
+import java.util.Map;
+
+import com.baomidou.mybatisplus.plugins.pagination.Pagination;
 import com.xin.bean.Academy;
-import com.baomidou.mybatisplus.mapper.BaseMapper;
 
 /**
  * <p>
@@ -11,6 +14,10 @@ import com.baomidou.mybatisplus.mapper.BaseMapper;
  * @author com.xin
  * @since 2017-02-28
  */
-public interface AcademyMapper extends BaseMapper<Academy> {
-
+public interface AcademyMapper{
+	boolean deleteById(int id);
+	Academy selectById(int id);
+	boolean updateById(Academy academy);
+	boolean insertByid(Academy academy);
+	List<Academy> selectPage(Pagination page, Map<String, Object> params);
 }

@@ -75,8 +75,7 @@
                 title : '电话',
                 field : 'phone',
                 sortable : true
-            }, 
-            {
+            },{
                 width : '200',
                 title : '角色',
                 field : 'rolesList',

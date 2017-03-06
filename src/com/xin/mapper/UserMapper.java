@@ -16,7 +16,7 @@ import com.xin.bean.vo.UserVo;
  *
  */
 public interface UserMapper extends BaseMapper<User> {
-
+	
     UserVo selectUserVoById(@Param("id") Long id);
 
     List<UserVo> selectUserVoPage(Pagination page, Map<String, Object> params);

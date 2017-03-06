@@ -1,16 +1,11 @@
 package com.xin.bean;
 
 import java.util.Date;
-
+import java.util.List;
 import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.annotations.TableId;
 
-
 /**
- * <p>
- * 
- * </p>
- *
  * @author com.xin
  * @since 2017-02-28
  */
@@ -18,6 +13,8 @@ public class Student{
 
 	@TableId("s_id")
 	private Integer sId;
+	@TableField("s_studentno")
+	private String studentNo;
 	@TableField("s_name")
 	private String sName;
 	@TableField("user_id")
@@ -37,6 +34,9 @@ public class Student{
 	@TableField("s_date")
 	private Date sDate;
 
+	private List<Academy> listAcademy;
+	
+	private List<User> listUser;
 
 	public Integer getSId() {
 		return sId;
@@ -52,6 +52,14 @@ public class Student{
 
 	public void setSName(String sName) {
 		this.sName = sName;
+	}
+
+	public List<User> getListUser() {
+		return listUser;
+	}
+
+	public void setListUser(List<User> listUser) {
+		this.listUser = listUser;
 	}
 
 	public Long getUserId() {
@@ -117,4 +125,21 @@ public class Student{
 	public void setSDate(Date sDate) {
 		this.sDate = sDate;
 	}
+
+	public String getStudentNo() {
+		return studentNo;
+	}
+
+	public void setStudentNo(String studentNo) {
+		this.studentNo = studentNo;
+	}
+
+	public List<Academy> getListAcademy() {
+		return listAcademy;
+	}
+
+	public void setListAcademy(List<Academy> listAcademy) {
+		this.listAcademy = listAcademy;
+	}
+	
 }

@@ -6,6 +6,7 @@
 	<resultMap id="BaseResultMap" type="com.xin.bean.Student">
 		<id column="s_id" property="sId" />
 		<result column="s_name" property="sName" />
+		<result column="s_studentno" property="studentNo"/>
 		<result column="user_id" property="userId" />
 		<result column="id_number" property="idNumber" />
 		<result column="s_phone" property="sPhone" />
@@ -14,19 +15,42 @@
 		<result column="s_gradations" property="sGradations" />
 		<result column="s_systme" property="sSystme" />
 		<result column="s_date" property="sDate" />
+		
+		<collection property="listAcademy" ofType ="com.xin.bean.Academy">
+			<id column="a_id" property="aId" />
+			<result column="a_school" property="aSchool" />
+			<result column="a_major" property="aMajor" />
+			<result column="a_flag" property="aFlag" />
+		</collection>
+		
+		<collection property="listUser" ofType="com.xin.bean.User">
+			<id column="id" property="id" />
+			<result column="name" property="name" />
+		</collection>	
 	</resultMap>
 	
 	<sql id="Studentcolumn">
-		s_name,user_id,id_number,s_phone,s_content,academy_id,s_gradations,s_systme,s_date
+		s_studentno,s_name,user_id,id_number,s_phone,s_content,academy_id,s_gradations,s_systme,s_date
 	</sql>
 	
-	<sql id="Studentproperty">
-		sName,userId,idNumber,sPhone,sContent,academyId,sGradations,sSystme,sDate
-	</sql>
+	<select id="selectAll" resultMap="BaseResultMap">
+		SELECT * FROM student
+	</select>
 
 	<insert id="insertByid" >
-		INSERT INTO apply_type(<include refid="Studentcolumn" />) 
-		VALUES(<include refid="Studentproperty"></include>)
+		INSERT INTO student(<include refid="Studentcolumn" />) 
+		VALUES(
+		#{studentNo},
+		#{sName},
+		#{userId},
+		#{idNumber},
+		#{sPhone},
+		#{sContent},
+		#{academyId},
+		#{sGradations},
+		#{sSystme},
+		#{sDate}
+		)
 	</insert>
 	
 	<select id="selectById" resultMap="BaseResultMap">
@@ -53,11 +77,31 @@
 	</update>
     
     <select id="selectPage" resultMap="BaseResultMap">
-    	SELECT *
-    	FROM student
+    	SELECT 
+    		s_id,
+	    	s_studentno,
+	    	s_name,
+	    	user_id,
+	    	id_number,
+	    	s_phone,
+	    	s_content,
+	    	academy_id,
+	    	s_gradations,
+	    	s_systme,
+	    	s_date,
+	    	a.a_id,
+	    	a.a_school,
+	    	u.id,
+	    	u.`name`
+    	FROM student s
+    	LEFT JOIN academy a ON s.academy_id = a.a_id
+    	LEFT JOIN user u ON s.user_id = u.id
     	<where>
     		<if test="name != null and name != '' ">
-    			at_name = #{name}
+    			s_name = #{name}
+    		</if>
+    		<if test="studentNo != null and studentNo != '' ">
+    			s_studentno = #{studentNo}
     		</if>
     	</where>
     </select>

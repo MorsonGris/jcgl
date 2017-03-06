@@ -1,21 +1,15 @@
 package com.xin.bean;
 
-import com.baomidou.mybatisplus.activerecord.Model;
-import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableField;
-import java.io.Serializable;
+import com.baomidou.mybatisplus.annotations.TableId;
+import com.baomidou.mybatisplus.annotations.TableName;
 
 /**
- * <p>
- * 
- * </p>
- *
  * @author com.xin
  * @since 2017-02-28
  */
-public class Academy extends Model<Academy> {
-
-    private static final long serialVersionUID = 1L;
+@TableName("Academy")
+public class Academy{
 
 	@TableId("a_id")
 	private Integer aId;
@@ -57,11 +51,6 @@ public class Academy extends Model<Academy> {
 
 	public void setAFlag(Integer aFlag) {
 		this.aFlag = aFlag;
-	}
-
-	@Override
-	protected Serializable pkVal() {
-		return this.aId;
 	}
 
 }

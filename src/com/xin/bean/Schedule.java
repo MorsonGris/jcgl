@@ -29,7 +29,8 @@ public class Schedule extends Model<Schedule> {
 	private Date sDate;
 	@TableField("s_flag")
 	private Integer sFlag;
-
+	private Date begintime;
+	private Date endtime;
 
 	public Integer getSId() {
 		return sId;
@@ -74,6 +75,22 @@ public class Schedule extends Model<Schedule> {
 	@Override
 	protected Serializable pkVal() {
 		return this.sId;
+	}
+
+	public Date getBegintime() {
+		return begintime;
+	}
+
+	public void setBegintime(Date begintime) {
+		this.begintime = begintime;
+	}
+
+	public Date getEndtime() {
+		return endtime;
+	}
+
+	public void setEndtime(Date endtime) {
+		this.endtime = endtime;
 	}
 
 }

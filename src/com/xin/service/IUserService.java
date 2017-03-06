@@ -13,7 +13,7 @@ import com.xin.bean.vo.UserVo;
  *
  */
 public interface IUserService extends IService<User> {
-
+	
     List<User> selectByLoginName(UserVo userVo);
 
     void insertByVo(UserVo userVo);

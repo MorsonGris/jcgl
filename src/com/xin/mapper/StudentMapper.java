@@ -15,6 +15,7 @@ import com.xin.bean.Student;
  * @since 2017-02-28
  */
 public interface StudentMapper{
+	List<Student> selectAll();
 	boolean deleteById(int id);
 	ApplyType selectById(int id);
 	boolean updateById(Student student);

@@ -1,29 +1,29 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/commons/global.jsp" %>
 <script type="text/javascript">
-    var applyTypeDataGrid;
+    var academyDataGrid;
 
     $(function() {
-    	applyTypeDataGrid = $('#applyTypeDataGrid').datagrid({
-            url : '${path }/applyType/dataGrid',
+    	academyDataGrid = $('#academyDataGrid').datagrid({
+            url : '${path }/academy/dataGrid',
             fit : true,
             striped : true,
             rownumbers : true,
             pagination : true,
             singleSelect : true,
-            idField : 'atId',
+            idField : 'aId',
 	        sortOrder : 'asc',
             pageSize : 20,
             pageList : [ 10, 20, 30, 40, 50, 100, 200, 300, 400, 500 ],
             columns : [ [ {
                 width : '200',
-                title : '报名类别',
-                field : 'atName',
+                title : '学校',
+                field : 'aschool',
                 sortable : true
             }, {
                 width : '120',
-                title : '图标地址',
-                field : 'atIcon',
+                title : '专业',
+                field : 'amajor',
                 sortable : true
             },{
                 field : 'action',
@@ -32,11 +32,11 @@
                 formatter : function(value, row, index) {
                     var str = '';
                         <shiro:hasPermission name="/applyType/edit">
-                            str += $.formatString('<a href="javascript:void(0)" class="user-easyui-linkbutton-edit" data-options="plain:true,iconCls:\'fi-pencil icon-blue\'" onclick="editUserFun(\'{0}\');" >编辑</a>', row.atId);
+                            str += $.formatString('<a href="javascript:void(0)" class="user-easyui-linkbutton-edit" data-options="plain:true,iconCls:\'fi-pencil icon-blue\'" onclick="editUserFun(\'{0}\');" >编辑</a>', row.aid);
                         </shiro:hasPermission>
                         <shiro:hasPermission name="/applyType/delete">
                             str += '&nbsp;&nbsp;|&nbsp;&nbsp;';
-                            str += $.formatString('<a href="javascript:void(0)" class="user-easyui-linkbutton-del" data-options="plain:true,iconCls:\'fi-x icon-red\'" onclick="deleteUserFun(\'{0}\');" >删除</a>', row.atId);
+                            str += $.formatString('<a href="javascript:void(0)" class="user-easyui-linkbutton-del" data-options="plain:true,iconCls:\'fi-x icon-red\'" onclick="deleteUserFun(\'{0}\');" >删除</a>', row.aid);
                         </shiro:hasPermission>
                     return str;
                 }
@@ -54,12 +54,12 @@
             title : '添加',
             width : 250,
             height : 200,
-            href : '${path }/applyType/addpage',
+            href : '${path }/academy/addpage',
             buttons : [ {
                 text : '添加',
                 handler : function() {
-                    parent.$.modalDialog.openner_dataGrid = applyTypeDataGrid;//因为添加成功之后，需要刷新这个dataGrid，所以先预定义好
-                    var f = parent.$.modalDialog.handler.find('#applyTypeAddForm');
+                    parent.$.modalDialog.openner_dataGrid = academyDataGrid;//因为添加成功之后，需要刷新这个dataGrid，所以先预定义好
+                    var f = parent.$.modalDialog.handler.find('#academyAddForm');
                     f.submit();
                 }
             } ]
@@ -68,20 +68,23 @@
     
     function deleteUserFun(id) {
         if (id == undefined) {//点击右键菜单才会触发这个
-            var rows = applyTypeDataGrid.datagrid('getSelections');
+            var rows = academyDataGrid.datagrid('getSelections');
             id = rows[0].id;
         } else {//点击操作里面的删除图标会触发这个
-        	applyTypeDataGrid.datagrid('unselectAll').datagrid('uncheckAll');
+        	academyDataGrid.datagrid('unselectAll').datagrid('uncheckAll');
         }
         parent.$.messager.confirm('询问', '您是否要删除当前数据？', function(b) {
             if (b) {
 	            progressLoad();
-	            $.post('${path }/applyType/delete', {
+	            $.post('${path }/academy/delete', {
 	                id : id
 	            }, function(result) {
 	                if (result.success) {
 	                    parent.$.messager.alert('提示', result.msg, 'info');
-	                    applyTypeDataGrid.datagrid('reload');
+	                    academyDataGrid.datagrid('reload');
+	                }else{
+	                	parent.$.messager.alert('提示', result.msg, 'info');
+		                academyDataGrid.datagrid('reload');
 	                }
 	                progressClose();
 	            }, 'JSON');
@@ -91,21 +94,21 @@
     
     function editUserFun(id) {
         if (id == undefined) {
-            var rows = applyTypeDataGrid.datagrid('getSelections');
+            var rows = academyDataGrid.datagrid('getSelections');
             id = rows[0].id;
         } else {
-        	applyTypeDataGrid.datagrid('unselectAll').datagrid('uncheckAll');
+        	academyDataGrid.datagrid('unselectAll').datagrid('uncheckAll');
         }
         parent.$.modalDialog({
             title : '编辑',
             width : 250,
             height : 200,
-            href : '${path }/applyType/editpage?id=' + id,
+            href : '${path }/academy/editpage?id=' + id,
             buttons : [ {
                 text : '确定',
                 handler : function() {
-                    parent.$.modalDialog.openner_dataGrid = applyTypeDataGrid;//因为添加成功之后，需要刷新这个dataGrid，所以先预定义好
-                    var f = parent.$.modalDialog.handler.find('#applyTypeEditForm');
+                    parent.$.modalDialog.openner_dataGrid = academyDataGrid;//因为添加成功之后，需要刷新这个dataGrid，所以先预定义好
+                    var f = parent.$.modalDialog.handler.find('#academyEditForm');
                     f.submit();
                 }
             } ]
@@ -113,11 +116,11 @@
     }
     
     function searchUserFun() {
-    	applyTypeDataGrid.datagrid('load', $.serializeObject($('#searchUserForm')));
+    	academyDataGrid.datagrid('load', $.serializeObject($('#searchUserForm')));
     }
     function cleanUserFun() {
         $('#searchUserForm input').val('');
-        applyTypeDataGrid.datagrid('load', {});
+        academyDataGrid.datagrid('load', {});
     }
 </script>
 <div class="easyui-layout" data-options="fit:true,border:false">
@@ -125,22 +128,24 @@
         <form id="searchUserForm">
             <table>
                 <tr>
-                    <th>报名类型:</th>
-                    <td><input name="atName" placeholder="请输入报名类型"/></td>
-                    <td>
-	                   <a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'fi-magnifying-glass',plain:true" onclick="searchUserFun();">查询</a>
-	                   <a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'fi-x-circle',plain:true" onclick="cleanUserFun();">清空</a>
+                    <th>学校名称:</th>
+                    <td><input name="aSchool" placeholder="请输入学校名称"/></td>
+                    <th>专业名称:</th>
+                    <td><input name="aMajor" placeholder="请输入专业名称"/></td>
+               		<td>
+	                   	<a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'fi-magnifying-glass',plain:true" onclick="searchUserFun();">查询</a>
+	                    <a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'fi-x-circle',plain:true" onclick="cleanUserFun();">清空</a>
                    </td>
                 </tr>
             </table>
         </form>
     </div>
-    <div data-options="region:'center',border:true,title:'报名类型'" >
-        <table id="applyTypeDataGrid" data-options="fit:true,border:false"></table>
+    <div data-options="region:'center',border:true,title:'专业管理'" >
+        <table id="academyDataGrid" data-options="fit:true,border:false"></table>
     </div>
 </div>
 <div id="userToolbar" style="display: none;">
-    <shiro:hasPermission name="/applyType/addpage">
+    <shiro:hasPermission name="/academy/addpage">
         <a onclick="addUserFun();" href="javascript:void(0);" class="easyui-linkbutton" data-options="plain:true,iconCls:'fi-plus icon-green'">添加</a>
     </shiro:hasPermission>
 </div>

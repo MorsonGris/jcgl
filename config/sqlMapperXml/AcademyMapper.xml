@@ -9,5 +9,34 @@
 		<result column="a_major" property="aMajor" />
 		<result column="a_flag" property="aFlag" />
 	</resultMap>
+	
+	<insert id="insertByid" >
+		INSERT INTO academy(a_school,a_major,a_flag) VALUES(#{aSchool},#{aMajor},#{aFlag})
+	</insert>
+	
+	<select id="selectById" resultMap="BaseResultMap">
+		SELECT * FROM academy WHERE a_id = #{aId}
+	</select>
+	
+	<delete id="deleteById">
+		DELETE FROM academy WHERE a_id = #{aId}
+	</delete>
+	
+	<update id="updateById">
+		UPDATE academy SET a_school = #{aSchool},a_major = #{aMajor},a_flag = #{aFlag} WHERE a_id = #{aId}
+	</update>
+    
+    <select id="selectPage" resultMap="BaseResultMap">
+    	SELECT * 
+    	FROM academy
+    	<where>
+    		<if test="aMajor != null and aMajor != '' ">
+    			a_major = #{aMajor}
+    		</if>
+    		<if test="aSchool != null and aSchool != '' ">
+    			a_school = #{aSchool}
+    		</if>
+    	</where>
+    </select>
 
 </mapper>

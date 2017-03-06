@@ -1,7 +1,7 @@
 package com.xin.service;
 
 import com.xin.bean.Academy;
-import com.baomidou.mybatisplus.service.IService;
+import com.xin.commons.utils.PageInfo;
 
 /**
  * <p>
@@ -11,6 +11,10 @@ import com.baomidou.mybatisplus.service.IService;
  * @author com.xin
  * @since 2017-02-28
  */
-public interface IAcademyService extends IService<Academy> {
-	
+public interface IAcademyService{
+	boolean deleteById(int id);
+	Academy selectById(int id);
+	boolean updateById(Academy academy);
+	boolean insertByid(Academy academy);
+	void selectDataGrid(PageInfo pageInfo);
 }

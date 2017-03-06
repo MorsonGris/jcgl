@@ -1,18 +1,15 @@
 package com.xin.controller;
 
 import java.util.Date;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-
+import com.xin.bean.Resource;
 import com.xin.commons.base.BaseController;
 import com.xin.commons.shiro.ShiroUser;
-import com.xin.bean.Resource;
 import com.xin.service.IResourceService;
 
 /**
@@ -32,7 +29,7 @@ public class ResourceController extends BaseController {
      *
      * @return
      */
-    @PostMapping("/tree")
+    @RequestMapping("/tree")
     @ResponseBody
     public Object tree() {
         ShiroUser shiroUser = getShiroUser();
@@ -54,7 +51,7 @@ public class ResourceController extends BaseController {
      *
      * @return
      */
-    @PostMapping("/treeGrid")
+    @RequestMapping("/treeGrid")
     @ResponseBody
     public Object treeGrid() {
         return resourceService.selectAll();
