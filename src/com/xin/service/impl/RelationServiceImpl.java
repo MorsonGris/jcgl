@@ -42,6 +42,16 @@ public class RelationServiceImpl implements IRelationService {
 	public Relation selectRelationById(int id) {
 		return relationMapper.selectRelationById(id);
 	}
+
+	@Override
+	public int updateRelation(Relation relation) {
+		return relationMapper.updateRelation(relation);
+	}
+
+	@Override
+	public void deleteRelation(int id) {
+		relationMapper.deleteRelation(id);
+	}
 	
 	
 }

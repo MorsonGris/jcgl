@@ -18,4 +18,8 @@ public interface RelationMapper {
 	int relationInsert(Relation relation);
 	
 	Relation selectRelationById(int id);
+	
+	int updateRelation(Relation relation);
+	
+	void deleteRelation(int id);
 }

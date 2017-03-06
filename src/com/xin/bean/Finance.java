@@ -22,8 +22,8 @@ public class Finance extends Model<Finance> {
 
 	@TableId("f_id")
 	private Integer fId;
-	@TableField("stu_id")
-	private Integer stuId;
+	@TableField("stu_no")
+	private String stuNo;
 	@TableField("tea_class")
 	private String teaClass;
 	@TableField("need_money")
@@ -33,14 +33,19 @@ public class Finance extends Model<Finance> {
 	@TableField("f_date")
 	private Date fDate;
 	@TableField("f_way")
-	private String fWay;
+	private Integer fWay;
 	@TableField("f_accumulative")
 	private BigDecimal fAccumulative;
 	@TableField("f_state")
 	private Integer fState;
 	@TableField("f_obligate")
 	private String fObligate;
+	private Date createdateStart;
+	private Date createdateEnd;
 
+	private Student student;
+	
+	private User user;
 
 	public Integer getFId() {
 		return fId;
@@ -50,12 +55,12 @@ public class Finance extends Model<Finance> {
 		this.fId = fId;
 	}
 
-	public Integer getStuId() {
-		return stuId;
+	public String getStuNo() {
+		return stuNo;
 	}
 
-	public void setStuId(Integer stuId) {
-		this.stuId = stuId;
+	public void setStuNo(String stuNo) {
+		this.stuNo = stuNo;
 	}
 
 	public String getTeaClass() {
@@ -90,11 +95,11 @@ public class Finance extends Model<Finance> {
 		this.fDate = fDate;
 	}
 
-	public String getFWay() {
+	public Integer getFWay() {
 		return fWay;
 	}
 
-	public void setFWay(String fWay) {
+	public void setFWay(Integer fWay) {
 		this.fWay = fWay;
 	}
 
@@ -122,9 +127,41 @@ public class Finance extends Model<Finance> {
 		this.fObligate = fObligate;
 	}
 
+	public Date getCreatedateStart() {
+		return createdateStart;
+	}
+
+	public void setCreatedateStart(Date createdateStart) {
+		this.createdateStart = createdateStart;
+	}
+
+	public Date getCreatedateEnd() {
+		return createdateEnd;
+	}
+
+	public void setCreatedateEnd(Date createdateEnd) {
+		this.createdateEnd = createdateEnd;
+	}
+
+	public Student getStudent() {
+		return student;
+	}
+
+	public void setStudent(Student student) {
+		this.student = student;
+	}
+	
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+	
 	@Override
 	protected Serializable pkVal() {
 		return this.fId;
 	}
-
+	
 }

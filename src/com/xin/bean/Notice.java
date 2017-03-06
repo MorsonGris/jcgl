@@ -8,10 +8,7 @@ import java.io.Serializable;
 
 
 /**
- * <p>
- * 
- * </p>
- *
+ *公告表
  * @author com.xin
  * @since 2017-02-28
  */
@@ -29,6 +26,7 @@ public class Notice extends Model<Notice> {
 	private Date nDate;
 	@TableField("n_flag")
 	private Integer nFlag;
+	private Date endDate;
 
 
 	public Integer getNId() {
@@ -69,6 +67,14 @@ public class Notice extends Model<Notice> {
 
 	public void setNFlag(Integer nFlag) {
 		this.nFlag = nFlag;
+	}
+	
+	public Date getEndDate() {
+		return endDate;
+	}
+
+	public void setEndDate(Date endDate) {
+		this.endDate = endDate;
 	}
 
 	@Override

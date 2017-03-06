@@ -1,10 +1,8 @@
 package com.xin.bean;
 
 import com.baomidou.mybatisplus.activerecord.Model;
-import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableField;
 import java.io.Serializable;
-
 
 /**
  * <p>

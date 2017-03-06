@@ -87,7 +87,7 @@
                 var currentUserId = '${sessionInfo.id}';/*当前登录用户的ID*/
                 if (currentUserId != id) {
                     progressLoad();
-                    $.post('${path }/user/delete', {
+                    $.post('${path }/relation/delete', {
                         id : id
                     }, function(result) {
                         if (result.success) {
