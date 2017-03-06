@@ -13,7 +13,7 @@
             pagination : true,
             singleSelect : true,
             idField : 'nid',
-            sortName : 'createTime',
+            sortName : 'n_date',
 	        sortOrder : 'asc',
             pageSize : 20,
             pageList : [ 10, 20, 30, 40, 50, 100, 200, 300, 400, 500 ],
@@ -143,16 +143,16 @@
     }
     
     function searchUserFun() {
-        noticeDataGrid.datagrid('load', $.serializeObject($('#searchUserForm')));
+        noticeDataGrid.datagrid('load', $.serializeObject($('#searchNoticeForm')));
     }
     function cleanUserFun() {
-        $('#searchUserForm input').val('');
+        $('#searchNoticeForm input').val('');
         noticeDataGrid.datagrid('load', {});
     }
 </script>
 <div class="easyui-layout" data-options="fit:true,border:false">
     <div data-options="region:'north',border:false" style="height: 30px; overflow: hidden;background-color: #fff">
-        <form id="searchUserForm">
+        <form id="searchNoticeForm">
             <table>
                 <tr>
                     <th>标题:</th>

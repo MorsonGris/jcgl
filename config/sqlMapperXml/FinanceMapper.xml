@@ -5,7 +5,7 @@
 	<!-- 通用查询映射结果 -->
 	<resultMap id="BaseResultMap" type="com.xin.bean.Finance">
 		<id column="f_id" property="fId" />
-		<result column="stu_id" property="stuId" />
+		<result column="stu_no" property="stuNo" />
 		<result column="tea_class" property="teaClass" />
 		<result column="need_money" property="needMoney" />
 		<result column="practical_money" property="practicalMoney" />
@@ -14,6 +14,109 @@
 		<result column="f_accumulative" property="fAccumulative" />
 		<result column="f_state" property="fState" />
 		<result column="f_obligate" property="fObligate" />
+		<association property="student" javaType="com.xin.bean.Student">
+			<id property="sId" column="s_id" />
+			<result property="sName" column="s_name" />
+		</association>
+		<association property="user" javaType="com.xin.bean.User">
+			<id property="id" column="id" />
+			<result property="name" column="name" />
+		</association>
 	</resultMap>
-
+	
+	<!-- 字段 -->
+	<sql id="field">
+		F.f_id,
+		S.s_name,
+		U.`name`,
+		F.STU_NO,
+		F.tea_class,
+		F.NEED_MONEY,
+		F.practical_money,
+		F.f_date,
+		F.f_way,
+		F.f_accumulative,
+		F.f_state,
+		F.f_obligate
+	</sql>
+	
+	<sql id="tableName">
+		FINANCE
+	</sql>
+	
+	<select id="selectFinancePage" resultMap="BaseResultMap">
+		SELECT 
+			<include refid="field" /> 
+		FROM FINANCE F LEFT JOIN STUDENT S ON F.STU_NO=S.S_STUDENTNO LEFT JOIN `user` U ON S.USER_ID=U.ID 
+		<where>
+            <if test=" sName != null and sName != '' ">
+                S.s_name = #{sName}
+            </if>
+            <if test=" stuNo != null and stuNo != '' ">
+              	and F.STU_NO = #{stuNo}
+            </if>
+            <if test=" fState != null and fState != 0 ">
+              	and F.f_state = #{fState}
+            </if>
+            <if test=" startTime != null ">
+                <![CDATA[ and f_date >= #{startTime} ]]>
+            </if>
+            <if test=" endTime != null ">
+                <![CDATA[ and f_date <= #{endTime} ]]>
+            </if>
+        </where>
+	</select>
+	
+	<select id="selectfinanceById" parameterType="Integer" resultMap="BaseResultMap">
+		SELECT <include refid="field" /> FROM FINANCE WHERE F_ID = #{id}
+	</select>
+	
+	<insert id="financeInsert" parameterType="com.xin.bean.Finance">
+		INSERT INTO <include refid="tableName"></include>(STU_NO,TEA_CLASS,NEED_MONEY,PRACTICAL_MONEY,F_DATE,F_WAY,F_ACCUMULATIVE,F_STATE,F_OBLIGATE) VALUES(
+			#{stuNo},
+			#{teaClass},
+			#{needMoney},
+			#{practicalMoney},
+			#{fDate},
+			#{fWay},
+			#{fAccumulative},
+			#{fState},
+			#{fObligate}
+		)
+	</insert>
+	
+	<update id="updateFinance" parameterType="com.xin.bean.Finance">
+		UPDATE <include refid="tableName"></include> 
+		<set>
+			<if test="stuNo!=null and stuNo!='' ">
+				STU_NO=#{stuNo},
+			</if>
+			<if test="teaClass!=null and teaClass!='' ">
+				TEA_CLASS=#{teaClass},
+			</if>
+			<if test="needMoney!=null and needMoney!='' ">
+				NEED_MONEY=#{needMoney},
+			</if>
+			<if test="practicalMoney!=null and practicalMoney!='' ">
+				PRACTICAL_MONEY=#{practicalMoney},
+			</if>
+			<if test="fDate!=null and fDate!='' ">
+				F_DATE=#{fDate},
+			</if>
+			<if test="fWay!=null and fWay!='' ">
+				F_WAY=#{fWay},
+			</if>
+			<if test="fAccumulative!=null and fAccumulative!='' ">
+				F_ACCUMULATIVE=#{fAccumulative},
+			</if>
+			<if test="fState!=null and fState!='' ">
+				F_STATE=#{fState},
+			</if>
+		</set>
+		WHERE F_ID=#{fId}
+	</update>
+	
+	<delete id="deleteFinance" parameterType="Integer">
+		DELETE FROM <include refid="tableName"></include> WHERE F_ID=#{id}
+	</delete>
 </mapper>

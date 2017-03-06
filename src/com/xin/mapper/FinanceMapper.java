@@ -1,16 +1,25 @@
 package com.xin.mapper;
 
 import com.xin.bean.Finance;
-import com.baomidou.mybatisplus.mapper.BaseMapper;
+
+import java.util.List;
+import java.util.Map;
+
+import com.baomidou.mybatisplus.plugins.pagination.Pagination;
 
 /**
- * <p>
-  *  Mapper 接口
- * </p>
- *
+ *缴费管理接口
  * @author com.xin
  * @since 2017-02-28
  */
-public interface FinanceMapper extends BaseMapper<Finance> {
-
+public interface FinanceMapper {
+	List<Finance> selectFinancePage(Pagination page, Map<String, Object> params);
+	
+	int financeInsert(Finance notice);
+	
+	Finance selectfinanceById(int id);
+	
+	int updateFinance(Finance finance);
+	
+	void deleteFinance(int id);
 }

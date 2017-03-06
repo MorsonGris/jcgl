@@ -54,7 +54,7 @@ public class NoticeController extends BaseController{
         if (StringUtils.isNotBlank(notice.getNTitle())) {
             condition.put("nTitle", notice.getNTitle());
         }
-        if (notice.getNFlag() != null) {
+        if (notice.getNFlag() != null && notice.getNFlag()!=0) {
             condition.put("nFlag", notice.getNFlag());
         }
         if (notice.getNDate() != null) {
@@ -69,7 +69,7 @@ public class NoticeController extends BaseController{
     }
     
     /**
-     * 公告管理页
+     * 公告添加页
      *
      * @return
      */

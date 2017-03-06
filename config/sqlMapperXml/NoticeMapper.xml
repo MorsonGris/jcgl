@@ -17,8 +17,8 @@
             <if test=" nTitle != null and nTitle != '' ">
                 n_title = #{nTitle}
             </if>
-            <if test=" nFlag != null ">
-              	n_flag = #{nFlag}
+            <if test=" nFlag != null and nFlag != 0">
+              	and n_flag = #{nFlag}
             </if>
             <if test=" startTime != null ">
                 <![CDATA[ and n_date >= #{startTime} ]]>

@@ -1,7 +1,8 @@
 package com.xin.service;
 
 import com.xin.bean.Finance;
-import com.baomidou.mybatisplus.service.IService;
+import com.xin.commons.utils.PageInfo;
+
 
 /**
  * <p>
@@ -11,6 +12,14 @@ import com.baomidou.mybatisplus.service.IService;
  * @author com.xin
  * @since 2017-02-28
  */
-public interface IFinanceService extends IService<Finance> {
+public interface IFinanceService {
+	void selectFinancePage(PageInfo pageinfo);
 	
+	int financeInsert(Finance notice);
+	
+	Finance selectfinanceById(int id);
+	
+	int updateFinance(Finance finance);
+	
+	void deleteFinance(int id);
 }
