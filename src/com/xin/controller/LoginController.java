@@ -42,8 +42,12 @@ public class LoginController extends BaseController {
     /**
      * 前端首页
      */
-    @GetMapping("/")
+    @GetMapping("/index")
     public String home(){
+    	return "proscenium/home";
+    }
+    @GetMapping("/")
+    public String home(String str){
     	return "proscenium/home";
     }
 

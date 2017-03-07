@@ -1,37 +1,34 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <% String path =request.getContextPath(); %>
 <!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="<%=path %>/static/proscenium/logo/favicon2.ico" /> 
+    <link href="<%=path %>/static/proscenium/css/bootstrap.min.css" rel="stylesheet">
+    <link href="<%=path %>/static/proscenium/css/style.css" rel="stylesheet">
 <title>聚成教育-登录</title>
 </head>
 <body>
-<form class="form-horizontal" role="form">
+<div class="container">
+	<div class="row">
+		<div class="col-xs-12">
+			<form role="form">
 				<div class="form-group">
-					 <label for="inputEmail3" class="col-sm-2 control-label">用户名</label>
-					<div class="col-sm-10">
-						<input type="email" class="form-control" id="inputEmail3" />
-					</div>
+					 <input type="email" class="form-control" id="exampleInputEmail1" />
 				</div>
 				<div class="form-group">
-					 <label for="inputPassword3" class="col-sm-2 control-label">密码</label>
-					<div class="col-sm-10">
-						<input type="password" class="form-control" id="inputPassword3" />
-					</div>
+					 <input type="password" class="form-control" id="exampleInputPassword1" />
 				</div>
-				<div class="form-group">
-					<div class="col-sm-offset-2 col-sm-10">
-						<div class="checkbox">
-							 <label><input type="checkbox" />Remember me</label>
-						</div>
-					</div>
-				</div>
-				<div class="form-group">
-					<div class="col-sm-offset-2 col-sm-10">
-						 <button type="submit" class="btn btn-default">登录</button>
-					</div>
-				</div>
+				
+				<button type="submit" class="btn btn-default">Submit</button>
 			</form>
+		</div>
+	</div>
+</div>
+<script src="<%=path %>/static/proscenium/js/jquery.min.js"></script>
+<script src="<%=path %>/static/proscenium/js/bootstrap.min.js"></script>
 </body>
 </html>
