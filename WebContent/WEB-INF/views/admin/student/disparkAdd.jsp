@@ -3,7 +3,7 @@
 <script type="text/javascript">
     $(function() {
         $('#studentAddForm').form({
-            url : '${path }/student/add',
+            url : '${path }/Dispark/add',
             onSubmit : function() {
                 progressLoad();
                 var isValid = $(this).form('enableValidation').form('validate');
@@ -82,42 +82,23 @@
 	  $('#win').window('open');
   } 
   
-  $("#addbtn").click(function(){
+  $("#addbtn").click(function() {
 	  var row = $('#userDataGrid').datagrid('getSelected');
 	  $("#userId").val(row.id);
 	  $("#name").val(row.name);
 	  $('#win').window('close');
 	});
   
-  function selectAca(){
-	  var value =  $('#academyId option:selected').val();//选中的值 
-	  var dd = $("#aMajor");
-	  if(value != ''){
-		  $.get("${path }/student/school",{"id":value},function(data){
-			  var json = JSON.parse(data); 
-			  dd.empty();
-			  for(var i=0;i<json.length;i++){
-				  dd.append("<option value='"+json[i].amajor+"'>"+json[i].amajor+"</option>")
-			  }
-		  });
-	  }else{
-		  dd.empty();
-		  dd.append("<option value=''>--请选择--</option>");
-	  }
-  }
-  
   function selected(){
 	 var valeu =  $('#sGradations option:selected').val();//选中的值
-	 if(valeu != "请选择"){
-		 if(valeu == "高达本"){//高达本
-			 $("#sSystme").val("五年"); 
-		 }else if(valeu == "专达本"){//专达本
-			 $("#sSystme").val("三年"); 
-		 }else if(valeu == "高达专"){//高达专
-			 $("#sSystme").val("三年"); 
-		 }else if(valeu == 0){
-			 $("#sSystme").val(""); 
-		 }
+	 if(valeu == "高达本"){//高达本
+		 $("#sSystme").val("六年"); 
+	 }else if(valeu == "专达本"){//专达本
+		 $("#sSystme").val("四年"); 
+	 }else if(valeu == "高达专"){//高达专
+		 $("#sSystme").val("三年"); 
+	 }else if(valeu == 0){
+		 $("#sSystme").val(""); 
 	 }
   }
   
@@ -153,12 +134,12 @@
 		  return"你输入的身份证长度或格式错误";sId=sId.replace(/x/i,"a");  
 	  }
 	  if(aCity[parseInt(sId.substr(0,2))]==null){
-		  return "你输入的身份证地区非法"; 
+		  return "你的身份证地区非法"; 
 	  } 
 	  sBirthday=sId.substr(6,4)+"-"+Number(sId.substr(10,2))+"-"+Number(sId.substr(12,2)); 
 	  var d=new Date(sBirthday.replace(/-/g,"/")) ; 
 	  if(sBirthday!=(d.getFullYear()+"-"+ (d.getMonth()+1) + "-" + d.getDate())){
-		  return "输入的身份证出生日期非法";  
+		  return "身份证上的出生日期非法";  
 	  }
 	  for(var i = 17;i>=0;i--) iSum += (Math.pow(2,i) % 11) * parseInt(sId.charAt(17 - i),11) ; 
 	  if(iSum%11!=1) return "你输入的身份证号非法"; 
@@ -188,34 +169,28 @@
                 </tr>
                 <tr>
 	                <td>报考院校</td>
-                    <td>
-                    	<select name="academyId" id="academyId" onchange="selectAca();" style="width:120px;height:22px;">
-                    	 	<option value="">--请选择--</option>
-                    		<c:forEach var="academy" items="${academy}" varStatus="s">
-                    			<option value="${academy.AId}">${academy.ASchool}</option>
-                    		</c:forEach>
-                    	</select>
-                    </td> 
-                	<td>报考专业</td>
-                	<td>
-                		<select name="sContent" id="aMajor" style="width:120px;height:22px;"></select>
-                	</td>
-                </tr>
-                <tr>
+	                    <td>
+	                    	<select name="academyId" id="academyId" style="width:120px;height:22px;">
+	                    	 	<option value="">--请选择--</option>
+	                    		<c:forEach var="academy" items="${academy}" varStatus="s">
+	                    			<option value="${academy.AId}">${academy.ASchool}</option>
+	                    		</c:forEach>
+	                    	</select>
+	                    </td>
                 	<td>报考层次</td>
                     <td>
-	                   	<select name="sGradations" id="sGradations" onclick="selected();" style="width:120px;height:22px;">
+	                   	<select name="sGradations" id="sGradations" onblur="selected();" style="width:120px;height:22px;">
 	                   	 	<option value="0">--请选择--</option>
 	                   	 	<option value="高达本">高达本</option>
 	                   	 	<option value="专达本">专达本</option>
 	                   	 	<option value="高达专">高达专</option>
 	                   	</select>
 					</td>
-                	<td>学制</td>
-                    <td><input name="sSystme" id="sSystme" type="text" placeholder="请选择学制" class="easyui-validatebox" data-options="required:true,novalidate:true" readonly="readonly" value=""></td>
                 </tr>
                 <tr>
-                	<td>报考日期</td>
+                	<td>学制</td>
+                    <td><input name="sSystme" id="sSystme" type="text" placeholder="请选择学制" class="easyui-validatebox" data-options="required:true,novalidate:true" readonly="readonly" value=""></td>
+               		<td>报考日期</td>
                     <td><input name="sDate" type="text" placeholder="请选报考日期" class="easyui-datetimebox" data-options="required:true,novalidate:true" value=""></td>
                 </tr>
             </table>

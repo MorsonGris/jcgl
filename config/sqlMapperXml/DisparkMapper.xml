@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.xin.mapper.StudentMapper">
+<mapper namespace="com.xin.mapper.DisparkMapper">
 
 	<!-- 通用查询映射结果 -->
 	<resultMap id="BaseResultMap" type="com.xin.bean.Student">
@@ -10,7 +10,6 @@
 		<result column="user_id" property="userId" />
 		<result column="id_number" property="idNumber" />
 		<result column="s_phone" property="sPhone" />
-		<result column="s_content" property="sContent" />
 		<result column="academy_id" property="academyId" />
 		<result column="s_gradations" property="sGradations" />
 		<result column="s_systme" property="sSystme" />
@@ -31,11 +30,11 @@
 	</resultMap>
 	
 	<sql id="Studentcolumn">
-		s_studentno,s_name,user_id,id_number,s_phone,academy_id,s_gradations,s_systme,s_date,s_type,s_content
+		s_studentno,s_name,user_id,id_number,s_phone,academy_id,s_gradations,s_systme,s_date,s_type
 	</sql>
 	
 	<select id="selectAll" resultMap="BaseResultMap">
-		SELECT * FROM student where s_type = 1
+		SELECT * FROM student where s_type = 2
 	</select>
 
 	<insert id="insertByid" >
@@ -50,8 +49,7 @@
 		#{sGradations},
 		#{sSystme},
 		#{sDate},
-		#{stype},
-		#{sContent}
+		#{stype}
 		)
 	</insert>
 	
@@ -67,7 +65,6 @@
 	    	s_gradations,
 	    	s_systme,
 	    	s_date,
-	    	s_content,
 	    	a.a_id,
 	    	a.a_school,
 	    	u.id,
@@ -75,7 +72,7 @@
     	FROM student s
     	LEFT JOIN academy a ON s.academy_id = a.a_id
     	LEFT JOIN user u ON s.user_id = u.id
-		WHERE s_id = #{sId} and s_type = 1
+		WHERE s_id = #{sId} and s_type = 2
 	</select>
 	
 	<delete id="deleteById">
@@ -91,7 +88,6 @@
 			academy_id = #{academyId},
 			s_gradations = #{sGradations},
 			s_systme = #{sSystme},
-			s_content = #{sContent},
 			s_date = #{sDate}
 		 WHERE 
 		 	s_id = #{sId}
@@ -108,7 +104,6 @@
 	    	academy_id,
 	    	s_gradations,
 	    	s_systme,
-	    	s_content,
 	    	s_date,
 	    	a.a_id,
 	    	a.a_school,
@@ -118,7 +113,7 @@
     	LEFT JOIN academy a ON s.academy_id = a.a_id
     	LEFT JOIN user u ON s.user_id = u.id
     	<where>
-    		s_type = 1
+    		s_type =2
     		<if test="name != null and name != '' ">
     			and s_name = #{name}
     		</if>

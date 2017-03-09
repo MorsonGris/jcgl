@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.xin.mapper.StudentMapper">
+<mapper namespace="com.xin.mapper.BookkeeperMapper">
 
 	<!-- 通用查询映射结果 -->
 	<resultMap id="BaseResultMap" type="com.xin.bean.Student">
@@ -17,13 +17,6 @@
 		<result column="s_date" property="sDate" />
 		<result column="s_type" property="stype"/>
 		
-		<collection property="listAcademy" ofType ="com.xin.bean.Academy">
-			<id column="a_id" property="aId" />
-			<result column="a_school" property="aSchool" />
-			<result column="a_major" property="aMajor" />
-			<result column="a_flag" property="aFlag" />
-		</collection>
-		
 		<collection property="listUser" ofType="com.xin.bean.User">
 			<id column="id" property="id" />
 			<result column="name" property="name" />
@@ -31,11 +24,11 @@
 	</resultMap>
 	
 	<sql id="Studentcolumn">
-		s_studentno,s_name,user_id,id_number,s_phone,academy_id,s_gradations,s_systme,s_date,s_type,s_content
+		s_studentno,s_name,user_id,s_phone,s_content,s_date,s_type
 	</sql>
 	
 	<select id="selectAll" resultMap="BaseResultMap">
-		SELECT * FROM student where s_type = 1
+		SELECT * FROM student where s_type = 3
 	</select>
 
 	<insert id="insertByid" >
@@ -44,14 +37,10 @@
 		#{studentNo},
 		#{sName},
 		#{userId},
-		#{idNumber},
 		#{sPhone},
-		#{academyId},
-		#{sGradations},
-		#{sSystme},
+		#{sContent},
 		#{sDate},
-		#{stype},
-		#{sContent}
+		#{stype}
 		)
 	</insert>
 	
@@ -61,21 +50,14 @@
 	    	s_studentno,
 	    	s_name,
 	    	user_id,
-	    	id_number,
 	    	s_phone,
-	    	academy_id,
-	    	s_gradations,
-	    	s_systme,
-	    	s_date,
 	    	s_content,
-	    	a.a_id,
-	    	a.a_school,
+	    	s_date,
 	    	u.id,
 	    	u.`name`
     	FROM student s
-    	LEFT JOIN academy a ON s.academy_id = a.a_id
     	LEFT JOIN user u ON s.user_id = u.id
-		WHERE s_id = #{sId} and s_type = 1
+		WHERE s_id = #{sId} and s_type = 3
 	</select>
 	
 	<delete id="deleteById">
@@ -88,9 +70,6 @@
 			user_id = #{userId},
 			id_number = #{idNumber},
 			s_phone = #{sPhone},
-			academy_id = #{academyId},
-			s_gradations = #{sGradations},
-			s_systme = #{sSystme},
 			s_content = #{sContent},
 			s_date = #{sDate}
 		 WHERE 
@@ -103,22 +82,15 @@
 	    	s_studentno,
 	    	s_name,
 	    	user_id,
-	    	id_number,
 	    	s_phone,
-	    	academy_id,
-	    	s_gradations,
-	    	s_systme,
 	    	s_content,
 	    	s_date,
-	    	a.a_id,
-	    	a.a_school,
 	    	u.id,
 	    	u.`name`
     	FROM student s
-    	LEFT JOIN academy a ON s.academy_id = a.a_id
     	LEFT JOIN user u ON s.user_id = u.id
     	<where>
-    		s_type = 1
+    		 s_type = 3
     		<if test="name != null and name != '' ">
     			and s_name = #{name}
     		</if>

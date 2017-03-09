@@ -6,50 +6,50 @@ import org.springframework.stereotype.Service;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.xin.bean.Student;
 import com.xin.commons.utils.PageInfo;
-import com.xin.mapper.StudentMapper;
-import com.xin.service.IStudentService;
+import com.xin.mapper.BookkeeperMapper;
+import com.xin.service.BookkeeperService;
 
 /**
  * @author com.xin
  * @since 2017-02-28
  */
 @Service
-public class StudentServiceImpl implements IStudentService {
+public class BookkeeperServiceImpl implements BookkeeperService {
 	
 	@Autowired
-	private StudentMapper Studentmapper;
+	private BookkeeperMapper bookkeeperMapper;
 
 	@Override
 	public boolean deleteById(int id) {
-		return Studentmapper.deleteById(id);
+		return bookkeeperMapper.deleteById(id);
 	}
 
 	@Override
 	public Student selectById(int id) {
-		return Studentmapper.selectById(id);
+		return bookkeeperMapper.selectById(id);
 	}
 
 	@Override
 	public boolean updateById(Student student) {
-		return Studentmapper.updateById(student);
+		return bookkeeperMapper.updateById(student);
 	}
 
 	@Override
 	public boolean insertByid(Student student) {
-		return Studentmapper.insertByid(student);
+		return bookkeeperMapper.insertByid(student);
 	}
 
 	@Override
 	public void selectDataGrid(PageInfo pageInfo) {
 		Page<Student> page = new Page<>(pageInfo.getNowpage(),pageInfo.getSize());
-		List<Student> list = Studentmapper.selectPage(page, pageInfo.getCondition());
+		List<Student> list = bookkeeperMapper.selectPage(page, pageInfo.getCondition());
 		pageInfo.setRows(list);
 		pageInfo.setTotal(page.getTotal());
 	}
 
 	@Override
 	public List<Student> selectAll() {
-		return Studentmapper.selectAll();
+		return bookkeeperMapper.selectAll();
 	}
 	
 }

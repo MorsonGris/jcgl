@@ -9,7 +9,7 @@ import com.xin.bean.Student;
  * @author com.xin
  * @since 2017-02-28
  */
-public interface StudentMapper{
+public interface DisparkMapper{
 	List<Student> selectAll();
 	boolean deleteById(int id);
 	Student selectById(int id);

@@ -18,27 +18,27 @@ import com.xin.bean.Student;
 import com.xin.bean.User;
 import com.xin.commons.base.BaseController;
 import com.xin.commons.utils.PageInfo;
+import com.xin.service.ArtexamService;
 import com.xin.service.IAcademyService;
-import com.xin.service.IStudentService;
 
 /**
  * <p>
- *  成人教育报名
+ *  艺考培训报名
  * </p>
  * @author com.xin
  * @since 2017-02-28
  */
 @Controller
-@RequestMapping("/student")
-public class StudentController extends BaseController{
+@RequestMapping("/Artexam")
+public class ArtexamController extends BaseController{
     
-    @Autowired private IStudentService studentService;
+    @Autowired private ArtexamService artexamService;
     
     @Autowired private IAcademyService academyService;
     
     @GetMapping("/studentpage")
     public String student(){
-    	return "admin/student/student";
+    	return "admin/student/artexam";
     }
     
     /**
@@ -62,7 +62,7 @@ public class StudentController extends BaseController{
     		map.put("studentNo", student.getStudentNo());
     	}
     	pageInfo.setCondition(map);
-    	studentService.selectDataGrid(pageInfo);
+    	artexamService.selectDataGrid(pageInfo);
     	return pageInfo;
     }
     
@@ -70,15 +70,7 @@ public class StudentController extends BaseController{
     public String addpage(Model model){
     	List<Academy> list = academyService.selectAll();
     	model.addAttribute("academy", list);
-    	return "admin/student/studentAdd";
-    }
-    
-    @GetMapping("/school")
-    @ResponseBody
-    public List<Academy> selectschool(int id){
-    	Academy schoolName = academyService.selectById(id);
-    	List<Academy> shcoollist = academyService.selectByName(schoolName.getASchool());
-    	return shcoollist;
+    	return "admin/student/artexamAdd";
     }
     
     /**
@@ -94,13 +86,14 @@ public class StudentController extends BaseController{
     	int i = 1;
     	String No = null;
     	if(i<10){
-    		No = sdf.format(date)+"0"+i;
+    		No = sdf.format(date)+0+i;
     	}
     	No = sdf.format(date)+i;
     	student.setStudentNo(No);
-    	student.setStype(1);
-    	boolean result = studentService.insertByid(student);
+    	student.setStype(4);
+    	boolean result = artexamService.insertByid(student);
     	if(result == true){
+    		i++;
     		return renderSuccess("添加成功");
     	}
     	return renderError("添加失败");
@@ -114,7 +107,7 @@ public class StudentController extends BaseController{
     @RequestMapping("/delete")
     @ResponseBody
     public Object delete(int id){
-    	boolean result = studentService.deleteById(id);
+    	boolean result = artexamService.deleteById(id);
     	if(result == true){
     		return renderSuccess("删除成功");
     	}
@@ -123,23 +116,15 @@ public class StudentController extends BaseController{
     
     @GetMapping("/editpage")
     public String editpage(Model model,int id){
-    	Student student = studentService.selectById(id);
-    	List<Academy> academieslist = student.getListAcademy();
+    	Student student = artexamService.selectById(id);
     	List<User> studentlsit = student.getListUser();
-    	Academy aca = null;
     	User user = null;
-    	for(int i=0;i<academieslist.size();i++){
-    		aca = academieslist.get(i);
-    	}
     	for(int j=0;j<studentlsit.size();j++){
     		 user = studentlsit.get(j);
     	}
-    	List<Academy> list = academyService.selectAll();
-    	model.addAttribute("academy", list);
-    	model.addAttribute("aca", aca);
     	model.addAttribute("user", user);
     	model.addAttribute("student", student);
-    	return "admin/student/studentEdit";
+    	return "admin/student/artexamEdit";
     }
     
     /**
@@ -150,7 +135,7 @@ public class StudentController extends BaseController{
     @RequestMapping("edit")
     @ResponseBody
     public Object edit(Student student){
-    	boolean result = studentService.updateById(student);
+    	boolean result = artexamService.updateById(student);
     	if(result == true){
     		return renderSuccess("修改成功");
     	}

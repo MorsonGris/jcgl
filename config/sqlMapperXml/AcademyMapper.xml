@@ -10,6 +10,14 @@
 		<result column="a_flag" property="aFlag" />
 	</resultMap>
 	
+	<select id="selectAll" resultMap="BaseResultMap">
+		SELECT * FROM academy
+	</select>
+	
+	<select id="selectByName" resultMap="BaseResultMap">
+		SELECT * FROM academy WHERE a_school = #{aSchool}
+	</select>
+	
 	<insert id="insertByid" >
 		INSERT INTO academy(a_school,a_major,a_flag) VALUES(#{aSchool},#{aMajor},#{aFlag})
 	</insert>

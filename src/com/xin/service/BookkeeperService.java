@@ -1,19 +1,18 @@
-package com.xin.mapper;
+package com.xin.service;
 
 import java.util.List;
-import java.util.Map;
-import com.baomidou.mybatisplus.plugins.pagination.Pagination;
 import com.xin.bean.Student;
+import com.xin.commons.utils.PageInfo;
 
 /**
  * @author com.xin
  * @since 2017-02-28
  */
-public interface StudentMapper{
+public interface BookkeeperService{
 	List<Student> selectAll();
 	boolean deleteById(int id);
 	Student selectById(int id);
 	boolean updateById(Student student);
 	boolean insertByid(Student student);
-	List<Student> selectPage(Pagination page, Map<String, Object> params);
+	void selectDataGrid(PageInfo pageInfo);
 }

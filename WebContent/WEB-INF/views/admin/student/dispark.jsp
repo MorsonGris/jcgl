@@ -1,11 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/commons/global.jsp" %>
 <script type="text/javascript">
-    var studentDataGrid;
+    var disparkDataGrid;
 
     $(function() {
-    	studentDataGrid = $('#studentDataGrid').datagrid({
-            url : '${path }/student/dataGrid',
+    	disparkDataGrid = $('#disparkDataGrid').datagrid({
+            url : '${path }/Dispark/dataGrid',
             fit : true,
             striped : true,
             rownumbers : true,
@@ -60,11 +60,6 @@
                     return(roles.join('\n'));
                 }
             },{
-                width : '100',
-                title : '专业',
-                field : 'scontent',
-                sortable : true
-            },{
                 width : '70',
                 title : '报考层次',
                 field : 'sgradations',
@@ -108,12 +103,12 @@
         parent.$.modalDialog({
             title : '添加',
             width : 500,
-            height : 250,
-            href : '${path }/student/addpage',
+            height : 230,
+            href : '${path }/Dispark/addpage',
             buttons : [ {
                 text : '添加',
                 handler : function() {
-                    parent.$.modalDialog.openner_dataGrid = studentDataGrid;//因为添加成功之后，需要刷新这个dataGrid，所以先预定义好
+                    parent.$.modalDialog.openner_dataGrid = disparkDataGrid;//因为添加成功之后，需要刷新这个dataGrid，所以先预定义好
                     var f = parent.$.modalDialog.handler.find('#studentAddForm');
                     f.submit();
                 }
@@ -123,10 +118,10 @@
     
     function deleteUserFun(id) {
         if (id == undefined) {//点击右键菜单才会触发这个
-            var rows = studentDataGrid.datagrid('getSelections');
+            var rows = disparkDataGrid.datagrid('getSelections');
             id = rows[0].id;
         } else {//点击操作里面的删除图标会触发这个
-        	studentDataGrid.datagrid('unselectAll').datagrid('uncheckAll');
+        	disparkDataGrid.datagrid('unselectAll').datagrid('uncheckAll');
         }
         parent.$.messager.confirm('询问', '您是否要删除当前数据？', function(b) {
             if (b) {
@@ -136,7 +131,7 @@
 	            }, function(result) {
 	                if (result.success) {
 	                    parent.$.messager.alert('提示', result.msg, 'info');
-	                    studentDataGrid.datagrid('reload');
+	                    disparkDataGrid.datagrid('reload');
 	                }
 	                progressClose();
 	            }, 'JSON');
@@ -146,20 +141,20 @@
     
     function editUserFun(id) {
         if (id == undefined) {
-            var rows = studentDataGrid.datagrid('getSelections');
+            var rows = disparkDataGrid.datagrid('getSelections');
             id = rows[0].id;
         } else {
-        	studentDataGrid.datagrid('unselectAll').datagrid('uncheckAll');
+        	disparkDataGrid.datagrid('unselectAll').datagrid('uncheckAll');
         }
         parent.$.modalDialog({
             title : '编辑',
             width : 500,
             height : 300,
-            href : '${path }/student/editpage?id=' + id,
+            href : '${path }/Dispark/editpage?id=' + id,
             buttons : [ {
                 text : '确定',
                 handler : function() {
-                    parent.$.modalDialog.openner_dataGrid = studentDataGrid;//因为添加成功之后，需要刷新这个dataGrid，所以先预定义好
+                    parent.$.modalDialog.openner_dataGrid = disparkDataGrid;//因为添加成功之后，需要刷新这个dataGrid，所以先预定义好
                     var f = parent.$.modalDialog.handler.find('#studentEditForm');
                     f.submit();
                 }
@@ -168,11 +163,11 @@
     }
     
     function searchUserFun() {
-    	studentDataGrid.datagrid('load', $.serializeObject($('#searchUserForm')));
+    	disparkDataGrid.datagrid('load', $.serializeObject($('#searchUserForm')));
     }
     function cleanUserFun() {
         $('#searchUserForm input').val('');
-        studentDataGrid.datagrid('load', {});
+        disparkDataGrid.datagrid('load', {});
     }
     
     Date.prototype.format = function (format) {    
@@ -225,7 +220,7 @@
         </form>
     </div>
     <div data-options="region:'center',border:true,title:'学生信息表'" >
-        <table id="studentDataGrid" data-options="fit:true,border:false"></table>
+        <table id="disparkDataGrid" data-options="fit:true,border:false"></table>
     </div>
 </div>
 <div id="userToolbar" style="display: none;">

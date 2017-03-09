@@ -15,6 +15,8 @@ import com.xin.bean.Academy;
  * @since 2017-02-28
  */
 public interface AcademyMapper{
+	List<Academy> selectByName(String school);
+	List<Academy> selectAll();
 	boolean deleteById(int id);
 	Academy selectById(int id);
 	boolean updateById(Academy academy);

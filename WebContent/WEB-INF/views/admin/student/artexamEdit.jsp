@@ -3,7 +3,7 @@
 <script type="text/javascript">
     $(function() {
         $('#studentEditForm').form({
-            url : '${path }/student/edit',
+            url : '${path }/Artexam/edit',
             onSubmit : function() {
                 progressLoad();
                 var isValid = $(this).form('enableValidation').form('validate');
@@ -89,38 +89,6 @@
 	  $('#win').window('close');
 	});
   
-  function selected(){
-	 var valeu =  $('#sGradations option:selected').val();//选中的值
-	 if(valeu != "请选择"){
-		 if(valeu == "高达本"){//高达本
-			 $("#sSystme").val("六年"); 
-		 }else if(valeu == "专达本"){//专达本
-			 $("#sSystme").val("四年"); 
-		 }else if(valeu == "高达专"){//高达专
-			 $("#sSystme").val("三年"); 
-		 }else if(valeu == 0){
-			 $("#sSystme").val(""); 
-		 }
-	 }
-  }
-  
-  function selectAca(){
-	  var value =  $('#academyId option:selected').val();//选中的值 
-	  var dd = $("#aMajor");
-	  if(value != ''){
-		  $.get("${path }/student/school",{"id":value},function(data){
-			  var json = JSON.parse(data); 
-			  dd.empty();
-			  for(var i=0;i<json.length;i++){
-				  dd.append("<option value='"+json[i].amajor+"'>"+json[i].amajor+"</option>")
-			  }
-		  });
-	  }else{
-		  dd.empty();
-		  dd.append("<option value=''>--请选择--</option>");
-	  }
-  }
-  
   $.extend($.fn.validatebox.defaults.rules, {
       phoneNum: { //验证手机号   
           validator: function(value, param){ 
@@ -134,36 +102,7 @@
             return /(^(0[0-9]{2,3}\-)?([2-9][0-9]{6,7})+(\-[0-9]{1,4})?$)|(^((\d3)|(\d{3}\-))?(1[358]\d{9})$)/.test(value);
            },    
            message: '请输入正确的电话号码。' 
-   	 },
-   	
-   	idcared: { 
-	  validator: function(value,param){ 
-		  var flag= isCardID(value); 
-		  return flag==true?true:false; 
-	}, 
-	 	 message: '输入的不是有效的身份证号码'
-	  }});
-  
-  var aCity={11:"北京",12:"天津",13:"河北",14:"山西",15:"内蒙古",21:"辽宁",22:"吉林",23:"黑龙江",31:"上海",32:"江苏",33:"浙江",34:"安徽",35:"福建",36:"江西",37:"山东",41:"河南",42:"湖北",43:"湖南",44:"广东",45:"广西",46:"海南",50:"重庆",51:"四川",52:"贵州",53:"云南",54:"西藏",61:"陕西",62:"甘肃",63:"青海",64:"宁夏",65:"新疆",71:"台湾",81:"香港",82:"澳门",91:"国外"}
-
-  function isCardID(sId){ 
-	  var iSum=0 ; 
-	  var info="" ; 
-	  if(!/^\d{17}(\d|x)/i.test(sId)){
-		  return"你输入的身份证长度或格式错误";sId=sId.replace(/x/i,"a");  
-	  }
-	  if(aCity[parseInt(sId.substr(0,2))]==null){
-		  return "你的身份证地区非法"; 
-	  } 
-	  sBirthday=sId.substr(6,4)+"-"+Number(sId.substr(10,2))+"-"+Number(sId.substr(12,2)); 
-	  var d=new Date(sBirthday.replace(/-/g,"/")) ; 
-	  if(sBirthday!=(d.getFullYear()+"-"+ (d.getMonth()+1) + "-" + d.getDate())){
-		  return "身份证上的出生日期非法";  
-	  }
-	  for(var i = 17;i>=0;i--) iSum += (Math.pow(2,i) % 11) * parseInt(sId.charAt(17 - i),11) ; 
-	  if(iSum%11!=1) return "你输入的身份证号非法"; 
-	  return true;//aCity[parseInt(sId.substr(0,2))]+","+sBirthday+","+(sId.substr(16,1)%2?"男":"女") 
-  }
+   	 }});
   
 </script>
 <div class="easyui-layout" data-options="fit:true,border:false">
@@ -183,38 +122,12 @@
                 <tr>
                 	<td>手机号码</td>
                     <td><input name="sPhone" type="text" placeholder="请输入手机号码" class="easyui-validatebox"  data-options="required:true,novalidate:true,prompt:'请输入正确的手机号码。',validType:'phoneNum'" value="${student.SPhone}"></td>
-                	<td>身份证号码</td>
-                    <td><input name="idNumber" type="text" placeholder="请输入身份证号码" class="easyui-validatebox" data-options="required:true,novalidate:true,prompt:'请输入正确的身份证号码。',validType:'idcared'" value="${student.idNumber}"></td>
-                </tr>
-                <tr>
-	                <td>报考院校</td>
-                    <td>
-                    	<select name="academyId" id="academyId" style="width:120px;height:22px;">
-                    		<c:forEach var="academy" items="${academy}" varStatus="s">
-                    			<option value="${academy.AId}" <c:if test="${aca.ASchool == academy.ASchool}">selected</c:if>>${academy.ASchool}</option>
-                    		</c:forEach>
-                    	</select>
-                    </td>
-                    <td>报考专业</td>
-                	<td>
-                		<select name="sContent" id="aMajor" style="width:120px;height:22px;"></select>
-                	</td>
-                </tr>
-                <tr>
-                	<td>学制</td>
-                    <td><input name="sSystme" id="sSystme" type="text" placeholder="请选择学制" class="easyui-validatebox" data-options="required:true,novalidate:true" readonly="readonly" value="${student.SSystme}"></td>
-               		<td>报考层次</td>
-                    <td>
-	                   	<select name="sGradations" id="sGradations" onclick="selected();" style="width:120px;height:22px;">
-	                   	 	<option value="高达本" <c:if test="${student.SGradations =='高达本'}">selected</c:if>>高达本</option>
-                   	 		<option value="专达本" <c:if test="${student.SGradations =='专达本'}">selected</c:if>>专达本</option>
-                   	 		<option value="高达专" <c:if test="${student.SGradations =='高达专'}">selected</c:if>>高达专</option>
-	                   	</select>
-					</td>
-                </tr>
-                <tr>
-                	<td>报考日期</td>
+                	<td>报名日期</td>
                     <td><input name="sDate" type="text" placeholder="请选报考日期" class="easyui-datetimebox" data-options="required:true,novalidate:true" value="${student.SDate}"></td>
+                </tr>
+                <tr>
+                	<td>学习内容</td>
+                    <td><input name="sContent" type="text" placeholder="请选择学习内容" class="easyui-validatebox" data-options="required:true,novalidate:true" value="${student.SContent}"></td>
                 	<td></td>
                 	<td><input type="text" name="sId" hidden="true" value="${student.SId}" /></td>
                 </tr>
