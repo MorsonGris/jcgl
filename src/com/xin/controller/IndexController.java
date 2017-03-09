@@ -7,8 +7,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/index")
 public class IndexController {
-
 	
+	/**
+	 * 前台登录
+	 */
+	@GetMapping("/login")
+	public String login(){
+		return "proscenium/login";
+	}
 	/**
 	 * 会计培训
 	 */
