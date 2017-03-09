@@ -26,14 +26,16 @@ public class FinanceServiceImpl implements IFinanceService {
 	private FinanceMapper financeMapper;
 	
 	@Override
-	public void selectFinancePage(PageInfo pageInfo) {
+	public List<Finance> selectFinancePage(PageInfo pageInfo) {
 		Page<Finance> page = new Page<Finance>(pageInfo.getNowpage(), pageInfo.getPagesize());
 		String orderField = com.baomidou.mybatisplus.toolkit.StringUtils.camelToUnderline(pageInfo.getSort());
         page.setOrderByField(orderField);
-        page.setAsc(pageInfo.getOrder().equalsIgnoreCase("asc"));
+        //page.setAsc(pageInfo.getOrder().equalsIgnoreCase("desc"));
+        page.setAsc(false);
 		List<Finance> list = financeMapper.selectFinancePage(page, pageInfo.getCondition());
 		pageInfo.setRows(list);
 		pageInfo.setTotal(page.getTotal());
+		return list;
 	}
 
 	@Override

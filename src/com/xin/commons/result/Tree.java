@@ -15,7 +15,7 @@ public class Tree implements java.io.Serializable {
     private static final long serialVersionUID = 980682543891282923L;
     private Long id;
     private String text;
-    private String state = "open";// open,closed
+    private String state = "closed";// open,closed
     private boolean checked = false;
     private Object attributes;
     @JsonInclude(Include.NON_NULL)

@@ -49,11 +49,6 @@
                 sortable : true
             },{
                 width : '120',
-                title : '学习内容',
-                field : 'scontent',
-                sortable : true
-            },{
-                width : '120',
                 title : '报考院校',
                 field : 'listAcademy',
                 sortable : true,
@@ -64,6 +59,11 @@
                     }
                     return(roles.join('\n'));
                 }
+            },{
+                width : '100',
+                title : '专业',
+                field : 'scontent',
+                sortable : true
             },{
                 width : '70',
                 title : '报考层次',
@@ -108,7 +108,7 @@
         parent.$.modalDialog({
             title : '添加',
             width : 500,
-            height : 300,
+            height : 250,
             href : '${path }/student/addpage',
             buttons : [ {
                 text : '添加',
@@ -153,14 +153,14 @@
         }
         parent.$.modalDialog({
             title : '编辑',
-            width : 250,
-            height : 200,
+            width : 500,
+            height : 300,
             href : '${path }/student/editpage?id=' + id,
             buttons : [ {
                 text : '确定',
                 handler : function() {
                     parent.$.modalDialog.openner_dataGrid = studentDataGrid;//因为添加成功之后，需要刷新这个dataGrid，所以先预定义好
-                    var f = parent.$.modalDialog.handler.find('#applyTypeEditForm');
+                    var f = parent.$.modalDialog.handler.find('#studentEditForm');
                     f.submit();
                 }
             } ]

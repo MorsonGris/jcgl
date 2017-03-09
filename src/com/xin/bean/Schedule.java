@@ -1,23 +1,15 @@
 package com.xin.bean;
 
-import com.baomidou.mybatisplus.activerecord.Model;
 import java.util.Date;
+import java.util.List;
 import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableField;
-import java.io.Serializable;
-
 
 /**
- * <p>
- * 
- * </p>
- *
  * @author com.xin
  * @since 2017-02-28
  */
-public class Schedule extends Model<Schedule> {
-
-    private static final long serialVersionUID = 1L;
+public class Schedule {
 
 	@TableId("s_id")
 	private Integer sId;
@@ -29,8 +21,10 @@ public class Schedule extends Model<Schedule> {
 	private Date sDate;
 	@TableField("s_flag")
 	private Integer sFlag;
+	
 	private Date begintime;
 	private Date endtime;
+	private List<User> listUser;
 
 	public Integer getSId() {
 		return sId;
@@ -64,19 +58,6 @@ public class Schedule extends Model<Schedule> {
 		this.sDate = sDate;
 	}
 
-	public Integer getSFlag() {
-		return sFlag;
-	}
-
-	public void setSFlag(Integer sFlag) {
-		this.sFlag = sFlag;
-	}
-
-	@Override
-	protected Serializable pkVal() {
-		return this.sId;
-	}
-
 	public Date getBegintime() {
 		return begintime;
 	}
@@ -91,6 +72,22 @@ public class Schedule extends Model<Schedule> {
 
 	public void setEndtime(Date endtime) {
 		this.endtime = endtime;
+	}
+
+	public List<User> getListUser() {
+		return listUser;
+	}
+
+	public void setListUser(List<User> listUser) {
+		this.listUser = listUser;
+	}
+
+	public Integer getsFlag() {
+		return sFlag;
+	}
+
+	public void setsFlag(Integer sFlag) {
+		this.sFlag = sFlag;
 	}
 
 }

@@ -15,6 +15,7 @@
 		<result column="s_gradations" property="sGradations" />
 		<result column="s_systme" property="sSystme" />
 		<result column="s_date" property="sDate" />
+		<result column="s_type" property="stype"/>
 		
 		<collection property="listAcademy" ofType ="com.xin.bean.Academy">
 			<id column="a_id" property="aId" />
@@ -30,11 +31,11 @@
 	</resultMap>
 	
 	<sql id="Studentcolumn">
-		s_studentno,s_name,user_id,id_number,s_phone,s_content,academy_id,s_gradations,s_systme,s_date
+		s_studentno,s_name,user_id,id_number,s_phone,academy_id,s_gradations,s_systme,s_date,s_type,s_content
 	</sql>
 	
 	<select id="selectAll" resultMap="BaseResultMap">
-		SELECT * FROM student
+		SELECT * FROM student where s_type = 1
 	</select>
 
 	<insert id="insertByid" >
@@ -45,16 +46,36 @@
 		#{userId},
 		#{idNumber},
 		#{sPhone},
-		#{sContent},
 		#{academyId},
 		#{sGradations},
 		#{sSystme},
-		#{sDate}
+		#{sDate},
+		#{stype},
+		#{sContent}
 		)
 	</insert>
 	
 	<select id="selectById" resultMap="BaseResultMap">
-		SELECT * FROM student WHERE s_id = #{sId}
+		SELECT 
+    		s_id,
+	    	s_studentno,
+	    	s_name,
+	    	user_id,
+	    	id_number,
+	    	s_phone,
+	    	academy_id,
+	    	s_gradations,
+	    	s_systme,
+	    	s_date,
+	    	s_content,
+	    	a.a_id,
+	    	a.a_school,
+	    	u.id,
+	    	u.`name`
+    	FROM student s
+    	LEFT JOIN academy a ON s.academy_id = a.a_id
+    	LEFT JOIN user u ON s.user_id = u.id
+		WHERE s_id = #{sId} and s_type = 1
 	</select>
 	
 	<delete id="deleteById">
@@ -67,10 +88,10 @@
 			user_id = #{userId},
 			id_number = #{idNumber},
 			s_phone = #{sPhone},
-			s_content = #{sContent},
 			academy_id = #{academyId},
 			s_gradations = #{sGradations},
 			s_systme = #{sSystme},
+			s_content = #{sContent},
 			s_date = #{sDate}
 		 WHERE 
 		 	s_id = #{sId}
@@ -84,10 +105,10 @@
 	    	user_id,
 	    	id_number,
 	    	s_phone,
-	    	s_content,
 	    	academy_id,
 	    	s_gradations,
 	    	s_systme,
+	    	s_content,
 	    	s_date,
 	    	a.a_id,
 	    	a.a_school,
@@ -97,14 +118,14 @@
     	LEFT JOIN academy a ON s.academy_id = a.a_id
     	LEFT JOIN user u ON s.user_id = u.id
     	<where>
+    		s_type = 1
     		<if test="name != null and name != '' ">
-    			s_name = #{name}
+    			and s_name = #{name}
     		</if>
     		<if test="studentNo != null and studentNo != '' ">
-    			s_studentno = #{studentNo}
+    			and s_studentno = #{studentNo}
     		</if>
     	</where>
     </select>
-    
 
 </mapper>

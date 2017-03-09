@@ -33,6 +33,8 @@ public class Student{
 	private String sSystme;
 	@TableField("s_date")
 	private Date sDate;
+	@TableField("s_type")
+	private int stype;
 
 	private List<Academy> listAcademy;
 	
@@ -140,6 +142,14 @@ public class Student{
 
 	public void setListAcademy(List<Academy> listAcademy) {
 		this.listAcademy = listAcademy;
+	}
+
+	public int getStype() {
+		return stype;
+	}
+
+	public void setStype(int stype) {
+		this.stype = stype;
 	}
 	
 }

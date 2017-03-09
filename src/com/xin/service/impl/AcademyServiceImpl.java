@@ -52,4 +52,14 @@ public class AcademyServiceImpl implements IAcademyService {
 		pageInfo.setTotal(page.getTotal());
 	}
 
+	@Override
+	public List<Academy> selectAll() {
+		return academymapper.selectAll();
+	}
+
+	@Override
+	public List<Academy> selectByName(String school) {
+		return academymapper.selectByName(school);
+	}
+
 }
