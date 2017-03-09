@@ -14,7 +14,7 @@
             singleSelect : true,
             idField : 'fid',
             sortName : 'f_date',
-	        sortOrder : 'asc',
+	        sortOrder : 'desc',
             pageSize : 20,
             pageList : [ 10, 20, 30, 40, 50, 100, 200, 300, 400, 500 ],
             columns : [ [ {
@@ -70,7 +70,7 @@
                     case 2:
                         return '微信';
                     case 3:
-                        return '银行';
+                        return '银行转账';
                     case 4:
                         return '现金';
                     }
@@ -90,7 +90,7 @@
                     case 0:
                         return '';
                     case 1:
-                        return '未交费';
+                        return '未缴费';
                     case 2:
                         return '已缴费';
                     case 3:
@@ -124,8 +124,8 @@
     function addUserFun() {
         parent.$.modalDialog({
             title : '添加',
-            width : 500,
-            height : 300,
+            width : 535,
+            height : 255,
             href : '${path }/finance/addPage',
             buttons : [ {
                 text : '添加',
@@ -199,6 +199,40 @@
         $('#searchFinanceForm input').val('');
         financeDataGrid.datagrid('load', {});
     }
+
+   	//导出excel
+    function toExcel(){
+    	var teaClass = $("#teaClass").val();
+    	var stuNo = $("#stuNo").val();
+    	var fState = $("#fState").val();
+    	var createdateStart = $("#createdateStart").val();
+    	var createdateEnd = $("#createdateEnd").val();
+    	var url = '${path }/finance/download_finance?teaClass='+teaClass+'&stuNo='+stuNo+'&fState='+fState+'&createdateStart='+createdateStart+'&createdateEnd='+createdateEnd;
+    	window.open(url);
+    }
+
+    //上传excel
+    function fromExcel() {
+    	parent.$.modalDialog({
+            title : '上传',
+            width : 300,
+            height : 150,
+            href : '${path }/finance/goUploadExcel',
+            buttons : [ {
+                text : '导入',
+                handler : function() {
+                    parent.$.modalDialog.openner_dataGrid = financeDataGrid; //因为添加成功之后，需要刷新这个dataGrid，所以先预定义好
+                    var f = parent.$.modalDialog.handler.find('#uploadForm');
+                    f.submit();
+                }
+            },{
+        		text : '取消',
+        		handler : function() {
+        		parent.$.modalDialog.handler.dialog('destroy');
+        		parent.$.modalDialog.handler = undefined;
+        		}}]
+        });
+    }
 </script>
 <div class="easyui-layout" data-options="fit:true,border:false">
     <div data-options="region:'north',border:false" style="height: 30px; overflow: hidden;background-color: #fff">
@@ -206,12 +240,12 @@
             <table>
                 <tr>
                     <th>姓名:</th>
-                    <td><input name="teaClass" placeholder="请输入姓名"/></td>
+                    <td><input id="teaClass" name="teaClass" placeholder="请输入姓名"/></td>
                     <th>学号:</th>
-                    <td><input name="stuNo" placeholder="请输入学号"/></td>
+                    <td><input id="stuNo" name="stuNo" placeholder="请输入学号"/></td>
                     <th>缴费状态:</th>
                     <td>
-                    	<select class="easyui-combobox" name="fState" data-options="width:80,height:29,editable:false,panelHeight:'auto'" >
+                    	<select class="easyui-combobox" id="fState" name="fState" data-options="width:80,height:29,editable:false,panelHeight:'auto'" >
 							<option value="0"></option>
 							<option value="1">未缴费</option>
 							<option value="2">已缴费</option>
@@ -220,9 +254,9 @@
                     </td>
                     <th>缴费时间:</th>
                     <td>
-                    	<input name="createdateStart" type="text" class="easyui-datetimebox" />
-                    	<input name="createdateStart" placeholder="点击选择时间" onclick="WdatePicker({readOnly:true,dateFmt:'yyyy-MM-dd HH:mm:ss'})" readonly="readonly" />至
-                        <input  name="createdateEnd" placeholder="点击选择时间" onclick="WdatePicker({readOnly:true,dateFmt:'yyyy-MM-dd HH:mm:ss'})" readonly="readonly" />
+                    	<!-- <input name="createdateStart" type="text" class="easyui-datetimebox" /> -->
+                    	<input id="createdateStart" name="createdateStart" placeholder="点击选择时间" onclick="WdatePicker({readOnly:true,dateFmt:'yyyy-MM-dd HH:mm:ss'})" readonly="readonly" />至
+                        <input id="createdateEnd" name="createdateEnd" placeholder="点击选择时间" onclick="WdatePicker({readOnly:true,dateFmt:'yyyy-MM-dd HH:mm:ss'})" readonly="readonly" />
                         <a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'fi-magnifying-glass',plain:true" onclick="searchUserFun();">查询</a>
                         <a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'fi-x-circle',plain:true" onclick="cleanUserFun();">清空</a>
                     </td>
@@ -237,5 +271,11 @@
 <div id="financeToolbar" style="display: none;">
     <shiro:hasPermission name="/finance/add">
         <a onclick="addUserFun();" href="javascript:void(0);" class="easyui-linkbutton" data-options="plain:true,iconCls:'fi-plus icon-green'">添加</a>
+    </shiro:hasPermission>
+    <shiro:hasPermission name="/finance/upload_finance">
+        <a onclick="fromExcel();" href="javascript:void(0);" class="easyui-linkbutton" data-options="plain:true,iconCls:'fi-upload icon-green'" >上传缴费数据</a>
+    </shiro:hasPermission>
+    <shiro:hasPermission name="/finance/download_finance">
+        <a onclick="toExcel();" href="javascript:void(0);" class="easyui-linkbutton" data-options="plain:true,iconCls:'fi-download icon-green'" >导出当前数据</a>
     </shiro:hasPermission>
 </div>
