@@ -3,22 +3,52 @@ body{
     font-family: 'Libre Franklin', Helvetica, Arial, sans-serif;
     margin-top: 57px;
 }
-a:link,a:visited{
-    text-decoration:none;  /*超链接无下划线*/
+a:link{
+	text-decoration:none;
+}
+a:visited{
+	text-decoration:none;
 }
 a:hover{
-    text-decoration:underline;  /*鼠标放上去有下划线*/
+	text-decoration:none;
 }
-a{text-decoration:none;color:#333;}
+a:active{
+	text-decoration:none;
+}
+
 .home-ico{
-    width: 90%;
+    width: 80%;
 }
 .apply-ico{
-    width: 90%;
+    width: 80%;
 }
 .home_operation{
 	font-size: 18px;
 }
 .navbar-top{
 	padding: 3px;
+}
+/*	float start  */
+.float{
+    width:40px;
+    height:40px;
+    text-align: right;
+    overflow:hidden;
+    position:fixed;
+    right:2px;;
+    bottom:300px;
+}
+.white_content {
+    display: none;
+    position: fixed;
+    top: 20%;
+    left: 5%;
+    width: 80%;
+    height: 50%;
+    border: 1px solid #999999;
+    background-color: white;
+}
+/*	float end  */
+.bottom_link{
+	color: #fff;
 }

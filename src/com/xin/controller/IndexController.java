@@ -15,6 +15,71 @@ public class IndexController {
 	public String login(){
 		return "proscenium/login";
 	}
+	
+	/**
+	 * 我的账户
+	 */
+	@GetMapping("/account")
+	public String account(){
+		return "proscenium/account";
+	}
+	
+	/**
+	 * 帮助中心
+	 */ 
+	@GetMapping("/help")
+	public String help(){
+		return "proscenium/help";
+	}
+	
+	/**
+	 * 学生报名
+	 */
+	@GetMapping("/apply")
+	public String apply(){
+		return "proscenium/apply";
+	}
+	
+    /**
+	 * 网上学习
+	 */
+    @GetMapping("/learn")
+    public String learn(){
+    	return "proscenium/learn";
+    }
+    
+	/**
+	 * 招生简章
+	 */
+	@GetMapping("/eguide")
+	public String eguide(){
+		return "proscenium/eguide";
+	}
+	
+	/**
+	 * 工作助手
+	 */ 
+	@GetMapping("/helper")
+	public String helper(){
+		return "proscenium/helper";
+	}
+	
+	/**
+	 * 公告栏
+	 */ 
+	@GetMapping("/notice")
+	public String notice(){
+		return "proscenium/notice";
+	}
+	
+	/**
+	 * 所有专业
+	 */ 
+	@GetMapping("/major")
+	public String major(){
+		return "proscenium/major";
+	}
+	
 	/**
 	 * 会计培训
 	 */
@@ -31,13 +96,6 @@ public class IndexController {
 		return "proscenium/adult";
 	}
 	
-	/**
-	 * 学生报名
-	 */
-	@GetMapping("/apply")
-	public String apply(){
-		return "proscenium/apply";
-	}
 	
 	/**
 	 * 艺考培训
@@ -46,23 +104,7 @@ public class IndexController {
 	public String art(){
 		return "proscenium/art";
 	}
-	
-	/**
-	 * 
-	 */
-	@GetMapping("/eguide")
-	public String eguide(){
-		return "proscenium/eguide";
-	}
-	
-	/**
-	 * 
-	 */
-	@GetMapping("/help")
-	public String help(){
-		return "proscenium/help";
-	}
-	
+		
 	/**
 	 * 国家开放大学
 	 */
