@@ -59,10 +59,10 @@
                 width : 130,
                 formatter : function(value, row, index) {
                     var str = '';
-                        <shiro:hasPermission name="/applyType/edit">
+                        <shiro:hasPermission name="/Bookkeeper/edit">
                             str += $.formatString('<a href="javascript:void(0)" class="user-easyui-linkbutton-edit" data-options="plain:true,iconCls:\'fi-pencil icon-blue\'" onclick="editUserFun(\'{0}\');" >编辑</a>', row.sid);
                         </shiro:hasPermission>
-                        <shiro:hasPermission name="/applyType/delete">
+                        <shiro:hasPermission name="/Bookkeeper/delete">
                             str += '&nbsp;&nbsp;|&nbsp;&nbsp;';
                             str += $.formatString('<a href="javascript:void(0)" class="user-easyui-linkbutton-del" data-options="plain:true,iconCls:\'fi-x icon-red\'" onclick="deleteUserFun(\'{0}\');" >删除</a>', row.sid);
                         </shiro:hasPermission>
@@ -202,7 +202,7 @@
     </div>
 </div>
 <div id="userToolbar" style="display: none;">
-    <shiro:hasPermission name="/student/addpage">
+    <shiro:hasPermission name="/Bookkeeper/add">
      	<a onclick="addUserFun();" href="javascript:void(0);" class="easyui-linkbutton" data-options="plain:true,iconCls:'fi-plus icon-green'">添加</a>
     </shiro:hasPermission>
 </div>

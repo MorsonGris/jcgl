@@ -10,6 +10,7 @@ import com.xin.bean.Student;
  * @since 2017-02-28
  */
 public interface StudentMapper{
+	Student selectByNo();
 	List<Student> selectAll();
 	boolean deleteById(int id);
 	Student selectById(int id);

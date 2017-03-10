@@ -1,7 +1,5 @@
 package com.xin.controller;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -16,8 +14,10 @@ import com.xin.bean.Student;
 import com.xin.bean.User;
 import com.xin.commons.base.BaseController;
 import com.xin.commons.utils.PageInfo;
+import com.xin.commons.utils.StudentNo;
 import com.xin.service.BookkeeperService;
 import com.xin.service.IAcademyService;
+import com.xin.service.IStudentService;
 
 /**
  * <p>
@@ -33,6 +33,8 @@ public class BookkeeperController extends BaseController{
     @Autowired private BookkeeperService bookkeeperService;
     
     @Autowired private IAcademyService academyService;
+    
+    @Autowired private IStudentService studentservice;
     
     @GetMapping("/studentpage")
     public String student(){
@@ -79,19 +81,12 @@ public class BookkeeperController extends BaseController{
     @RequestMapping("/add")
     @ResponseBody
     public Object add(Student student){
-    	Date date = new Date();
-    	SimpleDateFormat sdf = new SimpleDateFormat("yyyy");
-    	int i = 1;
-    	String No = null;
-    	if(i<10){
-    		No = sdf.format(date)+0+i;
-    	}
-    	No = sdf.format(date)+i;
+    	Student stu = studentservice.selectByNo();
+    	String No = StudentNo.getNo(stu);
     	student.setStudentNo(No);
     	student.setStype(3);
     	boolean result = bookkeeperService.insertByid(student);
     	if(result == true){
-    		i++;
     		return renderSuccess("添加成功");
     	}
     	return renderError("添加失败");

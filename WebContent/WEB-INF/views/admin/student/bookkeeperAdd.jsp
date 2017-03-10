@@ -123,7 +123,7 @@
                 <tr>
                 	<td>手机号码</td>
                     <td><input name="sPhone" type="text" placeholder="请输入手机号码" class="easyui-validatebox"  data-options="required:true,novalidate:true,prompt:'请输入正确的手机号码。',validType:'phoneNum'" value=""></td>
-                	<td>报考日期</td>
+                	<td>报名日期</td>
                     <td><input name="sDate" type="text" placeholder="请选报考日期" class="easyui-datetimebox" data-options="required:true,novalidate:true" value=""></td>
                 </tr>
                 <tr>

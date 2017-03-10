@@ -104,6 +104,11 @@
 	 }
   }
   
+  $(function(){
+	  var dd = $("#aMajor");
+	  dd.append("<option value=''>${student.SContent}</option>");
+  });
+  
   function selectAca(){
 	  var value =  $('#academyId option:selected').val();//选中的值 
 	  var dd = $("#aMajor");
@@ -115,9 +120,6 @@
 				  dd.append("<option value='"+json[i].amajor+"'>"+json[i].amajor+"</option>")
 			  }
 		  });
-	  }else{
-		  dd.empty();
-		  dd.append("<option value=''>--请选择--</option>");
 	  }
   }
   
@@ -189,7 +191,7 @@
                 <tr>
 	                <td>报考院校</td>
                     <td>
-                    	<select name="academyId" id="academyId" style="width:120px;height:22px;">
+                    	<select name="academyId" id="academyId" onchange="selectAca();" style="width:120px;height:22px;">
                     		<c:forEach var="academy" items="${academy}" varStatus="s">
                     			<option value="${academy.AId}" <c:if test="${aca.ASchool == academy.ASchool}">selected</c:if>>${academy.ASchool}</option>
                     		</c:forEach>

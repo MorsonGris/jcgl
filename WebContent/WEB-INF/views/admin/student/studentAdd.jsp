@@ -205,7 +205,7 @@
                 	<td>报考层次</td>
                     <td>
 	                   	<select name="sGradations" id="sGradations" onclick="selected();" style="width:120px;height:22px;">
-	                   	 	<option value="0">--请选择--</option>
+	                   	 	<option value="">--请选择--</option>
 	                   	 	<option value="高达本">高达本</option>
 	                   	 	<option value="专达本">专达本</option>
 	                   	 	<option value="高达专">高达专</option>

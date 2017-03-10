@@ -1,7 +1,6 @@
 package com.xin.commons.result;
 
 import java.util.List;
-
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
@@ -51,8 +50,8 @@ public class Tree implements java.io.Serializable {
         this.state = state;
     }
     
-    public void setState(Integer opened) {
-        this.state = (null != opened && opened == 1) ? "open" : "closed";
+    public void setState(Integer closed) {
+        this.state = (null != closed && closed == 1) ? "open" : "closed";
     }
     
     public boolean isChecked() {

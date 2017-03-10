@@ -60,6 +60,11 @@
                     return(roles.join('\n'));
                 }
             },{
+                width : '100',
+                title : '专业',
+                field : 'scontent',
+                sortable : true
+            },{
                 width : '70',
                 title : '报考层次',
                 field : 'sgradations',
@@ -81,10 +86,10 @@
                 width : 130,
                 formatter : function(value, row, index) {
                     var str = '';
-                        <shiro:hasPermission name="/applyType/edit">
+                        <shiro:hasPermission name="/Dispark/edit">
                             str += $.formatString('<a href="javascript:void(0)" class="user-easyui-linkbutton-edit" data-options="plain:true,iconCls:\'fi-pencil icon-blue\'" onclick="editUserFun(\'{0}\');" >编辑</a>', row.sid);
                         </shiro:hasPermission>
-                        <shiro:hasPermission name="/applyType/delete">
+                        <shiro:hasPermission name="/Dispark/delete">
                             str += '&nbsp;&nbsp;|&nbsp;&nbsp;';
                             str += $.formatString('<a href="javascript:void(0)" class="user-easyui-linkbutton-del" data-options="plain:true,iconCls:\'fi-x icon-red\'" onclick="deleteUserFun(\'{0}\');" >删除</a>', row.sid);
                         </shiro:hasPermission>
@@ -103,7 +108,7 @@
         parent.$.modalDialog({
             title : '添加',
             width : 500,
-            height : 230,
+            height : 250,
             href : '${path }/Dispark/addpage',
             buttons : [ {
                 text : '添加',
@@ -126,7 +131,7 @@
         parent.$.messager.confirm('询问', '您是否要删除当前数据？', function(b) {
             if (b) {
 	            progressLoad();
-	            $.post('${path }/student/delete', {
+	            $.post('${path }/Dispark/delete', {
 	                id : id
 	            }, function(result) {
 	                if (result.success) {
@@ -224,7 +229,7 @@
     </div>
 </div>
 <div id="userToolbar" style="display: none;">
-    <shiro:hasPermission name="/student/addpage">
+    <shiro:hasPermission name="/Dispark/add">
      	<a onclick="addUserFun();" href="javascript:void(0);" class="easyui-linkbutton" data-options="plain:true,iconCls:'fi-plus icon-green'">添加</a>
     </shiro:hasPermission>
 </div>

@@ -51,5 +51,10 @@ public class StudentServiceImpl implements IStudentService {
 	public List<Student> selectAll() {
 		return Studentmapper.selectAll();
 	}
+
+	@Override
+	public Student selectByNo() {
+		return Studentmapper.selectByNo();
+	}
 	
 }

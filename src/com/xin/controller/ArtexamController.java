@@ -1,27 +1,26 @@
 package com.xin.controller;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-
 import com.xin.bean.Academy;
 import com.xin.bean.Student;
 import com.xin.bean.User;
 import com.xin.commons.base.BaseController;
 import com.xin.commons.utils.PageInfo;
+import com.xin.commons.utils.StudentNo;
 import com.xin.service.ArtexamService;
 import com.xin.service.IAcademyService;
+import com.xin.service.IStudentService;
 
 /**
++
  * <p>
  *  艺考培训报名
  * </p>
@@ -35,6 +34,8 @@ public class ArtexamController extends BaseController{
     @Autowired private ArtexamService artexamService;
     
     @Autowired private IAcademyService academyService;
+    
+    @Autowired private IStudentService studentservice;
     
     @GetMapping("/studentpage")
     public String student(){
@@ -81,19 +82,12 @@ public class ArtexamController extends BaseController{
     @RequestMapping("/add")
     @ResponseBody
     public Object add(Student student){
-    	Date date = new Date();
-    	SimpleDateFormat sdf = new SimpleDateFormat("yyyy");
-    	int i = 1;
-    	String No = null;
-    	if(i<10){
-    		No = sdf.format(date)+0+i;
-    	}
-    	No = sdf.format(date)+i;
+    	Student stu = studentservice.selectByNo();
+    	String No = StudentNo.getNo(stu);
     	student.setStudentNo(No);
     	student.setStype(4);
     	boolean result = artexamService.insertByid(student);
     	if(result == true){
-    		i++;
     		return renderSuccess("添加成功");
     	}
     	return renderError("添加失败");

@@ -89,6 +89,25 @@
 	  $('#win').window('close');
 	});
   
+  $(function(){
+	  var dd = $("#aMajor");
+	  dd.append("<option value=''>${student.SContent}</option>");
+  });
+  
+  function selectAca(){
+	  var value =  $('#academyId option:selected').val();//选中的值 
+	  var dd = $("#aMajor");
+	  if(value != ''){
+		  $.get("${path }/student/school",{"id":value},function(data){
+			  var json = JSON.parse(data); 
+			  dd.empty();
+			  for(var i=0;i<json.length;i++){
+				  dd.append("<option value='"+json[i].amajor+"'>"+json[i].amajor+"</option>")
+			  }
+		  });
+	  }
+  }
+  
   function selected(){
 	 var valeu =  $('#sGradations option:selected').val();//选中的值
 	 if(valeu == "高达本"){//高达本
@@ -169,13 +188,19 @@
                 </tr>
                 <tr>
 	                <td>报考院校</td>
-	                    <td>
-	                    	<select name="academyId" id="academyId" style="width:120px;height:22px;">
-	                    		<c:forEach var="academy" items="${academy}" varStatus="s">
-	                    			<option value="${academy.AId}" <c:if test="${aca.ASchool == academy.ASchool}">selected</c:if>>${academy.ASchool}</option>
-	                    		</c:forEach>
-	                    	</select>
-	                    </td>
+                    <td>
+                    	<select name="academyId" id="academyId" onchange="selectAca();" style="width:120px;height:22px;">
+                    		<c:forEach var="academy" items="${academy}" varStatus="s">
+                    			<option value="${academy.AId}" <c:if test="${aca.ASchool == academy.ASchool}">selected</c:if>>${academy.ASchool}</option>
+                    		</c:forEach>
+                    	</select>
+                    </td>
+                	<td>报考专业</td>
+                	<td>
+                		<select name="sContent" id="aMajor" style="width:120px;height:22px;"></select>
+                	</td>
+                </tr>
+                <tr>
                 	<td>报考层次</td>
                     <td>
 	                   	<select name="sGradations" id="sGradations" onblur="selected();" style="width:120px;height:22px;">
@@ -184,14 +209,12 @@
                    	 		<option value="高达专" <c:if test="${student.SGradations =='高达专'}">selected</c:if>>高达专</option>
 	                   	</select>
 					</td>
-                </tr>
-                <tr>
                 	<td>学制</td>
                     <td><input name="sSystme" id="sSystme" type="text" placeholder="请选择学制" class="easyui-validatebox" data-options="required:true,novalidate:true" readonly="readonly" value="${student.SSystme}"></td>
-                	<td>报考日期</td>
-                    <td><input name="sDate" type="text" placeholder="请选报考日期" class="easyui-datetimebox" data-options="required:true,novalidate:true" value="${student.SDate}"></td>
                 </tr>
                 <tr>
+                	<td>报考日期</td>
+                    <td><input name="sDate" type="text" placeholder="请选报考日期" class="easyui-datetimebox" data-options="required:true,novalidate:true" value="${student.SDate}"></td>
                 	<td></td>
                 	<td><input type="text" name="sId" hidden="true" value="${student.SId}" /></td>
                 </tr>

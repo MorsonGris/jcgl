@@ -1,23 +1,20 @@
 package com.xin.controller;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-
 import com.xin.bean.Academy;
 import com.xin.bean.Student;
 import com.xin.bean.User;
 import com.xin.commons.base.BaseController;
 import com.xin.commons.utils.PageInfo;
+import com.xin.commons.utils.StudentNo;
 import com.xin.service.IAcademyService;
 import com.xin.service.IStudentService;
 
@@ -89,14 +86,8 @@ public class StudentController extends BaseController{
     @RequestMapping("/add")
     @ResponseBody
     public Object add(Student student){
-    	Date date = new Date();
-    	SimpleDateFormat sdf = new SimpleDateFormat("yyyy");
-    	int i = 1;
-    	String No = null;
-    	if(i<10){
-    		No = sdf.format(date)+"0"+i;
-    	}
-    	No = sdf.format(date)+i;
+    	Student stu = studentService.selectByNo();
+    	String No = StudentNo.getNo(stu);
     	student.setStudentNo(No);
     	student.setStype(1);
     	boolean result = studentService.insertByid(student);

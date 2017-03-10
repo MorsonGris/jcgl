@@ -37,6 +37,10 @@
 	<select id="selectAll" resultMap="BaseResultMap">
 		SELECT * FROM student where s_type = 1
 	</select>
+	
+	<select id="selectByNo" resultMap="BaseResultMap">
+		select Max(s_studentno) as s_studentno from student  
+	</select>
 
 	<insert id="insertByid" >
 		INSERT INTO student(<include refid="Studentcolumn" />) 

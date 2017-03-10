@@ -10,6 +10,7 @@
 		<result column="user_id" property="userId" />
 		<result column="id_number" property="idNumber" />
 		<result column="s_phone" property="sPhone" />
+		<result column="s_content" property="sContent" />
 		<result column="academy_id" property="academyId" />
 		<result column="s_gradations" property="sGradations" />
 		<result column="s_systme" property="sSystme" />
@@ -30,7 +31,7 @@
 	</resultMap>
 	
 	<sql id="Studentcolumn">
-		s_studentno,s_name,user_id,id_number,s_phone,academy_id,s_gradations,s_systme,s_date,s_type
+		s_studentno,s_name,user_id,id_number,s_phone,academy_id,s_gradations,s_systme,s_date,s_type,s_content
 	</sql>
 	
 	<select id="selectAll" resultMap="BaseResultMap">
@@ -49,7 +50,8 @@
 		#{sGradations},
 		#{sSystme},
 		#{sDate},
-		#{stype}
+		#{stype},
+		#{sContent}
 		)
 	</insert>
 	
@@ -67,6 +69,7 @@
 	    	s_date,
 	    	a.a_id,
 	    	a.a_school,
+	    	s_content,
 	    	u.id,
 	    	u.`name`
     	FROM student s
@@ -88,7 +91,8 @@
 			academy_id = #{academyId},
 			s_gradations = #{sGradations},
 			s_systme = #{sSystme},
-			s_date = #{sDate}
+			s_date = #{sDate},
+			s_content = #{sContent}
 		 WHERE 
 		 	s_id = #{sId}
 	</update>
@@ -105,6 +109,7 @@
 	    	s_gradations,
 	    	s_systme,
 	    	s_date,
+	    	s_content,
 	    	a.a_id,
 	    	a.a_school,
 	    	u.id,
