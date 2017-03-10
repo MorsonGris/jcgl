@@ -9,7 +9,6 @@ import java.io.InputStream;
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -28,7 +27,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.xin.commons.utils.StringUtils;
 import com.xin.commons.utils.PathUtil;
@@ -76,12 +74,11 @@ public class FinanceController extends BaseController{
     public Object dataGrid(Finance finance, Integer page, Integer rows, String sort, String order) {
         PageInfo pageInfo = new PageInfo(page, rows, sort, order);
         Map<String, Object> condition = new HashMap<String, Object>();
-        System.out.println(finance.getTeaClass()+"**"+finance.getStuNo()+"**"+finance.getFState()+"**"+finance.getCreatedateStart()+"//"+finance.getCreatedateEnd());
         if (StringUtils.isNotBlank(finance.getTeaClass())) {
-            condition.put("sName", finance.getTeaClass());
+            condition.put("username", StringUtils.formatLike(finance.getTeaClass()));
         }
         if (finance.getStuNo()!=null) {
-            condition.put("stuNo", finance.getStuNo());
+            condition.put("stuNo", StringUtils.formatLike(finance.getStuNo()));
         }
         if (finance.getFState() != null && finance.getFState()!=0) {
             condition.put("fState", finance.getFState());
@@ -109,8 +106,7 @@ public class FinanceController extends BaseController{
     
     /**
      * 添加缴费数据
-     *
-     * @param notice
+     * @param finance
      * @return
      */
     @PostMapping("/add")
@@ -128,7 +124,7 @@ public class FinanceController extends BaseController{
      * 编辑缴费页
      * @param model
      * @param id
-     * @retur
+     * @return
      * */
     @GetMapping("/editPage")
     public String editPage(Model model, int id) {
@@ -139,7 +135,7 @@ public class FinanceController extends BaseController{
     
     /**
      * 编辑缴费
-     * @param notice
+     * @param finance
      * @return
      * */
     @PostMapping("/edit")
@@ -154,7 +150,44 @@ public class FinanceController extends BaseController{
     }
     
     /**
+     * 批量缴费页
+     * @param model
+     * @param ids
+     * @return
+     * */
+    @GetMapping("/batchPay_Page")
+    public String batchPay_Page(Model model, String ids) {
+    	model.addAttribute("ids", ids);
+    	return "admin/finance/beath_pay";
+    }
+    
+    /**
+     * 批量缴费
+     * */
+    @PostMapping("/batchPay")
+    @ResponseBody
+    public Object batchPay(Finance finance) {
+    	String DATA_IDS = finance.getTeaClass();
+    	int result = 0;
+    	if(null != DATA_IDS && !"".equals(DATA_IDS)){
+			String ArrayDATA_IDS[] = DATA_IDS.split(",");
+			for(int i=0; i<ArrayDATA_IDS.length; i++) {
+				finance.setFId(Integer.parseInt(ArrayDATA_IDS[i]));
+				System.out.println(Integer.parseInt(ArrayDATA_IDS[i]));
+				result = financeService.updateBatchFinance(finance);
+			}
+    	}
+    	if(result>0) {
+    		return renderSuccess("缴费成功");
+    	}else {
+    		return renderSuccess("缴费失败");
+    	}
+    }
+    
+    /**
      * 删除缴费
+     * @param id
+     * @return
      * */
     @PostMapping("/delete")
     @ResponseBody
@@ -166,34 +199,35 @@ public class FinanceController extends BaseController{
     /**
 	 * @author Mr.Lin
 	 * 导出缴费数据到EXCEL
+	 * @param Finance
+	 * @param request
+	 * @param response
+	 * @throws IOException
 	 * @return
 	 */
     @RequestMapping(value="/download_finance")
-    public String download(Finance f,HttpServletRequest request,HttpServletResponse response) throws IOException{
+    public String download(Finance f,Integer page, Integer rows,HttpServletRequest request,HttpServletResponse response) throws IOException{
         String fileName="缴费清单数据导出";
         //填充projects数据
-        PageInfo pageInfo = new PageInfo(1, 20, "f_date", "desc");
-        Map<String, Object> condition = new HashMap<String, Object>();
         if (StringUtils.isNotBlank(f.getTeaClass())) {
-            condition.put("sName", f.getTeaClass());
+            f.setTeaClass(StringUtils.formatLike(f.getTeaClass()));
         }
         if (f.getStuNo()!=null) {
-            condition.put("stuNo", f.getStuNo());
+            f.setStuNo(StringUtils.formatLike(f.getStuNo()));
         }
         if (f.getFState() != null && f.getFState()!=0) {
-            condition.put("fState", f.getFState());
+            f.setFState(f.getFState());
         }
         if (f.getCreatedateStart() != null) {
-            condition.put("startTime", f.getCreatedateStart());
+            f.setCreatedateStart(f.getCreatedateStart());
         }
         if (f.getCreatedateEnd() != null) {
-            condition.put("endTime", f.getCreatedateEnd());
+            f.setCreatedateEnd(f.getCreatedateEnd());
         }
-        pageInfo.setCondition(condition);
-        List<Finance> finances = financeService.selectFinancePage(pageInfo);
+        List<Finance> finances = financeService.selectFinanceAll(f);
         List<Map<String,Object>> list=createExcelRecord(finances);
-        String columnNames[]={"序号","姓名","学号","班主任","合作人","需缴金额","实缴金额","缴费时间","缴费方式","累计金额","缴费状态"};//列名
-        String keys[]    =     {"var1","var2","var3","var4","var5","var6","var7","var8","var9","var10","var11"};//map中的key
+        String columnNames[]={"序号","姓名","学号","学校","专业","层次","班主任","合作人","需缴金额","实缴金额","缴费时间","缴费方式","累计金额","缴费状态"};//列名
+        String keys[]    =     {"var1","var2","var3","var4","var5","var6","var7","var8","var9","var10","var11","var12","var13","var14"};//map中的key
         ByteArrayOutputStream os = new ByteArrayOutputStream();
         try {
             ExcelUtil.createWorkBook(list,keys,columnNames).write(os);
@@ -229,6 +263,11 @@ public class FinanceController extends BaseController{
         return null;
     }
     
+    /**
+     * 填值
+     * @param finances
+     * @return
+     * */
     private List<Map<String, Object>> createExcelRecord(List<Finance> finances) {
         List<Map<String, Object>> listmap = new ArrayList<Map<String, Object>>();
         Map<String, Object> map = new HashMap<String, Object>();
@@ -243,14 +282,17 @@ public class FinanceController extends BaseController{
 			vpd.put("var1", i+1+"");
 			vpd.put("var2", finance.getStudent().getSName());   //1
 			vpd.put("var3", finance.getStuNo());				//2
-			vpd.put("var4", finance.getTeaClass());				//3
-			vpd.put("var5", finance.getUser().getName());	//4
-			String nmoney = finance.getNeedMoney()+"";
-			vpd.put("var6", nmoney);		//5
+			vpd.put("var4", finance.getAcademy().getASchool());	//3
+			vpd.put("var5", finance.getAcademy().getAMajor());	//4
+			vpd.put("var6", finance.getStudent().getSGradations());	//5
+			vpd.put("var7", finance.getTeaClass());				//6
+			vpd.put("var8", finance.getUser().getName());	//7
+			String nmoney = finance.getNeedMoney()+"";	//8
+			vpd.put("var9", nmoney);		//9
 			String pmoney = finance.getPracticalMoney()+"";
-			vpd.put("var7", pmoney);		//6
+			vpd.put("var10", pmoney);		//10
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:MM:ss");
-			vpd.put("var8", sdf.format(finance.getFDate()));	//7
+			vpd.put("var11", sdf.format(finance.getFDate()));	//11
 			state = finance.getFWay()+"";
 			if(state.equals("1")) {
 				state = "支付宝";
@@ -261,9 +303,9 @@ public class FinanceController extends BaseController{
 			}else {
 				state = "现金";
 			}
-			vpd.put("var9", state);		//8
+			vpd.put("var12", state);		//12
 			String fmoney = finance.getFAccumulative()+"";
-			vpd.put("var10", fmoney);		//9
+			vpd.put("var13", fmoney);		//13
 			state1 = finance.getFState()+"";
 			if(state1.equals("1")) {
 				state1 = "未缴费";
@@ -272,7 +314,7 @@ public class FinanceController extends BaseController{
 			}else{
 				state1 = "已兑账";
 			}
-			vpd.put("var11", state1);		//10
+			vpd.put("var14", state1);		//14
             listmap.add(vpd);
         }
         return listmap;
@@ -298,9 +340,11 @@ public class FinanceController extends BaseController{
 	
 	/**
 	 * 上传EXCEL
-	 * 
-	 * */
-	
+	 * @param file
+	 * @param request
+	 * @throws Exception
+	 * @return
+	 */
 	@SuppressWarnings({ "unchecked", "rawtypes"})
 	@RequestMapping("/upload_finance")
 	@ResponseBody

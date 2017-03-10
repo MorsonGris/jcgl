@@ -11,7 +11,7 @@
             striped : true,
             rownumbers : true,
             pagination : true,
-            singleSelect : true,
+            singleSelect : false,
             idField : 'fid',
             sortName : 'f_date',
 	        sortOrder : 'desc',
@@ -19,18 +19,75 @@
             pageList : [ 10, 20, 30, 40, 50, 100, 200, 300, 400, 500 ],
             columns : [ [ {
                 width : '80',
+                field : 'fid',
+                checkbox:true
+            },{
+                width : '60',
                 title : '姓名',
-                field : 'student',
+                field : 'studentsname',
                 formatter : function(value, row, index) {
-                    return value.sname;
+                	if (row.student){
+                        if(row.student.sname!= '')
+                            return row.student.sname;
+                        else{
+                            return '';
+                        }
+                    } else {
+                        return '';
+                    }
                 }
             }, {
-                width : '80',
+                width : '75',
                 title : '学号',
                 field : 'stuNo',
                 sortable : true
             },{
                 width : '80',
+                title : '学校',
+                field : 'academyaschool',
+                formatter : function(value, row, index) {
+                	if (row.academy){
+                        if(row.academy.aschool!= '')
+                            return row.academy.aschool;
+                        else{
+                            return '';
+                        }
+                    } else {
+                        return '';
+                    }
+                }
+            },{
+            	width : '110',
+                title : '专业',
+                field : 'academyamajor',
+                formatter : function(value, row, index) {
+                	if (row.academy){
+                        if(row.academy.amajor!= '')
+                            return row.academy.amajor;
+                        else{
+                            return '';
+                        }
+                    } else {
+                        return '';
+                    }
+                }
+            },{
+            	width : '70',
+                title : '层次',
+                field : 'studentsgradations',
+                formatter : function(value, row, index) {
+                	if (row.student){
+                        if(row.student.sgradations != '')
+                            return row.student.sgradations;
+                        else{
+                            return '';
+                        }
+                    } else {
+                        return '';
+                    }
+                }
+            },{
+                width : '70',
                 title : '班主任',
                 field : 'teaClass',
                 sortable : true
@@ -42,12 +99,12 @@
                     return value.name;
                 }
             },{
-                width : '80',
+                width : '60',
                 title : '需缴金额',
                 field : 'needMoney',
                 sortable : true
             },{
-                width : '80',
+                width : '60',
                 title : '实缴金额',
                 field : 'practicalMoney',
                 sortable : true
@@ -76,7 +133,7 @@
                     }
                 }
             },{
-                width : '80',
+                width : '60',
                 title : '累计金额',
                 field : 'faccumulative',
                 sortable : true
@@ -233,14 +290,43 @@
         		}}]
         });
     }
+
+    function batch_pay() {
+    	var ids = [];
+    	var rows = $('#financeDataGrid').datagrid('getSelections');
+    	for(var i=0; i<rows.length; i++){
+    		ids.push(rows[i].fid);
+    	}
+    	if(ids!='' && ids!=null) {
+        	parent.$.modalDialog({
+                title : '批量缴费',
+                width : 300,
+                height : 200,
+                href : '${path }/finance/batchPay_Page?ids=' + ids.join(','),
+                buttons : [ {
+                    text : '确定缴费',
+                    handler : function() {
+                        parent.$.modalDialog.openner_dataGrid = financeDataGrid;//因为添加成功之后，需要刷新这个dataGrid，所以先预定义好
+                        var f = parent.$.modalDialog.handler.find('#financebatch');
+                        f.submit();
+                    }
+                } ]
+            });
+        }else {
+        	parent.$.messager.show({
+                title : '提示',
+                msg : '请选择需缴费学生！'
+            });
+        }
+    }
 </script>
 <div class="easyui-layout" data-options="fit:true,border:false">
     <div data-options="region:'north',border:false" style="height: 30px; overflow: hidden;background-color: #fff">
         <form id="searchFinanceForm">
             <table>
                 <tr>
-                    <th>姓名:</th>
-                    <td><input id="teaClass" name="teaClass" placeholder="请输入姓名"/></td>
+                    <th>合作人:</th>
+                    <td><input id="teaClass" name="teaClass" placeholder="请输入合作人"/></td>
                     <th>学号:</th>
                     <td><input id="stuNo" name="stuNo" placeholder="请输入学号"/></td>
                     <th>缴费状态:</th>
@@ -277,5 +363,8 @@
     </shiro:hasPermission>
     <shiro:hasPermission name="/finance/download_finance">
         <a onclick="toExcel();" href="javascript:void(0);" class="easyui-linkbutton" data-options="plain:true,iconCls:'fi-download icon-green'" >导出当前数据</a>
+    </shiro:hasPermission>
+    <shiro:hasPermission name="/finance/batchPay">
+        <a onclick="batch_pay();" href="javascript:void(0);" class="easyui-linkbutton" data-options="plain:true,iconCls:'fi-dollar-bill icon-green'" >批量缴费</a>
     </shiro:hasPermission>
 </div>

@@ -9,7 +9,7 @@
 		<result column="tea_class" property="teaClass" />
 		<result column="need_money" property="needMoney" />
 		<result column="practical_money" property="practicalMoney" />
-		<result column="f_date" property="fDate" />
+		<result column="f_date" property="fDate" jdbcType="TIMESTAMP" />
 		<result column="f_way" property="fWay" />
 		<result column="f_accumulative" property="fAccumulative" />
 		<result column="f_state" property="fState" />
@@ -17,10 +17,16 @@
 		<association property="student" javaType="com.xin.bean.Student">
 			<id property="sId" column="s_id" />
 			<result property="sName" column="s_name" />
+			<result property="sGradations" column="s_gradations" />
 		</association>
 		<association property="user" javaType="com.xin.bean.User">
 			<id property="id" column="id" />
 			<result property="name" column="name" />
+		</association>
+		<association property="academy" javaType="com.xin.bean.Academy">
+			<id property="aId" column="a_id" />
+			<result property="aSchool" column="a_school" />
+			<result property="aMajor" column="a_major" />
 		</association>
 	</resultMap>
 	
@@ -28,7 +34,23 @@
 	<sql id="field">
 		F.f_id,
 		S.s_name,
+		S.s_gradations,
 		U.`name`,
+		A.a_school,
+		A.a_major,
+		F.STU_NO,
+		F.tea_class,
+		F.NEED_MONEY,
+		F.practical_money,
+		F.f_date,
+		F.f_way,
+		F.f_accumulative,
+		F.f_state,
+		F.f_obligate
+	</sql>
+	
+	<sql id="table_field">
+		F.f_id,
 		F.STU_NO,
 		F.tea_class,
 		F.NEED_MONEY,
@@ -48,12 +70,13 @@
 		SELECT 
 			<include refid="field" /> 
 		FROM FINANCE F LEFT JOIN STUDENT S ON F.STU_NO=S.S_STUDENTNO LEFT JOIN `user` U ON S.USER_ID=U.ID 
+		LEFT JOIN academy A ON S.academy_id=A.a_id 
 		<where>
-            <if test=" sName != null and sName != '' ">
-                S.s_name = #{sName}
+            <if test=" username != null and username != '' ">
+                U.`name` like #{username}
             </if>
             <if test=" stuNo != null and stuNo != '' ">
-              	and F.STU_NO = #{stuNo}
+              	and F.STU_NO like #{stuNo}
             </if>
             <if test=" fState != null and fState != 0 ">
               	and F.f_state = #{fState}
@@ -67,8 +90,32 @@
         </where>
 	</select>
 	
+	<select id="selectFinanceAll" parameterType="com.xin.bean.Finance" resultMap="BaseResultMap">
+		SELECT 
+			<include refid="field" /> 
+		FROM FINANCE F LEFT JOIN STUDENT S ON F.STU_NO=S.S_STUDENTNO LEFT JOIN `user` U ON S.USER_ID=U.ID 
+		LEFT JOIN academy A ON S.academy_id=A.a_id 
+		<where>
+            <if test=" teaClass != null and teaClass != '' ">
+                U.`name` like #{teaClass}
+            </if>
+            <if test=" stuNo != null and stuNo != '' ">
+              	and F.STU_NO like #{stuNo}
+            </if>
+            <if test=" fState != null and fState != 0 ">
+              	and F.f_state = #{fState}
+            </if>
+            <if test=" createdateStart != null ">
+                <![CDATA[ and f_date >= #{createdateStart} ]]>
+            </if>
+            <if test=" createdateEnd != null ">
+                <![CDATA[ and f_date <= #{createdateEnd} ]]>
+            </if>
+        </where> ORDER BY f_date DESC
+	</select>
+	
 	<select id="selectfinanceById" parameterType="Integer" resultMap="BaseResultMap">
-		SELECT <include refid="field" /> FROM FINANCE WHERE F_ID = #{id}
+		SELECT <include refid="table_field" /> FROM FINANCE F WHERE F.F_ID = #{id}
 	</select>
 	
 	<insert id="financeInsert" parameterType="com.xin.bean.Finance">
@@ -100,8 +147,8 @@
 			<if test="practicalMoney!=null and practicalMoney!='' ">
 				PRACTICAL_MONEY=#{practicalMoney},
 			</if>
-			<if test="fDate!=null and fDate!='' ">
-				F_DATE=#{fDate},
+			<if test="fDate!=null">
+				F_DATE=#{fDate,jdbcType=TIMESTAMP},
 			</if>
 			<if test="fWay!=null and fWay!='' ">
 				F_WAY=#{fWay},
@@ -114,6 +161,22 @@
 			</if>
 		</set>
 		WHERE F_ID=#{fId}
+	</update>
+	
+	<update id="updateBatchFinance" parameterType="com.xin.bean.Finance">
+		UPDATE <include refid="tableName"></include> 
+		<set>
+			<if test="practicalMoney!=null and practicalMoney!='' ">
+				PRACTICAL_MONEY=PRACTICAL_MONEY+#{practicalMoney},
+			</if>
+			<if test="fAccumulative!=null and fAccumulative!='' ">
+				F_ACCUMULATIVE=F_ACCUMULATIVE+#{fAccumulative},
+			</if>
+			<if test="fWay!=null and fWay!='' ">
+				F_WAY=#{fWay},
+			</if>
+		</set>
+		WHERE F_ID = #{fId}
 	</update>
 	
 	<delete id="deleteFinance" parameterType="Integer">

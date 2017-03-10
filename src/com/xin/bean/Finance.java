@@ -9,10 +9,6 @@ import java.io.Serializable;
 
 
 /**
- * <p>
- * 
- * </p>
- *
  * @author com.xin
  * @since 2017-02-28
  */
@@ -46,6 +42,8 @@ public class Finance extends Model<Finance> {
 	private Student student;
 	
 	private User user;
+	
+	private Academy academy;
 
 	public Integer getFId() {
 		return fId;
@@ -159,9 +157,26 @@ public class Finance extends Model<Finance> {
 		this.user = user;
 	}
 	
+	public Academy getAcademy() {
+		return academy;
+	}
+
+	public void setAcademy(Academy academy) {
+		this.academy = academy;
+	}
+
 	@Override
 	protected Serializable pkVal() {
 		return this.fId;
+	}
+
+	@Override
+	public String toString() {
+		return "Finance [fId=" + fId + ", stuNo=" + stuNo + ", teaClass=" + teaClass + ", needMoney=" + needMoney
+				+ ", practicalMoney=" + practicalMoney + ", fDate=" + fDate + ", fWay=" + fWay + ", fAccumulative="
+				+ fAccumulative + ", fState=" + fState + ", fObligate=" + fObligate + ", createdateStart="
+				+ createdateStart + ", createdateEnd=" + createdateEnd + ", student=" + student + ", user=" + user
+				+ "]";
 	}
 	
 }

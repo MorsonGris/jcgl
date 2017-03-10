@@ -15,7 +15,7 @@
 		select n_id,n_title,n_content,n_date,n_flag from notice 
 		<where>
             <if test=" nTitle != null and nTitle != '' ">
-                n_title = #{nTitle}
+                n_title like #{nTitle}
             </if>
             <if test=" nFlag != null and nFlag != 0">
               	and n_flag = #{nFlag}
