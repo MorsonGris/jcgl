@@ -6,6 +6,7 @@ import com.xin.commons.utils.PageInfo;
 import com.xin.mapper.FinanceMapper;
 import com.xin.service.IFinanceService;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,12 +51,24 @@ public class FinanceServiceImpl implements IFinanceService {
 
 	@Override
 	public int updateFinance(Finance finance) {
+		finance.setFDate(new Date());
 		return financeMapper.updateFinance(finance);
 	}
 
 	@Override
 	public void deleteFinance(int id) {
 		financeMapper.deleteFinance(id);
+	}
+
+	@Override
+	public int updateBatchFinance(Finance finance) {
+		return financeMapper.updateBatchFinance(finance);
+	}
+
+	@Override
+	public List<Finance> selectFinanceAll(Finance finance) {
+		List<Finance> list = financeMapper.selectFinanceAll(finance);
+		return list;
 	}
 	
 }

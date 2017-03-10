@@ -22,4 +22,8 @@ public interface FinanceMapper {
 	int updateFinance(Finance finance);
 	
 	void deleteFinance(int id);
+	
+	int updateBatchFinance(Finance finance);
+	
+	List<Finance> selectFinanceAll(Finance finance);
 }

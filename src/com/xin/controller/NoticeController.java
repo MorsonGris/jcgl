@@ -52,7 +52,7 @@ public class NoticeController extends BaseController{
         PageInfo pageInfo = new PageInfo(page, rows, sort, order);
         Map<String, Object> condition = new HashMap<String, Object>();
         if (StringUtils.isNotBlank(notice.getNTitle())) {
-            condition.put("nTitle", notice.getNTitle());
+            condition.put("nTitle", StringUtils.formatLike(notice.getNTitle()));
         }
         if (notice.getNFlag() != null && notice.getNFlag()!=0) {
             condition.put("nFlag", notice.getNFlag());

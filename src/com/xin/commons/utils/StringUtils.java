@@ -69,4 +69,17 @@ public class StringUtils extends org.springframework.util.StringUtils {
     public static String join(Object[] arr, String delim) {
         return StringUtils.arrayToDelimitedString(arr, delim);
     }
+    
+	/**
+	 * sql like
+	 * @param str
+	 * @return
+	 */
+	public static String formatLike(String str){
+		if(isNotBlank(str)){
+			return "%"+str+"%";
+		}else{
+			return null;
+		}
+	}
 }

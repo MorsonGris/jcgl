@@ -24,4 +24,8 @@ public interface IFinanceService {
 	int updateFinance(Finance finance);
 	
 	void deleteFinance(int id);
+	
+	int updateBatchFinance(Finance finance);	
+	
+	List<Finance> selectFinanceAll(Finance finance);
 }
