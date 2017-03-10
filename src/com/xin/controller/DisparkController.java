@@ -61,6 +61,9 @@ public class DisparkController extends BaseController{
     		//根据学号查询
     		map.put("studentNo", student.getStudentNo());
     	}
+    	if(getUserId() != null){
+    		map.put("uid", getUserId());
+    	}
     	pageInfo.setCondition(map);
     	disparkService.selectDataGrid(pageInfo);
     	return pageInfo;

@@ -122,7 +122,7 @@
     	LEFT JOIN academy a ON s.academy_id = a.a_id
     	LEFT JOIN user u ON s.user_id = u.id
     	<where>
-    		s_type = 1
+    		s_type = 1 and user_id = #{uid}
     		<if test="name != null and name != '' ">
     			and s_name = #{name}
     		</if>

@@ -2,20 +2,8 @@
 <%@ include file="/commons/global.jsp" %>
 <script type="text/javascript">
     var userDataGrid;
-    var organizationTree;
 
     $(function() {
-        organizationTree = $('#organizationTree').tree({
-            url : '${path }/organization/tree',
-            parentField : 'pid',
-            lines : true,
-            onClick : function(node) {
-                userDataGrid.datagrid('load', {
-                    organizationId: node.id
-                });
-            }
-        });
-
         userDataGrid = $('#userDataGrid').datagrid({
             url : '${path }/user/dataGrid',
             fit : true,
@@ -235,9 +223,6 @@
     </div>
     <div data-options="region:'center',border:true,title:'用户列表'" >
         <table id="userDataGrid" data-options="fit:true,border:false"></table>
-    </div>
-    <div data-options="region:'west',border:true,split:false,title:'组织机构'"  style="width:150px;overflow: hidden; ">
-        <ul id="organizationTree" style="width:160px;margin: 10px 10px 10px 10px"></ul>
     </div>
 </div>
 <div id="userToolbar" style="display: none;">

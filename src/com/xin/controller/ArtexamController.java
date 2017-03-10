@@ -62,6 +62,9 @@ public class ArtexamController extends BaseController{
     		//根据学号查询
     		map.put("studentNo", student.getStudentNo());
     	}
+    	if(getUserId() != null){
+    		map.put("uid", getUserId());
+    	}
     	pageInfo.setCondition(map);
     	artexamService.selectDataGrid(pageInfo);
     	return pageInfo;
