@@ -49,11 +49,6 @@
                 sortable : true
             },{
                 width : '120',
-                title : '学习内容',
-                field : 'scontent',
-                sortable : true
-            },{
-                width : '120',
                 title : '报考院校',
                 field : 'listAcademy',
                 sortable : true,
@@ -64,6 +59,11 @@
                     }
                     return(roles.join('\n'));
                 }
+            },{
+                width : '100',
+                title : '专业',
+                field : 'scontent',
+                sortable : true
             },{
                 width : '70',
                 title : '报考层次',
@@ -86,10 +86,10 @@
                 width : 130,
                 formatter : function(value, row, index) {
                     var str = '';
-                        <shiro:hasPermission name="/applyType/edit">
+                        <shiro:hasPermission name="/student/edit">
                             str += $.formatString('<a href="javascript:void(0)" class="user-easyui-linkbutton-edit" data-options="plain:true,iconCls:\'fi-pencil icon-blue\'" onclick="editUserFun(\'{0}\');" >编辑</a>', row.sid);
                         </shiro:hasPermission>
-                        <shiro:hasPermission name="/applyType/delete">
+                        <shiro:hasPermission name="/student/delete">
                             str += '&nbsp;&nbsp;|&nbsp;&nbsp;';
                             str += $.formatString('<a href="javascript:void(0)" class="user-easyui-linkbutton-del" data-options="plain:true,iconCls:\'fi-x icon-red\'" onclick="deleteUserFun(\'{0}\');" >删除</a>', row.sid);
                         </shiro:hasPermission>
@@ -108,7 +108,7 @@
         parent.$.modalDialog({
             title : '添加',
             width : 500,
-            height : 300,
+            height : 250,
             href : '${path }/student/addpage',
             buttons : [ {
                 text : '添加',
@@ -153,14 +153,14 @@
         }
         parent.$.modalDialog({
             title : '编辑',
-            width : 250,
-            height : 200,
+            width : 500,
+            height : 300,
             href : '${path }/student/editpage?id=' + id,
             buttons : [ {
                 text : '确定',
                 handler : function() {
                     parent.$.modalDialog.openner_dataGrid = studentDataGrid;//因为添加成功之后，需要刷新这个dataGrid，所以先预定义好
-                    var f = parent.$.modalDialog.handler.find('#applyTypeEditForm');
+                    var f = parent.$.modalDialog.handler.find('#studentEditForm');
                     f.submit();
                 }
             } ]
@@ -229,7 +229,7 @@
     </div>
 </div>
 <div id="userToolbar" style="display: none;">
-    <shiro:hasPermission name="/student/addpage">
+    <shiro:hasPermission name="/student/add">
      	<a onclick="addUserFun();" href="javascript:void(0);" class="easyui-linkbutton" data-options="plain:true,iconCls:'fi-plus icon-green'">添加</a>
     </shiro:hasPermission>
 </div>

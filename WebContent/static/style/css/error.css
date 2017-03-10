@@ -2,12 +2,36 @@
 
 @font-face{font-family:'Jenna Sue';src:url('../fonts/jennasue-webfont.eot');src:url('../fonts/jennasue-webfont.eot?#iefix') format('embedded-opentype'),url('../fonts/jennasue-webfont.woff') format('woff'),url('../fonts/jennasue-webfont.ttf') format('truetype'),url('../fonts/jennasue-webfont.svg#AsapRegular') format('svg');font-weight:normal;font-style:normal;}
 body{
-	height: auto;
-	background-color: steelblue;
 	text-align: center;
+	margin-top: 57px;
+}
+a:link{
+	text-decoration:none;
+}
+a:visited{
+	text-decoration:none;
+}
+a:hover{
+	text-decoration:none;
+}
+a:active{
+	text-decoration:none;
 }
 .img_404{
 	margin-top:20px;
-	width: 80%;
+	width: 100%;
 }
-.error{ color: #FBD436; font: 25px Jenna Sue, Helvetica, Arial, sans-serif;}
+.reason_title{
+	font-size: 20px;
+	text-align: right;
+}
+.reason{
+	font-size: 18px;
+	margin-left:10%;
+	text-align: left;
+}
+.error_return{
+	margin-top:40px;
+	font-size: 20px;
+}
+.error{  font: 25px Jenna Sue, Helvetica, Arial, sans-serif;}

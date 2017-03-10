@@ -9,6 +9,70 @@
 		<result column="s_content" property="sContent" />
 		<result column="s_date" property="sDate" />
 		<result column="s_flag" property="sFlag" />
+		
+		<collection property="listUser" ofType="com.xin.bean.User">
+			<id column="id" property="id" />
+			<result column="name" property="name" />
+		</collection>	
 	</resultMap>
+	
+	<select id="selectAll" resultMap="BaseResultMap">
+		SELECT * FROM schedule
+	</select>
+	
+	<delete id="deleteById">
+		DELETE FROM schedule WHERE s_id=#{sId}
+	</delete>
+	
+	<select id="selectById" resultMap="BaseResultMap">
+		SELECT 
+			s_id,
+			s_content,
+			s_date,
+			s_flag,
+			u.id,
+	    	u.`name`
+		FROM schedule s
+		LEFT JOIN user u ON s.user_id = u.id
+		WHERE s_id = #{sId}
+	</select>
+	
+	<update id="updateById">
+		UPDATE schedule SET user_id=#{userId} ,s_content=#{sContent} ,s_date=#{sDate} WHERE s_id=#{sId}
+	</update>
+	
+	<insert id="insertByid">
+		INSERT INTO schedule (
+			user_id,
+			s_content,
+			s_date,
+			s_flag
+		) VALUES (
+			#{userId},
+			#{sContent},
+			#{sDate},
+			#{sFlag}
+		)
+	</insert>
+	
+	<select id="selectPage" resultMap="BaseResultMap">
+		SELECT 
+    		s_id,
+    		s_content,
+    		s_date,
+    		s_flag,
+	    	u.id,
+	    	u.`name`
+    	FROM schedule s
+    	LEFT JOIN user u ON s.user_id = u.id
+		<where>
+			<if test="begin != null and begin!= '' ">
+				<![CDATA[ s_date >= #{begin} ]]>
+			</if>
+			<if test="end != null and end != '' ">
+				 <![CDATA[ and s_date <= #{end} ]]>
+			</if>
+		</where>		
+	</select>
 
 </mapper>

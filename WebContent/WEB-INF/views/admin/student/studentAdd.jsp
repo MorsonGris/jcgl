@@ -25,88 +25,146 @@
         });
     });
     
-    var userDataGrid;
-   	function User(){
-  	 userDataGrid = $('#userDataGrid').datagrid({
-        url : '${path }/user/dataGrid',
-        fit : true,
-        striped : true,
-        rownumbers : true,
-        pagination : true,
-        singleSelect : true,
-        idField : 'id',
-        sortName : 'createTime',
-        sortOrder : 'asc',
-        pageSize : 20,
-        pageList : [ 10, 20, 30, 40, 50, 100, 200, 300, 400, 500 ],
-        columns : [ [{
-            width : '80',
-            title : '姓名',
-            field : 'name',
-            sortable : true
-        },{
-            width : '80',
-            title : '所属部门',
-            field : 'organizationName'
-        },{
-            width : '40',
-            title : '性别',
-            field : 'sex',
-            sortable : true,
-            formatter : function(value, row, index) {
-                switch (value) {
-                case 0:
-                    return '男';
-                case 1:
-                    return '女';
-                }
-            }
-        }, {
-            width : '40',
-            title : '年龄',
-            field : 'age',
-            sortable : true
-        },{
-            width : '120',
-            title : '电话',
-            field : 'phone',
-            sortable : true
-        },{
-            field : 'action',
-            title : '操作',
-            width : 70,
-            formatter : function(value, row, index) {
-               var str = '';
-                   <shiro:hasPermission name="/user/edit">
-                       str += $.formatString('<a href="javascript:void(0)" class="user-easyui-linkbutton" data-options="plain:true,iconCls:\'fi-pencil icon-blue\'" onclick="addUserFun(\'{0}\');" >确定</a>');
-                   </shiro:hasPermission>
-               return str;
-            }
-        }] ],
-        onLoadSuccess:function(data){
-            $('.user-easyui-linkbutton').linkbutton({text:'确定'});
-        },
-     });
-   }
-   
-   function addUserFun(){
-	   var rows = $('#userDataGrid').datagrid('getSelected');
-	   document.getElementById("name").value=rows.name;
-	   document.getElementById("userId").value=rows.id;
-	   $('#userData').dialog("close");
-   }
     
+  var userDataGrid;
   function selectUser() {
-	 User();
-	 $('#userData').dialog({
-	    title: '教师信息表',
-	    width: 500,
-	    height: 300,
-	    closed: false,
-	    cache: false,
-	    modal: true
-	 });
+	  userDataGrid = $('#userDataGrid').datagrid({
+          url : '${path }/user/dataGrid',
+          fit : true,
+          striped : true,
+          rownumbers : true,
+          pagination : true,
+          singleSelect : true,
+          sortName : 'createTime',
+          sortOrder : 'asc',
+          pageSize : 20,
+          pageList : [ 10, 20, 30, 40, 50, 100, 200, 300, 400, 500 ],
+          columns : [ [{
+              width : '80',
+              title : 'ID',
+              field : 'id',
+              checkbox : true,
+              sortable : true
+          },{
+              width : '80',
+              title : '姓名',
+              field : 'name',
+              sortable : true
+          },{
+              width : '80',
+              title : '所属部门',
+              field : 'organizationName'
+          },{
+              width : '40',
+              title : '性别',
+              field : 'sex',
+              sortable : true,
+              formatter : function(value, row, index) {
+                  switch (value) {
+                  case 0:
+                      return '男';
+                  case 1:
+                      return '女';
+                  }
+              }
+          },{
+              width : '40',
+              title : '年龄',
+              field : 'age',
+              sortable : true
+          },{
+              width : '120',
+              title : '电话',
+              field : 'phone',
+              sortable : true
+          }] ],
+       });
+	  $('#win').window('open');
   } 
+  
+  $("#addbtn").click(function(){
+	  var row = $('#userDataGrid').datagrid('getSelected');
+	  $("#userId").val(row.id);
+	  $("#name").val(row.name);
+	  $('#win').window('close');
+	});
+  
+  function selectAca(){
+	  var value =  $('#academyId option:selected').val();//选中的值 
+	  var dd = $("#aMajor");
+	  if(value != ''){
+		  $.get("${path }/student/school",{"id":value},function(data){
+			  var json = JSON.parse(data); 
+			  dd.empty();
+			  for(var i=0;i<json.length;i++){
+				  dd.append("<option value='"+json[i].amajor+"'>"+json[i].amajor+"</option>")
+			  }
+		  });
+	  }else{
+		  dd.empty();
+		  dd.append("<option value=''>--请选择--</option>");
+	  }
+  }
+  
+  function selected(){
+	 var valeu =  $('#sGradations option:selected').val();//选中的值
+	 if(valeu != "请选择"){
+		 if(valeu == "高达本"){//高达本
+			 $("#sSystme").val("五年"); 
+		 }else if(valeu == "专达本"){//专达本
+			 $("#sSystme").val("三年"); 
+		 }else if(valeu == "高达专"){//高达专
+			 $("#sSystme").val("三年"); 
+		 }else if(valeu == 0){
+			 $("#sSystme").val(""); 
+		 }
+	 }
+  }
+  
+  $.extend($.fn.validatebox.defaults.rules, {
+      phoneNum: { //验证手机号   
+          validator: function(value, param){ 
+           return /^1[3-8]+\d{9}$/.test(value);
+          },    
+          message: '请输入正确的手机号码。'   
+      },
+      
+      telNum:{ //既验证手机号，又验证座机号
+        validator: function(value, param){ 
+            return /(^(0[0-9]{2,3}\-)?([2-9][0-9]{6,7})+(\-[0-9]{1,4})?$)|(^((\d3)|(\d{3}\-))?(1[358]\d{9})$)/.test(value);
+           },    
+           message: '请输入正确的电话号码。' 
+   	 },
+   	
+   	idcared: { 
+	  validator: function(value,param){ 
+		  var flag= isCardID(value); 
+		  return flag==true?true:false; 
+	}, 
+	 	 message: '输入的不是有效的身份证号码'
+	  }});
+  
+  var aCity={11:"北京",12:"天津",13:"河北",14:"山西",15:"内蒙古",21:"辽宁",22:"吉林",23:"黑龙江",31:"上海",32:"江苏",33:"浙江",34:"安徽",35:"福建",36:"江西",37:"山东",41:"河南",42:"湖北",43:"湖南",44:"广东",45:"广西",46:"海南",50:"重庆",51:"四川",52:"贵州",53:"云南",54:"西藏",61:"陕西",62:"甘肃",63:"青海",64:"宁夏",65:"新疆",71:"台湾",81:"香港",82:"澳门",91:"国外"}
+
+  function isCardID(sId){ 
+	  var iSum=0 ; 
+	  var info="" ; 
+	  if(!/^\d{17}(\d|x)/i.test(sId)){
+		  return"你输入的身份证长度或格式错误";sId=sId.replace(/x/i,"a");  
+	  }
+	  if(aCity[parseInt(sId.substr(0,2))]==null){
+		  return "你输入的身份证地区非法"; 
+	  } 
+	  sBirthday=sId.substr(6,4)+"-"+Number(sId.substr(10,2))+"-"+Number(sId.substr(12,2)); 
+	  var d=new Date(sBirthday.replace(/-/g,"/")) ; 
+	  if(sBirthday!=(d.getFullYear()+"-"+ (d.getMonth()+1) + "-" + d.getDate())){
+		  return "输入的身份证出生日期非法";  
+	  }
+	  for(var i = 17;i>=0;i--) iSum += (Math.pow(2,i) % 11) * parseInt(sId.charAt(17 - i),11) ; 
+	  if(iSum%11!=1) return "你输入的身份证号非法"; 
+	  return true;//aCity[parseInt(sId.substr(0,2))]+","+sBirthday+","+(sId.substr(16,1)%2?"男":"女") 
+  }
+  
 </script>
 <div class="easyui-layout" data-options="fit:true,border:false">
     <div data-options="region:'center',border:false" title="" style="overflow: hidden;padding: 3px;">
@@ -116,26 +174,45 @@
                     <td>学生姓名</td>
                     <td><input name="sName" type="text" placeholder="请输入学生姓名" class="easyui-validatebox" data-options="required:true,novalidate:true" value=""></td>
                 	<td>老师姓名</td>
-                    <td><input id="userId" name="userId" hidden="true">
-                    <input id="name" name="name" type="text" placeholder="请选择介绍老师" class="easyui-validatebox" onclick="selectUser();" data-options="required:true,novalidate:true" value=""></td>
+                    <td>
+	                    <input id="userId" name="userId" hidden="true">
+	                    <input id="name" name="name" type="text" placeholder="请选择介绍老师" style="width:100px;" class="easyui-validatebox" data-options="required:true,novalidate:true" readonly="readonly" value="">
+                    	<input type="button" onclick="selectUser();" value="点击选择">
+                    </td>
                 </tr>
                 <tr>
                 	<td>手机号码</td>
-                    <td><input name="sPhone" type="text" placeholder="请输入手机号码" class="easyui-validatebox" data-options="required:true,novalidate:true" value=""></td>
+                    <td><input name="sPhone" type="text" placeholder="请输入手机号码" class="easyui-validatebox"  data-options="required:true,novalidate:true,prompt:'请输入正确的手机号码。',validType:'phoneNum'" value=""></td>
                 	<td>身份证号码</td>
-                    <td><input name="idNumber" type="text" placeholder="请输入身份证号码" class="easyui-validatebox" data-options="required:true,novalidate:true" value=""></td>
+                    <td><input name="idNumber" type="text" placeholder="请输入身份证号码" class="easyui-validatebox" data-options="required:true,novalidate:true,prompt:'请输入正确的身份证号码。',validType:'idcared'" value=""></td>
                 </tr>
                 <tr>
-                	<td>学习内容</td>
-                    <td><input name="sContent" type="text" placeholder="请选择学习内容" class="easyui-validatebox" data-options="required:true,novalidate:true" value=""></td>
-                	<td>学制</td>
-                    <td><input name="sSystme" type="text" placeholder="请选择学制" class="easyui-validatebox" data-options="required:true,novalidate:true" value=""></td>
+	                <td>报考院校</td>
+                    <td>
+                    	<select name="academyId" id="academyId" onchange="selectAca();" style="width:120px;height:22px;">
+                    	 	<option value="">--请选择--</option>
+                    		<c:forEach var="academy" items="${academy}" varStatus="s">
+                    			<option value="${academy.AId}">${academy.ASchool}</option>
+                    		</c:forEach>
+                    	</select>
+                    </td> 
+                	<td>报考专业</td>
+                	<td>
+                		<select name="sContent" id="aMajor" style="width:120px;height:22px;"></select>
+                	</td>
                 </tr>
                 <tr>
-                	<td>报考院校</td>
-                    <td><input name="academyId" type="text" placeholder="请选择报考院校" class="easyui-validatebox" data-options="required:true,novalidate:true" value=""></td>
                 	<td>报考层次</td>
-                    <td><input name="sGradations" type="text" placeholder="请选择报考层次" class="easyui-validatebox" data-options="required:true,novalidate:true" value=""></td>
+                    <td>
+	                   	<select name="sGradations" id="sGradations" onclick="selected();" style="width:120px;height:22px;">
+	                   	 	<option value="">--请选择--</option>
+	                   	 	<option value="高达本">高达本</option>
+	                   	 	<option value="专达本">专达本</option>
+	                   	 	<option value="高达专">高达专</option>
+	                   	</select>
+					</td>
+                	<td>学制</td>
+                    <td><input name="sSystme" id="sSystme" type="text" placeholder="请选择学制" class="easyui-validatebox" data-options="required:true,novalidate:true" readonly="readonly" value=""></td>
                 </tr>
                 <tr>
                 	<td>报考日期</td>
@@ -144,7 +221,10 @@
             </table>
         </form>
     </div>
-    <div id="userData">
-        <table id="userDataGrid" data-options="fit:true,border:false"></table>
-    </div>
+</div>
+<div id="win" class="easyui-window" title="用户表" closed="true"  style="width:440px;height:300px;">
+  	<div style="width:430px;height:220px;">
+  		<table id="userDataGrid" data-options="fit:true,border:false"></table>
+  	</div>
+	<center><a href="javascript:;" id="addbtn" style="margin-top:10px;" class="easyui-linkbutton" data-options="toggle:true,group:'g1',iconCls:'icon-ok'" >确定</a></center>
 </div>

@@ -4,17 +4,12 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.baomidou.mybatisplus.plugins.Page;
-import com.xin.bean.ApplyType;
 import com.xin.bean.Student;
 import com.xin.commons.utils.PageInfo;
 import com.xin.mapper.StudentMapper;
 import com.xin.service.IStudentService;
 
 /**
- * <p>
- *  服务实现类
- * </p>
- *
  * @author com.xin
  * @since 2017-02-28
  */
@@ -30,7 +25,7 @@ public class StudentServiceImpl implements IStudentService {
 	}
 
 	@Override
-	public ApplyType selectById(int id) {
+	public Student selectById(int id) {
 		return Studentmapper.selectById(id);
 	}
 
@@ -55,6 +50,11 @@ public class StudentServiceImpl implements IStudentService {
 	@Override
 	public List<Student> selectAll() {
 		return Studentmapper.selectAll();
+	}
+
+	@Override
+	public Student selectByNo() {
+		return Studentmapper.selectByNo();
 	}
 	
 }

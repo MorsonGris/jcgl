@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.baomidou.mybatisplus.plugins.Page;
-import com.xin.bean.ApplyType;
 import com.xin.bean.Schedule;
 import com.xin.commons.utils.PageInfo;
 import com.xin.mapper.ScheduleMapper;
@@ -37,7 +36,7 @@ public class ScheduleServiceImpl implements IScheduleService {
 	}
 
 	@Override
-	public ApplyType selectById(int id) {
+	public Schedule selectById(int id) {
 		return schedulemapper.selectById(id);
 	}
 

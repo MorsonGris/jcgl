@@ -1,22 +1,25 @@
 package com.xin.controller;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-
 import com.xin.bean.Schedule;
+import com.xin.bean.User;
 import com.xin.commons.base.BaseController;
 import com.xin.commons.utils.PageInfo;
 import com.xin.service.IScheduleService;
 
 /**
  * <p>
- *   前端控制器
+ *  日程计划
  * </p>
  * @author com.xin
  * @since 2017-02-28
@@ -38,17 +41,19 @@ public class ScheduleController extends BaseController{
 	 * @param page
 	 * @param rows
 	 * @return
+	 * @throws ParseException 
 	 */
    @RequestMapping("/dataGrid")
    @ResponseBody
-   public Object dataGrid(Schedule cSchedule,Integer page, Integer rows){
+   public Object dataGrid(Schedule cSchedule,Integer page, Integer rows) throws ParseException{
 	   PageInfo pageInfo = new PageInfo(page,rows);
 	   Map<String, Object> map = new HashMap<>();
+	   SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	   if(cSchedule.getBegintime() != null){
-		   map.put("begin", cSchedule.getBegintime());
+		   map.put("begin", sdf.format(cSchedule.getBegintime()));
 	   }
 	   if(cSchedule.getEndtime() != null){
-		   map.put("end", cSchedule.getEndtime());
+		   map.put("end", sdf.format(cSchedule.getEndtime()));
 	   }
 	   pageInfo.setCondition(map);
 	   scheduleService.selectPage(pageInfo);
@@ -57,7 +62,7 @@ public class ScheduleController extends BaseController{
    
    @GetMapping("/addpage")
    public String addpage(){
-	  return "admin/student/"; 
+	  return "admin/student/scheduleAdd"; 
    }
    
    /**
@@ -68,6 +73,7 @@ public class ScheduleController extends BaseController{
    @RequestMapping("/add")
    @ResponseBody
    public Object add(Schedule cSchedule){
+	   cSchedule.setsFlag(0);
 	   boolean result = scheduleService.insertByid(cSchedule);
 	   if(result == true){
 		   return renderSuccess("添加成功");
@@ -91,8 +97,16 @@ public class ScheduleController extends BaseController{
    }
    
    @GetMapping("/editpage")
-   public String editpage(){
-	   return "admin/student/";
+   public String editpage(int id,Model model){
+	   Schedule cSchedule = scheduleService.selectById(id);
+	   List<User> list = cSchedule.getListUser();
+	   User user = null;
+	   for(int i=0;i<list.size();i++){
+		   user = list.get(i);
+	   }
+	   model.addAttribute("user", user);
+	   model.addAttribute("cSchedule", cSchedule);
+	   return "admin/student/scheduleEdit";
    }
    
    /**
@@ -103,6 +117,7 @@ public class ScheduleController extends BaseController{
    @RequestMapping("/edit")
    @ResponseBody
    public Object edit(Schedule cSchedule){
+	   cSchedule.setsFlag(1);
 	   boolean result = scheduleService.updateById(cSchedule);
 	   if(result == true){
 		   return renderSuccess("修改成功");
