@@ -2,25 +2,29 @@
 <%@ include file="/commons/global.jsp" %>
 <script type="text/javascript">
     $(function() {
-        $('#userAddOrganizationId').combotree({
-            url : '${path }/organization/tree',
-            parentField : 'pid',
-            lines : true,
-            panelHeight : 'auto'
-        });
+       	 var dd = $("#userAddOrganizationId");
+       	 $.post("${path }/organization/tree",function(data){
+			  var json = JSON.parse(data); 
+			  dd.empty();
+			  for(var i=0;i<json.length;i++){
+				  dd.append("<option value='"+json[i].id+"'>"+json[i].name+"</option>")
+			  }
+		  });
 
-        $('#userAddRoleIds').combotree({
-            url: '${path }/role/tree',
-            multiple: true,
-            required: true,
-            panelHeight : 'auto'
-        });
+       	var d = $("#userAddRoleIds");
+      	 $.post("${path }/role/tree",function(data){
+			  var json = JSON.parse(data); 
+			  d.empty();
+			  for(var i=0;i<json.length;i++){
+				  d.append("<option value='"+json[i].id+"'>"+json[i].description+"</option>")
+			  }
+		  });
 
         $('#userAddForm').form({
             url : '${path }/user/add',
             onSubmit : function() {
                 progressLoad();
-                var isValid = $(this).form('validate');
+                var isValid = $(this).form('enableValidation').form('validate');
                 if (!isValid) {
                     progressClose();
                 }
@@ -46,13 +50,13 @@
             <table class="grid">
                 <tr>
                     <td>登录名</td>
-                    <td><input name="loginName" type="text" placeholder="请输入登录名称" class="easyui-validatebox" data-options="required:true" value=""></td>
+                    <td><input name="loginName" type="text" placeholder="请输入登录名称" class="easyui-validatebox" data-options="required:true,novalidate:true" value=""></td>
                     <td>姓名</td>
-                    <td><input name="name" type="text" placeholder="请输入姓名" class="easyui-validatebox" data-options="required:true" value=""></td>
+                    <td><input name="name" type="text" placeholder="请输入姓名" class="easyui-validatebox" data-options="required:true,novalidate:true" value=""></td>
                 </tr>
                 <tr>
                     <td>密码</td>
-                    <td><input name="password" type="password" placeholder="请输入密码" class="easyui-validatebox" data-options="required:true"></td>
+                    <td><input name="password" type="password" placeholder="请输入密码" class="easyui-validatebox" data-options="required:true,novalidate:true"></td>
                     <td>性别</td>
                     <td>
                         <select name="sex" class="easyui-combobox" data-options="width:140,height:29,editable:false,panelHeight:'auto'">
@@ -74,14 +78,18 @@
                 </tr>
                 <tr>
                     <td>部门</td>
-                    <td><select id="userAddOrganizationId" name="organizationId" style="width: 140px; height: 29px;" class="easyui-validatebox" data-options="required:true"></select></td>
+                    <td>
+                    	<select id="userAddOrganizationId" name="organizationId" style="width: 140px; height: 29px;" class="easyui-validatebox" data-options="required:true"></select>
+                    </td>
                     <td>角色</td>
-                    <td><select id="userAddRoleIds" name="roleIds" style="width: 140px; height: 29px;"></select></td>
+                    <td>
+                    	<select id="userAddRoleIds" name="roleIds" style="width: 140px; height: 29px;"></select>
+                    </td>
                 </tr>
                 <tr>
                     <td>电话</td>
                     <td>
-                        <input type="text" name="phone" class="easyui-numberbox"/>
+                        <input type="text" name="phone" class="easyui-numberbox" data-options="required:true,novalidate:true"/>
                     </td>
                     <td>用户状态</td>
                     <td>

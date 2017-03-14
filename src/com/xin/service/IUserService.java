@@ -19,6 +19,8 @@ public interface IUserService extends IService<User> {
     void insertByVo(UserVo userVo);
 
     UserVo selectVoById(Long id);
+    
+    UserVo homeLogin(UserVo userVo);
 
     void updateByVo(UserVo userVo);
 

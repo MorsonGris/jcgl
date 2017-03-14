@@ -35,7 +35,7 @@ public class Student{
 	private Date sDate;
 	@TableField("s_type")
 	private Integer stype;
-
+	
 	private List<Academy> listAcademy;
 	
 	private List<User> listUser;
@@ -151,5 +151,4 @@ public class Student{
 	public void setStype(Integer stype) {
 		this.stype = stype;
 	}
-	
 }

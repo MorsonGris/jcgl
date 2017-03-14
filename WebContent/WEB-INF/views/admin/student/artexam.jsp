@@ -43,6 +43,19 @@
                 field : 'sphone',
                 sortable : true
             },{
+                width : '90',
+                title : '报名类型',
+                field : 'stype',
+                sortable : true,
+                formatter : function(value, row, index) {
+                    switch (value) {
+                    case 4:
+                        return '艺考';
+                    case 3:
+                        return '会计';
+                    }
+                }
+            },{
                 width : '120',
                 title : '学习内容',
                 field : 'scontent',
@@ -60,11 +73,11 @@
                 formatter : function(value, row, index) {
                     var str = '';
                         <shiro:hasPermission name="/Artexam/edit">
-                            str += $.formatString('<a href="javascript:void(0)" class="user-easyui-linkbutton-edit" data-options="plain:true,iconCls:\'fi-pencil icon-blue\'" onclick="editUserFun(\'{0}\');" >编辑</a>', row.sid);
+                            str += $.formatString('<a href="javascript:void(0)" class="user-easyui-linkbutton-edit" data-options="plain:true,iconCls:\'fi-pencil icon-blue\'" onclick="editArtexamFun(\'{0}\');" >编辑</a>', row.sid);
                         </shiro:hasPermission>
                         <shiro:hasPermission name="/Artexam/delete">
                             str += '&nbsp;&nbsp;|&nbsp;&nbsp;';
-                            str += $.formatString('<a href="javascript:void(0)" class="user-easyui-linkbutton-del" data-options="plain:true,iconCls:\'fi-x icon-red\'" onclick="deleteUserFun(\'{0}\');" >删除</a>', row.sid);
+                            str += $.formatString('<a href="javascript:void(0)" class="user-easyui-linkbutton-del" data-options="plain:true,iconCls:\'fi-x icon-red\'" onclick="deleteArtexamFun(\'{0}\');" >删除</a>', row.sid);
                         </shiro:hasPermission>
                     return str;
                 }
@@ -73,11 +86,11 @@
                 $('.user-easyui-linkbutton-edit').linkbutton({text:'编辑'});
                 $('.user-easyui-linkbutton-del').linkbutton({text:'删除'});
             },
-            toolbar : '#userToolbar'
+            toolbar : '#ArtexamToolbar'
         });
     });
     
-    function addUserFun() {
+    function addArtexamFun() {
         parent.$.modalDialog({
             title : '添加',
             width : 500,
@@ -87,14 +100,14 @@
                 text : '添加',
                 handler : function() {
                     parent.$.modalDialog.openner_dataGrid = artexamDataGrid;//因为添加成功之后，需要刷新这个dataGrid，所以先预定义好
-                    var f = parent.$.modalDialog.handler.find('#studentAddForm');
+                    var f = parent.$.modalDialog.handler.find('#ArtexamAddForm');
                     f.submit();
                 }
             } ]
         });
     }
     
-    function deleteUserFun(id) {
+    function deleteArtexamFun(id) {
         if (id == undefined) {//点击右键菜单才会触发这个
             var rows = artexamDataGrid.datagrid('getSelections');
             id = rows[0].id;
@@ -117,7 +130,7 @@
         });
     }
     
-    function editUserFun(id) {
+    function editArtexamFun(id) {
         if (id == undefined) {
             var rows = artexamDataGrid.datagrid('getSelections');
             id = rows[0].id;
@@ -133,18 +146,18 @@
                 text : '确定',
                 handler : function() {
                     parent.$.modalDialog.openner_dataGrid = artexamDataGrid;//因为添加成功之后，需要刷新这个dataGrid，所以先预定义好
-                    var f = parent.$.modalDialog.handler.find('#studentEditForm');
+                    var f = parent.$.modalDialog.handler.find('#ArtexamEditForm');
                     f.submit();
                 }
             } ]
         });
     }
     
-    function searchUserFun() {
-    	artexamDataGrid.datagrid('load', $.serializeObject($('#searchUserForm')));
+    function searchArtexamFun() {
+    	artexamDataGrid.datagrid('load', $.serializeObject($('#searchArtexamForm')));
     }
-    function cleanUserFun() {
-        $('#searchUserForm input').val('');
+    function cleanArtexamFun() {
+        $('#searchArtexamForm input').val('');
         artexamDataGrid.datagrid('load', {});
     }
     
@@ -182,7 +195,7 @@
 </script>
 <div class="easyui-layout" data-options="fit:true,border:false">
     <div data-options="region:'north',border:false" style="height: 30px; overflow: hidden;background-color: #fff">
-        <form id="searchUserForm">
+        <form id="searchArtexamForm">
             <table>
                 <tr>
                    <th>学生编号:</th>
@@ -190,8 +203,8 @@
                    <th>学生姓名:</th>
                    <td><input name="sName" placeholder="请输入学生姓名"/></td>
                    <td>
-	                   	<a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'fi-magnifying-glass',plain:true" onclick="searchUserFun();">查询</a>
-	                    <a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'fi-x-circle',plain:true" onclick="cleanUserFun();">清空</a>
+	                   	<a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'fi-magnifying-glass',plain:true" onclick="searchArtexamFun();">查询</a>
+	                    <a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'fi-x-circle',plain:true" onclick="cleanArtexamFun();">清空</a>
                    </td>
                 </tr>
             </table>
@@ -201,8 +214,8 @@
         <table id="artexamDataGrid" data-options="fit:true,border:false"></table>
     </div>
 </div>
-<div id="userToolbar" style="display: none;">
+<div id="ArtexamToolbar" style="display: none;">
     <shiro:hasPermission name="/Artexam/add">
-     	<a onclick="addUserFun();" href="javascript:void(0);" class="easyui-linkbutton" data-options="plain:true,iconCls:'fi-plus icon-green'">添加</a>
+     	<a onclick="addArtexamFun();" href="javascript:void(0);" class="easyui-linkbutton" data-options="plain:true,iconCls:'fi-plus icon-green'">添加</a>
     </shiro:hasPermission>
 </div>

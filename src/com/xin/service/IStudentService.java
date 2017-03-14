@@ -10,6 +10,7 @@ import com.xin.commons.utils.PageInfo;
  * @since 2017-02-28
  */
 public interface IStudentService{
+	List<Student> selectByName(Student student);
 	Student selectByNo();
 	List<Student> selectAll();
 	boolean deleteById(int id);

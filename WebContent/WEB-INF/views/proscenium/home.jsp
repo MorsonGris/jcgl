@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c"   uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
 <c:set var="path" value="${pageContext.request.contextPath}" />
 <!DOCTYPE html>
 <html>
@@ -69,7 +70,7 @@
                 </a>
             </div>
             <div class="col-xs-4 column">
-                <a href="https://account.chsi.com.cn/passport/login">
+                <a href="http://112.74.115.92/">
                     <img alt="80x80" src="${path }/static/proscenium/icon/briefcase.png" class="img-circle home-ico" />
                     <br>
                     <span class="home_operation">学籍查询</span>
@@ -78,7 +79,7 @@
         </div>
         <div class="row clearfix" style="text-align: center;margin-top: 20px;">
             <div class="col-xs-4 column">
-                <a href="index/learn">
+                <a href="http://www.jxck168.com/courseAction!listcatalog.action">
                     <img alt="80x80" src="${path }/static/proscenium/icon/computer.png" class="img-circle home-ico" />
                     <br>
                     <span class="home_operation">网上学习</span>
@@ -101,7 +102,7 @@
         </div>
         <div class="row clearfix" style="text-align: center;margin-top: 20px;">
             <div class="col-xs-4 column">
-                <a href="index/eguide">
+                <a href="http://www.jxck168.com/web/newsAction!listMulti.action?msgTypeId=117">
                     <img alt="140x140" src="${path }/static/proscenium/icon/clipboard.png" class="img-circle home-ico" />
                     <br>
                     <span class="home_operation">招生简章</span>
@@ -115,7 +116,7 @@
                 </a>
             </div>
             <div class="col-xs-4 column">
-                <a href = "JavaScript:void(0)" id="phone">
+                <a href = "JavaScript:void(0)" id="contact">
                     <img alt="80x80" src="${path }/static/proscenium/icon/phone.png" class="img-circle home-ico" />
                     <br>
                     <span class="home_operation">联系我们</span>
@@ -146,7 +147,7 @@
         <div class="row" style="text-align: left;margin-bottom: 20px;">
             <div class="col-xs-12 column">
                 <div style="border-bottom: 1px solid #e0e0e0; margin-bottom: 10px;">
-                    <h3>热门专业<span style="margin-left: 35%"><a href="#">查看更多</a></span></h3>
+                    <h3>热门专业</h3>
                 </div>
                 <div class="row">
                     <div class="col-md-4">
@@ -243,6 +244,12 @@
 <script src="${path }/static/proscenium/js/bootstrap.min.js"></script>
 <script src="${path }/static/proscenium/plugin/goup/jquery.goup.min.js"></script>
 <script src="${path }/static/proscenium/js/app.js"></script>
-
+<script type="text/javascript">
+//防止页面后退
+history.pushState(null, null, document.URL);
+window.addEventListener('popstate', function () {
+    history.pushState(null, null, document.URL);
+});
+</script>
 </body>
 </html>

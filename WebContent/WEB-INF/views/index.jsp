@@ -5,7 +5,7 @@
 <head>
 <%@ include file="/commons/basejs.jsp" %>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>主页</title>
+<title>聚成教育-聚成学习中心</title>
 <script type="text/javascript">
     var index_tabs;
     var layout_west_tree;
@@ -79,7 +79,7 @@
         
         layout_west_tree = $('#layout_west_tree').tree({
             url : '${path }/resource/tree',
-            parentField : 'pid',
+            parentField :'pid',
             lines : true,
             onClick : function(node) {
                 var opts = {
@@ -136,7 +136,7 @@
                 $.post('${path }/logout', function(result) {
                     if(result.success){
                         progressClose();
-                        window.location.href='${path }';
+                        window.location.href='${path }/login';
                     }
                 }, 'json');
             }

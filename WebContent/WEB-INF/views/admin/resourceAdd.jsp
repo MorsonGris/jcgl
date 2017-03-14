@@ -13,7 +13,7 @@
             url : '${path }/resource/add',
             onSubmit : function() {
                 progressLoad();
-                var isValid = $(this).form('validate');
+                var isValid = $(this).form('enableValidation').form('validate');
                 if (!isValid) {
                     progressClose();
                 }
@@ -37,7 +37,7 @@
         <table class="grid">
             <tr>
                 <td>资源名称</td>
-                <td><input name="name" type="text" placeholder="请输入资源名称" class="easyui-validatebox span2" data-options="required:true" ></td>
+                <td><input name="name" type="text" placeholder="请输入资源名称" class="easyui-validatebox span2" data-options="required:true,novalidate:true" ></td>
                 <td>资源类型</td>
                 <td>
                     <select name="resourceType" class="easyui-combobox" data-options="width:140,height:29,editable:false,panelHeight:'auto'">

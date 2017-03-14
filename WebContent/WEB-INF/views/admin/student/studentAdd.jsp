@@ -16,7 +16,7 @@
                 progressClose();
                 result = $.parseJSON(result);
                 if (result.success) {
-                    parent.$.modalDialog.openner_dataGrid.datagrid('reload');//之所以能在这里调用到parent.$.modalDialog.openner_dataGrid这个对象，是因为user.jsp页面预定义好了
+                    parent.$.modalDialog.openner_dataGrid.datagrid('reload');
                     parent.$.modalDialog.handler.dialog('close');
                 } else {
                     parent.$.messager.alert('提示', result.msg, 'warning');
@@ -26,9 +26,9 @@
     });
     
     
-  var userDataGrid;
-  function selectUser() {
-	  userDataGrid = $('#userDataGrid').datagrid({
+  var studentaddDataGrid;
+  function selectstuaUser() {
+	  studentaddDataGrid = $('#studentaddDataGrid').datagrid({
           url : '${path }/user/dataGrid',
           fit : true,
           striped : true,
@@ -83,9 +83,9 @@
   } 
   
   $("#addbtn").click(function(){
-	  var row = $('#userDataGrid').datagrid('getSelected');
-	  $("#userId").val(row.id);
-	  $("#name").val(row.name);
+	  var stuarow = $('#studentaddDataGrid').datagrid('getSelected');
+	  $("#userId").val(stuarow.id);
+	  $("#name").val(stuarow.name);
 	  $('#win').window('close');
 	});
   
@@ -177,7 +177,7 @@
                     <td>
 	                    <input id="userId" name="userId" hidden="true">
 	                    <input id="name" name="name" type="text" placeholder="请选择介绍老师" style="width:100px;" class="easyui-validatebox" data-options="required:true,novalidate:true" readonly="readonly" value="">
-                    	<input type="button" onclick="selectUser();" value="点击选择">
+                    	<input type="button" onclick="selectstuaUser();" value="点击选择">
                     </td>
                 </tr>
                 <tr>
@@ -198,7 +198,9 @@
                     </td> 
                 	<td>报考专业</td>
                 	<td>
-                		<select name="sContent" id="aMajor" style="width:120px;height:22px;"></select>
+                		<select name="sContent" id="aMajor" style="width:120px;height:22px;">
+                			<option value="">--请选择--</option>
+                		</select>
                 	</td>
                 </tr>
                 <tr>
@@ -217,6 +219,11 @@
                 <tr>
                 	<td>报考日期</td>
                     <td><input name="sDate" type="text" placeholder="请选报考日期" class="easyui-datetimebox" data-options="required:true,novalidate:true" value=""></td>
+                	<td>报名类型</td>
+                	<td><select id="stype" name="stype" style="width:100px;height:22px;">
+                		<option value="1">成人教育</option>
+                		<option value="2">开放大学</option>
+                	</select></td>
                 </tr>
             </table>
         </form>
@@ -224,7 +231,7 @@
 </div>
 <div id="win" class="easyui-window" title="用户表" closed="true"  style="width:440px;height:300px;">
   	<div style="width:430px;height:220px;">
-  		<table id="userDataGrid" data-options="fit:true,border:false"></table>
+  		<table id="studentaddDataGrid" data-options="fit:true,border:false"></table>
   	</div>
 	<center><a href="javascript:;" id="addbtn" style="margin-top:10px;" class="easyui-linkbutton" data-options="toggle:true,group:'g1',iconCls:'icon-ok'" >确定</a></center>
 </div>

@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>聚成管理平台</title>
+    <title>聚成教育-聚成学习中心</title>
     <meta name="viewport" content="width=device-width">
     <%@ include file="/commons/basejs.jsp" %>
     <link rel="stylesheet" type="text/css" href="${staticPath }/static/style/css/login.css?v=201612202107" />

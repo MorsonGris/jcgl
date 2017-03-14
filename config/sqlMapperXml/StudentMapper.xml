@@ -35,7 +35,19 @@
 	</sql>
 	
 	<select id="selectAll" resultMap="BaseResultMap">
-		SELECT * FROM student where s_type = 1
+		SELECT <include refid="Studentcolumn" /> FROM student where s_type = 1 or = s_type = 2
+	</select>
+	
+	<select id="selectByName" resultMap="BaseResultMap">
+		SELECT id_number,s_phone FROM student 
+		<where>
+			<if test="idNumber != null and idNumber != '' ">
+				id_number = #{idNumber} 
+			</if>
+			<if test="sPhone != null and sPhone != '' ">
+				s_phone = #{sPhone}
+			</if>
+		</where>
 	</select>
 	
 	<select id="selectByNo" resultMap="BaseResultMap">
@@ -72,6 +84,7 @@
 	    	s_systme,
 	    	s_date,
 	    	s_content,
+	    	s_type,
 	    	a.a_id,
 	    	a.a_school,
 	    	u.id,
@@ -79,7 +92,7 @@
     	FROM student s
     	LEFT JOIN academy a ON s.academy_id = a.a_id
     	LEFT JOIN user u ON s.user_id = u.id
-		WHERE s_id = #{sId} and s_type = 1
+		WHERE s_id = #{sId}
 	</select>
 	
 	<delete id="deleteById">
@@ -96,6 +109,7 @@
 			s_gradations = #{sGradations},
 			s_systme = #{sSystme},
 			s_content = #{sContent},
+			s_type = #{stype},
 			s_date = #{sDate}
 		 WHERE 
 		 	s_id = #{sId}
@@ -114,6 +128,7 @@
 	    	s_systme,
 	    	s_content,
 	    	s_date,
+	    	s_type,
 	    	a.a_id,
 	    	a.a_school,
 	    	u.id,
@@ -122,7 +137,10 @@
     	LEFT JOIN academy a ON s.academy_id = a.a_id
     	LEFT JOIN user u ON s.user_id = u.id
     	<where>
-    		s_type = 1
+    		s_type = 1 or s_type = 2
+    		<if test="uid != 1">
+    			and user_id = #{uid}
+    		</if>
     		<if test="name != null and name != '' ">
     			and s_name = #{name}
     		</if>

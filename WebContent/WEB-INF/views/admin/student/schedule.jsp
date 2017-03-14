@@ -58,11 +58,11 @@
                 formatter : function(value, row, index) {
                     var str = '';
                         <shiro:hasPermission name="/schedule/edit">
-                            str += $.formatString('<a href="javascript:void(0)" class="user-easyui-linkbutton-edit" data-options="plain:true,iconCls:\'fi-pencil icon-blue\'" onclick="editUserFun(\'{0}\');" >编辑</a>', row.sid);
+                            str += $.formatString('<a href="javascript:void(0)" class="user-easyui-linkbutton-edit" data-options="plain:true,iconCls:\'fi-pencil icon-blue\'" onclick="editScheduleFun(\'{0}\');" >编辑</a>', row.sid);
                         </shiro:hasPermission>
                         <shiro:hasPermission name="/schedule/delete">
                             str += '&nbsp;&nbsp;|&nbsp;&nbsp;';
-                            str += $.formatString('<a href="javascript:void(0)" class="user-easyui-linkbutton-del" data-options="plain:true,iconCls:\'fi-x icon-red\'" onclick="deleteUserFun(\'{0}\');" >删除</a>', row.sid);
+                            str += $.formatString('<a href="javascript:void(0)" class="user-easyui-linkbutton-del" data-options="plain:true,iconCls:\'fi-x icon-red\'" onclick="deleteScheduleFun(\'{0}\');" >删除</a>', row.sid);
                         </shiro:hasPermission>
                     return str;
                 }
@@ -71,11 +71,11 @@
                 $('.user-easyui-linkbutton-edit').linkbutton({text:'编辑'});
                 $('.user-easyui-linkbutton-del').linkbutton({text:'删除'});
             },
-            toolbar : '#userToolbar'
+            toolbar : '#scheduleToolbar'
         });
     });
     
-    function addUserFun() {
+    function addScheduleFun() {
         parent.$.modalDialog({
             title : '添加',
             width : 270,
@@ -92,7 +92,7 @@
         });
     }
     
-    function deleteUserFun(id) {
+    function deleteScheduleFun(id) {
         if (id == undefined) {//点击右键菜单才会触发这个
             var rows = scheduleDataGrid.datagrid('getSelections');
             id = rows[0].id;
@@ -115,7 +115,7 @@
         });
     }
     
-    function editUserFun(id) {
+    function editScheduleFun(id) {
         if (id == undefined) {
             var rows = scheduleDataGrid.datagrid('getSelections');
             id = rows[0].id;
@@ -169,25 +169,25 @@
         return dt.format("yyyy-MM-dd");  
     }  
     
-    function searchUserFun() {
-    	scheduleDataGrid.datagrid('load', $.serializeObject($('#searchUserForm')));
+    function searchScheduleFun() {
+    	scheduleDataGrid.datagrid('load', $.serializeObject($('#searchScheduleForm')));
     }
-    function cleanUserFun() {
-        $('#searchUserForm input').val('');
+    function cleanScheduleFun() {
+        $('#searchScheduleForm input').val('');
         scheduleDataGrid.datagrid('load', {});
     }
 </script>
 <div class="easyui-layout" data-options="fit:true,border:false">
     <div data-options="region:'north',border:false" style="height: 30px; overflow: hidden;background-color: #fff">
-        <form id="searchUserForm">
+        <form id="searchScheduleForm">
             <table>
                 <tr>
                     <th>创建时间:</th>
                     <td>
                         <input name="begintime" placeholder="点击选择时间" onclick="WdatePicker({readOnly:true,dateFmt:'yyyy-MM-dd HH:mm:ss'})" readonly="readonly" />至
                         <input  name="endtime" placeholder="点击选择时间" onclick="WdatePicker({readOnly:true,dateFmt:'yyyy-MM-dd HH:mm:ss'})" readonly="readonly" />
-                        <a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'fi-magnifying-glass',plain:true" onclick="searchUserFun();">查询</a>
-                        <a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'fi-x-circle',plain:true" onclick="cleanUserFun();">清空</a>
+                        <a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'fi-magnifying-glass',plain:true" onclick="searchScheduleFun();">查询</a>
+                        <a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'fi-x-circle',plain:true" onclick="cleanScheduleFun();">清空</a>
                     </td>
                 </tr>
             </table>
@@ -197,8 +197,8 @@
         <table id="scheduleDataGrid" data-options="fit:true,border:false"></table>
     </div>
 </div>
-<div id="userToolbar" style="display: none;">
+<div id="scheduleToolbar" style="display: none;">
     <shiro:hasPermission name="/schedule/addpage">
-        <a onclick="addUserFun();" href="javascript:void(0);" class="easyui-linkbutton" data-options="plain:true,iconCls:'fi-plus icon-green'">添加</a>
+        <a onclick="addScheduleFun();" href="javascript:void(0);" class="easyui-linkbutton" data-options="plain:true,iconCls:'fi-plus icon-green'">添加</a>
     </shiro:hasPermission>
 </div>

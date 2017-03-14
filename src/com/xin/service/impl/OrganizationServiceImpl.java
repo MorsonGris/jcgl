@@ -1,14 +1,10 @@
 package com.xin.service.impl;
 
-import java.util.ArrayList;
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
-import com.xin.commons.result.Tree;
 import com.xin.mapper.OrganizationMapper;
 import com.xin.bean.Organization;
 import com.xin.service.IOrganizationService;
@@ -25,21 +21,9 @@ public class OrganizationServiceImpl extends ServiceImpl<OrganizationMapper, Org
     private OrganizationMapper organizationMapper;
     
     @Override
-    public List<Tree> selectTree() {
+    public List<Organization> selectTree() {
         List<Organization> organizationList = selectTreeGrid();
-
-        List<Tree> trees = new ArrayList<Tree>();
-        if (organizationList != null) {
-            for (Organization organization : organizationList) {
-                Tree tree = new Tree();
-                tree.setId(organization.getId());
-                tree.setText(organization.getName());
-                tree.setIconCls(organization.getIcon());
-                tree.setPid(organization.getPid());
-                trees.add(tree);
-            }
-        }
-        return trees;
+        return organizationList;
     }
 
     @Override

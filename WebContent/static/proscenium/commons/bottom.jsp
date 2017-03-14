@@ -7,12 +7,12 @@
 				<p>
 					<img alt="140x140" src="<%=path %>/static/proscenium/images/ewm.png" style="width: 90%;margin-bottom: 10px;" />
 				</p>
-				<h4><img src="<%=path %>/static/proscenium/images/phone5.png" style="width: 30%"><span>800-8580990</span></h4>
-				<h4>地址：<span>江西省赣州市章贡区xx街xx区xx楼</span></h4>
+				<h4><img src="<%=path %>/static/proscenium/images/phone5.png" style="width: 30%"><span>0797-8385168</span></h4>
+				<h4>地址：<span>江西省赣州市红旗大道55号</span></h4>
 			</div>
 			<div class="col-xs-6 column">
 				<p>
-					<img alt="140x140" src="<%=path %>/static/proscenium/images/ewm2.png" style="width: 90%;margin-bottom: 20px;" />
+					<img alt="140x140" src="<%=path %>/static/proscenium/images/ewm2.jpg" style="width: 90%;margin-bottom: 20px;" />
 				</p>
 		    	<h4>友情链接</h4>
 		    	<h4>

@@ -32,11 +32,11 @@
                 formatter : function(value, row, index) {
                     var str = '';
                         <shiro:hasPermission name="/applyType/edit">
-                            str += $.formatString('<a href="javascript:void(0)" class="user-easyui-linkbutton-edit" data-options="plain:true,iconCls:\'fi-pencil icon-blue\'" onclick="editUserFun(\'{0}\');" >编辑</a>', row.aid);
+                            str += $.formatString('<a href="javascript:void(0)" class="user-easyui-linkbutton-edit" data-options="plain:true,iconCls:\'fi-pencil icon-blue\'" onclick="editAcademyFun(\'{0}\');" >编辑</a>', row.aid);
                         </shiro:hasPermission>
                         <shiro:hasPermission name="/applyType/delete">
                             str += '&nbsp;&nbsp;|&nbsp;&nbsp;';
-                            str += $.formatString('<a href="javascript:void(0)" class="user-easyui-linkbutton-del" data-options="plain:true,iconCls:\'fi-x icon-red\'" onclick="deleteUserFun(\'{0}\');" >删除</a>', row.aid);
+                            str += $.formatString('<a href="javascript:void(0)" class="user-easyui-linkbutton-del" data-options="plain:true,iconCls:\'fi-x icon-red\'" onclick="deleteAcademyFun(\'{0}\');" >删除</a>', row.aid);
                         </shiro:hasPermission>
                     return str;
                 }
@@ -45,11 +45,11 @@
                 $('.user-easyui-linkbutton-edit').linkbutton({text:'编辑'});
                 $('.user-easyui-linkbutton-del').linkbutton({text:'删除'});
             },
-            toolbar : '#userToolbar'
+            toolbar : '#AcademyToolbar'
         });
     });
     
-    function addUserFun() {
+    function addAcademyFun() {
         parent.$.modalDialog({
             title : '添加',
             width : 250,
@@ -66,7 +66,7 @@
         });
     }
     
-    function deleteUserFun(id) {
+    function deleteAcademyFun(id) {
         if (id == undefined) {//点击右键菜单才会触发这个
             var rows = academyDataGrid.datagrid('getSelections');
             id = rows[0].id;
@@ -92,7 +92,7 @@
         });
     }
     
-    function editUserFun(id) {
+    function editAcademyFun(id) {
         if (id == undefined) {
             var rows = academyDataGrid.datagrid('getSelections');
             id = rows[0].id;
@@ -115,17 +115,17 @@
         });
     }
     
-    function searchUserFun() {
-    	academyDataGrid.datagrid('load', $.serializeObject($('#searchUserForm')));
+    function searchAcademyFun() {
+    	academyDataGrid.datagrid('load', $.serializeObject($('#searchAcademyForm')));
     }
-    function cleanUserFun() {
-        $('#searchUserForm input').val('');
+    function cleanAcademyFun() {
+        $('#searchAcademyForm input').val('');
         academyDataGrid.datagrid('load', {});
     }
 </script>
 <div class="easyui-layout" data-options="fit:true,border:false">
     <div data-options="region:'north',border:false" style="height: 30px; overflow: hidden;background-color: #fff">
-        <form id="searchUserForm">
+        <form id="searchAcademyForm">
             <table>
                 <tr>
                     <th>学校名称:</th>
@@ -133,8 +133,8 @@
                     <th>专业名称:</th>
                     <td><input name="aMajor" placeholder="请输入专业名称"/></td>
                		<td>
-	                   	<a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'fi-magnifying-glass',plain:true" onclick="searchUserFun();">查询</a>
-	                    <a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'fi-x-circle',plain:true" onclick="cleanUserFun();">清空</a>
+	                   	<a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'fi-magnifying-glass',plain:true" onclick="searchAcademyFun();">查询</a>
+	                    <a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'fi-x-circle',plain:true" onclick="cleanAcademyFun();">清空</a>
                    </td>
                 </tr>
             </table>
@@ -144,8 +144,8 @@
         <table id="academyDataGrid" data-options="fit:true,border:false"></table>
     </div>
 </div>
-<div id="userToolbar" style="display: none;">
+<div id="AcademyToolbar" style="display: none;">
     <shiro:hasPermission name="/academy/addpage">
-        <a onclick="addUserFun();" href="javascript:void(0);" class="easyui-linkbutton" data-options="plain:true,iconCls:'fi-plus icon-green'">添加</a>
+        <a onclick="addAcademyFun();" href="javascript:void(0);" class="easyui-linkbutton" data-options="plain:true,iconCls:'fi-plus icon-green'">添加</a>
     </shiro:hasPermission>
 </div>

@@ -28,7 +28,19 @@
 	</sql>
 	
 	<select id="selectAll" resultMap="BaseResultMap">
-		SELECT * FROM student WHERE s_type = 4
+		SELECT * FROM student WHERE s_type = 4 or s_type = 3
+	</select>
+	
+	<select id="selectByName" resultMap="BaseResultMap">
+		SELECT id_number,s_phone FROM student 
+		<where>
+			<if test="idNumber != null and idNumber != '' ">
+				id_number = #{idNumber} 
+			</if>
+			<if test="sPhone != null and sPhone != '' ">
+				s_phone = #{sPhone}
+			</if>
+		</where>
 	</select>
 
 	<insert id="insertByid" >
@@ -53,11 +65,12 @@
 	    	s_phone,
 	    	s_content,
 	    	s_date,
+	    	s_type,
 	    	u.id,
 	    	u.`name`
     	FROM student s
     	LEFT JOIN user u ON s.user_id = u.id
-		WHERE s_id = #{sId} and s_type = 4
+		WHERE s_id = #{sId}
 	</select>
 	
 	<delete id="deleteById">
@@ -70,7 +83,8 @@
 			user_id = #{userId},
 			s_phone = #{sPhone},
 			s_content = #{sContent},
-			s_date = #{sDate}
+			s_date = #{sDate},
+			s_type = #{stype}
 		 WHERE 
 		 	s_id = #{sId}
 	</update>
@@ -84,12 +98,16 @@
 	    	s_phone,
 	    	s_content,
 	    	s_date,
+	    	s_type,
 	    	u.id,
 	    	u.`name`
     	FROM student s
     	LEFT JOIN user u ON s.user_id = u.id
     	<where>
-    		s_type = 4
+    		s_type = 4 or s_type = 3
+    		<if test="uid != 1">
+    			and user_id = #{uid}
+    		</if>
     		<if test="name != null and name != '' ">
     			and s_name = #{name}
     		</if>

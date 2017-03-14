@@ -65,5 +65,10 @@ public class StudentServiceImpl implements IStudentService {
 		pageInfo.setTotal(page.getTotal());
 		return list;
 	}
+
+	@Override
+	public List<Student> selectByName(Student student) {
+		return Studentmapper.selectByName(student);
+	}
 	
 }

@@ -6,7 +6,7 @@
             url : '${path }/role/add',
             onSubmit : function() {
                 progressLoad();
-                var isValid = $(this).form('validate');
+                var isValid = $(this).form('enableValidation').form('validate');
                 if (!isValid) {
                     progressClose();
                 }
@@ -31,7 +31,7 @@
             <table class="grid">
                 <tr>
                     <td>角色名称</td>
-                    <td><input name="name" type="text" placeholder="请输入角色名称" class="easyui-validatebox span2" data-options="required:true" value=""></td>
+                    <td><input name="name" type="text" placeholder="请输入角色名称" class="easyui-validatebox span2"  data-options="required:true,novalidate:true" value=""></td>
                 </tr>
                 <tr>
                     <td>排序</td>

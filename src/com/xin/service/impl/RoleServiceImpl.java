@@ -1,26 +1,22 @@
 package com.xin.service.impl;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
-import com.xin.commons.result.Tree;
+import com.xin.bean.Role;
+import com.xin.bean.RoleResource;
 import com.xin.commons.utils.PageInfo;
 import com.xin.commons.utils.StringUtils;
 import com.xin.mapper.RoleMapper;
 import com.xin.mapper.RoleResourceMapper;
 import com.xin.mapper.UserRoleMapper;
-import com.xin.bean.Role;
-import com.xin.bean.RoleResource;
 import com.xin.service.IRoleService;
 
 /**
@@ -58,16 +54,8 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements IR
 
     @Override
     public Object selectTree() {
-        List<Tree> trees = new ArrayList<Tree>();
         List<Role> roles = this.selectAll();
-        for (Role role : roles) {
-            Tree tree = new Tree();
-            tree.setId(role.getId());
-            tree.setText(role.getName());
-
-            trees.add(tree);
-        }
-        return trees;
+        return roles;
     }
 
     @Override
