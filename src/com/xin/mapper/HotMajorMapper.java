@@ -1,6 +1,6 @@
 package com.xin.mapper;
 
-import com.xin.bean.StuFile;
+import com.xin.bean.HotMajor;
 import com.baomidou.mybatisplus.mapper.BaseMapper;
 
 /**
@@ -11,6 +11,6 @@ import com.baomidou.mybatisplus.mapper.BaseMapper;
  * @author com.xin
  * @since 2017-02-28
  */
-public interface StuFileMapper extends BaseMapper<StuFile> {
+public interface HotMajorMapper {
 
 }

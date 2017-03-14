@@ -1,7 +1,6 @@
 package com.xin.bean;
 
 import com.baomidou.mybatisplus.activerecord.Model;
-import java.util.Date;
 import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.annotations.TableName;
@@ -10,82 +9,61 @@ import java.io.Serializable;
 
 /**
  * <p>
- * 
+ * 热门专业表
  * </p>
  *
  * @author com.xin
  * @since 2017-02-28
  */
 @TableName("stu_file")
-public class StuFile extends Model<StuFile> {
+public class HotMajor extends Model<HotMajor> {
 
     private static final long serialVersionUID = 1L;
 
-	@TableId("sf_id")
-	private Integer sfId;
-	@TableField("stu_id")
-	private Integer stuId;
-	@TableField("sf_photo")
-	private String sfPhoto;
-	@TableField("sf_voucher")
-	private String sfVoucher;
-	@TableField("sf_paper")
-	private String sfPaper;
-	@TableField("sf_date")
-	private Date sfDate;
+	@TableId("hm_id")
+	private Integer hmId;
+	@TableField("hm_title")
+	private String hmTitle;
+	@TableField("hm_picture")
+	private String hmPicture;
+	@TableField("hm_content")
+	private String hmContent;
 
-
-	public Integer getSfId() {
-		return sfId;
+	public Integer getHmId() {
+		return hmId;
 	}
 
-	public void setSfId(Integer sfId) {
-		this.sfId = sfId;
+	public void setHmId(Integer hmId) {
+		this.hmId = hmId;
 	}
 
-	public Integer getStuId() {
-		return stuId;
+	public String getHmTitle() {
+		return hmTitle;
 	}
 
-	public void setStuId(Integer stuId) {
-		this.stuId = stuId;
+	public void setHmTitle(String hmTitle) {
+		this.hmTitle = hmTitle;
 	}
 
-	public String getSfPhoto() {
-		return sfPhoto;
+	public String getHmPicture() {
+		return hmPicture;
 	}
 
-	public void setSfPhoto(String sfPhoto) {
-		this.sfPhoto = sfPhoto;
+	public void setHmPicture(String hmPicture) {
+		this.hmPicture = hmPicture;
 	}
 
-	public String getSfVoucher() {
-		return sfVoucher;
+	public String getHmContent() {
+		return hmContent;
 	}
 
-	public void setSfVoucher(String sfVoucher) {
-		this.sfVoucher = sfVoucher;
-	}
-
-	public String getSfPaper() {
-		return sfPaper;
-	}
-
-	public void setSfPaper(String sfPaper) {
-		this.sfPaper = sfPaper;
-	}
-
-	public Date getSfDate() {
-		return sfDate;
-	}
-
-	public void setSfDate(Date sfDate) {
-		this.sfDate = sfDate;
+	public void setHmContent(String hmContent) {
+		this.hmContent = hmContent;
 	}
 
 	@Override
 	protected Serializable pkVal() {
-		return this.sfId;
+		return this.hmId;
 	}
 
 }
