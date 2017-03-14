@@ -51,5 +51,10 @@ public class DisparkServiceImpl implements DisparkService {
 	public List<Student> selectAll() {
 		return disparkMapper.selectAll();
 	}
+
+	@Override
+	public List<Student> selectByName(Student sutdent) {
+		return disparkMapper.selectByName(sutdent);
+	}
 	
 }

@@ -30,6 +30,18 @@
 	<select id="selectAll" resultMap="BaseResultMap">
 		SELECT * FROM student WHERE s_type = 4
 	</select>
+	
+	<select id="selectByName" resultMap="BaseResultMap">
+		SELECT id_number,s_phone FROM student 
+		<where>
+			<if test="idNumber != null and idNumber != '' ">
+				id_number = #{idNumber} 
+			</if>
+			<if test="sPhone != null and sPhone != '' ">
+				s_phone = #{sPhone}
+			</if>
+		</where>
+	</select>
 
 	<insert id="insertByid" >
 		INSERT INTO student(<include refid="Studentcolumn" />) 
@@ -89,7 +101,10 @@
     	FROM student s
     	LEFT JOIN user u ON s.user_id = u.id
     	<where>
-    		s_type = 4 and user_id = #{uid}
+    		s_type = 4
+    		<if test="uid != 1">
+    			and user_id = #{uid}
+    		</if>
     		<if test="name != null and name != '' ">
     			and s_name = #{name}
     		</if>

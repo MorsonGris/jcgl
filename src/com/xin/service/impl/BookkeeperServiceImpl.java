@@ -51,5 +51,10 @@ public class BookkeeperServiceImpl implements BookkeeperService {
 	public List<Student> selectAll() {
 		return bookkeeperMapper.selectAll();
 	}
+
+	@Override
+	public List<Student> selectByName(Student sutdent) {
+		return bookkeeperMapper.selectByName(sutdent);
+	}
 	
 }

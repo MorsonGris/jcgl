@@ -36,6 +36,13 @@ public class AcademyController extends BaseController{
     	return "admin/student/academy";
     }
     
+    @RequestMapping("/selectall")
+    @ResponseBody
+    public Object selectall(){
+    	List<Academy> list = academyService.selectAll();
+    	return list;
+    }
+    
     /**
      * 分页查询
      * @param academy

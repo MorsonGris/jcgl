@@ -51,5 +51,10 @@ public class ArtexamServiceImpl implements ArtexamService {
 	public List<Student> selectAll() {
 		return artexamMapper.selectAll();
 	}
+
+	@Override
+	public List<Student> selectByName(Student sutdent) {
+		return artexamMapper.selectByName(sutdent);
+	}
 	
 }

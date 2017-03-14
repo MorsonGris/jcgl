@@ -35,7 +35,19 @@
 	</sql>
 	
 	<select id="selectAll" resultMap="BaseResultMap">
-		SELECT * FROM student where s_type = 1
+		SELECT <include refid="Studentcolumn" /> FROM student where s_type = 1
+	</select>
+	
+	<select id="selectByName" resultMap="BaseResultMap">
+		SELECT id_number,s_phone FROM student 
+		<where>
+			<if test="idNumber != null and idNumber != '' ">
+				id_number = #{idNumber} 
+			</if>
+			<if test="sPhone != null and sPhone != '' ">
+				s_phone = #{sPhone}
+			</if>
+		</where>
 	</select>
 	
 	<select id="selectByNo" resultMap="BaseResultMap">
@@ -122,7 +134,10 @@
     	LEFT JOIN academy a ON s.academy_id = a.a_id
     	LEFT JOIN user u ON s.user_id = u.id
     	<where>
-    		s_type = 1 and user_id = #{uid}
+    		s_type = 1
+    		<if test="uid != 1">
+    			and user_id = #{uid}
+    		</if>
     		<if test="name != null and name != '' ">
     			and s_name = #{name}
     		</if>

@@ -198,7 +198,9 @@
                     </td> 
                 	<td>报考专业</td>
                 	<td>
-                		<select name="sContent" id="aMajor" style="width:120px;height:22px;"></select>
+                		<select name="sContent" id="aMajor" style="width:120px;height:22px;">
+                			<option value="">--请选择--</option>
+                		</select>
                 	</td>
                 </tr>
                 <tr>

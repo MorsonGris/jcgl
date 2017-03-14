@@ -1,5 +1,5 @@
 $(document).ready(function() {
-	$("#phone").click(function () {
+	$("#contact").click(function () {
         document.getElementById('light').style.display='block';
         /* document.getElementById('fade').style.display='block'; */
     })

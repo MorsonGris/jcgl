@@ -9,6 +9,7 @@ import com.xin.commons.utils.PageInfo;
  * @since 2017-02-28
  */
 public interface BookkeeperService{
+	List<Student> selectByName(Student sutdent);
 	List<Student> selectAll();
 	boolean deleteById(int id);
 	Student selectById(int id);

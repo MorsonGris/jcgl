@@ -1,22 +1,27 @@
 package com.xin.controller;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
 import com.xin.bean.Academy;
 import com.xin.bean.Student;
 import com.xin.bean.User;
+import com.xin.bean.vo.UserVo;
 import com.xin.commons.base.BaseController;
 import com.xin.commons.utils.PageInfo;
 import com.xin.commons.utils.StudentNo;
 import com.xin.service.IAcademyService;
 import com.xin.service.IStudentService;
+import com.xin.service.IUserService;
 
 /**
  * <p>
@@ -32,6 +37,8 @@ public class StudentController extends BaseController{
     @Autowired private IStudentService studentService;
     
     @Autowired private IAcademyService academyService;
+    
+    @Autowired private IUserService userService;
     
     @GetMapping("/studentpage")
     public String student(){
@@ -59,6 +66,7 @@ public class StudentController extends BaseController{
     		map.put("studentNo", student.getStudentNo());
     	}
     	if(getUserId() != null){
+    		//只能看到自己推荐的学生
     		map.put("uid", getUserId());
     	}
     	pageInfo.setCondition(map);
@@ -81,6 +89,52 @@ public class StudentController extends BaseController{
     	return shcoollist;
     }
     
+	@RequestMapping("/validatori")
+    @ResponseBody
+    public Object validatori(String idNumber){
+    	Student student = new Student();
+    	if(idNumber != null){
+    		student.setIdNumber(idNumber);
+    	}
+    	Map<String,Object> map = new HashMap<>();
+    	List<Student> list = studentService.selectByName(student);
+    	Student stu = null;
+    	for(int i=0;i<list.size();i++){
+    		stu = list.get(i);
+    	}
+    	if(stu != null){
+    		if(stu.getIdNumber()!= null){
+        		map.put("valid", false);
+        	}
+    	}else{
+    		map.put("valid", true);
+    	}
+    	return map;
+    }
+	
+	@RequestMapping("/validatorp")
+    @ResponseBody
+    public Object validatorp(String sPhone){
+    	Student student = new Student();
+    	if(sPhone != null){
+    		student.setSPhone(sPhone);
+    	}
+    	Map<String,Object> map = new HashMap<>();
+    	List<Student> list = studentService.selectByName(student);
+    	Student stu = null;
+    	for(int i=0;i<list.size();i++){
+    		stu = list.get(i);
+    	}
+    	if(stu != null){
+    		if(stu.getSPhone() != null){
+    			map.put("valid", false);
+        	}
+    	}else{
+    		map.put("valid", true);
+    	}
+    	return map;
+    }
+    
     /**
      * 添加
      * @param student
@@ -89,10 +143,23 @@ public class StudentController extends BaseController{
     @RequestMapping("/add")
     @ResponseBody
     public Object add(Student student){
-    	Student stu = studentService.selectByNo();
+		Student stu = studentService.selectByNo();
     	String No = StudentNo.getNo(stu);
     	student.setStudentNo(No);
     	student.setStype(1);
+    	if(student.getSDate() == null){
+    		student.setSDate(new Date());
+    	}
+    	if(student.getUserId()==null){
+    		UserVo uservo = new UserVo();
+    		uservo.setLoginName("admin");
+    		List<User> list = userService.selectByLoginName(uservo);
+    		User users = null;
+    		for(int i=0;i<list.size();i++){
+    			users = list.get(i);
+    		}
+    		student.setUserId(users.getId());
+    	}
     	boolean result = studentService.insertByid(student);
     	if(result == true){
     		return renderSuccess("添加成功");

@@ -1,5 +1,6 @@
 package com.xin.controller;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,12 +13,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.xin.bean.Academy;
 import com.xin.bean.Student;
 import com.xin.bean.User;
+import com.xin.bean.vo.UserVo;
 import com.xin.commons.base.BaseController;
 import com.xin.commons.utils.PageInfo;
 import com.xin.commons.utils.StudentNo;
 import com.xin.service.DisparkService;
 import com.xin.service.IAcademyService;
 import com.xin.service.IStudentService;
+import com.xin.service.IUserService;
 
 /**
  * <p>
@@ -35,6 +38,8 @@ public class DisparkController extends BaseController{
     @Autowired private IAcademyService academyService;
     
     @Autowired private IStudentService studentservice;
+    
+    @Autowired private IUserService userService;
     
     @GetMapping("/studentpage")
     public String student(){
@@ -69,6 +74,52 @@ public class DisparkController extends BaseController{
     	return pageInfo;
     }
     
+    @RequestMapping("/validatori")
+    @ResponseBody
+    public Object validatori(String idNumber){
+    	Student student = new Student();
+    	if(idNumber != null){
+    		student.setIdNumber(idNumber);
+    	}
+    	Map<String,Object> map = new HashMap<>();
+    	List<Student> list = disparkService.selectByName(student);
+    	Student stu = null;
+    	for(int i=0;i<list.size();i++){
+    		stu = list.get(i);
+    	}
+    	if(stu != null){
+    		if(stu.getIdNumber()!= null){
+        		map.put("valid", false);
+        	}
+    	}else{
+    		map.put("valid", true);
+    	}
+    	return map;
+    }
+	
+	@RequestMapping("/validatorp")
+    @ResponseBody
+    public Object validatorp(String sPhone){
+    	Student student = new Student();
+    	if(sPhone != null){
+    		student.setSPhone(sPhone);
+    	}
+    	Map<String,Object> map = new HashMap<>();
+    	List<Student> list = disparkService.selectByName(student);
+    	Student stu = null;
+    	for(int i=0;i<list.size();i++){
+    		stu = list.get(i);
+    	}
+    	if(stu != null){
+    		if(stu.getSPhone() != null){
+    			map.put("valid", false);
+        	}
+    	}else{
+    		map.put("valid", true);
+    	}
+    	return map;
+    }
+    
     @GetMapping("/addpage")
     public String addpage(Model model){
     	List<Academy> list = academyService.selectAll();
@@ -84,6 +135,19 @@ public class DisparkController extends BaseController{
     @RequestMapping("/add")
     @ResponseBody
     public Object add(Student student){
+    	if(student.getUserId() == null){
+    		UserVo uservo = new UserVo();
+    		uservo.setLoginName("admin");
+    		List<User> list = userService.selectByLoginName(uservo);
+    		User users = null;
+    		for(int i=0;i<list.size();i++){
+    			users = list.get(i);
+    		}
+    		student.setUserId(users.getId());
+    	}
+    	if(student.getSDate() == null){
+    		student.setSDate(new Date());
+    	}
     	Student stu = studentservice.selectByNo();
     	String No = StudentNo.getNo(stu);
     	student.setStudentNo(No);

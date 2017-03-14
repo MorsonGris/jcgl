@@ -114,7 +114,7 @@
                 </a>
             </div>
             <div class="col-xs-4 column">
-                <a href = "JavaScript:void(0)" id="phone">
+                <a href = "JavaScript:void(0)" id="contact">
                     <img alt="80x80" src="${path }/static/proscenium/icon/phone.png" class="img-circle home-ico" />
                     <br>
                     <span class="home_operation">联系我们</span>
