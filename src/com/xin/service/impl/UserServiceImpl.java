@@ -120,4 +120,11 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
         }
     }
 
+	@Override
+	public UserVo homeLogin(UserVo userVo) {
+		return userMapper.homeLogin(userVo);
+	}
+
+	
+
 }

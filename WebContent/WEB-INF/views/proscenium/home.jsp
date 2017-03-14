@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c"   uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
 <c:set var="path" value="${pageContext.request.contextPath}" />
 <!DOCTYPE html>
 <html>
@@ -167,7 +168,7 @@
         <div class="row" style="text-align: left;margin-bottom: 20px;">
             <div class="col-xs-12 column">
                 <div style="border-bottom: 1px solid #e0e0e0; margin-bottom: 10px;">
-                    <h3>热门专业<span style="margin-left: 35%"><a href="#">查看更多</a></span></h3>
+                    <h3>热门专业</h3>
                 </div>
                 <div class="row">
                     <div class="col-md-4">
@@ -264,6 +265,12 @@
 <script src="${path }/static/proscenium/js/bootstrap.min.js"></script>
 <script src="${path }/static/proscenium/plugin/goup/jquery.goup.min.js"></script>
 <script src="${path }/static/proscenium/js/app.js"></script>
-
+<script type="text/javascript">
+//防止页面后退
+history.pushState(null, null, document.URL);
+window.addEventListener('popstate', function () {
+    history.pushState(null, null, document.URL);
+});
+</script>
 </body>
 </html>

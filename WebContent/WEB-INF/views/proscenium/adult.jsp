@@ -112,6 +112,7 @@ $(document).ready(function() {
 			  },'JSON');
 	    },
 	    fields: {
+<<<<<<< Updated upstream
 	    	sName: {
 			  validators: {
 			   notEmpty: {
@@ -121,6 +122,25 @@ $(document).ready(function() {
 			},
 			idNumber: {
 			   validators: {
+=======
+				name: {
+				  validators: {
+				   notEmpty: {
+				    message: '姓名不能为空'
+				   }
+				  }
+				},
+				id_card: {
+					validators: {
+					   notEmpty: {
+					    message: '身份证号码不能为空!'
+	   					}
+						
+					}
+				 },
+				phone: {
+				  validators: {
+>>>>>>> Stashed changes
 				   notEmpty: {
                        message: '身份证号码不能为空'
                    },

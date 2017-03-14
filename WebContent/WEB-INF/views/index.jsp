@@ -136,7 +136,7 @@
                 $.post('${path }/logout', function(result) {
                     if(result.success){
                         progressClose();
-                        window.location.href='${path }';
+                        window.location.href='${path }/login';
                     }
                 }, 'json');
             }

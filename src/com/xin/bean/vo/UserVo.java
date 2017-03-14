@@ -47,7 +47,12 @@ public class UserVo implements Serializable {
 
 	private Date createdateStart;
 	private Date createdateEnd;
-
+	
+	public UserVo(String phone,String password) {
+		this.phone=phone;
+		this.password=password;
+	}
+	public UserVo(){}
 	public Long getId() {
 		return id;
 	}
