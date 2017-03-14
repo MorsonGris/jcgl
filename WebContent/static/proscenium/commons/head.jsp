@@ -19,17 +19,17 @@
             <ul class="nav navbar-nav navbar-right">
                 <li class="active">
                     <a href="${path }/index">
-	                    <img alt="" 	src="${path }/static/proscenium/icon/home1.png" style="width: 30px;">
+	                    <img alt="" src="${path }/static/proscenium/icon/home1.png" style="width: 30px;">
 	                   	首页
                    	</a>
                 </li>
                 <li>
 	               	<c:choose>
 	               		<c:when test="${user.id != null }">
-	               			<a href="${path }/index/login">
-	             				<img alt="" src="${path }/static/proscenium/icon/user62.png" style="width: 30px;">
-	              				${user.name }
-	             		 		</a>
+	               		<div style="padding: 10px 15px;">
+	               			<img alt="" src="${path }/static/proscenium/icon/user62.png" style="width: 30px;">
+              				${user.name }
+	               		</div>
 	               		</c:when>
 	               		<c:otherwise>
 	               			<a href="${path }/index/login">

@@ -3,9 +3,9 @@
 <%	String	path = request.getContextPath(); %>
 
 <div class="float">
-        <a href = "JavaScript:void(0)" id="share">
+        <%-- <a href = "JavaScript:void(0)" id="share">
             <img src="<%=path %>/static/proscenium/icon/share3.png" style="width: 100%; border-radius: 10px;">
-        </a>
+        </a> --%>
     <%-- <p>
         <a href = "JavaScript:void(0)" id="phone">
             <img src="<%=path %>/static/proscenium/images/phone2.png" style="width: 50%;">
