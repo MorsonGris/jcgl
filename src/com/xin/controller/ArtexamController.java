@@ -136,6 +136,9 @@ public class ArtexamController extends BaseController{
     @RequestMapping("/add")
     @ResponseBody
     public Object add(Student student){
+    	Student stu = studentservice.selectByNo();
+    	String No = StudentNo.getNo(stu);
+    	student.setStudentNo(No);
     	if(student.getUserId() == null){
     		UserVo uservo = new UserVo();
     		uservo.setLoginName("admin");
@@ -149,10 +152,6 @@ public class ArtexamController extends BaseController{
     	if(student.getSDate() == null){
     		student.setSDate(new Date());
     	}
-    	Student stu = studentservice.selectByNo();
-    	String No = StudentNo.getNo(stu);
-    	student.setStudentNo(No);
-    	student.setStype(4);
     	boolean result = artexamService.insertByid(student);
     	if(result == true){
     		return renderSuccess("添加成功");

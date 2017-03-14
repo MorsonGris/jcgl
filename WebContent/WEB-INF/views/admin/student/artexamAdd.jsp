@@ -27,7 +27,7 @@
     
     
   var artexamaddDataGrid;
-  function selectartexamUser() {
+  function selectartexamaUser() {
 	  artexamaddDataGrid = $('#artexamaddDataGrid').datagrid({
           url : '${path }/user/dataGrid',
           fit : true,
@@ -118,7 +118,7 @@
                     <td>
 	                    <input id="userId" name="userId" hidden="true">
 	                    <input id="name" name="name" type="text" placeholder="请选择介绍老师" style="width:100px;" class="easyui-validatebox" data-options="required:true,novalidate:true" readonly="readonly" value="">
-                    	<input type="button" onclick="selectartexamUser();" value="点击选择">
+                    	<input type="button" onclick="selectartexamaUser();" value="点击选择">
                     </td>
                 </tr>
                 <tr>
@@ -130,7 +130,11 @@
                 <tr>
                 	<td>学习内容</td>
                     <td><input name="sContent" type="text" placeholder="请选择学习内容" class="easyui-validatebox" data-options="required:true,novalidate:true" value=""></td>
-                	
+                	<td>报名类型</td>
+                	<td><select id="stype" name="stype" style="width:80px;height:22px;">
+                		<option value="4">艺考</option>
+                		<option value="3">会计</option>
+                	</select></td>
                 </tr>
             </table>
         </form>

@@ -27,7 +27,7 @@
     
     
   var studenteditDataGrid;
-  function selectUser() {
+  function selectstueUser() {
 	  studenteditDataGrid = $('#studenteditDataGrid').datagrid({
           url : '${path }/user/dataGrid',
           fit : true,
@@ -106,7 +106,7 @@
   
   $(function(){
 	  var dd = $("#aMajor");
-	  dd.append("<option value=''>${student.SContent}</option>");
+	  dd.append("<option value='${student.SContent}'>${student.SContent}</option>");
   });
   
   function selectAca(){
@@ -179,7 +179,7 @@
                     <td>
 	                    <input id="userId" name="userId" hidden="true" value="${user.id}">
 	                    <input id="name" name="name" type="text" placeholder="请选择介绍老师" style="width:100px;" class="easyui-validatebox" data-options="required:true,novalidate:true" readonly="readonly" value="${user.name}">
-                    	<input type="button" onclick="selectUser();" value="点击选择">
+                    	<input type="button" onclick="selectstueUser();" value="点击选择">
                     </td>
                 </tr>
                 <tr>
@@ -217,9 +217,14 @@
                 <tr>
                 	<td>报考日期</td>
                     <td><input name="sDate" type="text" placeholder="请选报考日期" class="easyui-datetimebox" data-options="required:true,novalidate:true" value="${student.SDate}"></td>
-                	<td></td>
-                	<td><input type="text" name="sId" hidden="true" value="${student.SId}" /></td>
+                	<td>报名类型</td>
+                	<td><select id="stype" name="stype" style="width:100px;height:22px;">
+                		<option value="1" <c:if test="${student.stype == 1}">selected</c:if>>成人教育</option>
+                		<option value="2" <c:if test="${student.stype == 2}">selected</c:if>>开放大学</option>
+                	</select></td>
                 </tr>
+                <tr><td></td>
+                	<td><input type="text" name="sId" hidden="true" value="${student.SId}" /></td></tr>
             </table>
         </form>
     </div>

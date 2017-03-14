@@ -70,10 +70,23 @@
                 field : 'sgradations',
                 sortable : true
             },{
-                width : '100',
+                width : '80',
                 title : '学制',
-                field : 'ssystme',
+                field : 'ssystme',	
                 sortable : true
+            },{
+                width : '90',
+                title : '报名类型',
+                field : 'stype',
+                sortable : true,
+                formatter : function(value, row, index) {
+                    switch (value) {
+                    case 1:
+                        return '成人教育';
+                    case 2:
+                        return '国家开发大学';
+                    }
+                }
             },{
                 width : '100',
                 title : '报考日期',

@@ -43,6 +43,19 @@
                 field : 'sphone',
                 sortable : true
             },{
+                width : '90',
+                title : '报名类型',
+                field : 'stype',
+                sortable : true,
+                formatter : function(value, row, index) {
+                    switch (value) {
+                    case 4:
+                        return '艺考';
+                    case 3:
+                        return '会计';
+                    }
+                }
+            },{
                 width : '120',
                 title : '学习内容',
                 field : 'scontent',

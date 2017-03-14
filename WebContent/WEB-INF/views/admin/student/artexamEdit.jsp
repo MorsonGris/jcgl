@@ -27,7 +27,7 @@
     
     
   var artexamDataGrid;
-  function selectartexamUser() {
+  function selectartexameUser() {
 	  artexamDataGrid = $('#artexamDataGrid').datagrid({
           url : '${path }/user/dataGrid',
           fit : true,
@@ -116,7 +116,7 @@
                     <td>
 	                    <input id="userId" name="userId" hidden="true" value="${user.id}">
 	                    <input id="name" name="name" type="text" placeholder="请选择介绍老师" style="width:100px;" class="easyui-validatebox" data-options="required:true,novalidate:true" readonly="readonly" value="${user.name}">
-                    	<input type="button" onclick="selectartexamUser();" value="点击选择">
+                    	<input type="button" onclick="selectartexameUser();" value="点击选择">
                     </td>
                 </tr>
                 <tr>
@@ -128,6 +128,13 @@
                 <tr>
                 	<td>学习内容</td>
                     <td><input name="sContent" type="text" placeholder="请选择学习内容" class="easyui-validatebox" data-options="required:true,novalidate:true" value="${student.SContent}"></td>
+                	<td>报名类型</td>
+                	<td><select id="stype" name="stype" style="width:100px;height:22px;">
+                		<option value="4" <c:if test="${student.stype == 1}">selected</c:if>>艺考</option>
+                		<option value="3" <c:if test="${student.stype == 2}">selected</c:if>>会计</option>
+                	</select></td>
+                </tr>
+                <tr>
                 	<td></td>
                 	<td><input type="text" name="sId" hidden="true" value="${student.SId}" /></td>
                 </tr>

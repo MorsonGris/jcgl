@@ -146,7 +146,6 @@ public class StudentController extends BaseController{
 		Student stu = studentService.selectByNo();
     	String No = StudentNo.getNo(stu);
     	student.setStudentNo(No);
-    	student.setStype(1);
     	if(student.getSDate() == null){
     		student.setSDate(new Date());
     	}
@@ -185,6 +184,7 @@ public class StudentController extends BaseController{
     @GetMapping("/editpage")
     public String editpage(Model model,int id){
     	Student student = studentService.selectById(id);
+    	System.out.println(student.getStype());
     	List<Academy> academieslist = student.getListAcademy();
     	List<User> studentlsit = student.getListUser();
     	Academy aca = null;

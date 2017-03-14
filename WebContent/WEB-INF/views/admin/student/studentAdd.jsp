@@ -27,7 +27,7 @@
     
     
   var studentaddDataGrid;
-  function selectUser() {
+  function selectstuaUser() {
 	  studentaddDataGrid = $('#studentaddDataGrid').datagrid({
           url : '${path }/user/dataGrid',
           fit : true,
@@ -83,9 +83,9 @@
   } 
   
   $("#addbtn").click(function(){
-	  var row = $('#studentaddDataGrid').datagrid('getSelected');
-	  $("#userId").val(row.id);
-	  $("#name").val(row.name);
+	  var stuarow = $('#studentaddDataGrid').datagrid('getSelected');
+	  $("#userId").val(stuarow.id);
+	  $("#name").val(stuarow.name);
 	  $('#win').window('close');
 	});
   
@@ -177,7 +177,7 @@
                     <td>
 	                    <input id="userId" name="userId" hidden="true">
 	                    <input id="name" name="name" type="text" placeholder="请选择介绍老师" style="width:100px;" class="easyui-validatebox" data-options="required:true,novalidate:true" readonly="readonly" value="">
-                    	<input type="button" onclick="selectUser();" value="点击选择">
+                    	<input type="button" onclick="selectstuaUser();" value="点击选择">
                     </td>
                 </tr>
                 <tr>
@@ -219,6 +219,11 @@
                 <tr>
                 	<td>报考日期</td>
                     <td><input name="sDate" type="text" placeholder="请选报考日期" class="easyui-datetimebox" data-options="required:true,novalidate:true" value=""></td>
+                	<td>报名类型</td>
+                	<td><select id="stype" name="stype" style="width:100px;height:22px;">
+                		<option value="1">成人教育</option>
+                		<option value="2">开放大学</option>
+                	</select></td>
                 </tr>
             </table>
         </form>
