@@ -51,7 +51,7 @@ public class FinanceController extends BaseController{
     @Autowired private IFinanceService financeService;
     
     /**
-     * 缴费管理页
+     * 成考国家报名缴费管理页
      * @return
      * */
     @GetMapping("/manager")
@@ -60,7 +60,7 @@ public class FinanceController extends BaseController{
     }
     
     /**
-     * 缴费管理列表
+     * 成考缴费管理列表
      *
      * @param finance
      * @param page
@@ -72,7 +72,7 @@ public class FinanceController extends BaseController{
     @PostMapping("/dataGrid")
     @ResponseBody
     public Object dataGrid(Finance finance, Integer page, Integer rows, String sort, String order) {
-        PageInfo pageInfo = new PageInfo(page, rows, sort, order);
+    	PageInfo pageInfo = new PageInfo(page, rows, sort, order);
         Map<String, Object> condition = new HashMap<String, Object>();
         if (StringUtils.isNotBlank(finance.getTeaClass())) {
             condition.put("username", StringUtils.formatLike(finance.getTeaClass()));
@@ -89,6 +89,8 @@ public class FinanceController extends BaseController{
         if (finance.getCreatedateEnd() != null) {
             condition.put("endTime", finance.getCreatedateEnd());
         }
+        condition.put("stypeone", 1);
+        condition.put("stypetwo", 2);
         pageInfo.setCondition(condition);
         financeService.selectFinancePage(pageInfo);
         return pageInfo;
@@ -207,7 +209,7 @@ public class FinanceController extends BaseController{
 	 */
     @RequestMapping(value="/download_finance")
     public String download(Finance f,Integer page, Integer rows,HttpServletRequest request,HttpServletResponse response) throws IOException{
-        String fileName="缴费清单数据导出";
+        String fileName="成考缴费清单数据导出";
         //填充projects数据
         if (StringUtils.isNotBlank(f.getTeaClass())) {
             f.setTeaClass(StringUtils.formatLike(f.getTeaClass()));
@@ -224,6 +226,8 @@ public class FinanceController extends BaseController{
         if (f.getCreatedateEnd() != null) {
             f.setCreatedateEnd(f.getCreatedateEnd());
         }
+        f.setStypeone(1);
+        f.setStypetwo(2);
         List<Finance> finances = financeService.selectFinanceAll(f);
         List<Map<String,Object>> list=createExcelRecord(finances);
         String columnNames[]={"序号","姓名","学号","学校","专业","层次","班主任","合作人","需缴金额","实缴金额","缴费时间","缴费方式","累计金额","缴费状态"};//列名

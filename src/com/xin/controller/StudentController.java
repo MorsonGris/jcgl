@@ -63,6 +63,40 @@ public class StudentController extends BaseController{
     	return pageInfo;
     }
     
+    /**
+     * 分页查询
+     * @param student
+     * @param page
+     * @param rows
+     * @return
+     */
+    @RequestMapping("/selectDataGrid")
+    @ResponseBody
+    public Object selectDataGrid(Student student,Integer page, Integer rows){
+    	PageInfo pageInfo = new PageInfo(page,rows);
+    	Map<String,Object> map = new HashMap<String,Object>();
+    	if(student.getSName()!= null){
+    		//根据姓名查询
+    		map.put("name",student.getSName());
+    	}
+    	if(student.getStudentNo() != null){
+    		//根据学号查询
+    		map.put("studentNo", student.getStudentNo());
+    	}
+    	if(student.getStype() != null) {
+    		if(student.getStype()==1) {
+    			map.put("stypeone", 1);
+    			map.put("stypetwo", 2);
+    		}else {
+    			map.put("stypeone", 3);
+    			map.put("stypetwo", 4);
+    		}
+    	}
+    	pageInfo.setCondition(map);
+    	studentService.selectByStudent(pageInfo);
+    	return pageInfo;
+    }
+    
     @GetMapping("/addpage")
     public String addpage(Model model){
     	List<Academy> list = academyService.selectAll();

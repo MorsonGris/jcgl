@@ -14,7 +14,7 @@
             singleSelect : true,
             idField : 'nid',
             sortName : 'n_date',
-	        sortOrder : 'asc',
+	        sortOrder : 'desc',
             pageSize : 20,
             pageList : [ 10, 20, 30, 40, 50, 100, 200, 300, 400, 500 ],
             columns : [ [ {
@@ -54,24 +54,24 @@
                 formatter : function(value, row, index) {
                     var str = '';
                         <shiro:hasPermission name="/notice/edit">
-                            str += $.formatString('<a href="javascript:void(0)" class="user-easyui-linkbutton-edit" data-options="plain:true,iconCls:\'fi-pencil icon-blue\'" onclick="editUserFun(\'{0}\');" >编辑</a>', row.nid);
+                            str += $.formatString('<a href="javascript:void(0)" class="notice-easyui-linkbutton-edit" data-options="plain:true,iconCls:\'fi-pencil icon-blue\'" onclick="editNoticeFun(\'{0}\');" >编辑</a>', row.nid);
                         </shiro:hasPermission>
                         <shiro:hasPermission name="/notice/delete">
                             str += '&nbsp;&nbsp;|&nbsp;&nbsp;';
-                            str += $.formatString('<a href="javascript:void(0)" class="user-easyui-linkbutton-del" data-options="plain:true,iconCls:\'fi-x icon-red\'" onclick="deleteUserFun(\'{0}\');" >删除</a>', row.nid);
+                            str += $.formatString('<a href="javascript:void(0)" class="notice-easyui-linkbutton-del" data-options="plain:true,iconCls:\'fi-x icon-red\'" onclick="deleteNoticeFun(\'{0}\');" >删除</a>', row.nid);
                         </shiro:hasPermission>
                     return str;
                 }
             }] ],
             onLoadSuccess:function(data){
-                $('.user-easyui-linkbutton-edit').linkbutton({text:'编辑'});
-                $('.user-easyui-linkbutton-del').linkbutton({text:'删除'});
+                $('.notice-easyui-linkbutton-edit').linkbutton({text:'编辑'});
+                $('.notice-easyui-linkbutton-del').linkbutton({text:'删除'});
             },
             toolbar : '#noticeToolbar'
         });
     });
     
-    function addUserFun() {
+    function addNoticeFun() {
         parent.$.modalDialog({
             title : '添加',
             width : 500,
@@ -88,7 +88,7 @@
         });
     }
     
-    function deleteUserFun(id) {
+    function deleteNoticeFun(id) {
         if (id == undefined) {//点击右键菜单才会触发这个
             var rows = noticeDataGrid.datagrid('getSelections');
             id = rows[0].id;
@@ -97,8 +97,8 @@
         }
         parent.$.messager.confirm('询问', '您是否要删除当前用户？', function(b) {
             if (b) {
-                var currentUserId = '${sessionInfo.id}';/*当前登录用户的ID*/
-                if (currentUserId != id) {
+                var currentnoticeId = '${sessionInfo.id}';/*当前登录用户的ID*/
+                if (currentnoticeId != id) {
                     progressLoad();
                     $.post('${path }/notice/delete', {
                         id : id
@@ -119,7 +119,7 @@
         });
     }
     
-    function editUserFun(id) {
+    function editNoticeFun(id) {
         if (id == undefined) {
             var rows = noticeDataGrid.datagrid('getSelections');
             id = rows[0].id;
@@ -142,10 +142,10 @@
         });
     }
     
-    function searchUserFun() {
+    function searchNoticeFun() {
         noticeDataGrid.datagrid('load', $.serializeObject($('#searchNoticeForm')));
     }
-    function cleanUserFun() {
+    function cleanNoticeFun() {
         $('#searchNoticeForm input').val('');
         noticeDataGrid.datagrid('load', {});
     }
@@ -169,19 +169,19 @@
                     <td>
                         <input name="nDate" placeholder="点击选择时间" onclick="WdatePicker({readOnly:true,dateFmt:'yyyy-MM-dd HH:mm:ss'})" readonly="readonly" />至
                         <input  name="endDate" placeholder="点击选择时间" onclick="WdatePicker({readOnly:true,dateFmt:'yyyy-MM-dd HH:mm:ss'})" readonly="readonly" />
-                        <a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'fi-magnifying-glass',plain:true" onclick="searchUserFun();">查询</a>
-                        <a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'fi-x-circle',plain:true" onclick="cleanUserFun();">清空</a>
+                        <a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'fi-magnifying-glass',plain:true" onclick="searchNoticeFun();">查询</a>
+                        <a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'fi-x-circle',plain:true" onclick="cleanNoticeFun();">清空</a>
                     </td>
                 </tr>
             </table>
         </form>
     </div>
-    <div data-options="region:'center',border:true,title:'用户列表'" >
+    <div data-options="region:'center',border:true,title:'公告列表'" >
         <table id="noticeDataGrid" data-options="fit:true,border:false"></table>
     </div>
 </div>
 <div id="noticeToolbar" style="display: none;">
     <shiro:hasPermission name="/notice/add">
-        <a onclick="addUserFun();" href="javascript:void(0);" class="easyui-linkbutton" data-options="plain:true,iconCls:'fi-plus icon-green'">添加</a>
+        <a onclick="addNoticeFun();" href="javascript:void(0);" class="easyui-linkbutton" data-options="plain:true,iconCls:'fi-plus icon-green'">添加</a>
     </shiro:hasPermission>
 </div>

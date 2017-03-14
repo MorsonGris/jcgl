@@ -1,11 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/commons/global.jsp" %>
 <script type="text/javascript">
-    var financeDataGrid;
+    var accountantDataGrid;
     $(function() {
 		
-        financeDataGrid = $('#financeDataGrid').datagrid({
-            url : '${path }/finance/dataGrid',
+        accountantDataGrid = $('#accountantDataGrid').datagrid({
+            url : '${path }/accountant/DataGrid',
             fit : true,
             striped : true,
             rownumbers : true,
@@ -21,7 +21,7 @@
                 field : 'fid',
                 checkbox:true
             },{
-                width : '60',
+                width : '80',
                 title : '姓名',
                 field : 'studentsname',
                 formatter : function(value, row, index) {
@@ -36,57 +36,12 @@
                     }
                 }
             }, {
-                width : '75',
+                width : '80',
                 title : '学号',
                 field : 'stuNo',
                 sortable : true
             },{
                 width : '80',
-                title : '学校',
-                field : 'academyaschool',
-                formatter : function(value, row, index) {
-                	if (row.academy){
-                        if(row.academy.aschool!= '')
-                            return row.academy.aschool;
-                        else{
-                            return '';
-                        }
-                    } else {
-                        return '';
-                    }
-                }
-            },{
-            	width : '110',
-                title : '专业',
-                field : 'academyamajor',
-                formatter : function(value, row, index) {
-                	if (row.academy){
-                        if(row.academy.amajor!= '')
-                            return row.academy.amajor;
-                        else{
-                            return '';
-                        }
-                    } else {
-                        return '';
-                    }
-                }
-            },{
-            	width : '70',
-                title : '层次',
-                field : 'studentsgradations',
-                formatter : function(value, row, index) {
-                	if (row.student){
-                        if(row.student.sgradations != '')
-                            return row.student.sgradations;
-                        else{
-                            return '';
-                        }
-                    } else {
-                        return '';
-                    }
-                }
-            },{
-                width : '70',
                 title : '班主任',
                 field : 'teaClass',
                 sortable : true
@@ -98,12 +53,12 @@
                     return value.name;
                 }
             },{
-                width : '60',
+                width : '80',
                 title : '需缴金额',
                 field : 'needMoney',
                 sortable : true
             },{
-                width : '60',
+                width : '80',
                 title : '实缴金额',
                 field : 'practicalMoney',
                 sortable : true
@@ -132,7 +87,7 @@
                     }
                 }
             },{
-                width : '60',
+                width : '80',
                 title : '累计金额',
                 field : 'faccumulative',
                 sortable : true
@@ -161,10 +116,10 @@
                 	if (row.student){
                         if(row.student.stype!= ''){
                             var type = row.student.stype;
-                        	if(type==1) {
-                        		return "成人高考";
+                        	if(type==3) {
+                        		return "会计报名";
                             }else {
-                            	return "国家开放大学";
+                            	return "艺考报名";
                             }
                         }else{
                             return '';
@@ -180,46 +135,46 @@
                 formatter : function(value, row, index) {
                     var str = '';
                         <shiro:hasPermission name="/finance/edit">
-                            str += $.formatString('<a href="javascript:void(0)" class="finance-easyui-linkbutton-edit" data-options="plain:true,iconCls:\'fi-pencil icon-blue\'" onclick="editFinanceFun(\'{0}\');" >编辑</a>', row.fid);
+                            str += $.formatString('<a href="javascript:void(0)" class="accountant-easyui-linkbutton-edit" data-options="plain:true,iconCls:\'fi-pencil icon-blue\'" onclick="editaccountantFun(\'{0}\');" >编辑</a>', row.fid);
                         </shiro:hasPermission>
                         <shiro:hasPermission name="/finance/delete">
                             str += '&nbsp;&nbsp;|&nbsp;&nbsp;';
-                            str += $.formatString('<a href="javascript:void(0)" class="finance-easyui-linkbutton-del" data-options="plain:true,iconCls:\'fi-x icon-red\'" onclick="deleteFinanceFun(\'{0}\');" >删除</a>', row.fid);
+                            str += $.formatString('<a href="javascript:void(0)" class="accountant-easyui-linkbutton-del" data-options="plain:true,iconCls:\'fi-x icon-red\'" onclick="deleteaccountantFun(\'{0}\');" >删除</a>', row.fid);
                         </shiro:hasPermission>
                     return str;
                 }
             }] ],
             onLoadSuccess:function(data){
-                $('.finance-easyui-linkbutton-edit').linkbutton({text:'编辑'});
-                $('.finance-easyui-linkbutton-del').linkbutton({text:'删除'});
+                $('.accountant-easyui-linkbutton-edit').linkbutton({text:'编辑'});
+                $('.accountant-easyui-linkbutton-del').linkbutton({text:'删除'});
             },
-            toolbar : '#financeToolbar'
+            toolbar : '#accountantToolbar'
         });
     });
     
-    function addFinanceFun() {
+    function addaccountantFun() {
         parent.$.modalDialog({
             title : '添加',
             width : 535,
             height : 255,
-            href : '${path }/finance/addPage',
+            href : '${path }/accountant/addPage',
             buttons : [ {
                 text : '添加',
                 handler : function() {
-                    parent.$.modalDialog.openner_dataGrid = financeDataGrid; //因为添加成功之后，需要刷新这个dataGrid，所以先预定义好
-                    var f = parent.$.modalDialog.handler.find('#financeAddForm');
+                    parent.$.modalDialog.openner_dataGrid = accountantDataGrid; //因为添加成功之后，需要刷新这个dataGrid，所以先预定义好
+                    var f = parent.$.modalDialog.handler.find('#accountantAddForm');
                     f.submit();
                 }
             } ]
         });
     }
     
-    function deleteFinanceFun(id) {
+    function deleteaccountantFun(id) {
         if (id == undefined) {//点击右键菜单才会触发这个
-            var rows = financeDataGrid.datagrid('getSelections');
+            var rows = accountantDataGrid.datagrid('getSelections');
             id = rows[0].id;
         } else {//点击操作里面的删除图标会触发这个
-            financeDataGrid.datagrid('unselectAll').datagrid('uncheckAll');
+            accountantDataGrid.datagrid('unselectAll').datagrid('uncheckAll');
         }
         parent.$.messager.confirm('询问', '您是否要删除当前用户？', function(b) {
             if (b) {
@@ -229,20 +184,25 @@
                     }, function(result) {
                         if (result.success) {
                             parent.$.messager.alert('提示', result.msg, 'info');
-                            financeDataGrid.datagrid('reload');
+                            accountantDataGrid.datagrid('reload');
                         }
                         progressClose();
                     }, 'JSON');
-            }
+                } else {
+                    parent.$.messager.show({
+                        title : '提示',
+                        msg : '不可以删除自己！'
+                    });
+                }
         });
     }
     
-    function editFinanceFun(id) {
-    	if (id == undefined) {
-            var rows = financeDataGrid.datagrid('getSelections');
+    function editaccountantFun(id) {
+        if (id == undefined) {
+            var rows = accountantDataGrid.datagrid('getSelections');
             id = rows[0].id;
         } else {
-        	financeDataGrid.datagrid('unselectAll').datagrid('uncheckAll');
+            accountantDataGrid.datagrid('unselectAll').datagrid('uncheckAll');
         }
         parent.$.modalDialog({
             title : '编辑',
@@ -252,7 +212,7 @@
             buttons : [ {
                 text : '确定',
                 handler : function() {
-                    parent.$.modalDialog.openner_dataGrid = financeDataGrid;//因为添加成功之后，需要刷新这个dataGrid，所以先预定义好
+                    parent.$.modalDialog.openner_dataGrid = accountantDataGrid;//因为添加成功之后，需要刷新这个dataGrid，所以先预定义好
                     var f = parent.$.modalDialog.handler.find('#financeEditForm');
                     f.submit();
                 }
@@ -260,27 +220,27 @@
         });
     }
     
-    function searchFinanceFun() {
-    	financeDataGrid.datagrid('load', $.serializeObject($('#searchFinanceForm')));
+    function searchAccountantFun() {
+    	accountantDataGrid.datagrid('load', $.serializeObject($('#searchAccountantsForm')));
     }
-    function cleanFinanceFun() {
-        $('#searchFinanceForm input').val('');
-        financeDataGrid.datagrid('load', {});
+    function cleanAccountantFun() {
+        $('#searchAccountantsForm input').val('');
+        accountantDataGrid.datagrid('load', {});
     }
 
    	//导出excel
-    function toExcel(){
+    function toExcel1(){
     	var teaClass = $("#teaClass").val();
     	var stuNo = $("#stuNo").val();
     	var fState = $("#fState").val();
     	var createdateStart = $("#createdateStart").val();
     	var createdateEnd = $("#createdateEnd").val();
-    	var url = '${path }/finance/download_finance?teaClass='+teaClass+'&stuNo='+stuNo+'&fState='+fState+'&createdateStart='+createdateStart+'&createdateEnd='+createdateEnd;
+    	var url = '${path }/accountant/download_finance?teaClass='+teaClass+'&stuNo='+stuNo+'&fState='+fState+'&createdateStart='+createdateStart+'&createdateEnd='+createdateEnd;
     	window.open(url);
     }
 
     //上传excel
-    function fromExcel() {
+    function fromExcel1() {
     	parent.$.modalDialog({
             title : '上传',
             width : 300,
@@ -289,7 +249,7 @@
             buttons : [ {
                 text : '导入',
                 handler : function() {
-                    parent.$.modalDialog.openner_dataGrid = financeDataGrid; //因为添加成功之后，需要刷新这个dataGrid，所以先预定义好
+                    parent.$.modalDialog.openner_dataGrid = accountantDataGrid; //因为添加成功之后，需要刷新这个dataGrid，所以先预定义好
                     var f = parent.$.modalDialog.handler.find('#uploadForm');
                     f.submit();
                 }
@@ -302,9 +262,9 @@
         });
     }
 
-    function batch_pay() {
+    function batch_pay1() {
     	var ids = [];
-    	var rows = $('#financeDataGrid').datagrid('getSelections');
+    	var rows = $('#accountantDataGrid').datagrid('getSelections');
     	for(var i=0; i<rows.length; i++){
     		ids.push(rows[i].fid);
     	}
@@ -317,7 +277,7 @@
                 buttons : [ {
                     text : '确定缴费',
                     handler : function() {
-                        parent.$.modalDialog.openner_dataGrid = financeDataGrid;//因为添加成功之后，需要刷新这个dataGrid，所以先预定义好
+                        parent.$.modalDialog.openner_dataGrid = accountantDataGrid;//因为添加成功之后，需要刷新这个dataGrid，所以先预定义好
                         var f = parent.$.modalDialog.handler.find('#financebatch');
                         f.submit();
                     }
@@ -333,7 +293,7 @@
 </script>
 <div class="easyui-layout" data-options="fit:true,border:false">
     <div data-options="region:'north',border:false" style="height: 30px; overflow: hidden;background-color: #fff">
-        <form id="searchFinanceForm">
+        <form id="searchAccountantsForm">
             <table>
                 <tr>
                     <th>合作人:</th>
@@ -354,28 +314,28 @@
                     	<!-- <input name="createdateStart" type="text" class="easyui-datetimebox" /> -->
                     	<input id="createdateStart" name="createdateStart" placeholder="点击选择时间" onclick="WdatePicker({readOnly:true,dateFmt:'yyyy-MM-dd HH:mm:ss'})" readonly="readonly" />至
                         <input id="createdateEnd" name="createdateEnd" placeholder="点击选择时间" onclick="WdatePicker({readOnly:true,dateFmt:'yyyy-MM-dd HH:mm:ss'})" readonly="readonly" />
-                        <a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'fi-magnifying-glass',plain:true" onclick="searchFinanceFun();">查询</a>
-                        <a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'fi-x-circle',plain:true" onclick="cleanFinanceFun();">清空</a>
+                        <a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'fi-magnifying-glass',plain:true" onclick="searchAccountantFun();">查询</a>
+                        <a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'fi-x-circle',plain:true" onclick="cleanAccountantFun();">清空</a>
                     </td>
                 </tr>
             </table>
         </form>
     </div>
     <div data-options="region:'center',border:true,title:'缴费人员列表'" >
-        <table id="financeDataGrid" data-options="fit:true,border:false"></table>
+        <table id="accountantDataGrid" data-options="fit:true,border:false"></table>
     </div>
 </div>
-<div id="financeToolbar" style="display: none;">
+<div id="accountantToolbar" style="display: none;">
     <shiro:hasPermission name="/finance/add">
-        <a onclick="addFinanceFun();" href="javascript:void(0);" class="easyui-linkbutton" data-options="plain:true,iconCls:'fi-plus icon-green'">添加</a>
+        <a onclick="addaccountantFun();" href="javascript:void(0);" class="easyui-linkbutton" data-options="plain:true,iconCls:'fi-plus icon-green'">添加</a>
     </shiro:hasPermission>
     <shiro:hasPermission name="/finance/upload_finance">
-        <a onclick="fromExcel();" href="javascript:void(0);" class="easyui-linkbutton" data-options="plain:true,iconCls:'fi-upload icon-green'" >上传缴费数据</a>
+        <a onclick="fromExcel1();" href="javascript:void(0);" class="easyui-linkbutton" data-options="plain:true,iconCls:'fi-upload icon-green'" >上传缴费数据</a>
     </shiro:hasPermission>
     <shiro:hasPermission name="/finance/download_finance">
-        <a onclick="toExcel();" href="javascript:void(0);" class="easyui-linkbutton" data-options="plain:true,iconCls:'fi-download icon-green'" >导出当前数据</a>
+        <a onclick="toExcel1();" href="javascript:void(0);" class="easyui-linkbutton" data-options="plain:true,iconCls:'fi-download icon-green'" >导出当前数据</a>
     </shiro:hasPermission>
     <shiro:hasPermission name="/finance/batchPay">
-        <a onclick="batch_pay();" href="javascript:void(0);" class="easyui-linkbutton" data-options="plain:true,iconCls:'fi-dollar-bill icon-green'" >批量缴费</a>
+        <a onclick="batch_pay1();" href="javascript:void(0);" class="easyui-linkbutton" data-options="plain:true,iconCls:'fi-dollar-bill icon-green'" >批量缴费</a>
     </shiro:hasPermission>
 </div>

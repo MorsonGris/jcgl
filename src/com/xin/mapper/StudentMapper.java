@@ -3,6 +3,7 @@ package com.xin.mapper;
 import java.util.List;
 import java.util.Map;
 import com.baomidou.mybatisplus.plugins.pagination.Pagination;
+import com.xin.bean.Finance;
 import com.xin.bean.Student;
 
 /**
@@ -17,4 +18,5 @@ public interface StudentMapper{
 	boolean updateById(Student student);
 	boolean insertByid(Student student);
 	List<Student> selectPage(Pagination page, Map<String, Object> params);
+	List<Student> selectByStudent(Pagination page, Map<String, Object> params);
 }

@@ -1,5 +1,9 @@
 package com.xin.controller;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.shiro.SecurityUtils;
@@ -8,6 +12,7 @@ import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,10 +20,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.xin.bean.Notice;
 import com.xin.commons.base.BaseController;
 import com.xin.commons.csrf.CsrfToken;
 import com.xin.commons.utils.CaptchaUtils;
+import com.xin.commons.utils.PageInfo;
 import com.xin.commons.utils.StringUtils;
+import com.xin.service.INoticeService;
 
 /**
  * @description：登录退出
@@ -27,6 +35,8 @@ import com.xin.commons.utils.StringUtils;
  */
 @Controller
 public class LoginController extends BaseController {
+	
+	@Autowired private INoticeService noticeService;
 	
     /**
      * 首页
@@ -47,7 +57,13 @@ public class LoginController extends BaseController {
     	return "proscenium/home";
     }
     @GetMapping("/")
-    public String home(String str){
+    public String home(Model model, String str){
+    	PageInfo pageInfo = new PageInfo(0, 5, "n_date", "desc");
+    	Map<String, Object> condition = new HashMap<String, Object>();
+        condition.put("nFlag", "1");
+        pageInfo.setCondition(condition);
+    	List<Notice> list = noticeService.selectDataGrid(pageInfo);
+    	model.addAttribute("noticelist", list);
     	return "proscenium/home";
     }
 
