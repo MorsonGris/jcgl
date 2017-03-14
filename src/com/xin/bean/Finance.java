@@ -38,6 +38,8 @@ public class Finance extends Model<Finance> {
 	private String fObligate;
 	private Date createdateStart;
 	private Date createdateEnd;
+	private Integer stypeone;
+	private Integer stypetwo;
 
 	private Student student;
 	
@@ -163,6 +165,22 @@ public class Finance extends Model<Finance> {
 
 	public void setAcademy(Academy academy) {
 		this.academy = academy;
+	}
+
+	public Integer getStypeone() {
+		return stypeone;
+	}
+
+	public void setStypeone(Integer stypeone) {
+		this.stypeone = stypeone;
+	}
+
+	public Integer getStypetwo() {
+		return stypetwo;
+	}
+
+	public void setStypetwo(Integer stypetwo) {
+		this.stypetwo = stypetwo;
 	}
 
 	@Override

@@ -18,7 +18,7 @@ import com.xin.service.INoticeService;
 
 /**
  * 
- * @author com.xin
+ * @author Mr.Lin
  * @date 2017-3-03
  */
 @Controller
@@ -99,7 +99,7 @@ public class NoticeController extends BaseController{
      * 编辑公告页
      * @param model
      * @param id
-     * @retur
+     * @return
      * */
     @GetMapping("/editPage")
     public String editPage(Model model, int id) {
@@ -126,11 +126,33 @@ public class NoticeController extends BaseController{
     
     /**
      * 删除公告
+     * @param id
      * */
     @PostMapping("/delete")
     @ResponseBody
     public Object delete(int id) {
     	noticeService.deleteNotice(id);
     	return renderSuccess("删除成功");
+    }
+    
+    /**
+     * 根据id查询公告
+     * @param model
+     * @param id
+     * @return
+     * */
+    @GetMapping("/selectById")
+    public String selectById(Model model, int id) {
+    	Notice n = noticeService.selectNoticeById(id);
+    	model.addAttribute("notice", n);
+    	return "admin/notice/notice_particular";
+    }
+    
+    /**
+     * 更多页面
+     * */
+    @GetMapping("/selectMore")
+    public String selectMore() {
+    	return "admin/notice/select_more";
     }
 }

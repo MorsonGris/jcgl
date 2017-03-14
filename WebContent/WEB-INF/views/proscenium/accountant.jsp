@@ -36,6 +36,7 @@
                     <label for="content">学习内容</label>
                     <textarea class="form-control" rows="3" id="content" name="sContent"></textarea>
                 </div>
+                <input type="hidden" id="id" name="userId">
                 <button type="submit" class="btn btn-primary btn-lg" >提交</button>
             </form>
         </div>
@@ -52,6 +53,11 @@
 <script src="${path }/static/proscenium/js/app.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
+	var url = (window.location.href.split("?")[1]).split("&")[0];
+	var id = url.split("=")[1];
+	if(id != null && id != ''){
+		$("#id").val(id);
+	}
 	$('#adultEnroll').bootstrapValidator({
 		message: 'This value is not valid',
 	    live: 'disabled',

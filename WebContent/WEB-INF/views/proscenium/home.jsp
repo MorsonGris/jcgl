@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c"   uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
 <c:set var="path" value="${pageContext.request.contextPath}" />
 <!DOCTYPE html>
@@ -125,42 +126,20 @@
         <div class="row" style="text-align: left;margin-top: 20px;margin-bottom: 20px;">
             <div class="col-xs-12 column">
                 <div style="border-bottom: 1px solid #e0e0e0;">
-                    <h3>最新动态<span style="margin-left: 35%"><a href="#">查看更多</a></span></h3>
+                    <h3>最新动态<span style="margin-left: 35%"><a href="${path}/notice/selectMore">查看更多</a></span></h3>
                 </div>
                 <table class="table">
                     <tbody>
-                    <tr>
-                        <td>
-                            信考网为江西应用技术职业学院新增1000名同学
-                        </td>
-                        <td>
-                            2017/2/20
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            江西应用技术职业学院和信考网确立合作关系
-                        </td>
-                        <td>
-                            2017/2/17
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            信考网即时更新，于2月15号重启
-                        </td>
-                        <td>
-                            2017/2/14
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            200个同学通过信考网进入自己喜欢的专业
-                        </td>
-                        <td>
-                            2017/2/10
-                        </td>
-                    </tr>
+	                    <c:forEach items="${noticelist}" var="notice" varStatus="status">
+	                    <tr>
+	                        <td>
+	                        	<a href="${path}/notice/selectById?id=${notice.NId}">${notice.NTitle }</a>
+	                        </td>
+                       		<td>
+                          		<fmt:formatDate value="${notice.NDate }" pattern="yyyy/MM/dd"/>
+                       		</td>
+                    	</tr>
+	                    </c:forEach>
                     </tbody>
                 </table>
             </div>

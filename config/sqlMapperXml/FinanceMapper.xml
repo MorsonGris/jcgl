@@ -18,6 +18,8 @@
 			<id property="sId" column="s_id" />
 			<result property="sName" column="s_name" />
 			<result property="sGradations" column="s_gradations" />
+			<result property="sContent" column="s_content" />
+			<result property="stype" column="s_type" />
 		</association>
 		<association property="user" javaType="com.xin.bean.User">
 			<id property="id" column="id" />
@@ -35,6 +37,8 @@
 		F.f_id,
 		S.s_name,
 		S.s_gradations,
+		S.s_content,
+		S.s_type,
 		U.`name`,
 		A.a_school,
 		A.a_major,
@@ -87,6 +91,9 @@
             <if test=" endTime != null ">
                 <![CDATA[ and f_date <= #{endTime} ]]>
             </if>
+            <if test=" stypeone != null and stypeone != 0 ">
+              	and (S.s_type = #{stypeone} or S.s_type = #{stypetwo})
+            </if>
         </where>
 	</select>
 	
@@ -110,6 +117,9 @@
             </if>
             <if test=" createdateEnd != null ">
                 <![CDATA[ and f_date <= #{createdateEnd} ]]>
+            </if>
+            <if test=" stypeone != null and stypeone != 0 ">
+              	and (S.s_type = #{stypeone} or S.s_type = #{stypetwo})
             </if>
         </where> ORDER BY f_date DESC
 	</select>

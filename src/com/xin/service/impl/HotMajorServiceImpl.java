@@ -1,8 +1,8 @@
 package com.xin.service.impl;
 
-import com.xin.bean.StuFile;
-import com.xin.mapper.StuFileMapper;
-import com.xin.service.IStuFileService;
+import com.xin.bean.HotMajor;
+import com.xin.mapper.HotMajorMapper;
+import com.xin.service.IHotMajorService;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +15,6 @@ import org.springframework.stereotype.Service;
  * @since 2017-02-28
  */
 @Service
-public class StuFileServiceImpl extends ServiceImpl<StuFileMapper, StuFile> implements IStuFileService {
+public class HotMajorServiceImpl implements IHotMajorService {
 	
 }

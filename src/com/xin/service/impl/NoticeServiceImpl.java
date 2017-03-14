@@ -28,7 +28,7 @@ public class NoticeServiceImpl implements INoticeService {
 	private NoticeMapper noticeMapper;
 	
 	@Override
-	public void selectDataGrid(PageInfo pageInfo) {
+	public List<Notice> selectDataGrid(PageInfo pageInfo) {
 		Page<Notice> page = new Page<Notice>(pageInfo.getNowpage(), pageInfo.getPagesize());
 		String orderField = com.baomidou.mybatisplus.toolkit.StringUtils.camelToUnderline(pageInfo.getSort());
         page.setOrderByField(orderField);
@@ -36,6 +36,7 @@ public class NoticeServiceImpl implements INoticeService {
 		List<Notice> list = noticeMapper.selectNoticePage(page, pageInfo.getCondition());
 		pageInfo.setRows(list);
         pageInfo.setTotal(page.getTotal());
+        return list;
 	}
 
 	@Override

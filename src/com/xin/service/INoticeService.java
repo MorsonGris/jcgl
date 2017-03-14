@@ -20,7 +20,7 @@ import com.baomidou.mybatisplus.service.IService;
  */
 public interface INoticeService{
 	
-	void selectDataGrid(PageInfo pageInfo);
+	List<Notice> selectDataGrid(PageInfo pageInfo);
 	
 	int noticeInsert(Notice notice);
 	

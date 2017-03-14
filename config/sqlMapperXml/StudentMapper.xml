@@ -149,5 +149,37 @@
     		</if>
     	</where>
     </select>
-
+	<select id="selectByStudent" resultMap="BaseResultMap">
+		SELECT 
+    		s_id,
+	    	s_studentno,
+	    	s_name,
+	    	user_id,
+	    	id_number,
+	    	s_phone,
+	    	academy_id,
+	    	s_gradations,
+	    	s_systme,
+	    	s_content,
+	    	s_date,
+	    	a.a_id,
+	    	a.a_school,
+	    	u.id,
+	    	u.`name`
+    	FROM student s
+    	LEFT JOIN academy a ON s.academy_id = a.a_id
+    	LEFT JOIN user u ON s.user_id = u.id
+    	<where>
+    		<if test="name != null and name != '' ">
+    			and s_name = #{name}
+    		</if>
+    		<if test="studentNo != null and studentNo != '' ">
+    			and s_studentno = #{studentNo}
+    		</if>
+    		<if test="stypeone != null and stypeone != '' ">
+    			and (s_type = #{stypeone} or s_type = #{stypetwo})
+    		</if>
+    	</where>
+	</select>
+	
 </mapper>

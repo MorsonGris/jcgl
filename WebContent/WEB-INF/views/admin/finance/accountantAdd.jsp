@@ -4,71 +4,9 @@
 	String path = request.getContextPath();
 %>
 <script type="text/javascript">
-	var selectStuDataGrid;
     $(function() {
-        
-    	selectStuDataGrid = $('#selectStuDataGrid').datagrid({
-            url : '<%=path %>/student/selectDataGrid?stype=1',
-            fit : true,
-            striped : true,
-            rownumbers : true,
-            pagination : true,
-            singleSelect : true,
-            sortName : 'sdate',
-            sortOrder : 'desc',
-            pageSize : 20,
-            pageList : [ 10, 20, 30, 40, 50, 100, 200, 300, 400, 500 ],
-            columns : [ [{
-                width : '80',
-                title : '学生编号',
-                field : 'sid',
-                checkbox : true,
-                sortable : true
-            },{
-                width : '80',
-                title : '姓名',
-                field : 'sname',
-                sortable : true
-            },{
-                width : '80',
-                title : '学号',
-                field : 'studentNo',
-                sortable : true
-            },{
-            	width : '90',
-                title : '联系电话',
-                field : 'sphone',
-                sortable : true
-            },{
-                width : '80',
-                title : '院校',
-                field : 'listAcademy',
-                formatter : function(value, row, index) {
-                	var roles = [];
-                    for(var i = 0; i< value.length; i++) {
-                        roles.push(value[i].aschool);
-                    }
-                    return(roles.join('\n'));
-                }
-            },{
-            	width : '80',
-                title : '报考层次',
-                field : 'sgradations',
-                sortable : true
-            },{
-            	width : '80',
-                title : '学制',
-                field : 'ssystme',
-                sortable : true
-            },{
-            	width : '130',
-                title : '日期',
-                field : 'sdate',
-                sortable : true
-            }] ],
-         });
 		
-        $('#financeAddForm').form({
+        $('#accountantAddForm').form({
             url : '${path }/finance/add',
             onSubmit : function() {
                 progressLoad();
@@ -82,7 +20,7 @@
                 progressClose();
                 result = $.parseJSON(result);
                 if (result.success) {
-                    parent.$.modalDialog.openner_dataGrid.datagrid('reload');//之所以能在这里调用到parent.$.modalDialog.openner_dataGrid这个对象，是因为user.jsp页面预定义好了
+                    parent.$.modalDialog.openner_dataGrid.datagrid('reload');//之所以能在这里调用到parent.$.modalDialog.openner_dataGrid这个对象，是因为Accountant.jsp页面预定义好了
                     parent.$.modalDialog.handler.dialog('close');
                 } else {
                     parent.$.messager.alert('提示', result.msg, 'warning');
@@ -91,20 +29,6 @@
         });
 
        });
-
-    
-    function queryStudent() {
-  	  $('#queryStudent').window('open');
-  	  $('#searchStuForm input').val('');
-  	  $("#selectStuDataGrid").datagrid('load', {});
-    }
-
-    $("#addbtn1").click(function() {
-		var row = $("#selectStuDataGrid").datagrid("getSelected"); // 获取datagrid中被选中的行
-		$("#stuNo1").val(row.studentNo);
-		$("#queryStudent").window("close");
-	});
-    
 	function getAccumulative() {
 		var total = $("#practicalMoney").val();
 		if(total!=null) {
@@ -112,23 +36,33 @@
 		}
 	}
 
-	function searchStuFun() {
-		$("#selectStuDataGrid").datagrid('load', $.serializeObject($('#searchStuForm')));
+	function queryStudent1() {
+		$("#queryStudent1").window("open");
+		$("#list1").datagrid("reload");
+		$("#addbtn").click(function() {
+			var row = $("#list1").datagrid("getSelected"); // 获取datagrid中被选中的行
+			$("#stuNo2").val(row.studentNo);
+			$("#queryStudent1").window("close");
+		});
+	}
+
+	function searchAccountantFun() {
+		$("#list1").datagrid('load', $.serializeObject($('#searchStu1Form')));
     }
-    function cleanStuFun() {
-        $('#searchStuForm input').val('');
-        $("#selectStuDataGrid").datagrid('load', {});
+    function cleanAccountantFun() {
+        $('#searchStu1Form input').val('');
+        $("#list1").datagrid('load', {});
     }
 </script>
 <div class="easyui-layout" data-options="fit:true,border:false">
     <div data-options="region:'center',border:false" title="" style="overflow: hidden;padding: 3px;">
-        <form id="financeAddForm" method="post">
+        <form id="accountantAddForm" method="post">
             <table class="grid">
                 <tr>
                     <td>学生编号</td>
                     <td>
-                    	<input id="stuNo1" name="stuNo" type="text" placeholder="请选择学生" missingMessage="必须选择学生" class="easyui-validatebox" data-options="required:true,novalidate:true" readonly="readonly" value="" />
-                    	<a href="javascript:;" id="addStudent" class="easyui-linkbutton" data-options="toggle:true,group:'g1'" onclick="queryStudent();">点击选择</a>
+                    	<input id="stuNo2" name="stuNo" type="text" placeholder="请选择学生" missingMessage="必须选择学生" class="easyui-validatebox" data-options="required:true,novalidate:true" readonly="readonly"  value="">
+                    	<a href="javascript:;" id="addStudent" class="easyui-linkbutton" data-options="toggle:true,group:'g1'" onclick="queryStudent1();">点击选择</a>
                     </td>
                     <td>班主任</td>
                     <td>
@@ -178,10 +112,10 @@
         </form>
     </div>
 </div>
-<div id="queryStudent" class="easyui-window" title="选择学生" data-options="iconCls:'icon-search', closable:true, closed:true"  style="width:680px;height:400px;padding:0px;">
+<div id="queryStudent1" class="easyui-window" title="选择学生" data-options="iconCls:'icon-search', closable:true, closed:true"  style="width:600px;height:400px;padding:0px;">
 		<!-- <div class="easyui-layout" data-options="fit:true,border:false"> -->
 		    <div data-options="region:'north',border:false" style="height: 30px; overflow: hidden;background-color: #fff">
-		        <form id="searchStuForm">
+		        <form id="searchStu1Form">
 		            <table>
 		                <tr>
 		                   <th>学生编号:</th>
@@ -189,19 +123,36 @@
 		                   <th>学生姓名:</th>
 		                   <td>
 			                   	<input name="sName" placeholder="请输入学生姓名"/>
-			                   	<input name="stype" type="hidden" value="1" />
+			                   	<input name="stype" type="hidden" value="3" />
 		                   </td>
 		                   <td>
-			                   	<a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'fi-magnifying-glass',plain:true" onclick="searchStuFun();">查询</a>
-			                    <a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'fi-x-circle',plain:true" onclick="cleanStuFun();">清空</a>
+			                   	<a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'fi-magnifying-glass',plain:true" onclick="searchAccountantFun();">查询</a>
+			                    <a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'fi-x-circle',plain:true" onclick="cleanAccountantFun();">清空</a>
 		                   </td>
 		                </tr>
 		            </table>
 		        </form>
 		    </div>
 		<!-- </div> -->
-		<div style="height:300px;">
-			<table id="selectStuDataGrid" data-options="fit:true,border:false"></table>
-		</div>
-		<center><a href="javascript:;" id="addbtn1" style="margin-top:10px;" class="easyui-linkbutton" data-options="toggle:true,group:'g1',iconCls:'icon-ok'" >确定</a></center>
+		<table id="list1" class="easyui-datagrid" toolbar="#tb" data-options="
+			url:'<%=path %>/student/selectDataGrid?stype=3', 
+			method:'post', 
+			rownumbers:true,
+			singleSelect:true,
+			autoRowHeight: true,
+			pagination:true,
+			border:false,
+			pageSize:20" style="height:300px;">
+			<thead>
+				<tr>
+					<th field="sid" checkbox="true" width="100">学生编号</th>
+					<th field="sname" width="100">姓名</th>
+					<th field="studentNo"  width="100">学号</th>
+					<th field="sphone" width="100">联系电话</th>
+					<th field="sdate"  width="130">报考日期</th>
+					<th field="scontent"  width="100">报考内容</th>
+				</tr>
+			</thead>
+		</table>
+		<center><a href="javascript:;" id="addbtn" style="margin-top:10px;" class="easyui-linkbutton" data-options="toggle:true,group:'g1',iconCls:'icon-ok'" >确定</a></center>
 </div>
