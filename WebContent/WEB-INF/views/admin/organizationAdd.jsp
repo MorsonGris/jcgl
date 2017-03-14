@@ -13,7 +13,7 @@
             url : '${path }/organization/add',
             onSubmit : function() {
                 progressLoad();
-                var isValid = $(this).form('validate');
+                var isValid = $(this).form('enableValidation').form('validate');
                 if (!isValid) {
                     progressClose();
                 }
@@ -36,9 +36,9 @@
         <table class="grid">
             <tr>
                 <td>编号</td>
-                <td><input name="code" type="text" placeholder="请输入部门编号" class="easyui-validatebox" data-options="required:true" ></td>
+                <td><input name="code" type="text" placeholder="请输入部门编号" class="easyui-validatebox" data-options="required:true,novalidate:true" ></td>
                 <td>部门名称</td>
-                <td><input name="name" type="text" placeholder="请输入部门名称" class="easyui-validatebox" data-options="required:true" ></td>
+                <td><input name="name" type="text" placeholder="请输入部门名称" class="easyui-validatebox" data-options="required:true,novalidate:true"></td>
                 
             </tr>
             <tr>
