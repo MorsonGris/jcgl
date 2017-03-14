@@ -3,13 +3,13 @@
 <mapper namespace="com.xin.mapper.StuFileMapper">
 
 	<!-- 通用查询映射结果 -->
-	<resultMap id="BaseResultMap" type="com.xin.bean.StuFile">
-		<id column="sf_id" property="sfId" />
+	<resultMap id="BaseResultMap" type="com.xin.bean.HotMajor">
+		<!-- <id column="sf_id" property="sfId" />
 		<result column="stu_id" property="stuId" />
 		<result column="sf_photo" property="sfPhoto" />
 		<result column="sf_voucher" property="sfVoucher" />
 		<result column="sf_paper" property="sfPaper" />
-		<result column="sf_date" property="sfDate" />
+		<result column="sf_date" property="sfDate" /> -->
 	</resultMap>
 
 </mapper>

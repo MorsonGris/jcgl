@@ -57,8 +57,7 @@ public class LoginController extends BaseController {
     public String home(){
     	return "proscenium/home";
     }
-    @RequestMapping("/")
-    public String home(String str){
+
     @GetMapping("/")
     public String home(Model model, String str){
     	PageInfo pageInfo = new PageInfo(0, 5, "n_date", "desc");
@@ -67,6 +66,11 @@ public class LoginController extends BaseController {
         pageInfo.setCondition(condition);
     	List<Notice> list = noticeService.selectDataGrid(pageInfo);
     	model.addAttribute("noticelist", list);
+    	return "proscenium/home";
+    }
+    
+    @RequestMapping("/")
+    public String home(String str){
     	return "proscenium/home";
     }
 
