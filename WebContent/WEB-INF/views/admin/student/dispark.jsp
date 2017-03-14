@@ -87,11 +87,11 @@
                 formatter : function(value, row, index) {
                     var str = '';
                         <shiro:hasPermission name="/Dispark/edit">
-                            str += $.formatString('<a href="javascript:void(0)" class="user-easyui-linkbutton-edit" data-options="plain:true,iconCls:\'fi-pencil icon-blue\'" onclick="editUserFun(\'{0}\');" >编辑</a>', row.sid);
+                            str += $.formatString('<a href="javascript:void(0)" class="user-easyui-linkbutton-edit" data-options="plain:true,iconCls:\'fi-pencil icon-blue\'" onclick="editDisparkFun(\'{0}\');" >编辑</a>', row.sid);
                         </shiro:hasPermission>
                         <shiro:hasPermission name="/Dispark/delete">
                             str += '&nbsp;&nbsp;|&nbsp;&nbsp;';
-                            str += $.formatString('<a href="javascript:void(0)" class="user-easyui-linkbutton-del" data-options="plain:true,iconCls:\'fi-x icon-red\'" onclick="deleteUserFun(\'{0}\');" >删除</a>', row.sid);
+                            str += $.formatString('<a href="javascript:void(0)" class="user-easyui-linkbutton-del" data-options="plain:true,iconCls:\'fi-x icon-red\'" onclick="deleteDisparkFun(\'{0}\');" >删除</a>', row.sid);
                         </shiro:hasPermission>
                     return str;
                 }
@@ -100,11 +100,11 @@
                 $('.user-easyui-linkbutton-edit').linkbutton({text:'编辑'});
                 $('.user-easyui-linkbutton-del').linkbutton({text:'删除'});
             },
-            toolbar : '#userToolbar'
+            toolbar : '#disparkToolbar'
         });
     });
     
-    function addUserFun() {
+    function addDisparkFun() {
         parent.$.modalDialog({
             title : '添加',
             width : 500,
@@ -114,14 +114,14 @@
                 text : '添加',
                 handler : function() {
                     parent.$.modalDialog.openner_dataGrid = disparkDataGrid;//因为添加成功之后，需要刷新这个dataGrid，所以先预定义好
-                    var f = parent.$.modalDialog.handler.find('#studentAddForm');
+                    var f = parent.$.modalDialog.handler.find('#disparkAddForm');
                     f.submit();
                 }
             } ]
         });
     }
     
-    function deleteUserFun(id) {
+    function deleteDisparkFun(id) {
         if (id == undefined) {//点击右键菜单才会触发这个
             var rows = disparkDataGrid.datagrid('getSelections');
             id = rows[0].id;
@@ -144,7 +144,7 @@
         });
     }
     
-    function editUserFun(id) {
+    function editDisparkFun(id) {
         if (id == undefined) {
             var rows = disparkDataGrid.datagrid('getSelections');
             id = rows[0].id;
@@ -160,18 +160,18 @@
                 text : '确定',
                 handler : function() {
                     parent.$.modalDialog.openner_dataGrid = disparkDataGrid;//因为添加成功之后，需要刷新这个dataGrid，所以先预定义好
-                    var f = parent.$.modalDialog.handler.find('#studentEditForm');
+                    var f = parent.$.modalDialog.handler.find('#disparkEditForm');
                     f.submit();
                 }
             } ]
         });
     }
     
-    function searchUserFun() {
-    	disparkDataGrid.datagrid('load', $.serializeObject($('#searchUserForm')));
+    function searchDisparkFun() {
+    	disparkDataGrid.datagrid('load', $.serializeObject($('#searchDisparkForm')));
     }
-    function cleanUserFun() {
-        $('#searchUserForm input').val('');
+    function cleanDisparkFun() {
+        $('#searchDisparkForm input').val('');
         disparkDataGrid.datagrid('load', {});
     }
     
@@ -209,7 +209,7 @@
 </script>
 <div class="easyui-layout" data-options="fit:true,border:false">
     <div data-options="region:'north',border:false" style="height: 30px; overflow: hidden;background-color: #fff">
-        <form id="searchUserForm">
+        <form id="searchDisparkForm">
             <table>
                 <tr>
                    <th>学生编号:</th>
@@ -217,8 +217,8 @@
                    <th>学生姓名:</th>
                    <td><input name="sName" placeholder="请输入学生姓名"/></td>
                    <td>
-	                   	<a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'fi-magnifying-glass',plain:true" onclick="searchUserFun();">查询</a>
-	                    <a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'fi-x-circle',plain:true" onclick="cleanUserFun();">清空</a>
+	                   	<a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'fi-magnifying-glass',plain:true" onclick="searchDisparkFun();">查询</a>
+	                    <a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'fi-x-circle',plain:true" onclick="cleanDisparkFun();">清空</a>
                    </td>
                 </tr>
             </table>
@@ -228,8 +228,8 @@
         <table id="disparkDataGrid" data-options="fit:true,border:false"></table>
     </div>
 </div>
-<div id="userToolbar" style="display: none;">
+<div id="disparkToolbar" style="display: none;">
     <shiro:hasPermission name="/Dispark/add">
-     	<a onclick="addUserFun();" href="javascript:void(0);" class="easyui-linkbutton" data-options="plain:true,iconCls:'fi-plus icon-green'">添加</a>
+     	<a onclick="addDisparkFun();" href="javascript:void(0);" class="easyui-linkbutton" data-options="plain:true,iconCls:'fi-plus icon-green'">添加</a>
     </shiro:hasPermission>
 </div>

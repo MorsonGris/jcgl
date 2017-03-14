@@ -2,7 +2,7 @@
 <%@ include file="/commons/global.jsp" %>
 <script type="text/javascript">
     $(function() {
-        $('#studentEditForm').form({
+        $('#bookkeeperEditForm').form({
             url : '${path }/Bookkeeper/edit',
             onSubmit : function() {
                 progressLoad();
@@ -16,7 +16,7 @@
                 progressClose();
                 result = $.parseJSON(result);
                 if (result.success) {
-                    parent.$.modalDialog.openner_dataGrid.datagrid('reload');//之所以能在这里调用到parent.$.modalDialog.openner_dataGrid这个对象，是因为user.jsp页面预定义好了
+                    parent.$.modalDialog.openner_dataGrid.datagrid('reload');
                     parent.$.modalDialog.handler.dialog('close');
                 } else {
                     parent.$.messager.alert('提示', result.msg, 'warning');
@@ -26,9 +26,9 @@
     });
     
     
-  var userDataGrid;
+  var bookkeditDataGrid;
   function selectUser() {
-	  userDataGrid = $('#userDataGrid').datagrid({
+	  bookkeditDataGrid = $('#bookkeditDataGrid').datagrid({
           url : '${path }/user/dataGrid',
           fit : true,
           striped : true,
@@ -83,7 +83,7 @@
   } 
   
   $("#addbtn").click(function() {
-	  var row = $('#userDataGrid').datagrid('getSelected');
+	  var row = $('#bookkeditDataGrid').datagrid('getSelected');
 	  $("#userId").val(row.id);
 	  $("#name").val(row.name);
 	  $('#win').window('close');
@@ -149,7 +149,7 @@
 </script>
 <div class="easyui-layout" data-options="fit:true,border:false">
     <div data-options="region:'center',border:false" title="" style="overflow: hidden;padding: 3px;">
-        <form id="studentEditForm" method="post">
+        <form id="bookkeeperEditForm" method="post">
             <table class="grid">
                 <tr>
                     <td>学生姓名</td>
@@ -179,7 +179,7 @@
 </div>
 <div id="win" class="easyui-window" title="用户表" closed="true"  style="width:440px;height:300px;">
   	<div style="width:430px;height:220px;">
-  		<table id="userDataGrid" data-options="fit:true,border:false"></table>
+  		<table id="bookkeditDataGrid" data-options="fit:true,border:false"></table>
   	</div>
 	<center><a href="javascript:;" id="addbtn" style="margin-top:10px;" class="easyui-linkbutton" data-options="toggle:true,group:'g1',iconCls:'icon-ok'" >确定</a></center>
 </div>

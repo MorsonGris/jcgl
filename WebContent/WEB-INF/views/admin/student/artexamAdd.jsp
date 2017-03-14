@@ -2,7 +2,7 @@
 <%@ include file="/commons/global.jsp" %>
 <script type="text/javascript">
     $(function() {
-        $('#studentAddForm').form({
+        $('#ArtexamAddForm').form({
             url : '${path }/Artexam/add',
             onSubmit : function() {
                 progressLoad();
@@ -16,7 +16,7 @@
                 progressClose();
                 result = $.parseJSON(result);
                 if (result.success) {
-                    parent.$.modalDialog.openner_dataGrid.datagrid('reload');//之所以能在这里调用到parent.$.modalDialog.openner_dataGrid这个对象，是因为user.jsp页面预定义好了
+                    parent.$.modalDialog.openner_dataGrid.datagrid('reload');
                     parent.$.modalDialog.handler.dialog('close');
                 } else {
                     parent.$.messager.alert('提示', result.msg, 'warning');
@@ -26,9 +26,9 @@
     });
     
     
-  var userDataGrid;
-  function selectUser() {
-	  userDataGrid = $('#userDataGrid').datagrid({
+  var artexamaddDataGrid;
+  function selectartexamUser() {
+	  artexamaddDataGrid = $('#artexamaddDataGrid').datagrid({
           url : '${path }/user/dataGrid',
           fit : true,
           striped : true,
@@ -83,7 +83,7 @@
   } 
   
   $("#addbtn").click(function() {
-	  var row = $('#userDataGrid').datagrid('getSelected');
+	  var row = $('#artexamaddDataGrid').datagrid('getSelected');
 	  $("#userId").val(row.id);
 	  $("#name").val(row.name);
 	  $('#win').window('close');
@@ -109,7 +109,7 @@
 </script>
 <div class="easyui-layout" data-options="fit:true,border:false">
     <div data-options="region:'center',border:false" title="" style="overflow: hidden;padding: 3px;">
-        <form id="studentAddForm" method="post">
+        <form id="ArtexamAddForm" method="post">
             <table class="grid">
                 <tr>
                     <td>学生姓名</td>
@@ -118,7 +118,7 @@
                     <td>
 	                    <input id="userId" name="userId" hidden="true">
 	                    <input id="name" name="name" type="text" placeholder="请选择介绍老师" style="width:100px;" class="easyui-validatebox" data-options="required:true,novalidate:true" readonly="readonly" value="">
-                    	<input type="button" onclick="selectUser();" value="点击选择">
+                    	<input type="button" onclick="selectartexamUser();" value="点击选择">
                     </td>
                 </tr>
                 <tr>
@@ -138,7 +138,7 @@
 </div>
 <div id="win" class="easyui-window" title="用户表" closed="true"  style="width:440px;height:300px;">
   	<div style="width:430px;height:220px;">
-  		<table id="userDataGrid" data-options="fit:true,border:false"></table>
+  		<table id="artexamaddDataGrid" data-options="fit:true,border:false"></table>
   	</div>
 	<center><a href="javascript:;" id="addbtn" style="margin-top:10px;" class="easyui-linkbutton" data-options="toggle:true,group:'g1',iconCls:'icon-ok'" >确定</a></center>
 </div>
