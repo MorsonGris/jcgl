@@ -97,6 +97,9 @@ $(document).ready(function() {
 						$("#school").val("");
 						$("#aMajor").val("");
 						$("#sGradations").val("");
+						$(".swal2-styled").click(function(){
+							window.location="${path }/index";
+						});
 					}else if(data.success == false){ 
 						 swal(
 						      '',

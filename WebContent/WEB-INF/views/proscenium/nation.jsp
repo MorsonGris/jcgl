@@ -88,7 +88,7 @@ $(document).ready(function() {
 					      '添加成功!',
 					      '',
 					      'success'
-						);
+						)
 						$("#adultEnroll").bootstrapValidator('resetForm');
 						$("#name").val("");
 						$("#id-card").val("");
@@ -96,12 +96,11 @@ $(document).ready(function() {
 						$("#school").val("");
 						$("#aMajor").val("");
 						$("#sGradations").val("");
+						$(".swal2-styled").click(function(){
+							window.location="${path }/index";
+						});
 					}else if(data.success == false){ 
-						 swal(
-						      '',
-						      '该身份证或电话已使用',
-						      'error'
-						  );
+						
 					}else if(data.result=="exist"){
 						
 					}

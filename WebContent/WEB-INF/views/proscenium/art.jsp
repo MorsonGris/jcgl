@@ -73,6 +73,9 @@ $(document).ready(function() {
 						$("#id-card").val("");
 						$("#phone").val("");
 						$("#content").val("");
+						$(".swal2-styled").click(function(){
+							window.location="${path }/index";
+						});
 					}else if(data.success == false){ 
 						
 					}else if(data.result=="exist"){

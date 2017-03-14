@@ -20,14 +20,14 @@
         <div class="row clearfix" style="text-align: center;margin-top: 20px; color: #d58512;">
             <div class="col-xs-4 column">
                 <a href="adult">
-                    <img alt="80x80" src="${path }/static/proscenium/icon/clock.png" class="img-circle apply-ico" />
+                    <img alt="80x80" src="${path }/static/proscenium/icon/rocket.png" class="img-circle apply-ico" />
                     <br>
                     <span class="home_operation">成人教育<br>报名</span>
                 </a>
             </div>
             <div class="col-xs-4 column">
                 <a href="accountant">
-                    <img alt="80x80" src="${path }/static/proscenium/icon/compose.png" class="img-circle apply-ico" />
+                    <img alt="80x80" src="${path }/static/proscenium/icon/rulertriangle.png" class="img-circle apply-ico" />
                     <br>
                     <span class="home_operation">会计培训<br>报名</span>
                 </a>
@@ -43,14 +43,14 @@
         <div class="row clearfix" style="text-align: center;margin-top: 20px;">
             <div class="col-xs-4 column">
                 <a href="nation">
-                    <img alt="80x80" src="${path }/static/proscenium/icon/flame.png" class="img-circle apply-ico" />
+                    <img alt="80x80" src="${path }/static/proscenium/icon/cloud.png" class="img-circle apply-ico" />
                     <br>
                     <span>国家开放<br>报名</span>
                 </a>
             </div>
             <div class="col-xs-4 column">
                 <a href="art">
-                    <img alt="80x80" src="${path }/static/proscenium/icon/phone.png" class="img-circle apply-ico" />
+                    <img alt="80x80" src="${path }/static/proscenium/icon/trophy.png" class="img-circle apply-ico" />
                     <br>
                     <span class="home_operation">艺考培训<br>报名</span>
                 </a>
