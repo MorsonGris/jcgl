@@ -12,7 +12,7 @@
 			</div>
 			<div class="col-xs-6 column">
 				<p>
-					<img alt="140x140" src="<%=path %>/static/proscenium/images/ewm2.png" style="width: 90%;margin-bottom: 20px;" />
+					<img alt="140x140" src="<%=path %>/static/proscenium/images/ewm2.jpg" style="width: 90%;margin-bottom: 20px;" />
 				</p>
 		    	<h4>友情链接</h4>
 		    	<h4>
