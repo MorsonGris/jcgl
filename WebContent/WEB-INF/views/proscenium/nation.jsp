@@ -56,6 +56,7 @@
                  <div class="form-group" hidden="true">
                  	<input type="text" class="form-control" id="sSystme"  name="sSystme" />
                 </div>
+                <input type="hidden" id="id" name="userId">
                 <button type="submit" class="btn btn-primary btn-lg" >提交</button>
             </form>
             </div>
@@ -188,6 +189,11 @@ $(document).ready(function() {
 })
 
 $(function(){
+	var url = (window.location.href.split("?")[1]).split("&")[0];
+	var id = url.split("=")[1];
+	if(id != null && id != ''){
+		$("#id").val(id);
+	}
 	var school = $("#school");
 	$.get("${path }/academy/selectall",function(data){
 		  var json = JSON.parse(data); 

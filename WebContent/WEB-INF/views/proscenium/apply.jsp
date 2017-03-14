@@ -19,7 +19,7 @@
     <div class="container">
         <div class="row clearfix" style="text-align: center;margin-top: 20px; color: #d58512;">
             <div class="col-xs-4 column">
-                <a href="adult?id=${user.id }">
+                <a href="adult?id=${user.id }&a=1231311321">
                     <img alt="80x80" src="${path }/static/proscenium/icon/rocket.png" class="img-circle apply-ico" />
                     <br>
                     <span class="home_operation">成人教育<br>报名</span>
