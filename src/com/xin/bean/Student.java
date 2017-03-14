@@ -34,7 +34,7 @@ public class Student{
 	@TableField("s_date")
 	private Date sDate;
 	@TableField("s_type")
-	private int stype;
+	private Integer stype;
 	
 	private List<Academy> listAcademy;
 	
@@ -144,11 +144,11 @@ public class Student{
 		this.listAcademy = listAcademy;
 	}
 
-	public int getStype() {
+	public Integer getStype() {
 		return stype;
 	}
 
-	public void setStype(int stype) {
+	public void setStype(Integer stype) {
 		this.stype = stype;
 	}
 }

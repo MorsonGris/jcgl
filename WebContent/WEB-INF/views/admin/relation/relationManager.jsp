@@ -41,24 +41,24 @@
                 formatter : function(value, row, index) {
                     var str = '';
                         <shiro:hasPermission name="/relation/edit">
-                            str += $.formatString('<a href="javascript:void(0)" class="user-easyui-linkbutton-edit" data-options="plain:true,iconCls:\'fi-pencil icon-blue\'" onclick="editUserFun(\'{0}\');" >编辑</a>', row.rid);
+                            str += $.formatString('<a href="javascript:void(0)" class="relation-easyui-linkbutton-edit" data-options="plain:true,iconCls:\'fi-pencil icon-blue\'" onclick="editrelationFun(\'{0}\');" >编辑</a>', row.rid);
                         </shiro:hasPermission>
                         <shiro:hasPermission name="/relation/delete">
                             str += '&nbsp;&nbsp;|&nbsp;&nbsp;';
-                            str += $.formatString('<a href="javascript:void(0)" class="user-easyui-linkbutton-del" data-options="plain:true,iconCls:\'fi-x icon-red\'" onclick="deleteUserFun(\'{0}\');" >删除</a>', row.rid);
+                            str += $.formatString('<a href="javascript:void(0)" class="relation-easyui-linkbutton-del" data-options="plain:true,iconCls:\'fi-x icon-red\'" onclick="deleterelationFun(\'{0}\');" >删除</a>', row.rid);
                         </shiro:hasPermission>
                     return str;
                 }
             }] ],
             onLoadSuccess:function(data){
-                $('.user-easyui-linkbutton-edit').linkbutton({text:'编辑'});
-                $('.user-easyui-linkbutton-del').linkbutton({text:'删除'});
+                $('.relation-easyui-linkbutton-edit').linkbutton({text:'编辑'});
+                $('.relation-easyui-linkbutton-del').linkbutton({text:'删除'});
             },
             toolbar : '#relationToolbar'
         });
     });
     
-    function addUserFun() {
+    function addRelationFun() {
         parent.$.modalDialog({
             title : '添加',
             width : 500,
@@ -75,7 +75,7 @@
         });
     }
     
-    function deleteUserFun(id) {
+    function deleterelationFun(id) {
         if (id == undefined) {//点击右键菜单才会触发这个
             var rows = relationDataGrid.datagrid('getSelections');
             id = rows[0].id;
@@ -84,8 +84,6 @@
         }
         parent.$.messager.confirm('询问', '您是否要删除当前用户？', function(b) {
             if (b) {
-                var currentUserId = '${sessionInfo.id}';/*当前登录用户的ID*/
-                if (currentUserId != id) {
                     progressLoad();
                     $.post('${path }/relation/delete', {
                         id : id
@@ -102,11 +100,10 @@
                         msg : '不可以删除自己！'
                     });
                 }
-            }
         });
     }
     
-    function editUserFun(id) {
+    function editrelationFun(id) {
         if (id == undefined) {
             var rows = relationDataGrid.datagrid('getSelections');
             id = rows[0].id;
@@ -137,6 +134,6 @@
 </div>
 <div id="relationToolbar" style="display: none;">
     <shiro:hasPermission name="/relation/add">
-        <a onclick="addUserFun();" href="javascript:void(0);" class="easyui-linkbutton" data-options="plain:true,iconCls:'fi-plus icon-green'">添加</a>
+        <a onclick="addRelationFun();" href="javascript:void(0);" class="easyui-linkbutton" data-options="plain:true,iconCls:'fi-plus icon-green'">添加</a>
     </shiro:hasPermission>
 </div>

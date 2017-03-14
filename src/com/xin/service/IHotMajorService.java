@@ -1,6 +1,6 @@
 package com.xin.service;
 
-import com.xin.bean.StuFile;
+import com.xin.bean.HotMajor;
 import com.baomidou.mybatisplus.service.IService;
 
 /**
@@ -11,6 +11,6 @@ import com.baomidou.mybatisplus.service.IService;
  * @author com.xin
  * @since 2017-02-28
  */
-public interface IStuFileService extends IService<StuFile> {
+public interface IHotMajorService {
 	
 }
