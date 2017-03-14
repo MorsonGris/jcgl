@@ -143,6 +143,7 @@ public class StudentController extends BaseController{
     @RequestMapping("/add")
     @ResponseBody
     public Object add(Student student){
+    	System.out.println("User"+student.getUserId());
 		Student stu = studentService.selectByNo();
     	String No = StudentNo.getNo(stu);
     	student.setStudentNo(No);
