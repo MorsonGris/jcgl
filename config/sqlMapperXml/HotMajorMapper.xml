@@ -1,15 +1,64 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.xin.mapper.StuFileMapper">
+<mapper namespace="com.xin.mapper.HotMajorMapper">
 
 	<!-- 通用查询映射结果 -->
 	<resultMap id="BaseResultMap" type="com.xin.bean.HotMajor">
-		<!-- <id column="sf_id" property="sfId" />
-		<result column="stu_id" property="stuId" />
-		<result column="sf_photo" property="sfPhoto" />
-		<result column="sf_voucher" property="sfVoucher" />
-		<result column="sf_paper" property="sfPaper" />
-		<result column="sf_date" property="sfDate" /> -->
+		<id column="hm_id" property="hmId" />
+		<result column="hm_title" property="hmTitle" />
+		<result column="hm_picture" property="hmPicture" />
+		<result column="hm_content" property="hmContent" />
 	</resultMap>
+	
+	<insert id="insertByid">
+		INSERT INTO hot_major(hm_title,hm_picture,hm_content)
+		VALUES(#{hmTitle},#{hmPicture},#{hmContent})
+	</insert>
+	
+	<update id="updateByid">
+		UPDATE hot_major SET 
+			hm_title = #{hmTitle},
+			hm_picture = #{hmPicture},
+			hm_content = #{hmContent}
+		WHERE
+			hm_id = #{hmId}
+	</update>
+		
+	<delete id="deleteByid">
+		DELETE FROM hot_major WHERE hm_id = #{hmId}
+	</delete>
+	
+	<select id="selectAll" resultMap="BaseResultMap">
+		SELECT 
+			hm_id,
+			hm_title,
+			hm_picture,
+			hm_content 
+		FROM hot_major LIMIT 0,4
+	</select>
+	
+	<select id="selectByid" resultMap="BaseResultMap">
+		SELECT 
+			hm_id,
+			hm_title,
+			hm_picture,
+			hm_content 
+		FROM hot_major
+		WHERE hm_id = #{hmId}
+	</select>
+	
+	<select id="selectPage" resultMap="BaseResultMap">
+		SELECT 
+			hm_id,
+			hm_title,
+			hm_picture,
+			hm_content 
+		FROM hot_major
+		<where>
+			<if test="title != null and title != '' ">
+				hm_title = #{title}
+			</if>
+		</where>		
+	</select>
 
 </mapper>

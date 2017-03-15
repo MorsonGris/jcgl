@@ -5,6 +5,8 @@
 <head>
 <%@ include file="/commons/basejs.jsp" %>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" type="text/css" href="${staticPath }/static/style/css/simple-calendar.css" />
+<script type="text/javascript" src="${staticPath}/static/style/simple-calendar.js"></script>
 <title>聚成教育-聚成学习中心</title>
 <script type="text/javascript">
     var index_tabs;
@@ -186,6 +188,15 @@
         <div data-options="region:'center'" style="overflow: hidden;">
             <div id="index_tabs" style="overflow: hidden;">
                 <div title="首页" data-options="iconCls:'fi-home',border:false" style="overflow: hidden;">
+					 <div>
+					 	<div class="inner clearfix" style="margin: 50px;">
+					        <div id='calendar'>
+					        </div>
+					    </div>
+					    <script>
+						     var myCalendar = new SimpleCalendar('#calendar');
+						</script>
+					 </div>
                 </div>
             </div>
         </div>
