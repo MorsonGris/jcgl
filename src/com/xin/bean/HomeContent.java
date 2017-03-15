@@ -141,4 +141,13 @@ public class HomeContent extends Model<HomeContent> {
 		return this.hcId;
 	}
 
+	@Override
+	public String toString() {
+		return "HomeContent [hcId=" + hcId + ", pictureOne=" + pictureOne + ", pictureTwo=" + pictureTwo
+				+ ", pictureThree=" + pictureThree + ", qrcodeOne=" + qrcodeOne + ", qrcodeTwo=" + qrcodeTwo
+				+ ", hcPhone=" + hcPhone + ", hcAddress=" + hcAddress + ", interlinkageOne=" + interlinkageOne
+				+ ", interlinkageTwo=" + interlinkageTwo + ", interlinkageThree=" + interlinkageThree
+				+ ", interlinkageFour=" + interlinkageFour + "]";
+	}
+
 }
