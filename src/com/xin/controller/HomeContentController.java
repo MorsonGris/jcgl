@@ -7,6 +7,7 @@ import java.util.Iterator;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -98,9 +99,9 @@ public class HomeContentController extends BaseController{
     
     @PostMapping("/edit")
     @ResponseBody
-    public Object edit(HomeContent homeContent,HttpServletRequest request,HttpServletResponse response) throws IllegalStateException, IOException {
-    	System.out.println(""+homeContent.getInterlinkageOne());
-    	/*FileUpload.pictureUpload(request, response, "", "");*/
+    public Object edit(@RequestParam(value="pictureOne",required=false)MultipartFile file,HttpServletRequest request,HttpServletResponse response) throws IllegalStateException, IOException {
+    	System.out.println("/*****"+file);
+    	FileUpload.pictureUpload(request, response, "", "E:/");
         return renderSuccess("添加失败");
     }
     
