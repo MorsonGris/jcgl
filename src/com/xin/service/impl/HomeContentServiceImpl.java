@@ -1,7 +1,6 @@
 package com.xin.service.impl;
 
 import com.baomidou.mybatisplus.plugins.Page;
-import com.xin.bean.Finance;
 import com.xin.bean.HomeContent;
 import com.xin.commons.utils.PageInfo;
 import com.xin.mapper.HomeContentMapper;

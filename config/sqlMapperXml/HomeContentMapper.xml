@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xin.mapper.HomeContentMapper">
+
+	<!-- 通用查询映射结果 -->
+	<resultMap id="BaseResultMap" type="com.xin.bean.HomeContent">
+		<id column="hc_id" property="hcId" />
+		<result column="picture_one" property="pictureOne" />
+		<result column="picture_two" property="pictureTwo" />
+		<result column="picture_three" property="pictureThree" />
+		<result column="qrcode_one" property="qrcodeOne" />
+		<result column="qrcode_two" property="qrcodeTwo" />
+		<result column="hc_phone" property="hcPhone" />
+		<result column="hc_address" property="hcAddress" />
+		<result column="interlinkage_one" property="interlinkageOne" />
+		<result column="interlinkage_two" property="interlinkageTwo" />
+		<result column="interlinkage_three" property="interlinkageThree" />
+		<result column="interlinkage_four" property="interlinkageFour" />
+	</resultMap>
+	
+	<sql id="field">
+		HC_ID,
+		PICTURE_ONE,
+		PICTURE_TWO,
+		PICTURE_THREE,
+		QRCODE_ONE,
+		QRCODE_TWO,
+		HC_PHONE,
+		HC_ADDRESS,
+		INTERLINKAGE_ONE,
+		INTERLINKAGE_TWO,
+		INTERLINKAGE_THREE,
+		INTERLINKAGE_FOUR
+	</sql>
+	
+	<sql id="insertfield">
+		PICTURE_ONE,
+		PICTURE_TWO,
+		PICTURE_THREE,
+		QRCODE_ONE,
+		QRCODE_TWO,
+		HC_PHONE,
+		HC_ADDRESS,
+		INTERLINKAGE_ONE,
+		INTERLINKAGE_TWO,
+		INTERLINKAGE_THREE,
+		INTERLINKAGE_FOUR
+	</sql>
+	
+	<sql id="tableName">
+		HOME_CONTENT
+	</sql>
+	
+	<select id="selectHomeContentPage" resultMap="BaseResultMap">
+		SELECT 
+			<include refid="field" /> FROM HOME_CONTENT
+	</select>
+	
+	<select id="selectHomeContentById" parameterType="Integer" resultMap="BaseResultMap">
+		SELECT 
+			<include refid="field" /> FROM HOME_CONTENT WHERE HC_ID = #{id}
+	</select>
+	
+	<insert id="HomeContentInsert" parameterType="com.xin.bean.HomeContent">
+		INSERT INTO <include refid="tableName" />(<include refid="insertfield" />) VALUES(
+			#{pictureOne},
+			#{pictureTwo},
+			#{pictureThree},
+			#{qrcodeOne},
+			#{qrcodeTwo},
+			#{hcPhone},
+			#{hcAddress},
+			#{interlinkageOne},
+			#{interlinkageTwo},
+			#{interlinkageThree},
+			#{interlinkageFour}
+		)
+	</insert>
+	
+	<update id="updateHomeContent" parameterType="com.xin.bean.HomeContent">
+		update <include refid="tableName" /> 
+		<set>
+			<if test="pictureOne!=null and pictureOne!='' ">
+				picture_one=#{pictureOne},
+			</if>
+			<if test="pictureTwo!=null and pictureTwo!='' ">
+				picture_two=#{pictureTwo},
+			</if>
+			<if test="pictureThree!=null and pictureThree!='' ">
+				picture_three=#{pictureThree},
+			</if>
+			<if test="qrcodeOne!=null and qrcodeOne!='' ">
+				qrcode_one=#{qrcodeOne},
+			</if>
+			<if test="qrcodeTwo!=null and qrcodeTwo!='' ">
+				qrcode_two=#{qrcodeTwo},
+			</if>
+			<if test="hcPhone!=null and hcPhone!='' ">
+				hc_phone=#{hcPhone},
+			</if>
+			<if test="hcAddress!=null and hcAddress!='' ">
+				hc_address=#{hcAddress},
+			</if>
+			<if test="interlinkageOne!=null and interlinkageOne!='' ">
+				interlinkage_one=#{interlinkageOne},
+			</if>
+			<if test="interlinkageTwo!=null and interlinkageTwo!='' ">
+				interlinkage_two=#{interlinkageTwo},
+			</if>
+			<if test="interlinkageThree!=null and interlinkageThree!='' ">
+				interlinkage_three=#{interlinkageThree},
+			</if>
+			<if test="interlinkageFour!=null and interlinkageFour!='' ">
+				interlinkage_four=#{interlinkageFour}
+			</if>
+		</set>
+		where hc_id=#{hcId}
+	</update>
+	
+	<delete id="deleteHomeContent" parameterType="Integer">
+		DELETE FROM <include refid="tableName" /> WHERE hc_id=#{hcId}
+	</delete>
+</mapper>

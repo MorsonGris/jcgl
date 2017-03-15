@@ -56,7 +56,7 @@
                 </tr>
                 <tr>
                     <td>手机号码</td>
-                    <td><input name="rPhone" placeholder="请输入手机号码" class="easyui-textbox" id="phone" name="basic.phone" data-options="prompt:'请输入正确的手机号码。',validType:'phoneNum'" value="${relation.RPhone}" /></td>
+                    <td><input name="rPhone" placeholder="请输入手机号码" class="easyui-textbox" data-options="prompt:'请输入正确的手机号码。',validType:'phoneNum'" value="${relation.RPhone}" /></td>
                 </tr>
                 <tr>
                     <td>详细说明</td>
