@@ -188,11 +188,6 @@
                         }
                         progressClose();
                     }, 'JSON');
-                } else {
-                    parent.$.messager.show({
-                        title : '提示',
-                        msg : '不可以删除自己！'
-                    });
                 }
         });
     }
