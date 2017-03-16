@@ -198,7 +198,7 @@
     </div>
 </div>
 <div id="scheduleToolbar" style="display: none;">
-    <shiro:hasPermission name="/schedule/addpage">
+    <shiro:hasPermission name="/schedule/add">
         <a onclick="addScheduleFun();" href="javascript:void(0);" class="easyui-linkbutton" data-options="plain:true,iconCls:'fi-plus icon-green'">添加</a>
     </shiro:hasPermission>
 </div>

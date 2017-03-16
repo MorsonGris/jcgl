@@ -62,18 +62,25 @@
                     <span class="home_operation">学生报名</span>
                 </a>
             </div>
-            <div class="col-xs-4 column">
+            <%-- <div class="col-xs-4 column">
                 <a href="home.html">
                     <img alt="80x80" src="${path }/static/proscenium/icon/compose.png" class="img-circle home-ico" />
                     <br>
                     <span class="home_operation">缴费查询</span>
                 </a>
-            </div>
+            </div> --%>
             <div class="col-xs-4 column">
                 <a href="http://112.74.115.92/">
                     <img alt="80x80" src="${path }/static/proscenium/icon/briefcase.png" class="img-circle home-ico" />
                     <br>
                     <span class="home_operation">学籍查询</span>
+                </a>
+            </div>
+            <div class="col-xs-4 column">
+                <a href="https://www.baidu.com">
+                    <img alt="80x80" src="${path }/static/proscenium/icon/arrow-up.png" class="img-circle home-ico" />
+                    <br>
+                    <span class="home_operation">上传文件</span>
                 </a>
             </div>
         </div>
@@ -86,33 +93,10 @@
                 </a>
             </div>
             <div class="col-xs-4 column">
-                <a href="https://www.baidu.com">
-                    <img alt="80x80" src="${path }/static/proscenium/icon/arrow-up.png" class="img-circle home-ico" />
-                    <br>
-                    <span class="home_operation">上传文件</span>
-                </a>
-            </div>
-            <div class="col-xs-4 column">
-                <a href="home.html">
-                    <img alt="80x80" src="${path }/static/proscenium/icon/bookshelf.png" class="img-circle home-ico" />
-                    <br>
-                    <span class="home_operation">培训管理</span>
-                </a>
-            </div>
-        </div>
-        <div class="row clearfix" style="text-align: center;margin-top: 20px;">
-            <div class="col-xs-4 column">
                 <a href="http://www.jxck168.com/web/newsAction!listMulti.action?msgTypeId=117">
                     <img alt="140x140" src="${path }/static/proscenium/icon/clipboard.png" class="img-circle home-ico" />
                     <br>
                     <span class="home_operation">招生简章</span>
-                </a>
-            </div>
-            <div class="col-xs-4 column">
-                <a href="index/helper">
-                    <img alt="80x80" src="${path }/static/proscenium/icon/clock.png" class="img-circle home-ico" />
-                    <br>
-                    <span class="home_operation">工作助手</span>
                 </a>
             </div>
             <div class="col-xs-4 column">
@@ -122,7 +106,25 @@
                     <span class="home_operation">联系我们</span>
                 </a>
             </div>
+            <%-- <div class="col-xs-4 column">
+                <a href="home.html">
+                    <img alt="80x80" src="${path }/static/proscenium/icon/bookshelf.png" class="img-circle home-ico" />
+                    <br>
+                    <span class="home_operation">培训管理</span>
+                </a>
+            </div> --%>
         </div>
+        <%-- <div class="row clearfix" style="text-align: center;margin-top: 20px;">
+            
+            <div class="col-xs-4 column">
+                <a href="index/helper">
+                    <img alt="80x80" src="${path }/static/proscenium/icon/clock.png" class="img-circle home-ico" />
+                    <br>
+                    <span class="home_operation">工作助手</span>
+                </a>
+            </div>
+            
+        </div> --%>
         <div class="row" style="text-align: left;margin-top: 20px;margin-bottom: 20px;">
             <div class="col-xs-12 column">
                 <div style="border-bottom: 1px solid #e0e0e0;">

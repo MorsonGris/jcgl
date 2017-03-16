@@ -10,6 +10,12 @@
 		<result column="n_date" property="nDate" />
 		<result column="n_flag" property="nFlag" />
 	</resultMap>
+	<resultMap type="com.xin.commons.utils.PageJson" id="PageResult">
+		<result property="total" column="total"/>
+	</resultMap>
+	<sql id="Base_notice">
+		n.n_id,n.n_title,n.n_content,n.n_date,n.n_flag
+	</sql>
 	
 	<select id="selectNoticePage" resultMap="BaseResultMap">
 		select n_id,n_title,n_content,n_date,n_flag from notice 
@@ -29,6 +35,14 @@
         </where>
 	</select>
 	
+	<select id="queryByPages" resultMap="BaseResultMap">
+		select <include refid="Base_notice" /> from notice n where n_title like #{arg0} limit #{arg1},#{arg2}
+	</select>
+	
+	<select id="queryTotal" resultMap="PageResult">
+		select count(*) total from notice n where n_title like #{arg0};
+	</select>
+		
 	<select id="selectNoticeById" parameterType="Integer" resultMap="BaseResultMap">
 		select n_id,n_title,n_content,n_date,n_flag from notice where n_id = #{id}
 	</select>

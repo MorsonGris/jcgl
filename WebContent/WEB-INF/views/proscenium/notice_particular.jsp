@@ -17,20 +17,20 @@
 <body>
 <div class="wrapper">
     <jsp:include page="/static/proscenium/commons/head.jsp"></jsp:include>
+    <div><img src="${path }/static/proscenium/images/happy.jpg" width="100%"></div>
     <div class="container">
-        <div class="row clearfix" style="text-align: center;margin-top: 20px; color: #d58512;">
+        <div class="row clearfix" style="text-align: center;margin-top: 20px;">
         	<div class="col-md-12">
         		<div class="view">
 				<div class="panel panel-default">
 					<div class="panel-heading">
-						<h3 class="panel-title" contenteditable="true">Panel title</h3>
+						<h3>公告栏</h3>
 					</div>
-					<div class="panel-body" contenteditable="true">
-					${notice.NTitle }
+					<div class="panel-body">
+					<h4>${notice.NTitle }</h4>
             		${notice.NContent }
-            		<fmt:formatDate value="${notice.NDate }" pattern="yyyy/MM/dd"/>
 					</div>
-					<div class="panel-footer" contenteditable="true">Panel footer</div>
+					<div class="panel-footer">时间：<fmt:formatDate value="${notice.NDate }" pattern="yyyy/MM/dd"/></div>
 				</div>
 				</div>
         	</div>

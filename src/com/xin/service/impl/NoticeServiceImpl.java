@@ -2,6 +2,7 @@ package com.xin.service.impl;
 
 import com.xin.bean.Notice;
 import com.xin.commons.utils.PageInfo;
+import com.xin.commons.utils.PageJson;
 import com.xin.mapper.NoticeMapper;
 import com.xin.service.INoticeService;
 import com.baomidou.mybatisplus.plugins.Page;
@@ -58,6 +59,17 @@ public class NoticeServiceImpl implements INoticeService {
 	@Override
 	public void deleteNotice(int id) {
 		noticeMapper.deleteNotice(id);
+	}
+
+	@Override
+	public List<Notice> queryByPages(String search, int offset, int limit) {
+		return noticeMapper.queryByPages(search, offset, limit);
+	}
+
+	@Override
+	public long queryTotal(String search) {
+		PageJson<Notice> pages=noticeMapper.queryTotal(search);
+		return pages.getTotal();
 	}
 
 }

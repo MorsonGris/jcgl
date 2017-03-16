@@ -54,7 +54,13 @@ public class LoginController extends BaseController {
      * 前端首页
      */
     @RequestMapping("/index")
-    public String home(){
+    public String home(Model model){
+    	PageInfo pageInfo = new PageInfo(0, 5, "n_date", "desc");
+    	Map<String, Object> condition = new HashMap<String, Object>();
+        condition.put("nFlag", "1");
+        pageInfo.setCondition(condition);
+    	List<Notice> list = noticeService.selectDataGrid(pageInfo);
+    	model.addAttribute("noticelist", list);
     	return "proscenium/home";
     }
 

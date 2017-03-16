@@ -3,16 +3,20 @@ package com.xin.controller;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.ui.Model;
 import com.xin.bean.Notice;
 import com.xin.commons.base.BaseController;
 import com.xin.commons.utils.PageInfo;
+import com.xin.commons.utils.PageJson;
 import com.xin.commons.utils.StringUtils;
 import com.xin.service.INoticeService;
 
@@ -68,6 +72,20 @@ public class NoticeController extends BaseController{
         return pageInfo;
     }
     
+    @RequestMapping("/queryBypages")
+    @ResponseBody
+    public PageJson<Notice> queryByPages(PageJson<Notice> pages,@RequestParam int offset,@RequestParam int limit,HttpServletRequest request){
+    	String search = request.getParameter("search");
+    	System.out.println("**************");
+		if(search==null||("").equals(search.trim())||("null").equals(search)){
+			search="";		
+		}
+		search="%"+search+"%";
+		System.out.println(search);
+		pages.setRows(noticeService.queryByPages(search, offset, limit));
+		pages.setTotal(noticeService.queryTotal(search));
+		return pages;
+    }
     /**
      * 公告添加页
      *
@@ -145,7 +163,7 @@ public class NoticeController extends BaseController{
     public String selectById(Model model, int id) {
     	Notice n = noticeService.selectNoticeById(id);
     	model.addAttribute("notice", n);
-    	return "admin/notice/notice_particular";
+    	return "proscenium/notice_particular";
     }
     
     /**
@@ -153,6 +171,6 @@ public class NoticeController extends BaseController{
      * */
     @GetMapping("/selectMore")
     public String selectMore() {
-    	return "admin/notice/select_more";
+    	return "proscenium/notice";
     }
 }
