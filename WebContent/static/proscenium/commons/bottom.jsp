@@ -16,12 +16,12 @@
 				</p>
 		    	<h4>友情链接</h4>
 		    	<h4>
-		    		<a class="bottom_link"  href="http://www.chsi.com.cn/">${homeContent.interlinkageOne }</a> | 
-		    		<a class="bottom_link"  href="http://www.kuaiji.com/">${homeContent.interlinkageTwo }</a>
+		    		<a class="bottom_link"  href="${homeContent.interlinkageOne }">学信网</a> | 
+		    		<a class="bottom_link"  href="${homeContent.interlinkageTwo }">会计网</a>
 	    		</h4>
 		    	<h4>
-		    		<a class="bottom_link"  href="http://www.yk211.com/">${homeContent.interlinkageThree }</a> | 
-		    		<a class="bottom_link"  href="http://chengkao.eol.cn/">${homeContent.interlinkageFour }</a>
+		    		<a class="bottom_link"  href="${homeContent.interlinkageThree }">艺考网</a> | 
+		    		<a class="bottom_link"  href="${homeContent.interlinkageFour }">成考网</a>
 	    		</h4>
 			</div>
     	</div>
