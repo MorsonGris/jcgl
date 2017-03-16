@@ -24,4 +24,6 @@ public interface IHomeContentService {
 	int updateHomeContent(HomeContent homeContent);
 	
 	void deleteHomeContent(int id);
+	
+	HomeContent selectHomeOne();
 }

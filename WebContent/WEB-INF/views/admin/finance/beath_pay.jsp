@@ -45,7 +45,7 @@
                     <td>缴费金额</td>
                     <td>
                     	<input type="hidden" name="teaClass" value="${ids}"/>
-                    	<input id="practicalMoney" name="practicalMoney" type="number" onblur="getAccumulative();" placeholder="请输入缴费金额" missingMessage="缴费金额不能为空" class="easyui-validatebox" data-options="required:true" value="">
+                    	<input id="practicalMoney" name="practicalMoney" type="number" onblur="getAccumulative();" placeholder="请输入缴费金额" missingMessage="缴费金额不能为空" class="easyui-validatebox" data-options="required:true,novalidate:true" value="">
                     	<input id="fAccumulative" name="fAccumulative" type="hidden" />
                     </td>
                 </tr>

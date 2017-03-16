@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c"   uri="http://java.sun.com/jsp/jstl/core" %>
 <%	String	path = request.getContextPath(); %>
 
 <div class="float">
@@ -27,8 +28,24 @@
     </div>
     <div class="phone-body" style="text-align: left;margin-top: 20px;">
     	<div class="container">
+    	
     		<div class ="row">
-	    		<div class="col-xs-6 column">
+    		<c:forEach items="${relation}" var="rel" varStatus="status">
+    			<div class="col-xs-6 column">
+	    			<p><span>${rel.REffect}：</span><span>${rel.RContent }</span></p>
+			        <p>
+			        	<img src="<%=path %>/static/proscenium/images/phone8.png">
+			            <a href="http://wpa.qq.com/msgrd?v=3&uin=${rel.RQq}&site=qq&menu=yes" target="_blank">
+			            <img src="http://wpa.qq.com/pa?p=2:${rel.RQq}:51" title="点击这里给我发消息" style="height: 32px;width: 80px;"/>
+						</a>
+						<br>
+			        	<span>${rel.RPhone}</span>
+			        </p>
+	    		</div>
+    		</c:forEach>
+    			
+    		
+	    		<%-- <div class="col-xs-6 column">
 	    			<p><span>成考：</span><span>李老师</span></p>
 			        <p>
 			        	<img src="<%=path %>/static/proscenium/images/phone8.png">
@@ -67,7 +84,7 @@
 						<br>
 			        	<span>1889765413</span>
 			        </p>
-	    		</div>
+	    		</div> --%>
 	    	</div>   
     	</div>
    </div>

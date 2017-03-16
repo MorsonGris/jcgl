@@ -53,5 +53,10 @@ public class HomeContentServiceImpl implements IHomeContentService {
 	public void deleteHomeContent(int id) {
 		homeContentMapper.deleteHomeContent(id);
 	}
+
+	@Override
+	public HomeContent selectHomeOne() {
+		return homeContentMapper.selectHomeOne();
+	}
 	
 }

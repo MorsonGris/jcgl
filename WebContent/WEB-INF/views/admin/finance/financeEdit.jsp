@@ -7,7 +7,7 @@
             url : '${path }/finance/edit',
             onSubmit : function() {
                 progressLoad();
-                var isValid = $(this).form('validate');
+                var isValid = $(this).form('enableValidation').form('validate');
                 if (!isValid) {
                     progressClose();
                 }
@@ -46,17 +46,17 @@
                     </td>
                     <td>班主任</td>
                     <td>
-                    	<input name="teaClass" type="text" placeholder="请输入班主任" missingMessage="班主任不能为空" class="easyui-validatebox" data-options="required:true" value="${finance.teaClass }">
+                    	<input name="teaClass" type="text" placeholder="请输入班主任" missingMessage="班主任不能为空" class="easyui-validatebox" data-options="required:true,novalidate:true" value="${finance.teaClass }">
                     </td>
                 </tr>
                 <tr>
                 	<td>需交金额</td>
                     <td>
-                    	<input name="needMoney" type="number" placeholder="请输入需交金额" missingMessage="需交金额不能为空" class="easyui-validatebox" data-options="required:true" value="${finance.needMoney }">
+                    	<input name="needMoney" type="number" placeholder="请输入需交金额" missingMessage="需交金额不能为空" class="easyui-validatebox" data-options="required:true,novalidate:true" value="${finance.needMoney }">
                     </td>
                     <td>实缴金额</td>
                     <td>
-                    	<input id="practicalMoney" name="practicalMoney" type="number" placeholder="请输入实缴金额" missingMessage="实缴金额不能为空" class="easyui-validatebox" data-options="required:true" onblur="getAccumulative();" value="${finance.practicalMoney }">
+                    	<input id="practicalMoney" name="practicalMoney" type="number" placeholder="请输入实缴金额" missingMessage="实缴金额不能为空" class="easyui-validatebox" data-options="required:true,novalidate:true" onblur="getAccumulative();" value="${finance.practicalMoney }">
                     </td>
                 </tr>
                 <tr>
@@ -71,7 +71,7 @@
                     </td>
                     <td>缴费总额</td>
                     <td>
-                    	<input id="fAccumulative" name="fAccumulative" type="number" readonly class="easyui-validatebox" data-options="required:true" value="${finance.FAccumulative }">
+                    	<input id="fAccumulative" name="fAccumulative" type="number" readonly class="easyui-validatebox" data-options="required:true,novalidate:true" value="${finance.FAccumulative }">
                     </td>
                 </tr>
                 <tr>

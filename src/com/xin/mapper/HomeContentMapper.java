@@ -22,4 +22,6 @@ public interface HomeContentMapper {
 	int updateHomeContent(HomeContent homeContent);
 	
 	void deleteHomeContent(int id);
+	
+	HomeContent selectHomeOne();
 }

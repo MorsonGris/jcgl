@@ -7,7 +7,7 @@
             url : '${path }/notice/edit',
             onSubmit : function() {
                 progressLoad();
-                var isValid = $(this).form('validate');
+                var isValid = $(this).form('enableValidation').form('validate');
                 if (!isValid) {
                     progressClose();
                 }
@@ -34,13 +34,13 @@
                     <td>标题</td>
                     <td>
                     	<input type="hidden" name="nId" value="${notice.NId }" />
-                    	<input name="nTitle" type="text" placeholder="请输入标题" missingMessage="标题不能为空" class="easyui-validatebox" data-options="required:true"  value="${notice.NTitle }">
+                    	<input name="nTitle" type="text" placeholder="请输入标题" missingMessage="标题不能为空" class="easyui-validatebox" data-options="required:true,novalidate:true"  value="${notice.NTitle }">
                     </td>
                 </tr>
                 <tr>
                     <td>内容</td>
                     <td colspan="3">
-						<textarea name="nContent" cols="" rows="3" style="width:98%;" class="textarea" placeholder="这里输入内容">${notice.NContent }</textarea>
+						<textarea name="nContent" cols="" rows="3" style="width:98%;" placeholder="这里输入内容" missingMessage="内容不能为空" class="easyui-validatebox" data-options="required:true,novalidate:true">${notice.NContent }</textarea>
                     </td>
                 </tr>
                 <tr>

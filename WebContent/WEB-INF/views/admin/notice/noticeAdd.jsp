@@ -7,7 +7,7 @@
             url : '${path }/notice/add',
             onSubmit : function() {
                 progressLoad();
-                var isValid = $(this).form('validate');
+                var isValid = $(this).form('enableValidation').form('validate');
                 if (!isValid) {
                     progressClose();
                 }
@@ -34,12 +34,12 @@
             <table class="grid">
                 <tr>
                     <td>标题</td>
-                    <td><input name="nTitle" type="text" placeholder="请输入标题" missingMessage="标题不能为空" class="easyui-validatebox" data-options="required:true"  value=""></td>
+                    <td><input name="nTitle" type="text" placeholder="请输入标题" missingMessage="标题不能为空" class="easyui-validatebox" data-options="required:true,novalidate:true"  value=""></td>
                 </tr>
                 <tr>
                     <td>内容</td>
                     <td colspan="3">
-						<textarea name="nContent" cols="" rows="3" style="width:98%;" class="textarea" placeholder="这里输入内容"></textarea>
+						<textarea name="nContent" cols="" rows="3" style="width:98%;" placeholder="这里输入内容" missingMessage="内容不能为空" class="easyui-validatebox" data-options="required:true,novalidate:true"></textarea>
                     </td>
                 </tr>
                 <tr>
