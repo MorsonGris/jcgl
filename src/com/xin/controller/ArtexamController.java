@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.xin.bean.Academy;
+import com.xin.bean.Finance;
 import com.xin.bean.Student;
 import com.xin.bean.User;
 import com.xin.bean.vo.UserVo;
@@ -19,6 +20,7 @@ import com.xin.commons.utils.PageInfo;
 import com.xin.commons.utils.StudentNo;
 import com.xin.service.ArtexamService;
 import com.xin.service.IAcademyService;
+import com.xin.service.IFinanceService;
 import com.xin.service.IStudentService;
 import com.xin.service.IUserService;
 
@@ -39,6 +41,8 @@ public class ArtexamController extends BaseController{
     @Autowired private IAcademyService academyService;
     
     @Autowired private IStudentService studentservice;
+    
+    @Autowired private IFinanceService financeService;
     
     @Autowired private IUserService userService;
     
@@ -167,11 +171,14 @@ public class ArtexamController extends BaseController{
     @RequestMapping("/delete")
     @ResponseBody
     public Object delete(int id){
+    	Finance finace = financeService.selectfinanceById(id);
+    	if(finace !=null){
     	boolean result = artexamService.deleteById(id);
-    	if(result == true){
-    		return renderSuccess("删除成功");
+	    	if(result == true){
+	    		return renderSuccess("删除成功");
+	    	}
     	}
-    	return renderError("删除删除失败");
+    	return renderError("删除失败");
     }
     
     @GetMapping("/editpage")
