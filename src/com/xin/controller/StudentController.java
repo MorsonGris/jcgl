@@ -214,7 +214,7 @@ public class StudentController extends BaseController{
     @ResponseBody
     public Object delete(int id){
     	Finance finace = financeService.selectfinanceById(id);
-    	if(finace !=null){
+    	if(finace ==null){
     		boolean result = studentService.deleteById(id);
     		if(result == true){
         		return renderSuccess("删除成功");
