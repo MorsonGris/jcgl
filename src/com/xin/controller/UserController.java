@@ -183,4 +183,12 @@ public class UserController extends BaseController {
         userService.deleteUserById(id);
         return renderSuccess("删除成功！");
     }
+    /**
+     * 工作助手
+     *
+     */
+    @GetMapping("/helper")
+	public String helper(){
+		return "admin/helper";
+	}
 }

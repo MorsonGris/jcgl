@@ -3,6 +3,7 @@ package com.xin.service;
 import com.xin.bean.Notice;
 import com.xin.bean.Relation;
 import com.xin.commons.utils.PageInfo;
+import com.xin.commons.utils.PageJson;
 
 import java.util.List;
 import java.util.Map;
@@ -21,6 +22,9 @@ import com.baomidou.mybatisplus.service.IService;
 public interface INoticeService{
 	
 	List<Notice> selectDataGrid(PageInfo pageInfo);
+	
+	List<Notice> queryByPages(String search,int offset,int limit);
+	long queryTotal(String search);
 	
 	int noticeInsert(Notice notice);
 	

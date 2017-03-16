@@ -17,14 +17,14 @@
 <body>
 <jsp:include page="/static/proscenium/commons/head.jsp"></jsp:include>
 <div class="container">
-	<div class="row" style="margin: 20px;">
+	<div class="row" style="margin-bottom: 20px;">
 		<div class="col-xs-12">
-			<table id="priceTable" data-toggle="table"
-			       data-url="price/queryBypages.do?p_room=${currentUser.u_ck}"
+			<table id="noticeTable" data-toggle="table"
+			       data-url="queryBypages"
 			       data-pagination="true"
 			       data-locale="zh-CN"
 			       data-side-pagination="server"
-			       data-page-list="[5, 10, 20, 50, 100, 200]"
+			       
 			       data-toolbar="#toolbar"
 			       data-search="true"
 			       data-show-refresh="true"
@@ -38,15 +38,9 @@
 			       >
 			    <thead>
 			    <tr>
-			    	<!-- <th data-field="p_id" data-align="center" >编号</th> -->
-			        <!-- <th data-field="p_id" data-align="center" data-sortable="true" >编号</th> -->
-			        <th data-field="p_room" data-align="center" data-sortable="false" >仓库</th>
-			        <th data-field="p_state" data-align="center" data-formatter="stateFormatter" data-sortable="false">状态</th>
-			        <th data-field="p_are" data-align="center" data-sortable="false">地区</th>
-					<th data-field="p_start" data-align="center" data-sortable="false">起步价(单位:￥)</th>
-					<th data-field="p_weight" data-align="center" data-sortable="false">首重(单位:kg)</th>
-					<th data-field="p_perc" data-align="center" data-sortable="false">续重价格(单位:￥)</th>
-					<th data-field="p_id" data-align="center"  data-formatter="actionFormatter" data-events="actionEvents" data-sortable="false">操作</th>
+			    	<th data-field="ntitle" data-align="left" data-sortable="false" >标题</th>
+			    	<th data-field="ndate" data-align="center" data-formatter="dateFormatter" data-sortable="false" >时间</th>
+			    	<th data-field="nid" data-align="center"  data-formatter="actionFormatter" data-events="actionEvents" data-sortable="false">操作</th>
 			    </tr>
 			    </thead>
 			</table>
@@ -64,5 +58,23 @@
 <script src="${path }/static/proscenium/plugin/bootstrap-validator/bootstrapValidator.min.js"></script>
 <script src="${path }/static/proscenium/plugin/goup/jquery.goup.min.js"></script>
 <script src="${path }/static/proscenium/js/app.js"></script>
+<script type="text/javascript">
+function actionFormatter(value, row, index) {
+    return [
+        '<a class="open ml10" href="javascript:void(0)" title="查看">',
+        '<i class="glyphicon glyphicon-eye-open"></i>',
+        '</a>'
+    ].join('');
+}
+function dateFormatter(value) {
+	var date = value.split("-")[0]+"/"+value.split("-")[1]+"/"+(value.split("-")[2]).split(" ")[0];
+    return date
+}
+window.actionEvents = {
+	'click .open': function (e, value, row, index) {
+		window.location="${path}/notice/selectById?id="+value;
+    }
+}
+</script>
 </body>
 </html>
