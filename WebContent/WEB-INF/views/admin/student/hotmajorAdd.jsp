@@ -27,7 +27,7 @@
 </script>
 <div class="easyui-layout" data-options="fit:true,border:false">
     <div data-options="region:'center',border:false" title="" style="overflow: hidden;padding: 3px;">
-        <form id="hotmajorAddForm" method="post"enctype="multipart/from-data">
+        <form id="hotmajorAddForm" method="post" enctype="multipart/form-data">
             <table class="grid">
                 <tr>
                     <td>标题</td>
@@ -35,7 +35,7 @@
                 </tr>
                 <tr>
                 	<td>图片</td>
-                    <td><input name="hmPicture" type="file" placeholder="请选择图片" class="easyui-validatebox" data-options="required:true,novalidate:true" value=""></td>
+                    <td><input name="price" type="file" ></td>
                 </tr>
                 <tr>
                 	<td>内容</td>

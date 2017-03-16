@@ -1,15 +1,21 @@
 package com.xin.controller;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import com.xin.bean.HotMajor;
 import com.xin.commons.base.BaseController;
+import com.xin.commons.utils.FileUpload;
 import com.xin.commons.utils.PageInfo;
 import com.xin.service.IHotMajorService;
 
@@ -60,12 +66,18 @@ public class HotMajorController extends BaseController{
     /**
      * 添加
      * @param hotMajor
+     * @param file
+     * @param request
+     * @param response
      * @return
+     * @throws IllegalStateException
      */
     @RequestMapping("/add")
     @ResponseBody
-    public Object add(HotMajor hotMajor){
-    	System.out.println("图片："+hotMajor.getHmPicture());
+    public Object add(HotMajor hotMajor,@RequestParam(value="price") MultipartFile file,HttpServletRequest request,HttpServletResponse response) throws IllegalStateException, IOException{
+    	String url = request.getServletContext().getRealPath("/")+"static\\proscenium\\images\\";
+    	FileUpload.pictureUpload(request, response, "",url);
+    	hotMajor.setHmPicture(file.getOriginalFilename());
     	boolean result = hotMajorService.insertByid(hotMajor);
     	if(result == true){
     		return renderSuccess("添加成功");
