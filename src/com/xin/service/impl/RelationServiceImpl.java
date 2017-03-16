@@ -26,11 +26,12 @@ public class RelationServiceImpl implements IRelationService {
 	private RelationMapper relationMapper;
 
 	@Override
-	public void selectDataGrid(PageInfo pageInfo) {
+	public List<Relation> selectDataGrid(PageInfo pageInfo) {
 		Page<Relation> page = new Page<Relation>(pageInfo.getNowpage(), pageInfo.getPagesize());
 		List<Relation> list = relationMapper.selectRelationPage(page, pageInfo.getCondition());
 		pageInfo.setRows(list);
         pageInfo.setTotal(page.getTotal());
+        return list;
 	}
 
 	@Override

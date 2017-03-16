@@ -73,4 +73,11 @@ public class Relation extends Model<Relation> {
 		this.rPhone = rPhone;
 	}
 
+	@Override
+	public String toString() {
+		return "Relation [rId=" + rId + ", rQq=" + rQq + ", rPhone=" + rPhone + ", rContent=" + rContent + ", rEffect="
+				+ rEffect + "]";
+	}
+	
+
 }

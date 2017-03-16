@@ -51,6 +51,11 @@
 		HOME_CONTENT
 	</sql>
 	
+	<select id="selectHomeOne" resultMap="BaseResultMap">
+		SELECT 
+			<include refid="field" /> FROM HOME_CONTENT LIMIT 0,1
+	</select>
+	
 	<select id="selectHomeContentPage" resultMap="BaseResultMap">
 		SELECT 
 			<include refid="field" /> FROM HOME_CONTENT

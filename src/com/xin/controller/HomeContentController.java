@@ -1,13 +1,8 @@
 package com.xin.controller;
 
-import java.io.File;
 import java.io.IOException;
-import java.util.Iterator;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,13 +12,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
-import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
 import com.xin.bean.HomeContent;
 import com.xin.commons.base.BaseController;
 import com.xin.commons.utils.FileUpload;
 import com.xin.commons.utils.PageInfo;
+import com.xin.commons.utils.PathUtil;
 import com.xin.service.IHomeContentService;
 
 /**
@@ -83,26 +77,52 @@ public class HomeContentController extends BaseController{
      * 编辑首页内容
      * @param homeContent
      * @return
-     * *//*
+     * */
     @PostMapping("/edit")
     @ResponseBody
-    public Object edit(@RequestParam(value="pictureOne",required=false) MultipartFile file) throws IOException{
-    	System.out.println(file+"*******************");
-    	int result = homeContentService.updateHomeContent(homeContent);
+    public Object edit(@RequestParam(value="pictureOne",required=false)MultipartFile picOne,
+    		@RequestParam(value="pictureTwo",required=false)MultipartFile picTwo,
+    		@RequestParam(value="pictureThree",required=false)MultipartFile picThree,
+    		@RequestParam(value="qrcodeOne",required=false)MultipartFile qrcodeOne,
+    		@RequestParam(value="qrcodeTwo",required=false)MultipartFile qrcodeTwo,
+    		@RequestParam(value="hcId")String id,
+    		@RequestParam(value="hcPhone")String hcPhone,
+    		@RequestParam(value="interlinkageOne")String interlinkageOne,
+    		@RequestParam(value="interlinkageTwo")String interlinkageTwo,
+    		@RequestParam(value="interlinkageThree")String interlinkageThree,
+    		@RequestParam(value="interlinkageFour")String interlinkageFour,
+    		@RequestParam(value="hcAddress")String hcAddress,HttpServletRequest request,HttpServletResponse response) throws IllegalStateException, IOException {
+    	FileUpload.pictureUpload(request, response,"",PathUtil.getClasspath()+"static/proscenium/images/homepicture/");
+    	//System.out.println(request.getSession().getServletContext().getRealPath("uploadFile"));
+    	HomeContent homeContent = new HomeContent();
+    	if(picOne.getOriginalFilename()!=null) {
+    		homeContent.setPictureOne(picOne.getOriginalFilename());
+    	}
+		if(picTwo.getOriginalFilename()!=null) {
+			homeContent.setPictureTwo(picTwo.getOriginalFilename());
+		}
+		if(picThree.getOriginalFilename()!=null) {
+			homeContent.setPictureThree(picThree.getOriginalFilename());
+		}
+		if(qrcodeOne.getOriginalFilename()!=null) {
+			homeContent.setQrcodeOne(qrcodeOne.getOriginalFilename());
+		}
+		if(qrcodeTwo.getOriginalFilename()!=null){
+			homeContent.setQrcodeTwo(qrcodeTwo.getOriginalFilename());
+		}
+		homeContent.setHcId(Integer.parseInt(id));
+		homeContent.setHcPhone(hcPhone);
+		homeContent.setInterlinkageOne(interlinkageOne);
+		homeContent.setInterlinkageTwo(interlinkageTwo);
+		homeContent.setInterlinkageThree(interlinkageThree);
+		homeContent.setInterlinkageFour(interlinkageFour);
+		homeContent.setHcAddress(hcAddress);
+		int result = homeContentService.updateHomeContent(homeContent);
     	if(result>0) {
     		return renderSuccess("添加成功");
     	}else {
     		return renderSuccess("添加失败");
     	}
-    	return renderSuccess("添加失败");
-    }*/
-    
-    @PostMapping("/edit")
-    @ResponseBody
-    public Object edit(@RequestParam(value="pictureOne",required=false)MultipartFile file,HttpServletRequest request,HttpServletResponse response) throws IllegalStateException, IOException {
-    	System.out.println("/*****"+file);
-    	FileUpload.pictureUpload(request, response, "", "E:/");
-        return renderSuccess("添加失败");
     }
     
 }

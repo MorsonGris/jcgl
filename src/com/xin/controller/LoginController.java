@@ -20,16 +20,21 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
+import com.xin.bean.HomeContent;
 import com.xin.bean.HotMajor;
 import com.xin.bean.Notice;
+import com.xin.bean.Relation;
 import com.xin.commons.base.BaseController;
 import com.xin.commons.csrf.CsrfToken;
 import com.xin.commons.utils.CaptchaUtils;
 import com.xin.commons.utils.PageInfo;
 import com.xin.commons.utils.StringUtils;
+import com.xin.service.IHomeContentService;
 import com.xin.service.IHotMajorService;
 import com.xin.service.INoticeService;
+import com.xin.service.IRelationService;
 
 /**
  * @description：登录退出
@@ -42,6 +47,10 @@ public class LoginController extends BaseController {
 	@Autowired private INoticeService noticeService;
 	
 	@Autowired private IHotMajorService hotMajorService;
+	
+	@Autowired private IHomeContentService homeContentService;
+	
+	@Autowired private IRelationService relationService;
 	
     /**
      * 首页
@@ -59,8 +68,22 @@ public class LoginController extends BaseController {
      */
     @RequestMapping("/index")
     public String home(Model model){
+    	PageInfo pageInfo = new PageInfo(0, 5, "n_date", "desc");
+    	Map<String, Object> condition = new HashMap<String, Object>();
+        condition.put("nFlag", "1");
+        pageInfo.setCondition(condition);
+    	List<Notice> list = noticeService.selectDataGrid(pageInfo);
+    	model.addAttribute("noticelist", list);
+    	
     	List<HotMajor> major = hotMajorService.selectAll();
     	model.addAttribute("major", major);
+    	
+    	HomeContent homeContent = homeContentService.selectHomeOne();
+    	model.addAttribute("homeContent", homeContent);
+    	
+    	PageInfo pi = new PageInfo(0, 4, "r_id", "desc");
+    	List<Relation> relation = relationService.selectDataGrid(pi);
+    	model.addAttribute("relation", relation);
     	return "proscenium/home";
     }
 
@@ -75,11 +98,35 @@ public class LoginController extends BaseController {
     	
     	List<HotMajor> major = hotMajorService.selectAll();
     	model.addAttribute("major", major);
+    	
+    	HomeContent homeContent = homeContentService.selectHomeOne();
+    	model.addAttribute("homeContent", homeContent);
+    	
+    	PageInfo pi = new PageInfo(0, 4, "r_id", "desc");
+    	List<Relation> relation = relationService.selectDataGrid(pi);
+    	model.addAttribute("relation", relation);
     	return "proscenium/home";
     }
     
     @RequestMapping("/")
     public String home(String str){
+    	ModelAndView model = new ModelAndView();
+    	PageInfo pageInfo = new PageInfo(0, 5, "n_date", "desc");
+    	Map<String, Object> condition = new HashMap<String, Object>();
+        condition.put("nFlag", "1");
+        pageInfo.setCondition(condition);
+    	List<Notice> list = noticeService.selectDataGrid(pageInfo);
+    	model.addObject("noticelist", list);
+    	
+    	List<HotMajor> major = hotMajorService.selectAll();
+    	model.addObject("major", major);
+    	
+    	HomeContent homeContent = homeContentService.selectHomeOne();
+    	model.addObject("homeContent", homeContent);
+    	
+    	PageInfo pi = new PageInfo(0, 4, "r_id", "desc");
+    	List<Relation> relation = relationService.selectDataGrid(pi);
+    	model.addObject("relation", relation);
     	return "proscenium/home";
     }
 

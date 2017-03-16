@@ -46,7 +46,7 @@
             	<tr>
                     <td>轮播图一</td>
                     <td>
-                    	<input name="hcId" type="hidden"  value="${homeContent.hcId}">
+                    	<input name="hcId" type="hidden" value="${homeContent.hcId}">
                     	<input name="pictureOne" type="file" placeholder="请选择轮播图一" value="">
                     </td>
                     <td>轮播图二</td>
@@ -70,7 +70,7 @@
                     	<input name="qrcodeTwo" type="file" placeholder="请选择二维码二" value="">
                     </td>
                 	<td>电话号码</td>
-                    <td><input name="hcPhone" type="text" placeholder="请输入电话号码" class="easyui-textbox" data-options="prompt:'请输入正确的电话号码。',validType:'telNum'" value="${homeContent.hcPhone}" /></td>
+                    <td><input name="hcPhone" type="text" placeholder="请输入电话号码" missingMessage="电话号码不能为空" class="easyui-textbox" data-options="required:true,novalidate:true,prompt:'请输入正确的电话号码。',validType:'telNum'" value="${homeContent.hcPhone}" /></td>
                 </tr>
                 <tr>
                     <td>链接一</td>

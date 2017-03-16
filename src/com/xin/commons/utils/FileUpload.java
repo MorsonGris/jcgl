@@ -8,9 +8,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.HashMap;
 import java.util.Iterator;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -120,7 +118,6 @@ public class FileUpload {
 	 * @throws IOException
 	 * */
 	public static void pictureUpload(HttpServletRequest request,HttpServletResponse response,String filename,String filePath) throws IllegalStateException, IOException {
-		Map<String, String> nameMap = new HashMap<String, String>();
 		//创建一个通用的多部分解析器  
         CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver(request.getSession().getServletContext());  
         //判断 request 是否有文件上传,即多部分请求  
@@ -139,11 +136,9 @@ public class FileUpload {
                     String myFileName = file.getOriginalFilename();  
                     //如果名称不为“”,说明该文件存在，否则说明该文件不存在  
                     if(myFileName.trim() !=""){  
-                        System.out.println(myFileName);  
+                        System.out.println(myFileName);
                         //重命名上传后的文件名  
                         String fileName = filename + file.getOriginalFilename();
-                        nameMap.put("", fileName);
-                        System.out.println("---"+iter.hasNext()+"***"+iter.next());
                         //定义上传路径  
                         String path = filePath + fileName;  
                         File localFile = new File(path);  
