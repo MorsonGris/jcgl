@@ -21,12 +21,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.xin.bean.HotMajor;
 import com.xin.bean.Notice;
 import com.xin.commons.base.BaseController;
 import com.xin.commons.csrf.CsrfToken;
 import com.xin.commons.utils.CaptchaUtils;
 import com.xin.commons.utils.PageInfo;
 import com.xin.commons.utils.StringUtils;
+import com.xin.service.IHotMajorService;
 import com.xin.service.INoticeService;
 
 /**
@@ -38,6 +40,8 @@ import com.xin.service.INoticeService;
 public class LoginController extends BaseController {
 	
 	@Autowired private INoticeService noticeService;
+	
+	@Autowired private IHotMajorService hotMajorService;
 	
     /**
      * 首页
@@ -55,12 +59,8 @@ public class LoginController extends BaseController {
      */
     @RequestMapping("/index")
     public String home(Model model){
-    	PageInfo pageInfo = new PageInfo(0, 5, "n_date", "desc");
-    	Map<String, Object> condition = new HashMap<String, Object>();
-        condition.put("nFlag", "1");
-        pageInfo.setCondition(condition);
-    	List<Notice> list = noticeService.selectDataGrid(pageInfo);
-    	model.addAttribute("noticelist", list);
+    	List<HotMajor> major = hotMajorService.selectAll();
+    	model.addAttribute("major", major);
     	return "proscenium/home";
     }
 
@@ -72,6 +72,9 @@ public class LoginController extends BaseController {
         pageInfo.setCondition(condition);
     	List<Notice> list = noticeService.selectDataGrid(pageInfo);
     	model.addAttribute("noticelist", list);
+    	
+    	List<HotMajor> major = hotMajorService.selectAll();
+    	model.addAttribute("major", major);
     	return "proscenium/home";
     }
     

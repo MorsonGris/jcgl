@@ -151,89 +151,21 @@
                 <div style="border-bottom: 1px solid #e0e0e0; margin-bottom: 10px;">
                     <h3>热门专业</h3>
                 </div>
-                <div class="row">
-                    <div class="col-md-4">
+                <c:forEach var="major" items="${major}">
+                	 <div class="col-md-6">
                         <div class="thumbnail">
-                            <img alt="300x200" src="${path }/static/proscenium/images/computer.jpg" />
+                            <img alt="300x200" style="width:" src="${path }/static/proscenium/images/${major.hmPicture}" />
                             <div class="caption">
                                 <h4>
-                                    软件技术
+                                   	<b>${major.hmTitle}</b>
                                 </h4>
                                 <p>
-                                   本专业培养具有一定的理论知识，掌握至少一种主流软件开发平台，具有较强编程能力的高级实用型专业人才。该专业毕业的学生拥有庞大的就业市场，具有广阔的就业前景。
+                                	&nbsp;&nbsp;&nbsp;&nbsp;${major.hmContent}
                                 </p>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-4">
-                        <div class="thumbnail">
-                            <img alt="300x200" src="${path }/static/proscenium/images/kj5.jpg" />
-                            <div class="caption">
-                                <h4>
-                                    会计学
-                                </h4>
-                                <p>
-                                   该专业培养具备管理、经济、法律和会计学等方面的知识和能力，能在企、事业单位及政府部门从事会计实务以及教学、科研方面工作的工商管理学科高级专门人才。
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="thumbnail">
-                            <img alt="300x200" src="${path }/static/proscenium/images/qx.jpg" />
-                            <div class="caption">
-                                <h4>
-                                    汽车维修
-                                </h4>
-                                <p>
-                                    汽车维修是适应社会发展的需要，随着中国社会的发展，汽车数量的增加，汽车维修人员的缺乏，需要一批，专业强，素质高的维修人员。汽车维修作为教育部实施的技能紧缺人才培养工程重点之一，全国人才需求量30多万。
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="thumbnail">
-                            <img alt="300x200" src="${path }/static/proscenium/images/ds.jpg" />
-                            <div class="caption">
-                                <h4>
-                                    电子商务
-                                </h4>
-                                <p>
-                                   培养商务、营销等专业技术人才，毕业后从事相关的商务、计算机应用与操作技术或管理工作。如市场预测、业务洽谈、商品验收、推销、展销等。
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="thumbnail">
-                            <img alt="300x200" src="${path }/static/proscenium/images/hkly.jpg" />
-                            <div class="caption">
-                                <h4>
-                                    航空旅游
-                                </h4>
-                                <p>
-                                    培养熟练掌握民航服务理论和基本技能，为客户提供高品位、高质量服务，具有较强公关能力与协调能力、灵活应变能力的航空服务人才。毕业后就业于各大航空公司空乘或地面服务岗位。
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="thumbnail">
-                            <img alt="300x200" src="${path }/static/proscenium/images/wlgl.jpg" />
-                            <div class="caption">
-                                <h4>
-                                    物流管理
-                                </h4>
-                                <p>
-                                    培养从事现代物流业中的信息处理、配送、仓储、多式联运、采购、货代等具有专业及管理的高等技术应用型人才。毕业后在物流部门从事运输调度员、理货员、物质配送、商品储存等方面工作。
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                </c:forEach>
             </div>
         </div>
      </div>
