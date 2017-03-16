@@ -161,7 +161,9 @@ public class NoticeController extends BaseController{
      * */
     @GetMapping("/selectById")
     public String selectById(Model model, int id) {
+    	model.addAttribute("homeContent", homeContent());
     	Notice n = noticeService.selectNoticeById(id);
+    	
     	model.addAttribute("notice", n);
     	return "proscenium/notice_particular";
     }
@@ -170,7 +172,8 @@ public class NoticeController extends BaseController{
      * 更多页面
      * */
     @GetMapping("/selectMore")
-    public String selectMore() {
+    public String selectMore(Model model) {
+    	model.addAttribute("homeContent", homeContent());
     	return "proscenium/notice";
     }
 }

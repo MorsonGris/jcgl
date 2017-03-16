@@ -42,9 +42,9 @@
 		U.`name`,
 		A.a_school,
 		A.a_major,
-		F.STU_NO,
+		F.stu_no,
 		F.tea_class,
-		F.NEED_MONEY,
+		F.need_money,
 		F.practical_money,
 		F.f_date,
 		F.f_way,
@@ -55,9 +55,9 @@
 	
 	<sql id="table_field">
 		F.f_id,
-		F.STU_NO,
+		F.stu_no,
 		F.tea_class,
-		F.NEED_MONEY,
+		F.need_money,
 		F.practical_money,
 		F.f_date,
 		F.f_way,
@@ -67,14 +67,14 @@
 	</sql>
 	
 	<sql id="tableName">
-		FINANCE
+		finance
 	</sql>
 	
 	<select id="selectFinancePage" resultMap="BaseResultMap">
-		SELECT 
+		select 
 			<include refid="field" /> 
-		FROM FINANCE F LEFT JOIN STUDENT S ON F.STU_NO=S.S_STUDENTNO LEFT JOIN `user` U ON S.USER_ID=U.ID 
-		LEFT JOIN academy A ON S.academy_id=A.a_id 
+		from finance F left join student S on F.stu_no=S.s_studentno left join `user` U on S.user_id=U.id 
+		left join academy A on S.academy_id=A.a_id 
 		<where>
             <if test=" username != null and username != '' ">
                 U.`name` like #{username}
@@ -98,16 +98,16 @@
 	</select>
 	
 	<select id="selectFinanceAll" parameterType="com.xin.bean.Finance" resultMap="BaseResultMap">
-		SELECT 
+		select 
 			<include refid="field" /> 
-		FROM FINANCE F LEFT JOIN STUDENT S ON F.STU_NO=S.S_STUDENTNO LEFT JOIN `user` U ON S.USER_ID=U.ID 
-		LEFT JOIN academy A ON S.academy_id=A.a_id 
+		from finance F left join student S on F.stu_no=S.s_studentno left join `user` U on S.user_id=U.id 
+		left join academy A on S.academy_id=A.a_id 
 		<where>
             <if test=" teaClass != null and teaClass != '' ">
                 U.`name` like #{teaClass}
             </if>
             <if test=" stuNo != null and stuNo != '' ">
-              	and F.STU_NO like #{stuNo}
+              	and F.stu_no like #{stuNo}
             </if>
             <if test=" fState != null and fState != 0 ">
               	and F.f_state = #{fState}
@@ -121,15 +121,15 @@
             <if test=" stypeone != null and stypeone != 0 ">
               	and (S.s_type = #{stypeone} or S.s_type = #{stypetwo})
             </if>
-        </where> ORDER BY f_date DESC
+        </where> order by f_date desc
 	</select>
 	
 	<select id="selectfinanceById" parameterType="Integer" resultMap="BaseResultMap">
-		SELECT <include refid="table_field" /> FROM FINANCE F WHERE F.F_ID = #{id}
+		select <include refid="table_field" /> from finance F where F.f_id = #{id}
 	</select>
 	
 	<insert id="financeInsert" parameterType="com.xin.bean.Finance">
-		INSERT INTO <include refid="tableName"></include>(STU_NO,TEA_CLASS,NEED_MONEY,PRACTICAL_MONEY,F_DATE,F_WAY,F_ACCUMULATIVE,F_STATE,F_OBLIGATE) VALUES(
+		insert into <include refid="tableName"></include>(stu_no,tea_class,need_money,practical_money,f_date,f_way,f_accumulative,f_state,f_obligate) values(
 			#{stuNo},
 			#{teaClass},
 			#{needMoney},
@@ -143,53 +143,53 @@
 	</insert>
 	
 	<update id="updateFinance" parameterType="com.xin.bean.Finance">
-		UPDATE <include refid="tableName"></include> 
+		update <include refid="tableName"></include> 
 		<set>
 			<if test="stuNo!=null and stuNo!='' ">
-				STU_NO=#{stuNo},
+				stu_no=#{stuNo},
 			</if>
 			<if test="teaClass!=null and teaClass!='' ">
-				TEA_CLASS=#{teaClass},
+				tea_class=#{teaClass},
 			</if>
 			<if test="needMoney!=null and needMoney!='' ">
-				NEED_MONEY=#{needMoney},
+				need_money=#{needMoney},
 			</if>
 			<if test="practicalMoney!=null and practicalMoney!='' ">
-				PRACTICAL_MONEY=#{practicalMoney},
+				practical_money=#{practicalMoney},
 			</if>
 			<if test="fDate!=null">
-				F_DATE=#{fDate,jdbcType=TIMESTAMP},
+				f_date=#{fDate,jdbcType=TIMESTAMP},
 			</if>
 			<if test="fWay!=null and fWay!='' ">
-				F_WAY=#{fWay},
+				f_way=#{fWay},
 			</if>
 			<if test="fAccumulative!=null and fAccumulative!='' ">
-				F_ACCUMULATIVE=#{fAccumulative},
+				f_accumulative=#{fAccumulative},
 			</if>
 			<if test="fState!=null and fState!='' ">
-				F_STATE=#{fState},
+				f_state=#{fState},
 			</if>
 		</set>
 		WHERE F_ID=#{fId}
 	</update>
 	
 	<update id="updateBatchFinance" parameterType="com.xin.bean.Finance">
-		UPDATE <include refid="tableName"></include> 
+		update <include refid="tableName"></include> 
 		<set>
 			<if test="practicalMoney!=null and practicalMoney!='' ">
-				PRACTICAL_MONEY=PRACTICAL_MONEY+#{practicalMoney},
+				practical_money=practical_money+#{practicalMoney},
 			</if>
 			<if test="fAccumulative!=null and fAccumulative!='' ">
-				F_ACCUMULATIVE=F_ACCUMULATIVE+#{fAccumulative},
+				f_accumulative=f_accumulative+#{fAccumulative},
 			</if>
 			<if test="fWay!=null and fWay!='' ">
-				F_WAY=#{fWay},
+				f_way=#{f_way},
 			</if>
 		</set>
-		WHERE F_ID = #{fId}
+		where f_id = #{fId}
 	</update>
 	
 	<delete id="deleteFinance" parameterType="Integer">
-		DELETE FROM <include refid="tableName"></include> WHERE F_ID=#{id}
+		delete from <include refid="tableName"></include> where f_id=#{id}
 	</delete>
 </mapper>

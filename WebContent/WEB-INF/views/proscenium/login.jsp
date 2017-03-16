@@ -50,13 +50,18 @@
                    </div>
                    <div class="form-group">
                    <div class="row">
-                   	<div class="col-xs-8">
-                   		<input class="captcha" type="text" name="captcha" placeholder="请输入验证码"/>
-                   	</div>
-                   	<div class="col-xs-4" style="padding: 0;padding-right: 15px;">
-                   		<img id="captcha" alt="验证码" src="${path }/captcha.jpg" data-src="${path }/captcha.jpg?t=" style="vertical-align:middle;border-radius:4px;width:100%;height:50px;cursor:pointer;">
-                   	</div>
+                   		<div class="col-xs-6">
+                   			<input class="form-control" type="text" name="captcha" placeholder="验证码"/>
+                   		</div>
+                   		<div class="col-xs-6">
+                   			<img id="captcha" alt="验证码" src="${path }/captcha.jpg" data-src="${path }/captcha.jpg?t=" style="vertical-align:middle;border-radius:4px;width:100%;height:50px;cursor:pointer;">
+                   		</div>
                    </div>
+                   		
+                   	
+                   		
+                   
+                   
                    </div>
                    <button type="submit" class="btn">登录</button>
                </form>

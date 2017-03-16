@@ -78,8 +78,7 @@ public class LoginController extends BaseController {
     	List<HotMajor> major = hotMajorService.selectAll();
     	model.addAttribute("major", major);
     	
-    	HomeContent homeContent = homeContentService.selectHomeOne();
-    	model.addAttribute("homeContent", homeContent);
+    	model.addAttribute("homeContent", homeContent());
     	
     	PageInfo pi = new PageInfo(0, 4, "r_id", "desc");
     	List<Relation> relation = relationService.selectDataGrid(pi);
