@@ -121,10 +121,9 @@ public class StudentController extends BaseController{
     
     @GetMapping("/school")
     @ResponseBody
-    public List<Academy> selectschool(int id){
-    	Academy schoolName = academyService.selectById(id);
-    	List<Academy> shcoollist = academyService.selectByName(schoolName.getASchool());
-    	return shcoollist;
+    public Object selectschool(String schoolname){
+    	List<Academy> list = academyService.selectByName(schoolname);
+    	return list;
     }
     
 	@RequestMapping("/validatori")
@@ -181,7 +180,6 @@ public class StudentController extends BaseController{
     @RequestMapping("/add")
     @ResponseBody
     public Object add(Student student){
-    	System.out.println("User"+student.getUserId());
 		Student stu = studentService.selectByNo();
     	String No = StudentNo.getNo(stu);
     	student.setStudentNo(No);

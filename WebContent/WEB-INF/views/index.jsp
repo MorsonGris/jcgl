@@ -193,6 +193,12 @@
 					        <div id='calendar'>
 					        </div>
 					    </div>
+					    <div style="float: left;margin-left:30px;">
+					    	<h2>工作提示：</h2>
+					    	<c:forEach var="schedule" items="${schedule}" varStatus="idxStatus">
+					    		<p style="font-size:18px;"><c:out value='${idxStatus.count}'/>、<c:out value="${schedule.SContent}"></c:out></p>
+					    	</c:forEach>
+					    </div>
 					    <script>
 						     var myCalendar = new SimpleCalendar('#calendar');
 						</script>

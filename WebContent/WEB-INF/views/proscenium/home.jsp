@@ -29,13 +29,13 @@
             </ol>
             <div class="carousel-inner">
                 <div class="item active">
-                    <img alt="" src="${path }/static/proscenium/images/homepicture/${homeContent.pictureOne}" />
+                    <img alt="" src="${path }/static/proscenium/images/${homeContent.pictureOne}" />
                     <div class="carousel-caption">
                             <h3>学历国家承认,网上可查</h3>
                     </div>
                 </div>
                 <div class="item">
-                    <img alt="" src="${path }/static/proscenium/images/homepicture/${homeContent.pictureTwo}" />
+                    <img alt="" src="${path }/static/proscenium/images/${homeContent.pictureTwo}" />
                     <div class="carousel-caption">
                         <h3>
                             在职大专，本科学历
@@ -43,7 +43,7 @@
                     </div>
                 </div>
                 <div class="item">
-                    <img alt="" src="${path }/static/proscenium/images/homepicture/${homeContent.pictureThree}" />
+                    <img alt="" src="${path }/static/proscenium/images/${homeContent.pictureThree}" />
                     <div class="carousel-caption">
                         <h3>
                             名额有限，早报早录取

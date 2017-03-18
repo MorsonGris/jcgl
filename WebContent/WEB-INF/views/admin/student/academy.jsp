@@ -31,10 +31,10 @@
                 width : 130,
                 formatter : function(value, row, index) {
                     var str = '';
-                        <shiro:hasPermission name="/applyType/edit">
+                        <shiro:hasPermission name="/academy/editpage">
                             str += $.formatString('<a href="javascript:void(0)" class="user-easyui-linkbutton-edit" data-options="plain:true,iconCls:\'fi-pencil icon-blue\'" onclick="editAcademyFun(\'{0}\');" >编辑</a>', row.aid);
                         </shiro:hasPermission>
-                        <shiro:hasPermission name="/applyType/delete">
+                        <shiro:hasPermission name="/academy/delete">
                             str += '&nbsp;&nbsp;|&nbsp;&nbsp;';
                             str += $.formatString('<a href="javascript:void(0)" class="user-easyui-linkbutton-del" data-options="plain:true,iconCls:\'fi-x icon-red\'" onclick="deleteAcademyFun(\'{0}\');" >删除</a>', row.aid);
                         </shiro:hasPermission>

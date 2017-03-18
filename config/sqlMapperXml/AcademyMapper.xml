@@ -11,7 +11,7 @@
 	</resultMap>
 	
 	<select id="selectAll" resultMap="BaseResultMap">
-		SELECT * FROM academy
+		SELECT distinct a_school FROM academy
 	</select>
 	
 	<select id="selectByName" resultMap="BaseResultMap">

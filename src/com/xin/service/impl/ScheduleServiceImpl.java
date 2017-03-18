@@ -57,5 +57,10 @@ public class ScheduleServiceImpl implements IScheduleService {
 		pageInfo.setRows(list);
 		pageInfo.setTotal(page.getTotal());
 	}
+
+	@Override
+	public List<Schedule> selectByDate(Schedule schedule) {
+		return schedulemapper.selectByDate(schedule);
+	}
 	
 }

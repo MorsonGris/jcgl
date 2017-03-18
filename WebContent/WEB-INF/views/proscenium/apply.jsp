@@ -19,7 +19,7 @@
     <div class="container">
         <div class="row clearfix" style="text-align: center;margin-top: 20px; color: #d58512;">
             <div class="col-xs-4 column">
-                <a href="adult?id=${user.id }&a=1231311321">
+                <a href="adult?id=${user.id }">
                     <img alt="80x80" src="${path }/static/proscenium/icon/rocket.png" class="img-circle apply-ico" />
                     <br>
                     <span class="home_operation">成人教育<br>报名</span>
@@ -33,7 +33,7 @@
                 </a>
             </div>
             <div class="col-xs-4 column">
-                <a href="profession">
+                <a href="http://www.jxck168.com/collegeAction!list3.action?college.collegeid=50">
                     <img alt="80x80" src="${path }/static/proscenium/icon/document.png" class="img-circle apply-ico" />
                     <br>
                     <span class="home_operation">职业培训<br>报名</span>
@@ -56,7 +56,7 @@
                 </a>
             </div>
             <div class="col-xs-4 column">
-                <a href="teacher">
+                <a href="http://www.jxck168.com/collegeAction!list3.action?college.collegeid=65">
                     <img alt="140x140" src="${path }/static/proscenium/icon/hotair.png" class="img-circle apply-ico" />
                     <br>
                     <span class="home_operation">教师资格<br>证报名</span>

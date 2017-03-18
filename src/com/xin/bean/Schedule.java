@@ -21,6 +21,7 @@ public class Schedule {
 	private Date sDate;
 	@TableField("s_flag")
 	private Integer sFlag;
+	private String Day;
 	
 	private Date begintime;
 	private Date endtime;
@@ -88,6 +89,14 @@ public class Schedule {
 
 	public void setsFlag(Integer sFlag) {
 		this.sFlag = sFlag;
+	}
+
+	public String getDay() {
+		return Day;
+	}
+
+	public void setDay(String day) {
+		Day = day;
 	}
 
 }

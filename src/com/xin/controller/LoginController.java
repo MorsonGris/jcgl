@@ -1,5 +1,7 @@
 package com.xin.controller;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -26,6 +28,7 @@ import com.xin.bean.HomeContent;
 import com.xin.bean.HotMajor;
 import com.xin.bean.Notice;
 import com.xin.bean.Relation;
+import com.xin.bean.Schedule;
 import com.xin.commons.base.BaseController;
 import com.xin.commons.csrf.CsrfToken;
 import com.xin.commons.utils.CaptchaUtils;
@@ -35,6 +38,7 @@ import com.xin.service.IHomeContentService;
 import com.xin.service.IHotMajorService;
 import com.xin.service.INoticeService;
 import com.xin.service.IRelationService;
+import com.xin.service.IScheduleService;
 
 /**
  * @description：登录退出
@@ -51,6 +55,8 @@ public class LoginController extends BaseController {
 	@Autowired private IHomeContentService homeContentService;
 	
 	@Autowired private IRelationService relationService;
+	
+	@Autowired private IScheduleService scheduleService;
 	
     /**
      * 首页
@@ -137,6 +143,12 @@ public class LoginController extends BaseController {
      */
     @GetMapping("/admin/index")
     public String index(Model model) {
+    	Schedule schedule = new Schedule();
+    	SimpleDateFormat sdf = new SimpleDateFormat("dd");
+    	schedule.setDay(sdf.format(new Date()));
+    	schedule.setUserId(getUserId());
+    	List<Schedule> list = scheduleService.selectByDate(schedule);
+    	model.addAttribute("schedule", list);
         return "index";
     }
 
@@ -146,9 +158,15 @@ public class LoginController extends BaseController {
      */
     @GetMapping("/login")
     @CsrfToken(create = true)
-    public String login() {
+    public String login(Model model) {
         logger.info("GET请求登录");
         if (SecurityUtils.getSubject().isAuthenticated()) {
+        	Schedule schedule = new Schedule();
+        	SimpleDateFormat sdf = new SimpleDateFormat("dd");
+        	schedule.setDay(sdf.format(new Date()));
+        	schedule.setUserId(getUserId());
+        	List<Schedule> list = scheduleService.selectByDate(schedule);
+        	model.addAttribute("schedule", list);
             return "redirect:/admin/index";
         }
         return "login";

@@ -2,7 +2,6 @@ package com.xin.mapper;
 
 import java.util.List;
 import java.util.Map;
-
 import com.baomidou.mybatisplus.plugins.pagination.Pagination;
 import com.xin.bean.Schedule;
 
@@ -15,6 +14,7 @@ import com.xin.bean.Schedule;
  * @since 2017-02-28
  */
 public interface ScheduleMapper{
+	List<Schedule> selectByDate(Schedule schedule);
 	List<Schedule> selectAll();
 	boolean deleteById(int id);
 	Schedule selectById(int id);

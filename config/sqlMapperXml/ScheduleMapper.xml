@@ -20,6 +20,10 @@
 		SELECT * FROM schedule
 	</select>
 	
+	<select id="selectByDate" resultMap="BaseResultMap">
+		SELECT * FROM schedule where DAY(s_date) = #{Day} and user_id = #{userId}
+	</select>
+	
 	<delete id="deleteById">
 		DELETE FROM schedule WHERE s_id=#{sId}
 	</delete>

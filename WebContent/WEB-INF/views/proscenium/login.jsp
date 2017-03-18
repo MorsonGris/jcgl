@@ -51,7 +51,7 @@
                    <div class="form-group">
                    <div class="row">
                    		<div class="col-xs-6">
-                   			<input class="form-control" type="text" name="captcha" placeholder="验证码"/>
+                   			<input class="form-control" type="text" id="yzm" name="captcha" placeholder="验证码"/>
                    		</div>
                    		<div class="col-xs-6">
                    			<img id="captcha" alt="验证码" src="${path }/captcha.jpg" data-src="${path }/captcha.jpg?t=" style="vertical-align:middle;border-radius:4px;width:100%;height:50px;cursor:pointer;">
@@ -114,7 +114,10 @@ $(document).ready(function() {
 				if(data.result==true){
 					window.location.href = '${path }/index';
 				}else{
+					$("#yzm").val("");
 					$("#captcha")[0].click();
+					$("#loginForm").bootstrapValidator('resetForm');
+					
 					swal( '登录失败!',data.result,'error');
 				}
 			},'JSON');

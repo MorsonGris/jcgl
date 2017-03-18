@@ -16,7 +16,7 @@ import com.xin.bean.Role;
 public interface IRoleService extends IService<Role> {
 
     void selectDataGrid(PageInfo pageInfo);
-
+     
     Object selectTree();
 
     List<Long> selectResourceIdListByRoleId(Long id);
