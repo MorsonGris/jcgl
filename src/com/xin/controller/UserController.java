@@ -1,6 +1,5 @@
 package com.xin.controller;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,13 +12,16 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.xin.bean.Organization;
+import com.xin.bean.Role;
+import com.xin.bean.User;
+import com.xin.bean.vo.UserVo;
 import com.xin.commons.base.BaseController;
 import com.xin.commons.utils.DigestUtils;
 import com.xin.commons.utils.PageInfo;
 import com.xin.commons.utils.StringUtils;
-import com.xin.bean.Role;
-import com.xin.bean.User;
-import com.xin.bean.vo.UserVo;
+import com.xin.service.IOrganizationService;
+import com.xin.service.IRoleService;
 import com.xin.service.IUserService;
 
 /**
@@ -32,6 +34,12 @@ import com.xin.service.IUserService;
 public class UserController extends BaseController {
     @Autowired
     private IUserService userService;
+    
+    @Autowired
+    private IOrganizationService organizationService;
+    
+    @Autowired
+    private IRoleService roleService;
 
     /**
      * 用户管理页
@@ -113,12 +121,15 @@ public class UserController extends BaseController {
     @GetMapping("/editPage")
     public String editPage(Model model, Long id) {
         UserVo userVo = userService.selectVoById(id);
+        List<Organization> list = organizationService.selectTree();
+        Object rolelist = roleService.selectTree();
         List<Role> rolesList = userVo.getRolesList();
-        List<Long> ids = new ArrayList<Long>();
-        for (Role role : rolesList) {
-            ids.add(role.getId());
+        for(int i=0;i<rolesList.size();i++){
+        	Role r = rolesList.get(i);
+        	userVo.setRoleid(Integer.valueOf(String.valueOf(r.getId())));
         }
-        model.addAttribute("roleIds", ids);
+        model.addAttribute("list", list);
+        model.addAttribute("rolelist", rolelist);
         model.addAttribute("user", userVo);
         return "admin/userEdit";
     }

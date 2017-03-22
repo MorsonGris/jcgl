@@ -29,21 +29,21 @@
             </ol>
             <div class="carousel-inner">
                 <div class="item active">
-                    <img alt="" src="${path }/static/proscenium/images/homepicture/${homeContent.pictureOne}" />
+                    <img alt="" src="${path }/static/proscenium/images/${homeContent.pictureOne}" />
                     <div class="carousel-caption">
                             <h3>学历国家承认,网上可查</h3>
                     </div>
                 </div>
                 <div class="item">
-                    <img alt="" src="${path }/static/proscenium/images/homepicture/${homeContent.pictureTwo}" />
+                    <img alt="" src="${path }/static/proscenium/images/${homeContent.pictureTwo}" />
                     <div class="carousel-caption">
                         <h3>
-                            在职大专，本科学历
+                            成人大专，本科学历
                         </h3>
                     </div>
                 </div>
                 <div class="item">
-                    <img alt="" src="${path }/static/proscenium/images/homepicture/${homeContent.pictureThree}" />
+                    <img alt="" src="${path }/static/proscenium/images/${homeContent.pictureThree}" />
                     <div class="carousel-caption">
                         <h3>
                             名额有限，早报早录取
@@ -77,7 +77,7 @@
                 </a>
             </div>
             <div class="col-xs-4 column">
-                <a href="https://www.baidu.com">
+                <a href="http://江西教育网.com/articleAction!init2.action">
                     <img alt="80x80" src="${path }/static/proscenium/icon/arrow-up.png" class="img-circle home-ico" />
                     <br>
                     <span class="home_operation">上传文件</span>
@@ -86,7 +86,7 @@
         </div>
         <div class="row clearfix" style="text-align: center;margin-top: 20px;">
             <div class="col-xs-4 column">
-                <a href="http://www.jxck168.com/courseAction!listcatalog.action">
+                <a href="index/learn">
                     <img alt="80x80" src="${path }/static/proscenium/icon/computer.png" class="img-circle home-ico" />
                     <br>
                     <span class="home_operation">网上学习</span>

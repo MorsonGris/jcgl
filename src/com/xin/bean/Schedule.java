@@ -21,6 +21,7 @@ public class Schedule {
 	private Date sDate;
 	@TableField("s_flag")
 	private Integer sFlag;
+	private String Day;
 	
 	private Date begintime;
 	private Date endtime;
@@ -90,11 +91,12 @@ public class Schedule {
 		this.sFlag = sFlag;
 	}
 
-	@Override
-	public String toString() {
-		return "Schedule [sId=" + sId + ", userId=" + userId + ", sContent=" + sContent + ", sDate=" + sDate
-				+ ", sFlag=" + sFlag + ", begintime=" + begintime + ", endtime=" + endtime + ", listUser=" + listUser
-				+ "]";
+	public String getDay() {
+		return Day;
 	}
-	
+
+	public void setDay(String day) {
+		Day = day;
+	}
+
 }

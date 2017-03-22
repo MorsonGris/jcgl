@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -94,7 +95,8 @@ public class IndexController extends BaseController{
 	 * 学生报名
 	 */
 	@GetMapping("/apply")
-	public String apply(){
+	public String apply(Model model){
+		model.addAttribute("homeContent", homeContent());
 		return "proscenium/apply";
 	}
 	
@@ -102,7 +104,8 @@ public class IndexController extends BaseController{
 	 * 网上学习
 	 */
     @GetMapping("/learn")
-    public String learn(){
+    public String learn(Model model){
+    	model.addAttribute("homeContent", homeContent());
     	return "proscenium/learn";
     }
     
@@ -126,7 +129,8 @@ public class IndexController extends BaseController{
 	 * 公告栏
 	 */ 
 	@GetMapping("/notice")
-	public String notice(){
+	public String notice(Model model){
+		model.addAttribute("homeContent", homeContent());
 		return "proscenium/notice";
 	}
 	
@@ -142,7 +146,8 @@ public class IndexController extends BaseController{
 	 * 会计培训
 	 */
 	@GetMapping("/accountant")
-	public String accountant(){
+	public String accountant(Model model){
+		model.addAttribute("homeContent", homeContent());
 		return "proscenium/accountant";
 	}
 	
@@ -150,7 +155,8 @@ public class IndexController extends BaseController{
 	 * 成人教育
 	 */
 	@GetMapping("/adult")
-	public String adult(){
+	public String adult(Model model){
+		model.addAttribute("homeContent", homeContent());
 		return "proscenium/adult";
 	}
 	
@@ -159,7 +165,8 @@ public class IndexController extends BaseController{
 	 * 艺考培训
 	 */
 	@GetMapping("art")
-	public String art(){
+	public String art(Model model){
+		model.addAttribute("homeContent", homeContent());
 		return "proscenium/art";
 	}
 		
@@ -167,7 +174,8 @@ public class IndexController extends BaseController{
 	 * 国家开放大学
 	 */
 	@GetMapping("/nation")
-	public String nation(){
+	public String nation(Model model){
+		model.addAttribute("homeContent", homeContent());
 		return "proscenium/nation";
 	}
 	

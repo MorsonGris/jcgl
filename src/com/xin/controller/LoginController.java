@@ -1,5 +1,7 @@
 package com.xin.controller;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -56,6 +58,8 @@ public class LoginController extends BaseController {
 	
 	@Autowired private IRelationService relationService;
 	
+	@Autowired private IScheduleService scheduleService;
+	
     /**
      * 首页
      *
@@ -82,8 +86,7 @@ public class LoginController extends BaseController {
     	List<HotMajor> major = hotMajorService.selectAll();
     	model.addAttribute("major", major);
     	
-    	HomeContent homeContent = homeContentService.selectHomeOne();
-    	model.addAttribute("homeContent", homeContent);
+    	model.addAttribute("homeContent", homeContent());
     	
     	PageInfo pi = new PageInfo(0, 4, "r_id", "desc");
     	List<Relation> relation = relationService.selectDataGrid(pi);
@@ -142,12 +145,12 @@ public class LoginController extends BaseController {
      */
     @RequestMapping("/admin/index")
     public String index(Model model) {
-    	ModelAndView mv = new ModelAndView();
-    	List<Schedule> list = scheduleService.selectByuserId(getUserId());
-    	for(Schedule s : list) {
-    		System.out.println(s.getSContent()+"*************");
-    	}
-    	mv.addObject("schedule", list);
+    	Schedule schedule = new Schedule();
+    	SimpleDateFormat sdf = new SimpleDateFormat("dd");
+    	schedule.setDay(sdf.format(new Date()));
+    	schedule.setUserId(getUserId());
+    	List<Schedule> list = scheduleService.selectByDate(schedule);
+    	model.addAttribute("schedule", list);
         return "index";
     }
     
@@ -164,9 +167,15 @@ public class LoginController extends BaseController {
      */
     @GetMapping("/login")
     @CsrfToken(create = true)
-    public String login() {
+    public String login(Model model) {
         logger.info("GET请求登录");
         if (SecurityUtils.getSubject().isAuthenticated()) {
+        	Schedule schedule = new Schedule();
+        	SimpleDateFormat sdf = new SimpleDateFormat("dd");
+        	schedule.setDay(sdf.format(new Date()));
+        	schedule.setUserId(getUserId());
+        	List<Schedule> list = scheduleService.selectByDate(schedule);
+        	model.addAttribute("schedule", list);
             return "redirect:/admin/index";
         }
         return "login";

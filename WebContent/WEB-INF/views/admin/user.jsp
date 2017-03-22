@@ -64,7 +64,7 @@
                 field : 'phone',
                 sortable : true
             },{
-                width : '200',
+                width : '100',
                 title : '角色',
                 field : 'rolesList',
                 formatter : function(value, row, index) {

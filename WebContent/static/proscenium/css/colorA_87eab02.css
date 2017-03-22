@@ -1,0 +1,100 @@
+.nor-downloadbtn {
+    background-color: #f85959 ;
+}
+
+.nor-btn {
+    background-color: #f85959 ;
+}
+
+.head-line .head1 h2 {
+    border-color: #f85959 !important;
+}
+
+.head-line .head2 {
+    border-top: 2px solid #f85959 !important;
+}
+
+.head-line .head3 h2 {
+    border-color: #f85959 !important;
+}
+
+.head-line .head4 h2 {
+    border-bottom: 2px solid #f85959 !important;
+}
+
+.tel-btn {
+    background-color: #f85959 !important;
+}
+.tel-btn.style2,
+.tel-btn.style4,
+.tel-btn.style6{
+    background-color: #fff;
+    color: #f85959;
+    border: 1px solid #f85959;
+}
+.tel-btn.style2:hover,
+.tel-btn.style4:hover,
+.tel-btn.style6:hover{
+    color: #f85959;
+}
+
+.qqcustomer-btn {
+    background-color: #f85959 !important;
+}
+.qqcustomer-btn.style2,
+.qqcustomer-btn.style4,
+.qqcustomer-btn.style6{
+    background-color: #fff;
+    color: #f85959;
+    border: 1px solid #f85959;
+}
+.qqcustomer-btn.style2:hover,
+.qqcustomer-btn.style4:hover,
+.qqcustomer-btn.style6:hover{
+    color: #f85959;
+}
+
+
+
+form .btn-i {
+    background-color: #f85959 !important;
+}
+form .btn-jump{
+    background-color: #f85959 !important;
+}
+
+.rich-text .inner{
+    border-color: #f85959;
+}
+
+
+/******************导航样式******************/
+.nav-wrapper .nav-inner {
+    border-bottom-color: #f85959 !important;
+}
+
+.nav-wrapper.item2 .nav-inner {
+    border-bottom-color: #f85959 !important;
+}
+
+.nav-wrapper.item3 .nav-inner {
+    background-color: #f85959 !important;
+}
+
+.nav-wrapper.item1 .cur a{
+    background-color: #f85959 !important;
+}
+
+.nav-wrapper.item2 .cur a{
+    border-bottom-color: #f85959 !important;
+}
+
+.nav-wrapper.item4 .cur a {
+    color: #f85959 !important;
+}
+.nav-wrapper.item5 .cur a{
+    background-color: #f85959 !important;
+}
+.poll .poll-content .poll-oper a{
+    background-color: #f85959 !important;
+}

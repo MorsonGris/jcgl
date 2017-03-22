@@ -34,6 +34,8 @@ public class UserVo implements Serializable {
 	private Integer status;
 
 	private Integer organizationId;
+	
+	private Integer roleid;
 
 	private Date createTime;
 
@@ -117,6 +119,12 @@ public class UserVo implements Serializable {
 		this.status = status;
 	}
 
+	public Integer getRoleid() {
+		return roleid;
+	}
+	public void setRoleid(Integer roleid) {
+		this.roleid = roleid;
+	}
 	public Integer getOrganizationId() {
 		return organizationId;
 	}

@@ -2,25 +2,6 @@
 <%@ include file="/commons/global.jsp" %>
 <script type="text/javascript">
     $(function() {
-        $('#userEditorganizationId').combotree({
-            url : '${path }/organization/tree',
-            parentField : 'pid',
-            lines : true,
-            panelHeight : 'auto',
-            value : '${user.organizationId}'
-        });
-
-        $('#userEditRoleIds').combotree({
-            url : '${path }/role/tree',
-            parentField : 'pid',
-            lines : true,
-            panelHeight : 'auto',
-            multiple : true,
-            required : true,
-            cascadeCheck : false,
-            value : ${roleIds }
-        });
-
         $('#userEditForm').form({
             url : '${path }/user/edit',
             onSubmit : function() {
@@ -81,9 +62,21 @@
                 </tr>
                 <tr>
                     <td>部门</td>
-                    <td><select id="userEditorganizationId" name="organizationId" style="width: 140px; height: 29px;" class="easyui-validatebox" data-options="required:true"></select></td>
+                    <td>
+                   		<select id="userAddOrganizationId" name="organizationId" style="width: 140px; height: 29px;" class="easyui-validatebox" data-options="required:true">
+                   			<c:forEach items="${list}" var="list">
+                   				<option value="${list.id}" <c:if test="${list.id==user.organizationId}">selected</c:if>>${list.name}</option>
+                   			</c:forEach>
+                   		</select>
+                    </td>
                     <td>角色</td>
-                    <td><input  id="userEditRoleIds" name="roleIds" style="width: 140px; height: 29px;"/></td>
+                    <td>
+                    	<select id="userAddRoleIds" name="roleIds" style="width: 140px; height: 29px;">
+                    		<c:forEach items="${rolelist}" var="rolelist">
+                   				<option value="${rolelist.id}" <c:if test="${rolelist.id==user.roleid}">selected</c:if>>${rolelist.description}</option>
+                   			</c:forEach>
+                    	</select>
+                    </td>
                 </tr>
                 <tr>
                     <td>电话</td>

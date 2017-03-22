@@ -172,7 +172,7 @@ public class ArtexamController extends BaseController{
     @ResponseBody
     public Object delete(int id){
     	Finance finace = financeService.selectfinanceById(id);
-    	if(finace !=null){
+    	if(finace ==null){
     	boolean result = artexamService.deleteById(id);
 	    	if(result == true){
 	    		return renderSuccess("删除成功");

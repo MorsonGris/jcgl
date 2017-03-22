@@ -1,0 +1,428 @@
+.input-group-i,
+.select-group,
+.selectMulti-group,
+.textarea-group,
+.city-group,
+.date-group,
+.gender-group,
+.checkbox-group,
+.radio-group {
+    padding: 5px 18px;
+    position: relative;
+    border-collapse: separate;
+}
+
+
+
+.select-addon, .city-addon, .date-addon, .gender-addon,
+.textarea-addon, .checkbox-addon, .radio-addon,
+.input-group-i .input-group-addon-i{
+    font-size: 12px;
+    color: #464646;
+    text-align: center;
+    line-height: 1;
+    margin-bottom: 10px;
+    color: #808080;
+}
+
+.form-input-i:focus {
+    border-color: #66afe9;
+    outline: 0;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6);
+}
+
+.btn-i {
+    display: block;
+    cursor: pointer;
+    color: #fff;
+    height: 42px;
+    line-height: 42px;
+    text-align: center;
+    box-sizing: border-box;
+    text-decoration: none;
+    font-size: 14px;
+    width: 100%;
+    padding: 0;
+    border: none;
+    border-radius: 4px;
+    background-color: #f85959;
+    -webkit-user-select: none;
+}
+form .btn-i:active{
+    opacity: 0.7;
+}
+
+
+.form-control {
+      height: 40px;
+}
+.warn-star:after {
+    content: ' *';
+    color: #f85959;
+}
+
+.btn-jump
+{
+    width: 58px;
+    height: 58px;
+    display: none;
+    // position: fixed;
+    z-index: 9999;
+    margin: 10px auto;
+    opacity: 0.7;
+    border-radius: 50%;
+    background-color: #f85959;
+    /*在测试环境中  实际地址是 http://ad.toutiao.com/static/tetris/images/form_icon.png  */
+    background-image: url("form_icon.png")/*tpa=http://s2.pstatp.com/site/tetris/images/form_icon.png*/;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 60%;
+    outline: none;
+}
+.btn-jump:focus,
+.btn-jump:active,
+.btn-jump:hover{
+    outline: none;
+    outline: 0 !important;
+    opacity: 0.5;
+}
+
+.textarea-group .content{
+    display: block;
+    position: relative;
+    z-index: 2;
+    margin-bottom: 0;
+    width: 100%;
+    padding: 6px 12px;
+    font-size: 14px;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    border-radius: 4px;
+}
+
+
+/*下拉*/
+.select-list{
+    width: 100%;
+    line-height: 1;
+}
+
+.select-checkbox select{
+    display: none;
+}
+
+.select-checkbox .cbx-item{
+    margin: 10px 20px 0 0;
+    display: inline-block;
+    font-weight: normal;
+}
+
+.select-checkbox .cbx-item input{
+    margin: 2px 5px 0 0;
+    width: 18px;
+    height: 18px;
+}
+
+
+.selectMulti-wrapper{
+}
+
+.selectMulti-wrapper .select-wrapper:not(:first-child){
+    margin-top: 10px;
+}
+
+/*存储select所选的值*/
+.selectMulti-group .multi-select{
+    display: none;
+}
+
+/*城市*/
+.city-group .pro-list, .city-group .city-list {
+    width: 80%;
+    margin-left: 10px;
+    display: inline-block;
+    vertical-align: middle;
+}
+.city-group-province {
+    padding-right: 5px;
+}
+.city-group-city {
+    padding-left: 5px;
+}
+.city-box {
+    padding: 0 15px;
+}
+.city-control {
+      display: block;
+      height: 40px;
+      padding: 6px 12px;
+      font-size: 14px;
+      line-height: 1.42857143;
+      color: #555;
+      background-color: #fff;
+      background-image: none;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+      box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+      -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
+      -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+      transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+}
+
+
+
+/*单选多选*/
+
+.radio-box [type="radio"],
+.checkbox-box [type="checkbox"] {
+    margin-right: 10px;
+}
+.radio-box label,
+.checkbox-box label{
+    font-weight: normal;
+}
+.radio-box label,
+.checkbox-box label{
+    margin-right: 15px;
+}
+.radio-group .radio-select,
+.checkbox-group .checkbox-select{
+    display: none;
+}
+
+
+/*日期*/
+.date-group .form-date {
+    -webkit-appearance: none;
+    line-height: 22px;
+}
+
+/*短信验证*/
+.sms-validate
+{
+    margin: 10px 0;
+}
+
+.sms-validate .form-control
+{
+    display: inline-block;
+    width: 60%;
+}
+
+.sms-validate .btn-wrapper{
+    width: 40%;
+    padding-left: 10px;
+}
+.sms-validate .nor-btn
+{
+    font-size: 14px;
+    line-height: 40px;
+    display: inline-block;
+    box-sizing: border-box;
+    width: 100%;
+    height: 40px;
+    margin: 0 auto;
+    padding: 0 14px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    opacity: 0.7;
+}
+.sms-validate .disabled
+{
+    background: #999;
+}
+.sms-validate .disabled .text{
+    font-size: 12px;
+}
+
+
+
+/*新样式*/
+
+form.input-style1 .input-group-i,
+form.input-style1 [class*="-group"]{
+    min-height: 40px;
+    overflow: hidden;
+}
+
+form.input-style1 .input-group-i span.input-group-addon-i,
+form.input-style1 .date-group span.date-addon,
+form.input-style1 .selectMulti-group span.select-addon,
+form.input-style1 .textarea-group span.textarea-addon,
+form.input-style1 .gender-group span.gender-addon,
+form.input-style1 .radio-group span.radio-addon,
+form.input-style1 .checkbox-group span.checkbox-addon,
+form.input-style1 .city-group span.city-addon{
+    float:left;
+    width: 20%;
+    overflow: hidden;
+    line-height: 40px;
+    margin-bottom: 0;
+    text-align: left;
+}
+form.input-style1 input[type="radio"],
+form.input-style1 input[type="checkbox"]{
+    margin-top: 13px;
+}
+form.input-style1 .input-group-i input,
+form.input-style1 .date-group input{
+    height: 40px;
+    width: 80%;
+}
+
+form.input-style1 .input-group-i .sms-validate span.input-group-addon-i{
+    float: none;
+    width: 40%;
+}
+form.input-style1 .input-group-i .sms-validate input{
+    width: 60%;
+}
+
+
+
+form.input-style1 .city-box,
+form.input-style1 .radio-box,
+form.input-style1 .checkbox-box,
+form.input-style1 .selectMulti-group .selectMulti-wrapper{
+    width: 80%;
+    min-height: 40px;
+    margin-left: 20%;
+}
+form.input-style1 .city-box{
+    padding: 0;
+}
+form.input-style1 .textarea-group textarea{
+    width: 80%;
+    margin-left: 20%;
+}
+form.input-style1 .gender-group label,
+form.input-style1 .radio-group label,
+form.input-style1 .checkbox-group label{
+    height: 40px;
+    /*margin: 0;*/
+    line-height: 40px;
+}
+
+form.input-style1 .sms-validate{
+    margin-left: 20%;
+}
+form.input-style1 .input-group-i .sms-validate input,
+form.input-style1 .input-group-i .sms-validate .btn-wrapper{
+    width: 50%;
+}
+
+
+
+/*新样式*/
+form.input-style2 .input-group-i span.input-group-addon-i,
+form.input-style2 .textarea-group span.textarea-addon{
+    display: none;
+}
+
+/*新样式 暂用于附加创意*/
+.ui-style4-input{
+    padding: 0 35px;
+    margin-top: 10px;
+}
+
+.ui-style4-input input[type="text"]{
+    border: none;
+    border-radius: 0;
+    padding: 0;
+    font-size: 16px;
+    text-indent: 2px;
+    box-shadow: none;
+}
+
+.ui-style4-sub{
+    margin-top: 35px !important;
+    padding: 0 35px;
+}
+
+.ui-style4-btn{
+    font-size: 17px;
+    border-radius: 6px;
+    height: 45px;
+}
+
+.m-title{
+    font-size: 17px;
+    text-align: center;
+    padding-top: 40px;
+    color: #222;
+}
+
+.m-title > h2{
+    height: 22px;
+    white-space: nowrap;
+    overflow: hidden;
+    -webkit-text-overflow: ellipsis;
+    text-overflow: ellipsis;
+}
+
+.m-astitle > h5{
+    font-size: 12px;
+    color: #999;
+    text-align: center;
+    padding: 10px 0;
+}
+
+.el-result{
+    position: absolute;
+    text-align: center;
+    color: #f00;
+    font-size: 12px;
+    left: 0;
+    right: 0;
+    top: -18px;
+}
+
+.el-line4{
+    width: 100%;
+    height: 1px;
+    background-color: #d8d8d8;
+    -webkit-transform: scaleY(.5);
+    transform: scaleY(.5);
+}
+.form-piece .form-count {
+    display: none;
+    margin: 6px 0;
+}
+.form-piece .form-count .split-count {
+    flex: 1;
+    border-bottom: solid 1px #E8E8E8;
+    height: 10px;
+    margin: 0 8px;
+}
+.form-piece .form-count .count-text {
+    font-family: PingFangSC-Regular;
+    font-size: 10px;
+    color: #505050;
+}
+.form-piece .form-count .count-text-num {
+    margin: 0 5px;
+    font-size: 15px;
+    line-height: 1.2;
+    color: red;
+}
+
+@media screen and (min-width:1024px) and (max-width:1439px) {
+    .piece.form-piece {
+        padding: 0 15px;
+    }
+}
+
+@media screen and (min-width:1440px) {
+    .piece.form-piece {
+        padding: 0 30px;
+    }
+}

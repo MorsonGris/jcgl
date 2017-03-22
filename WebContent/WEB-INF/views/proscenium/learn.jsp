@@ -20,24 +20,40 @@
     <div class="container">
         <div class="row clearfix" style="text-align: center;margin-top: 20px; color: #d58512;">
             <div class="col-xs-4 column">
-                <a href="http://m.kuaiji.com/">
-                    <img alt="80x80" src="${path }/static/proscenium/icon/clock.png" class="img-circle apply-ico" />
+                <a href="http://www.jxck168.com/web/kaochang.jsp">
+                    <img alt="80x80" src="${path }/static/proscenium/images/xin.jpg" class="img-circle apply-ico" />
                     <br>
-                    <span class="home_operation">会计网</span>
+                    <span class="home_operation">聚成模拟考场</span>
                 </a>
             </div>
             <div class="col-xs-4 column">
-                <a href="http://m.yikaow.com/">
-                    <img alt="80x80" src="${path }/static/proscenium/icon/compose.png" class="img-circle apply-ico" />
+                <a href="http://degree.qingshuxuetang.com/dhlg/Home?schoolCategory=1">
+                    <img alt="80x80" src="${path }/static/proscenium/images/sciences.jpg" class="img-circle apply-ico" />
                     <br>
-                    <span class="home_operation">艺考网</span>
+                    <span class="home_operation">东华理工学习平台 </span>
                 </a>
             </div>
             <div class="col-xs-4 column">
-                <a href="http://m.jxzkwz.com/">
-                    <img alt="80x80" src="${path }/static/proscenium/icon/document.png" class="img-circle apply-ico" />
+                <a href="http://degree.qingshuxuetang.com/gnnu/Majors">
+                    <img alt="80x80" src="${path }/static/proscenium/images/Gannan.jpg" class="img-circle apply-ico" />
                     <br>
-                    <span class="home_operation">成考网</span>
+                    <span class="home_operation">赣南师范学习平台</span>
+                </a>
+            </div>
+        </div>
+        <div class="row clearfix" style="text-align: center;margin-top: 20px; color: #d58512;">
+        	<div class="col-xs-4 column">
+                <a href="http://degree.qingshuxuetang.com/jxzyy/">
+                    <img alt="80x80" src="${path }/static/proscenium/images/medicine.jpg" class="img-circle apply-ico" />
+                    <br>
+                    <span class="home_operation">江西中医药学习平台</span>
+                </a>
+            </div>
+        	<div class="col-xs-4 column">
+                <a href="http://degree.qingshuxuetang.com/jxsf/Student/Home">
+                    <img alt="80x80" src="${path }/static/proscenium/images/Jiangxi.jpg" class="img-circle apply-ico" />
+                    <br>
+                    <span class="home_operation">江西师范学习平台</span>
                 </a>
             </div>
         </div>

@@ -121,10 +121,9 @@ public class StudentController extends BaseController{
     
     @GetMapping("/school")
     @ResponseBody
-    public List<Academy> selectschool(int id){
-    	Academy schoolName = academyService.selectById(id);
-    	List<Academy> shcoollist = academyService.selectByName(schoolName.getASchool());
-    	return shcoollist;
+    public Object selectschool(String schoolname){
+    	List<Academy> list = academyService.selectByName(schoolname);
+    	return list;
     }
     
 	@RequestMapping("/validatori")
@@ -181,7 +180,6 @@ public class StudentController extends BaseController{
     @RequestMapping("/add")
     @ResponseBody
     public Object add(Student student){
-    	System.out.println("User"+student.getUserId());
 		Student stu = studentService.selectByNo();
     	String No = StudentNo.getNo(stu);
     	student.setStudentNo(No);
@@ -214,7 +212,7 @@ public class StudentController extends BaseController{
     @ResponseBody
     public Object delete(int id){
     	Finance finace = financeService.selectfinanceById(id);
-    	if(finace !=null){
+    	if(finace ==null){
     		boolean result = studentService.deleteById(id);
     		if(result == true){
         		return renderSuccess("删除成功");

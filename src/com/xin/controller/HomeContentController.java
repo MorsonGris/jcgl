@@ -92,7 +92,7 @@ public class HomeContentController extends BaseController{
     		@RequestParam(value="interlinkageThree")String interlinkageThree,
     		@RequestParam(value="interlinkageFour")String interlinkageFour,
     		@RequestParam(value="hcAddress")String hcAddress,HttpServletRequest request,HttpServletResponse response) throws IllegalStateException, IOException {
-    	FileUpload.pictureUpload(request, response,"",PathUtil.getClasspath()+"static/proscenium/images/homepicture/");
+    	FileUpload.pictureUpload(request, response,"",PathUtil.getClasspath()+"static/proscenium/images/");
     	//System.out.println(request.getSession().getServletContext().getRealPath("uploadFile"));
     	HomeContent homeContent = new HomeContent();
     	if(picOne.getOriginalFilename()!=null) {

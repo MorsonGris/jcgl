@@ -48,7 +48,7 @@
 	</select>
 	
 	<insert id="noticeInsert" parameterType="com.xin.bean.Notice">
-		INSERT INTO NOTICE(n_title,n_content,n_date,n_flag) VALUES(
+		insert into notice(n_title,n_content,n_date,n_flag) values(
 			#{nTitle},
 			#{nContent},
 			#{nDate},

@@ -20,7 +20,7 @@
 	</select>
 	
 	<insert id="relationInsert" parameterType="com.xin.bean.Relation">
-		INSERT INTO RELATION(R_QQ,R_PHONE,R_CONTENT,R_EFFECT) VALUES(
+		insert into relation(r_qq,r_phone,r_content,r_effect) values(
 			#{rQq},
 			#{rPhone},
 			#{rContent},

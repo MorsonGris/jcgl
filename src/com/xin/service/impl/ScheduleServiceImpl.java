@@ -59,9 +59,8 @@ public class ScheduleServiceImpl implements IScheduleService {
 	}
 
 	@Override
-	public List<Schedule> selectByuserId(long id) {
-		// TODO Auto-generated method stub
-		return schedulemapper.selectByuserId(id);
+	public List<Schedule> selectByDate(Schedule schedule) {
+		return schedulemapper.selectByDate(schedule);
 	}
 	
 }
