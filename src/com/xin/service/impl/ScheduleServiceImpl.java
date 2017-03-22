@@ -57,5 +57,11 @@ public class ScheduleServiceImpl implements IScheduleService {
 		pageInfo.setRows(list);
 		pageInfo.setTotal(page.getTotal());
 	}
+
+	@Override
+	public List<Schedule> selectByuserId(long id) {
+		// TODO Auto-generated method stub
+		return schedulemapper.selectByuserId(id);
+	}
 	
 }

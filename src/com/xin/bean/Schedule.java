@@ -90,4 +90,11 @@ public class Schedule {
 		this.sFlag = sFlag;
 	}
 
+	@Override
+	public String toString() {
+		return "Schedule [sId=" + sId + ", userId=" + userId + ", sContent=" + sContent + ", sDate=" + sDate
+				+ ", sFlag=" + sFlag + ", begintime=" + begintime + ", endtime=" + endtime + ", listUser=" + listUser
+				+ "]";
+	}
+	
 }

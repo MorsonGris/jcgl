@@ -39,19 +39,6 @@
                 sortable : true,
                 formatter: formatDatebox
             },{
-                width : '50',
-                title : '状态',
-                field : 'sFlag',
-                sortable : true,
-                formatter : function(value, row, index) {
-                    switch (value) {
-                    case 0:
-                        return '未完成';
-                    case 1:
-                        return '已完成';
-                    }
-                }
-            },{
                 field : 'action',
                 title : '操作',
                 width : 130,

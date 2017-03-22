@@ -16,6 +16,7 @@ import com.xin.bean.Schedule;
  */
 public interface ScheduleMapper{
 	List<Schedule> selectAll();
+	List<Schedule> selectByuserId(long id);
 	boolean deleteById(int id);
 	Schedule selectById(int id);
 	boolean updateById(Schedule schedule);

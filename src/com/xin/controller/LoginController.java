@@ -26,6 +26,7 @@ import com.xin.bean.HomeContent;
 import com.xin.bean.HotMajor;
 import com.xin.bean.Notice;
 import com.xin.bean.Relation;
+import com.xin.bean.Schedule;
 import com.xin.commons.base.BaseController;
 import com.xin.commons.csrf.CsrfToken;
 import com.xin.commons.utils.CaptchaUtils;
@@ -35,6 +36,7 @@ import com.xin.service.IHomeContentService;
 import com.xin.service.IHotMajorService;
 import com.xin.service.INoticeService;
 import com.xin.service.IRelationService;
+import com.xin.service.IScheduleService;
 
 /**
  * @description：登录退出
@@ -45,6 +47,8 @@ import com.xin.service.IRelationService;
 public class LoginController extends BaseController {
 	
 	@Autowired private INoticeService noticeService;
+	
+	@Autowired private IScheduleService scheduleService;
 	
 	@Autowired private IHotMajorService hotMajorService;
 	
@@ -136,9 +140,22 @@ public class LoginController extends BaseController {
      * @param model
      * @return
      */
-    @GetMapping("/admin/index")
+    @RequestMapping("/admin/index")
     public String index(Model model) {
+    	ModelAndView mv = new ModelAndView();
+    	List<Schedule> list = scheduleService.selectByuserId(getUserId());
+    	for(Schedule s : list) {
+    		System.out.println(s.getSContent()+"*************");
+    	}
+    	mv.addObject("schedule", list);
         return "index";
+    }
+    
+    @RequestMapping("/admin/work")
+    @ResponseBody
+    public List<Schedule> work(){
+    	List<Schedule> list = scheduleService.selectByuserId(getUserId());
+    	return list;
     }
 
     /**
