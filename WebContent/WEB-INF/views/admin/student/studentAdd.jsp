@@ -5,11 +5,6 @@
         $('#studentAddForm').form({
             url : '${path }/student/add',
             onSubmit : function() {
-              var value =  $('#aMajor option:selected').val();//选中的值 
-      		  var ama = value.split("&")[0];
-      		  var sh = value.split("&")[1];
-      		  $("#ama").val(ama);
-      		  $("#sh").val(sh);
                 progressLoad();
                 var isValid = $(this).form('enableValidation').form('validate');
                 if (!isValid) {
@@ -94,23 +89,6 @@
 	  $('#win').window('close');
 	});
   
-  function selectAca(){
-	  var value = $("#academyId").find("option:selected").text();
-	  var dd = $("#aMajor");
-	  if(value != ''){
-		  $.get("${path }/student/school",{"schoolname":value},function(data){
-			  var json = JSON.parse(data); 
-			  dd.empty();
-			  for(var i=0;i<json.length;i++){
-				  dd.append("<option value='"+json[i].amajor+"&"+json[i].aid+"'>"+json[i].amajor+"</option>")
-			  }
-		  });
-	  }else{
-		  dd.empty();
-		  dd.append("<option value=''>--请选择--</option>");
-	  }
-  }
-  
   function selected(){
 	 var valeu =  $('#sGradations option:selected').val();//选中的值
 	 if(valeu != "请选择"){
@@ -194,20 +172,16 @@
                 <tr>
 	                <td>报考院校</td>
                     <td>
-                    	<input type="hidden" id="sh" name="academyId">
-                    	<select id="academyId" onchange="selectAca();" style="width:120px;height:22px;">
+                    	<select id="academyId" name="academyId" style="width:120px;height:22px;">
                     	 	<option value="">--请选择--</option>
                     		<c:forEach var="academy" items="${academy}" varStatus="s">
-                    			<option>${academy.ASchool}</option>
+                    			<option value="${academy.AId}">${academy.ASchool}</option>
                     		</c:forEach>
                     	</select>
                     </td> 
                 	<td>报考专业</td>
                 	<td>
-                		<input type="hidden" id="ama" name="sContent">
-                		<select id="aMajor" style="width:120px;height:22px;">
-                			<option value="">--请选择--</option>
-                		</select>
+                		<input type="text" id="sContent" name="sContent" class="easyui-validatebox" data-options="required:true,novalidate:true" value=""> 
                 	</td>
                 </tr>
                 <tr>

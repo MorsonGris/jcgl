@@ -10,8 +10,14 @@
 		<result column="a_flag" property="aFlag" />
 	</resultMap>
 	
-	<select id="selectAll" resultMap="BaseResultMap">
-		SELECT distinct a_school FROM academy
+	<select id="selectadult" resultMap="BaseResultMap">
+		<!-- 成人学校查询 -->
+		SELECT * FROM academy WHERE a_flag = 1
+	</select>
+	
+	<select id="selectnation" resultMap="BaseResultMap">
+		<!-- 国家开放大学学校查询 -->
+		SELECT * FROM academy WHERE a_flag = 2
 	</select>
 	
 	<select id="selectByName" resultMap="BaseResultMap">
@@ -19,7 +25,7 @@
 	</select>
 	
 	<insert id="insertByid" >
-		INSERT INTO academy(a_school,a_major,a_flag) VALUES(#{aSchool},#{aMajor},#{aFlag})
+		INSERT INTO academy(a_school,a_flag) VALUES(#{aSchool},#{aFlag})
 	</insert>
 	
 	<select id="selectById" resultMap="BaseResultMap">
@@ -39,7 +45,7 @@
     	FROM academy
     	<where>
     		<if test="aMajor != null and aMajor != '' ">
-    			a_major = #{aMajor}
+    			a_flag = #{aMajor}
     		</if>
     		<if test="aSchool != null and aSchool != '' ">
     			a_school = #{aSchool}

@@ -141,7 +141,7 @@ public class LoginController extends BaseController {
      * @param model
      * @return
      */
-    @GetMapping("/admin/index")
+    @RequestMapping("/admin/index")
     public String index(Model model) {
     	Schedule schedule = new Schedule();
     	SimpleDateFormat sdf = new SimpleDateFormat("dd");
@@ -150,6 +150,13 @@ public class LoginController extends BaseController {
     	List<Schedule> list = scheduleService.selectByDate(schedule);
     	model.addAttribute("schedule", list);
         return "index";
+    }
+    
+    @RequestMapping("/admin/work")
+    @ResponseBody
+    public List<Schedule> work(){
+    	List<Schedule> list = scheduleService.selectByuserId(getUserId());
+    	return list;
     }
 
     /**
