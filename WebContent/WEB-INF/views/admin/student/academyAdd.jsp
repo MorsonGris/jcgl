@@ -31,12 +31,17 @@
         <form id="academyAddForm" method="post">
             <table class="grid">
                 <tr>
-                    <td>学校</td>
+                    <td>学校名称</td>
                     <td><input name="aSchool" type="text" placeholder="请输入学校名称" class="easyui-validatebox" data-options="required:true,novalidate:true" value=""></td>
                 </tr>
                 <tr>
-                	<td>专业</td>
-                    <td><input name="aMajor" type="text" placeholder="请输入专业名称" class="easyui-validatebox" data-options="required:true,novalidate:true" value=""></td>
+                	<td>隶属种类</td>
+                	<td>
+                		<select id="aFlag" name="aFlag" class="easyui-validatebox" data-options="required:true,novalidate:true" value="">
+                			<option value="1">成人教育</option>
+                			<option value="2">国家开发大学</option>
+                		</select>
+                	</td>
                 </tr>
             </table>
         </form>

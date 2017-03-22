@@ -38,10 +38,17 @@ public class AcademyController extends BaseController{
     	return "admin/student/academy";
     }
     
-    @RequestMapping("/selectall")
+    @RequestMapping("/selectadult")
     @ResponseBody
-    public Object selectall(){
-    	List<Academy> list = academyService.selectAll();
+    public Object selectadult(){
+    	List<Academy> list = academyService.selectadult();
+    	return list;
+    }
+    
+    @RequestMapping("/selectnation")
+    @ResponseBody
+    public Object selectnation(){
+    	List<Academy> list = academyService.selectnation();
     	return list;
     }
     
@@ -57,8 +64,8 @@ public class AcademyController extends BaseController{
     public Object dataGrid(Academy academy,Integer page, Integer rows){
     	PageInfo pageInfo = new PageInfo(page,rows);
     	Map<String,Object> map = new HashMap<String,Object>();
-    	if(academy.getAMajor() != null){
-    		map.put("aMajor", academy.getAMajor());
+    	if(academy.getAFlag() != null){
+    		map.put("aMajor", academy.getAFlag());
     	}
     	if(academy.getASchool() != null){
     		map.put("aSchool", academy.getASchool());

@@ -5,13 +5,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>聚成教育-国家开放大学</title>
+    <title>聚成教育-会计培训</title>
     <link rel="shortcut icon" href="${path }/static/proscenium/logo/favicon2.ico" /> 
     <link href="${path }/static/proscenium/css/bootstrap.min.css" rel="stylesheet">
     <link href="${path }/static/proscenium/plugin/bootstrap-validator/bootstrapValidator.min.css" rel="stylesheet">
-    <link href="${path }/static/proscenium/plugin/sweetalert2/sweetalert2.min.css" rel="stylesheet">
+	<link href="${path }/static/proscenium/plugin/sweetalert2/sweetalert2.min.css" rel="stylesheet">
 	
 	<!-- ************2017/3/18********** -->
 	<link rel="stylesheet" type="text/css" href="${path }/static/proscenium/css/colorA_87eab02.css" /> 
@@ -24,17 +24,17 @@
 	<link rel="stylesheet" type="text/css" href="${path }/static/proscenium/css/form_0601e68.css" /> 
 	<link rel="stylesheet" type="text/css" href="${path }/static/proscenium/css/default_06e7803.css" /> 
 	<!-- ******************************* -->
-	<link href="${path }/static/proscenium/css/style.css" rel="stylesheet">
+    <link href="${path }/static/proscenium/css/style.css" rel="stylesheet">
 </head>
 <body>
 <div class="wrapper">
     <jsp:include page="/static/proscenium/commons/head.jsp"></jsp:include>
-    <div class="container">
+   	<div class="container">
         <div class="row clearfix"> 
 		   <div class="col-md-12"> 
 		    <div class="piece image-con" style="padding-left: 0px; padding-right: 0px; padding-top: 0px; padding-bottom: 0px;" data-idx="0"> 
 		     <div class="image-box"> 
-		      <a target="_blank" class="image-link" href="javascript:void(0);"> <img class="image-item" src="${path }/static/proscenium/images/119100041505bd799dbe1.png" /> </a> 
+		      <a target="_blank" class="image-link" href="javascript:void(0);"> <img class="image-item" src="${path }/static/proscenium/images/gjkfdx.png" /> </a> 
 		      <span class="image-text"></span> 
 		     </div> 
 		    </div> 
@@ -45,23 +45,19 @@
 		     <div class="rich-text" style="padding: 10px 15px 10px 15px;"> 
 		      <div class="inner"> 
 		       <div style="text-align: center;"> 
-		        <span style="line-height: 1.5; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; display: inline !important;"><b><font size="4" color="#ff0000">远程教育</font></b>&nbsp;</span> 
+		        <span style="line-height: 1.5; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; display: inline !important;"><b><font size="4" color="#ff0000">国家开放大学</font></b>&nbsp;</span> 
 		       </div> 
 		       <div style="text-align: center;"> 
-		        <font color="#000000">可以在家上的大学</font> 
+		        <font color="#000000">
+		        	教育部直属，以现代信息技术为支撑，学历教育与非学历教育并举，实施远程开放教育的新型高等学校。学校在广播电视大学基础上组建，面向全社会成员，强调优质教育资源的聚集、整合与共享，强调以现代信息技术为支撑，探索现代信息技术与教育的深度融合。
+		        </font> 
 		       </div> 
 		      </div> 
 		     </div> 
 		    </div> 
 		    <div class="piece image-con" style="padding-left: 0px; padding-right: 0px; padding-top: 0px; padding-bottom: 0px;" data-idx="10"> 
 		     <div class="image-box"> 
-		      <a target="_blank" class="image-link" href="javascript:void(0);"> <img class="image-item" src="${path }/static/proscenium/images/yczy.png" /> </a> 
-		      <span class="image-text"></span> 
-		     </div> 
-		    </div> 
-		    <div class="piece image-con" style="padding-left: 0px; padding-right: 0px; padding-top: 0px; padding-bottom: 0px;" data-idx="15"> 
-		     <div class="image-box"> 
-		      <a target="_blank" class="image-link" href="javascript:void(0);"> <img class="image-item" src="${path }/static/proscenium/images/f20000b7cf4b4db90dd1.png" /> </a> 
+		      <a target="_blank" class="image-link" href="javascript:void(0);"> <img class="image-item" src="${path }/static/proscenium/images/11910003eb5a09c405254.png" /> </a> 
 		      <span class="image-text"></span> 
 		     </div> 
 		    </div> 
@@ -93,28 +89,17 @@
 		       <label for="name">姓名</label> 
 		       <input type="text" class="form-control" id="name" name="sName" /> 
 		      </div> 
-		      <div class="form-group"> 
-		       <label for="id-card">身份证号码</label> 
-		       <input type="text" class="form-control" id="id-card" name="idNumber" /> 
-		      </div> 
+		      <!-- <div class="form-group">
+		           <label for="id-card">身份证号码</label>
+		           <input type="text" class="form-control" id="id-card" name="idNumber" />
+		       </div> --> 
 		      <div class="form-group"> 
 		       <label for="phone">手机号码</label> 
 		       <input type="text" class="form-control" id="phone" name="sPhone" /> 
 		      </div> 
 		      <div class="form-group"> 
-		       <label for="school">报考院校</label> 
-		       <select id="school" name="academyId" class="form-control"> <option value="">---请选择---</option> </select> 
-		      </div> 
-		      <div class="form-group"> 
-		       <label for="profession">专业</label> 
-		       <input type="text" id="sContent" name="sContent" class="form-control" /> 
-		      </div> 
-		      <div class="form-group"> 
-		       <label for="sGradations">层次</label> 
-		       <select id="sGradations" name="sGradations" onclick="selected();" class="form-control"> <option value="">---请选择---</option> <option value="高达本">高达本</option> <option value="专达本">专达本</option> <option value="高达专">高达专</option> </select> 
-		      </div> 
-		      <div class="form-group" hidden="true"> 
-		       <input type="text" class="form-control" id="sSystme" name="sSystme" /> 
+		       <label for="content">学习内容</label> 
+		       <textarea class="form-control" rows="3" id="content" name="sContent"></textarea> 
 		      </div> 
 		      <input type="hidden" name="stype" value="2" /> 
 		      <input type="hidden" id="id" name="userId" /> 
@@ -128,10 +113,6 @@
 		      <span class="split-count"></span> 
 		     </div> 
 		    </div> 
-		    <a target="_blank" class="image-link" href="javascript:void(0);"> </a> 
-		    <div class="piece" data-idx="16"> 
-		     <div class="floor-space" style="height: 10px; background-color: rgba(255,255,255,0);"></div> 
-		    </div> 
 		    <div class="piece image-con" style="padding-left: 0px; padding-right: 0px; padding-top: 0px; padding-bottom: 0px;" data-idx="19"> 
 		     <div class="image-box"> 
 		      <a target="_blank" class="image-link" href="javascript:void(0);"> <img class="image-item" src="${path }/static/proscenium/images/1191000404564478855b.png" /> </a> 
@@ -139,21 +120,26 @@
 		     </div> 
 		    </div> 
 		   </div> 
-		  </div>
+	  </div>
     </div>
     <jsp:include page="/static/proscenium/commons/bottom.jsp"></jsp:include>
 </div>
 <jsp:include page="/static/proscenium/commons/scroll.jsp"></jsp:include>
-<!-- ************************************************* -->
+<!-- **************************************** -->
 <script src="${path }/static/proscenium/plugin/sweetalert2/sweetalert2.min.js"></script>
 <script src="${path }/static/proscenium/js/jquery.min.js"></script>
 <script src="${path }/static/proscenium/js/bootstrap.min.js"></script>
-<script src="${path }/static/proscenium/plugin/bootstrap-validator/bootstrapValidator.min.js" ></script>
+<script src="${path }/static/proscenium/plugin/bootstrap-validator/bootstrapValidator.min.js"></script>
 <script src="${path }/static/proscenium/plugin/goup/jquery.goup.min.js"></script>
 <script src="${path }/static/proscenium/js/app.js"></script>
 
 <script type="text/javascript">
 $(document).ready(function() {
+	var url = (window.location.href.split("?")[1]).split("&")[0];
+	var id = url.split("=")[1];
+	if(id != null && id != ''){
+		$("#id").val(id);
+	}
 	$('#adultEnroll').bootstrapValidator({
 		message: 'This value is not valid',
 	    live: 'disabled',
@@ -163,7 +149,7 @@ $(document).ready(function() {
 	        validating: 'glyphicon glyphicon-refresh'
 	    },
 	    submitHandler: function(validator, form, submitButton) {
-			 $.post("${path }/student/add",form.serialize(),function(data){
+			 $.post("${path }/Artexam/add",form.serialize(),function(data){
 				  if(data.success == true){
 					  swal(
 					      '添加成功!',
@@ -174,9 +160,7 @@ $(document).ready(function() {
 						$("#name").val("");
 						$("#id-card").val("");
 						$("#phone").val("");
-						$("#school").val("");
-						$("#aMajor").val("");
-						$("#sGradations").val("");
+						$("#content").val("");
 						$(".swal2-styled").click(function(){
 							window.location="${path }/index";
 						});
@@ -195,7 +179,7 @@ $(document).ready(function() {
 			   }
 			  }
 			},
-			idNumber: {
+			/* idNumber: {
 			   validators: {
 				   notEmpty: {
                        message: '身份证号码不能为空'
@@ -207,7 +191,7 @@ $(document).ready(function() {
                    },
                    threshold :18 ,
                    remote: {
-                       url: '${path }/student/validatori',
+                       url: '${path }/Bookkeeper/validatori',
                        message: '身份证号码已存在',
                        delay :  2000,
                        type: 'POST',
@@ -218,7 +202,7 @@ $(document).ready(function() {
                        }
                    }
 			   }
-			 },
+			 }, */
 			 sPhone: {
                 validators: {
                     notEmpty: {
@@ -231,7 +215,7 @@ $(document).ready(function() {
                     },
                     threshold :11 ,
                     remote: {
-                        url: '${path }/student/validatorp',
+                        url: '${path }/Artexam/validatorp',
                         message: '手机号码已存在',
                         delay :  2000,
                         type: 'POST',
@@ -243,60 +227,16 @@ $(document).ready(function() {
                     }
                 }
 			},
-			academyId: {
-			  validators: {
-			   notEmpty: {
-			    message: '学校不能为空'
-			   }
-			  }
-			},
 			sContent: {
 			  validators: {
 			   notEmpty: {
-			    message: '专业不能为空'
-			   }
-			  }
-			},
-			sGradations: {
-			  validators: {
-			   notEmpty: {
-			    message: '层次不能为空'
+			    message: '学习内容不能为空'
 			   }
 			  }
 			}
 	    }
 	})
 })
-
-$(function(){
-	var url = (window.location.href.split("?")[1]).split("&")[0];
-	var id = url.split("=")[1];
-	if(id != null && id != ''){
-		$("#id").val(id);
-	}
-	var school = $("#school");
-	$.get("${path }/academy/selectnation",function(data){
-		  var json = JSON.parse(data); 
-		  school.empty();
-		  school.append("<option value=''>---请选择---</option>")
-		  for(var i=0;i<json.length;i++){
-			  school.append("<option value='"+json[i].aid+"'>"+json[i].aschool+"</option>")
-		  }
-	 });
-})
-
-function selected(){
-	 var valeu =  $('#sGradations option:selected').val();//选中的值
-	 if(valeu != "请选择"){
-		 if(valeu == "高达本"){//高达本
-			 $("#sSystme").val("五年"); 
-		 }else if(valeu == "专达本"){//专达本
-			 $("#sSystme").val("三年"); 
-		 }else if(valeu == "高达专"){//高达专
-			 $("#sSystme").val("三年"); 
-		 }
-	 }
-  }
 </script>
 </body>
 </html>

@@ -15,7 +15,8 @@ import com.xin.commons.utils.PageInfo;
  */
 public interface IAcademyService{
 	List<Academy> selectByName(String school);
-	List<Academy> selectAll();
+	List<Academy> selectadult();
+	List<Academy> selectnation();
 	boolean deleteById(int id);
 	Academy selectById(int id);
 	boolean updateById(Academy academy);

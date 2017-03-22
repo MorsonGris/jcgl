@@ -22,9 +22,17 @@
                 sortable : true
             }, {
                 width : '120',
-                title : '专业',
-                field : 'amajor',
-                sortable : true
+                title : '隶属种类',
+                field : 'aflag',
+                sortable : true,
+                formatter : function(value, row, index) {
+                    switch (value) {
+                    case 1:
+                        return '成人教育';
+                    case 2:
+                        return '国家开发大学';
+                    }
+                }
             },{
                 field : 'action',
                 title : '操作',
@@ -131,7 +139,12 @@
                     <th>学校名称:</th>
                     <td><input name="aSchool" placeholder="请输入学校名称"/></td>
                     <th>专业名称:</th>
-                    <td><input name="aMajor" placeholder="请输入专业名称"/></td>
+                    <td>
+	                   	<select name="aFlag">
+	               			<option>---请选择---</option>
+	               			<option value="1">成人教育</option>
+	               			<option value="2">国家开发大学</option>
+	               		</select>
                		<td>
 	                   	<a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'fi-magnifying-glass',plain:true" onclick="searchAcademyFun();">查询</a>
 	                    <a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'fi-x-circle',plain:true" onclick="cleanAcademyFun();">清空</a>

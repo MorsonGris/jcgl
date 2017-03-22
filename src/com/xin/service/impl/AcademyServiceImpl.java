@@ -53,8 +53,13 @@ public class AcademyServiceImpl implements IAcademyService {
 	}
 
 	@Override
-	public List<Academy> selectAll() {
-		return academymapper.selectAll();
+	public List<Academy> selectadult() {
+		return academymapper.selectadult();
+	}
+	
+	@Override
+	public List<Academy> selectnation() {
+		return academymapper.selectnation();
 	}
 
 	@Override

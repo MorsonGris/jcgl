@@ -33,10 +33,10 @@
                 </a>
             </div>
             <div class="col-xs-4 column">
-                <a href="http://www.jxck168.com/collegeAction!list3.action?college.collegeid=50">
+                <a href="country?id=${user.id }">
                     <img alt="80x80" src="${path }/static/proscenium/icon/document.png" class="img-circle apply-ico" />
                     <br>
-                    <span class="home_operation">职业培训<br>报名</span>
+                    <span class="home_operation">国家开放<br>报名</span>
                 </a>
             </div>
         </div>
@@ -45,7 +45,7 @@
                 <a href="nation?id=${user.id }">
                     <img alt="80x80" src="${path }/static/proscenium/icon/cloud.png" class="img-circle apply-ico" />
                     <br>
-                    <span>国家开放<br>报名</span>
+                    <span>远程教育<br>培训</span>
                 </a>
             </div>
             <div class="col-xs-4 column">
@@ -56,7 +56,7 @@
                 </a>
             </div>
             <div class="col-xs-4 column">
-                <a href="http://www.jxck168.com/collegeAction!list3.action?college.collegeid=65">
+                <a href="teacher?id=${user.id }">
                     <img alt="140x140" src="${path }/static/proscenium/icon/hotair.png" class="img-circle apply-ico" />
                     <br>
                     <span class="home_operation">教师资格<br>证报名</span>
