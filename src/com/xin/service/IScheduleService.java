@@ -16,6 +16,7 @@ import com.xin.commons.utils.PageInfo;
 public interface IScheduleService{
 	List<Schedule> selectByDate(Schedule schedule);
 	List<Schedule> selectAll();
+	List<Schedule> selectByuserId(long id);
 	boolean deleteById(int id);
 	Schedule selectById(int id);
 	boolean updateById(Schedule schedule);

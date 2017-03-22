@@ -41,6 +41,19 @@
 		WHERE s_id = #{sId}
 	</select>
 	
+	<select id="selectByuserId" resultMap="BaseResultMap">
+		SELECT 
+			s_id,
+			s_content,
+			s_date,
+			s_flag,
+			u.id,
+	    	u.`name`
+		FROM schedule s
+		LEFT JOIN user u ON s.user_id = u.id
+		WHERE user_id = #{userId}
+	</select>
+	
 	<update id="updateById">
 		UPDATE schedule SET user_id=#{userId} ,s_content=#{sContent} ,s_date=#{sDate} WHERE s_id=#{sId}
 	</update>
