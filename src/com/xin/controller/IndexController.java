@@ -104,7 +104,8 @@ public class IndexController extends BaseController{
 	 * 网上学习
 	 */
     @GetMapping("/learn")
-    public String learn(){
+    public String learn(Model model){
+    	model.addAttribute("homeContent", homeContent());
     	return "proscenium/learn";
     }
     

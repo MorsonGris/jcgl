@@ -17,6 +17,7 @@ import com.xin.bean.HotMajor;
 import com.xin.commons.base.BaseController;
 import com.xin.commons.utils.FileUpload;
 import com.xin.commons.utils.PageInfo;
+import com.xin.commons.utils.PathUtil;
 import com.xin.service.IHotMajorService;
 
 /**
@@ -75,8 +76,7 @@ public class HotMajorController extends BaseController{
     @RequestMapping("/add")
     @ResponseBody
     public Object add(HotMajor hotMajor,@RequestParam(value="price") MultipartFile file,HttpServletRequest request,HttpServletResponse response) throws IllegalStateException, IOException{
-    	String url = request.getServletContext().getRealPath("/")+"static\\proscenium\\images\\";
-    	FileUpload.pictureUpload(request, response, "",url);
+    	FileUpload.pictureUpload(request, response, "",PathUtil.getClasspath()+"static/proscenium/images/");
     	hotMajor.setHmPicture(file.getOriginalFilename());
     	boolean result = hotMajorService.insertByid(hotMajor);
     	if(result == true){
@@ -98,10 +98,14 @@ public class HotMajorController extends BaseController{
      * 修改
      * @param hotMajor
      * @return
+     * @throws IOException 
+     * @throws IllegalStateException 
      */
     @RequestMapping("/edit")
     @ResponseBody
-    public Object edit(HotMajor hotMajor){
+    public Object edit(HotMajor hotMajor,@RequestParam(value="price") MultipartFile file,HttpServletRequest request,HttpServletResponse response) throws IllegalStateException, IOException{
+    	FileUpload.pictureUpload(request, response, "",PathUtil.getClasspath()+"static/proscenium/images/");
+    	hotMajor.setHmPicture(file.getOriginalFilename());
     	boolean result = hotMajorService.updateByid(hotMajor);
     	if(result == true){
     		return renderSuccess("修改成功");

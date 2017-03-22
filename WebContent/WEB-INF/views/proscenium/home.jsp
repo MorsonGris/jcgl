@@ -38,7 +38,7 @@
                     <img alt="" src="${path }/static/proscenium/images/${homeContent.pictureTwo}" />
                     <div class="carousel-caption">
                         <h3>
-                            在职大专，本科学历
+                            成人大专，本科学历
                         </h3>
                     </div>
                 </div>
@@ -86,7 +86,7 @@
         </div>
         <div class="row clearfix" style="text-align: center;margin-top: 20px;">
             <div class="col-xs-4 column">
-                <a href="http://www.jxck168.com/courseAction!listcatalog.action">
+                <a href="index/learn">
                     <img alt="80x80" src="${path }/static/proscenium/icon/computer.png" class="img-circle home-ico" />
                     <br>
                     <span class="home_operation">网上学习</span>
