@@ -50,7 +50,7 @@
                 </a>
             </div>
         	<div class="col-xs-4 column">
-                <a href="http://degree.qingshuxuetang.com/jxsf/Student/Home">
+                <a href="http://degree.qingshuxuetang.com/jxsf/Home">
                     <img alt="80x80" src="${path }/static/proscenium/images/Jiangxi.jpg" class="img-circle apply-ico" />
                     <br>
                     <span class="home_operation">江西师范学习平台</span>

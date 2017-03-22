@@ -109,13 +109,11 @@
 	       </div> 
 	       <div class="form-group"> 
 	        <label for="school">报考院校</label> 
-	        <input type="hidden" id="sh" name="academyId" /> 
-	        <select id="school" class="form-control" onchange="selectAca();"> <option value="">---请选择---</option> </select> 
+	        <select id="school" name="academyId" class="form-control"> <option value="">---请选择---</option> </select> 
 	       </div> 
 	       <div class="form-group"> 
 	        <label for="profession">专业</label> 
-	        <input type="hidden" id="ama" name="sContent" /> 
-	        <select id="aMajor" class="form-control"> <option value="">---请选择---</option> </select> 
+	        <input type="text" id="sContent" name="sContent" class="form-control" /> 
 	       </div> 
 	       <div class="form-group"> 
 	        <label for="sGradations">层次</label> 
@@ -170,11 +168,6 @@ $(document).ready(function() {
 	        validating: 'glyphicon glyphicon-refresh'
 	    },
 	    submitHandler: function(validator, form, submitButton) {
-	    	  var value =  $('#aMajor option:selected').val();//选中的值 
-			  var ama = value.split("&")[0];
-			  var sh = value.split("&")[1];
-			  $("#ama").val(ama);
-			  $("#sh").val(sh);
 			 $.post("${path }/student/add",form.serialize(),function(data){
 				  if(data.success == true){
 					  swal(
@@ -287,12 +280,12 @@ $(function(){
 		$("#id").val(id);
 	}
 	var school = $("#school");
-	$.get("${path }/academy/selectall",function(data){
+	$.get("${path }/academy/selectadult",function(data){
 		  var json = JSON.parse(data); 
 		  school.empty();
 		  school.append("<option value=''>---请选择---</option>")
 		  for(var i=0;i<json.length;i++){
-			  school.append("<option value='"+json[i].aschool+"'>"+json[i].aschool+"</option>")
+			  school.append("<option value='"+json[i].aid+"'>"+json[i].aschool+"</option>")
 		  }
 	 });
 })
@@ -308,24 +301,6 @@ function selected(){
 			 $("#sSystme").val("三年"); 
 		 }
 	 }
-  }
-
-function selectAca(){
-	  var value =  $('#school option:selected').val();//选中的值 
-	  var dd = $("#aMajor");
-	  if(value != ''){
-		  $.get("${path }/student/school",{"schoolname":value},function(data){
-			  var json = JSON.parse(data); 
-			  dd.empty();
-			  dd.append("<option value=''>---请选择---</option>");
-			  for(var i=0;i<json.length;i++){
-				  dd.append("<option value='"+json[i].amajor+"&"+json[i].aid+"'>"+json[i].amajor+"</option>")
-			  }
-		  });
-	  }else{
-		  dd.empty();
-		  dd.append("<option value=''>---请选择---</option>");
-	  }
   }
 </script>
 </body>

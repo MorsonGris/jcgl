@@ -35,8 +35,13 @@
                     <input name="ASchool" type="text" placeholder="请输入学校名称" class="easyui-validatebox" data-options="required:true" value="${academy.ASchool}"></td>
                 </tr>
                 <tr>
-                	<td>专业名称</td>
-                    <td><input name="AMajor" type="text" placeholder="请输入专业名称" class="easyui-validatebox" data-options="required:true" value="${academy.AMajor}"></td>
+                	<td>隶属种类</td>
+                	<td>
+                		<select id="aFlag" name="aFlag" class="easyui-validatebox" data-options="required:true,novalidate:true" value="">
+                			<option value="1" <c:if test="${academy.AFlag ==1}">selected</c:if>>成人教育</option>
+                			<option value="2" <c:if test="${academy.AFlag ==2}">selected</c:if>>国家开发大学</option>
+                		</select>
+                	</td>
                 </tr>
             </table>
         </form>

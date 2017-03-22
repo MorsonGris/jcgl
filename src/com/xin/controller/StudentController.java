@@ -114,7 +114,7 @@ public class StudentController extends BaseController{
     
     @GetMapping("/addpage")
     public String addpage(Model model){
-    	List<Academy> list = academyService.selectAll();
+    	List<Academy> list = academyService.selectadult();
     	model.addAttribute("academy", list);
     	return "admin/student/studentAdd";
     }
@@ -235,7 +235,7 @@ public class StudentController extends BaseController{
     	for(int j=0;j<studentlsit.size();j++){
     		 user = studentlsit.get(j);
     	}
-    	List<Academy> list = academyService.selectAll();
+    	List<Academy> list = academyService.selectadult();
     	model.addAttribute("academy", list);
     	model.addAttribute("aca", aca);
     	model.addAttribute("user", user);

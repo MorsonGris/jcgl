@@ -35,7 +35,7 @@
 	</sql>
 	
 	<select id="selectAll" resultMap="BaseResultMap">
-		SELECT <include refid="Studentcolumn" /> FROM student where s_type = 1 or = s_type = 2
+		SELECT <include refid="Studentcolumn" /> FROM student where s_type = 1 or s_type = 2
 	</select>
 	
 	<select id="selectByName" resultMap="BaseResultMap">

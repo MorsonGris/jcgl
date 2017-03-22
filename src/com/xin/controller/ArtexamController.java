@@ -127,7 +127,7 @@ public class ArtexamController extends BaseController{
     
     @GetMapping("/addpage")
     public String addpage(Model model){
-    	List<Academy> list = academyService.selectAll();
+    	List<Academy> list = academyService.selectnation();
     	model.addAttribute("academy", list);
     	return "admin/student/artexamAdd";
     }

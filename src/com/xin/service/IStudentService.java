@@ -1,7 +1,7 @@
 package com.xin.service;
 
 import java.util.List;
-import com.xin.bean.Finance;
+
 import com.xin.bean.Student;
 import com.xin.commons.utils.PageInfo;
 
