@@ -50,8 +50,6 @@ public class LoginController extends BaseController {
 	
 	@Autowired private INoticeService noticeService;
 	
-	@Autowired private IScheduleService scheduleService;
-	
 	@Autowired private IHotMajorService hotMajorService;
 	
 	@Autowired private IHomeContentService homeContentService;
