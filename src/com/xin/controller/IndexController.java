@@ -152,6 +152,15 @@ public class IndexController extends BaseController{
 	}
 	
 	/**
+	 * 国家开放大学
+	 */
+	@GetMapping("/country")
+	public String country(Model model){
+		model.addAttribute("homeContent", homeContent());
+		return "proscenium/country";
+	}
+	
+	/**
 	 * 成人教育
 	 */
 	@GetMapping("/adult")
@@ -191,7 +200,8 @@ public class IndexController extends BaseController{
 	 * 教师资格证
 	 */
 	@GetMapping("/teacher")
-	public String teacher(){
+	public String teacher(Model model){
+		model.addAttribute("homeContent", homeContent());
 		return "proscenium/teacher";
 	}
 }
