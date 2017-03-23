@@ -151,7 +151,7 @@
 			       <label for="content">学习内容</label> 
 			       <textarea class="form-control" rows="3" id="content" name="sContent"></textarea> 
 			      </div> 
-			      <input type="hidden" name="stype" value="2" /> 
+			      <input type="hidden" name="stype" value="5" /> 
 			      <input type="hidden" id="id" name="userId" /> 
 			      <button type="submit" class="btn btn-primary btn-lg">提交</button> 
 			     </form> 
