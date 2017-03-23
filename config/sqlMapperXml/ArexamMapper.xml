@@ -28,7 +28,7 @@
 	</sql>
 	
 	<select id="selectAll" resultMap="BaseResultMap">
-		SELECT * FROM student WHERE s_type = 4 or s_type = 3
+		SELECT * FROM student WHERE s_type = 4 or s_type = 3 or s_type = 5
 	</select>
 	
 	<select id="selectByName" resultMap="BaseResultMap">
