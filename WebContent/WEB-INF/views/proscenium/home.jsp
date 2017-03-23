@@ -93,7 +93,7 @@
                 </a>
             </div>
             <div class="col-xs-4 column">
-                <a href="http://www.jxck168.com/web/newsAction!listMulti.action?msgTypeId=117">
+                <a href="index/eguide">
                     <img alt="140x140" src="${path }/static/proscenium/icon/clipboard.png" class="img-circle home-ico" />
                     <br>
                     <span class="home_operation">招生简章</span>
