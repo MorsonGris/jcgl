@@ -7,7 +7,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>聚成教育-国家开放大学</title>
+    <title>聚成教育-国家开放大学报名</title>
     <link rel="shortcut icon" href="${path }/static/proscenium/logo/favicon2.ico" /> 
     <link href="${path }/static/proscenium/css/bootstrap.min.css" rel="stylesheet">
     <link href="${path }/static/proscenium/plugin/bootstrap-validator/bootstrapValidator.min.css" rel="stylesheet">
@@ -89,17 +89,35 @@
 		       <label for="name">姓名</label> 
 		       <input type="text" class="form-control" id="name" name="sName" /> 
 		      </div> 
-		      <!-- <div class="form-group">
-		           <label for="id-card">身份证号码</label>
-		           <input type="text" class="form-control" id="id-card" name="idNumber" />
-		       </div> --> 
+		      <div class="form-group"> 
+		       <label for="id-card">身份证号码</label> 
+		       <input type="text" class="form-control" id="id-card" name="idNumber" /> 
+		      </div> 
 		      <div class="form-group"> 
 		       <label for="phone">手机号码</label> 
 		       <input type="text" class="form-control" id="phone" name="sPhone" /> 
 		      </div> 
 		      <div class="form-group"> 
-		       <label for="content">学习内容</label> 
-		       <textarea class="form-control" rows="3" id="content" name="sContent"></textarea> 
+		       <label for="school">报考院校</label> 
+		       <select id="school" name="academyId" class="form-control"> <option value="">---请选择---</option> </select> 
+		      </div> 
+		      <div class="form-group">
+				<div style="float:left">
+					<label for="profession">专业</label> 
+					<input type="text" id="sContent" name="sContent" class="form-control" style="width:170px;" /> 
+				</div>
+				<div style="margin-left: 205px;">
+					<label for="sGradations">层次</label> 
+					<select id="sGradations" name="sGradations" onclick="selected();" class="form-control" style="width:170px;"> 
+						<option value="">---请选择---</option>
+						<option value="高达本">高达本</option>
+						<option value="专达本">专达本</option>
+						<option value="高达专">高达专</option>
+					</select> 
+				</div>
+			  </div> 
+		      <div class="form-group" hidden="true"> 
+		       <input type="text" class="form-control" id="sSystme" name="sSystme" /> 
 		      </div> 
 		      <input type="hidden" name="stype" value="2" /> 
 		      <input type="hidden" id="id" name="userId" /> 
@@ -135,11 +153,6 @@
 
 <script type="text/javascript">
 $(document).ready(function() {
-	var url = (window.location.href.split("?")[1]).split("&")[0];
-	var id = url.split("=")[1];
-	if(id != null && id != ''){
-		$("#id").val(id);
-	}
 	$('#adultEnroll').bootstrapValidator({
 		message: 'This value is not valid',
 	    live: 'disabled',
@@ -149,7 +162,7 @@ $(document).ready(function() {
 	        validating: 'glyphicon glyphicon-refresh'
 	    },
 	    submitHandler: function(validator, form, submitButton) {
-			 $.post("${path }/Artexam/add",form.serialize(),function(data){
+			 $.post("${path }/student/add",form.serialize(),function(data){
 				  if(data.success == true){
 					  swal(
 					      '添加成功!',
@@ -160,7 +173,9 @@ $(document).ready(function() {
 						$("#name").val("");
 						$("#id-card").val("");
 						$("#phone").val("");
-						$("#content").val("");
+						$("#school").val("");
+						$("#aMajor").val("");
+						$("#sGradations").val("");
 						$(".swal2-styled").click(function(){
 							window.location="${path }/index";
 						});
@@ -179,7 +194,7 @@ $(document).ready(function() {
 			   }
 			  }
 			},
-			/* idNumber: {
+			idNumber: {
 			   validators: {
 				   notEmpty: {
                        message: '身份证号码不能为空'
@@ -191,7 +206,7 @@ $(document).ready(function() {
                    },
                    threshold :18 ,
                    remote: {
-                       url: '${path }/Bookkeeper/validatori',
+                       url: '${path }/student/validatori',
                        message: '身份证号码已存在',
                        delay :  2000,
                        type: 'POST',
@@ -202,7 +217,7 @@ $(document).ready(function() {
                        }
                    }
 			   }
-			 }, */
+			 },
 			 sPhone: {
                 validators: {
                     notEmpty: {
@@ -215,7 +230,7 @@ $(document).ready(function() {
                     },
                     threshold :11 ,
                     remote: {
-                        url: '${path }/Artexam/validatorp',
+                        url: '${path }/student/validatorp',
                         message: '手机号码已存在',
                         delay :  2000,
                         type: 'POST',
@@ -227,16 +242,60 @@ $(document).ready(function() {
                     }
                 }
 			},
+			academyId: {
+			  validators: {
+			   notEmpty: {
+			    message: '学校不能为空'
+			   }
+			  }
+			},
 			sContent: {
 			  validators: {
 			   notEmpty: {
-			    message: '学习内容不能为空'
+			    message: '专业不能为空'
+			   }
+			  }
+			},
+			sGradations: {
+			  validators: {
+			   notEmpty: {
+			    message: '层次不能为空'
 			   }
 			  }
 			}
 	    }
 	})
 })
+
+$(function(){
+	var url = (window.location.href.split("?")[1]).split("&")[0];
+	var id = url.split("=")[1];
+	if(id != null && id != ''){
+		$("#id").val(id);
+	}
+	var school = $("#school");
+	$.get("${path }/academy/selectnation",function(data){
+		  var json = JSON.parse(data); 
+		  school.empty();
+		  school.append("<option value=''>---请选择---</option>")
+		  for(var i=0;i<json.length;i++){
+			  school.append("<option value='"+json[i].aid+"'>"+json[i].aschool+"</option>")
+		  }
+	 });
+})
+
+function selected(){
+	 var valeu =  $('#sGradations option:selected').val();//选中的值
+	 if(valeu != "请选择"){
+		 if(valeu == "高达本"){//高达本
+			 $("#sSystme").val("五年"); 
+		 }else if(valeu == "专达本"){//专达本
+			 $("#sSystme").val("三年"); 
+		 }else if(valeu == "高达专"){//高达专
+			 $("#sSystme").val("三年"); 
+		 }
+	 }
+  }
 </script>
 </body>
 </html>

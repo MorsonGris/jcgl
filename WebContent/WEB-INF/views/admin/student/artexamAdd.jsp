@@ -134,6 +134,7 @@
                 	<td><select id="stype" name="stype" style="width:80px;height:22px;">
                 		<option value="4">艺考</option>
                 		<option value="3">会计</option>
+                		<option value="5">职业资格</option>
                 	</select></td>
                 </tr>
             </table>

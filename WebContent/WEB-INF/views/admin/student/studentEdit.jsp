@@ -202,6 +202,7 @@
                 	<td><select id="stype" name="stype" style="width:100px;height:22px;">
                 		<option value="1" <c:if test="${student.stype == 1}">selected</c:if>>成人教育</option>
                 		<option value="2" <c:if test="${student.stype == 2}">selected</c:if>>开放大学</option>
+                		<option value="6" <c:if test="${student.stype == 6}">selected</c:if>>远程教育</option>
                 	</select></td>
                 </tr>
                 <tr><td></td>

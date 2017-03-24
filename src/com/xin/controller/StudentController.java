@@ -102,7 +102,8 @@ public class StudentController extends BaseController{
     		if(student.getStype()==1) {
     			map.put("stypeone", 1);
     			map.put("stypetwo", 2);
-    		}else {
+    			
+    		}else{
     			map.put("stypeone", 3);
     			map.put("stypetwo", 4);
     		}
@@ -222,9 +223,8 @@ public class StudentController extends BaseController{
     }
     
     @GetMapping("/editpage")
-    public String editpage(Model model,int id){
+    public String editpage(Model model,String type,int id){
     	Student student = studentService.selectById(id);
-    	System.out.println(student.getStype());
     	List<Academy> academieslist = student.getListAcademy();
     	List<User> studentlsit = student.getListUser();
     	Academy aca = null;
@@ -235,7 +235,13 @@ public class StudentController extends BaseController{
     	for(int j=0;j<studentlsit.size();j++){
     		 user = studentlsit.get(j);
     	}
-    	List<Academy> list = academyService.selectadult();
+    	Academy academ = new Academy();
+    	if(Integer.valueOf(type) == 2 || Integer.valueOf(type) == 6){
+    		academ.setAFlag(2);
+    	}else{
+    		academ.setAFlag(1);
+    	}
+    	List<Academy> list = academyService.selectBytype(academ);
     	model.addAttribute("academy", list);
     	model.addAttribute("aca", aca);
     	model.addAttribute("user", user);

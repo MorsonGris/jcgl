@@ -130,8 +130,9 @@
                     <td><input name="sContent" type="text" placeholder="请选择学习内容" class="easyui-validatebox" data-options="required:true,novalidate:true" value="${student.SContent}"></td>
                 	<td>报名类型</td>
                 	<td><select id="stype" name="stype" style="width:100px;height:22px;">
-                		<option value="4" <c:if test="${student.stype == 1}">selected</c:if>>艺考</option>
-                		<option value="3" <c:if test="${student.stype == 2}">selected</c:if>>会计</option>
+                		<option value="4" <c:if test="${student.stype == 4}">selected</c:if>>艺考</option>
+                		<option value="3" <c:if test="${student.stype == 3}">selected</c:if>>会计</option>
+                		<option value="5" <c:if test="${student.stype == 5}">selected</c:if>>职业资格</option>
                 	</select></td>
                 </tr>
                 <tr>

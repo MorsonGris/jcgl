@@ -67,4 +67,9 @@ public class AcademyServiceImpl implements IAcademyService {
 		return academymapper.selectByName(school);
 	}
 
+	@Override
+	public List<Academy> selectBytype(Academy academy) {
+		return academymapper.selectBytype(academy);
+	}
+
 }

@@ -7,7 +7,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>聚成教育-远程教育培训</title>
+    <title>聚成教育-远程教育培训报名</title>
     <link rel="shortcut icon" href="${path }/static/proscenium/logo/favicon2.ico" /> 
     <link href="${path }/static/proscenium/css/bootstrap.min.css" rel="stylesheet">
     <link href="${path }/static/proscenium/plugin/bootstrap-validator/bootstrapValidator.min.css" rel="stylesheet">
@@ -105,18 +105,25 @@
 		       <label for="school">报考院校</label> 
 		       <select id="school" name="academyId" class="form-control"> <option value="">---请选择---</option> </select> 
 		      </div> 
-		      <div class="form-group"> 
-		       <label for="profession">专业</label> 
-		       <input type="text" id="sContent" name="sContent" class="form-control" /> 
-		      </div> 
-		      <div class="form-group"> 
-		       <label for="sGradations">层次</label> 
-		       <select id="sGradations" name="sGradations" onclick="selected();" class="form-control"> <option value="">---请选择---</option> <option value="高达本">高达本</option> <option value="专达本">专达本</option> <option value="高达专">高达专</option> </select> 
-		      </div> 
+		      <div class="form-group">
+				<div style="float:left">
+					<label for="profession">专业</label> 
+					<input type="text" id="sContent" name="sContent" class="form-control" style="width:170px;" /> 
+				</div>
+				<div style="margin-left: 205px;">
+					<label for="sGradations">层次</label> 
+					<select id="sGradations" name="sGradations" onclick="selected();" class="form-control" style="width:170px;"> 
+						<option value="">---请选择---</option>
+						<option value="高达本">高达本</option>
+						<option value="专达本">专达本</option>
+						<option value="高达专">高达专</option>
+					</select> 
+				</div>
+			</div> 
 		      <div class="form-group" hidden="true"> 
 		       <input type="text" class="form-control" id="sSystme" name="sSystme" /> 
 		      </div> 
-		      <input type="hidden" name="stype" value="2" /> 
+		      <input type="hidden" name="stype" value="6" /> 
 		      <input type="hidden" id="id" name="userId" /> 
 		      <button type="submit" class="btn btn-primary btn-lg">提交</button> 
 		     </form> 

@@ -104,7 +104,7 @@
     	FROM student s
     	LEFT JOIN user u ON s.user_id = u.id
     	<where>
-    		s_type = 4 or s_type = 3
+    		s_type = 4 or s_type = 3 or s_type = 5
     		<if test="uid != 1">
     			and user_id = #{uid}
     		</if>

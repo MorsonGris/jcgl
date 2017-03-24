@@ -10,6 +10,10 @@
 		<result column="a_flag" property="aFlag" />
 	</resultMap>
 	
+	<select id="selectBytype" resultMap="BaseResultMap">
+		SELECT * FROM academy WHERE a_flag = #{aFlag}
+	</select>
+	
 	<select id="selectadult" resultMap="BaseResultMap">
 		<!-- 成人学校查询 -->
 		SELECT * FROM academy WHERE a_flag = 1

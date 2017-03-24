@@ -84,7 +84,9 @@
                     case 1:
                         return '成人教育';
                     case 2:
-                        return '国家开发大学';
+                        return '国家开放大学';
+                    case 6:
+                        return '远程教育';
                     }
                 }
             },{
@@ -98,9 +100,9 @@
                 title : '操作',
                 width : 130,
                 formatter : function(value, row, index) {
-                    var str = '';
+                	var str = '';
                         <shiro:hasPermission name="/student/edit">
-                            str += $.formatString('<a href="javascript:void(0)" class="user-easyui-linkbutton-edit" data-options="plain:true,iconCls:\'fi-pencil icon-blue\'" onclick="editStudentFun(\'{0}\');" >编辑</a>', row.sid);
+                            str += $.formatString('<a href="javascript:void(0)" class="user-easyui-linkbutton-edit" data-options="plain:true,iconCls:\'fi-pencil icon-blue\'" onclick="editStudentFun(\'{0}\',\'{1}\');" >编辑</a>', row.sid,row.stype);
                         </shiro:hasPermission>
                         <shiro:hasPermission name="/student/delete">
                             str += '&nbsp;&nbsp;|&nbsp;&nbsp;';
@@ -157,10 +159,11 @@
         });
     }
     
-    function editStudentFun(id) {
-        if (id == undefined) {
+    function editStudentFun(id,type) {
+       if (id == undefined || type == undefined) {
             var rows = studentDataGrid.datagrid('getSelections');
             id = rows[0].id;
+            type = rows[1].type;
         } else {
         	studentDataGrid.datagrid('unselectAll').datagrid('uncheckAll');
         }
@@ -168,7 +171,7 @@
             title : '编辑',
             width : 500,
             height : 300,
-            href : '${path }/student/editpage?id=' + id,
+            href : "${path }/student/editpage?type="+type+"&id="+id,
             buttons : [ {
                 text : '确定',
                 handler : function() {

@@ -45,7 +45,7 @@
                 <a href="nation?id=${user.id }">
                     <img alt="80x80" src="${path }/static/proscenium/icon/cloud.png" class="img-circle apply-ico" />
                     <br>
-                    <span>远程教育<br>培训</span>
+                    <span>远程教育<br>报名</span>
                 </a>
             </div>
             <div class="col-xs-4 column">
@@ -59,7 +59,7 @@
                 <a href="teacher?id=${user.id }">
                     <img alt="140x140" src="${path }/static/proscenium/icon/hotair.png" class="img-circle apply-ico" />
                     <br>
-                    <span class="home_operation">教师资格<br>证报名</span>
+                    <span class="home_operation">职业资格<br>培训</span>
                 </a>
             </div>
         </div>

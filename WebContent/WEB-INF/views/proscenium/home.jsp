@@ -57,21 +57,14 @@
         <div class="row clearfix" style="text-align: center;margin-top: 20px; color: #d58512;">
             <div class="col-xs-4">
                 <a href="index/apply">
-                    <img alt="80x80" src="${path }/static/proscenium/icon/flame.png" class="img-circle home-ico" />
+                    <img alt="80x80" src="${path }/static/proscenium/icon/apply.png" class="img-circle home-ico" />
                     <br>
                     <span class="home_operation">学生报名</span>
                 </a>
             </div>
-            <%-- <div class="col-xs-4 column">
-                <a href="home.html">
-                    <img alt="80x80" src="${path }/static/proscenium/icon/compose.png" class="img-circle home-ico" />
-                    <br>
-                    <span class="home_operation">缴费查询</span>
-                </a>
-            </div> --%>
             <div class="col-xs-4 column">
                 <a href="http://112.74.115.92/">
-                    <img alt="80x80" src="${path }/static/proscenium/icon/briefcase.png" class="img-circle home-ico" />
+                    <img alt="80x80" src="${path }/static/proscenium/icon/inquire.png" class="img-circle home-ico" />
                     <br>
                     <span class="home_operation">学籍查询</span>
                 </a>
@@ -106,25 +99,30 @@
                     <span class="home_operation">联系我们</span>
                 </a>
             </div>
-            <%-- <div class="col-xs-4 column">
-                <a href="home.html">
-                    <img alt="80x80" src="${path }/static/proscenium/icon/bookshelf.png" class="img-circle home-ico" />
+        </div>
+        <div class="row clearfix" style="text-align: center;margin-top: 20px;">
+            <div class="col-xs-4 column">
+                <a href="index/payment">
+                    <img alt="80x80" src="${path }/static/proscenium/icon/pay.png" class="img-circle home-ico" />
+                    <br>
+                    <span class="home_operation">缴费查询</span>
+                </a>
+            </div>
+           <div class="col-xs-4 column">
+                <a href="index/train">
+                    <img alt="80x80" src="${path }/static/proscenium/icon/train.png" class="img-circle home-ico" />
                     <br>
                     <span class="home_operation">培训管理</span>
                 </a>
-            </div> --%>
-        </div>
-        <%-- <div class="row clearfix" style="text-align: center;margin-top: 20px;">
-            
+            </div>
             <div class="col-xs-4 column">
                 <a href="index/helper">
-                    <img alt="80x80" src="${path }/static/proscenium/icon/clock.png" class="img-circle home-ico" />
+                    <img alt="80x80" src="${path }/static/proscenium/icon/assistant.png" class="img-circle home-ico" />
                     <br>
                     <span class="home_operation">工作助手</span>
                 </a>
             </div>
-            
-        </div> --%>
+        </div>
         <div class="row" style="text-align: left;margin-top: 20px;margin-bottom: 20px;">
             <div class="col-xs-12 column">
                 <div style="border-bottom: 1px solid #e0e0e0;">

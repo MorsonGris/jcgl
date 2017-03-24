@@ -53,6 +53,8 @@
                         return '艺考';
                     case 3:
                         return '会计';
+                    case 5:
+                        return '职业资格';
                     }
                 }
             },{

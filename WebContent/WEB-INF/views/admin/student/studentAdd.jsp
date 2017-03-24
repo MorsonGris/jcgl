@@ -204,6 +204,7 @@
                 	<td><select id="stype" name="stype" style="width:100px;height:22px;">
                 		<option value="1">成人教育</option>
                 		<option value="2">开放大学</option>
+                		<option value="6">远程教育</option>
                 	</select></td>
                 </tr>
             </table>

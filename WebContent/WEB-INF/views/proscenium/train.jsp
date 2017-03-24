@@ -11,7 +11,7 @@
     <link href="${path }/static/proscenium/css/bootstrap.min.css" rel="stylesheet">
     <link href="${path }/static/proscenium/plugin/bootstrap-validator/bootstrapValidator.min.css" rel="stylesheet">
     <link href="${path }/static/proscenium/css/style.css" rel="stylesheet">
-<title>聚成教育-工作助手</title>
+<title>聚成教育-项目培训</title>
 </head>
 <body>
 	<jsp:include page="/static/proscenium/commons/head.jsp"></jsp:include>
@@ -24,10 +24,11 @@
 	</div>
 	<jsp:include page="/static/proscenium/commons/bottom.jsp"></jsp:include>
 	<jsp:include page="/static/proscenium/commons/scroll.jsp"></jsp:include>
-	<script src="${path }/static/proscenium/js/jquery.min.js"></script>
-	<script src="${path }/static/proscenium/js/bootstrap.min.js"></script>
-	<script src="${path }/static/proscenium/plugin/bootstrap-validator/bootstrapValidator.min.js"></script>
-	<script src="${path }/static/proscenium/plugin/goup/jquery.goup.min.js"></script>
-	<script src="${path }/static/proscenium/js/app.js"></script>
+
+<script src="${path }/static/proscenium/js/jquery.min.js"></script>
+<script src="${path }/static/proscenium/js/bootstrap.min.js"></script>
+<script src="${path }/static/proscenium/plugin/bootstrap-validator/bootstrapValidator.min.js"></script>
+<script src="${path }/static/proscenium/plugin/goup/jquery.goup.min.js"></script>
+<script src="${path }/static/proscenium/js/app.js"></script>
 </body>
 </html>

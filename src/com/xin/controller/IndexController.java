@@ -121,8 +121,27 @@ public class IndexController extends BaseController{
 	 * 工作助手
 	 */ 
 	@GetMapping("/helper")
-	public String helper(){
+	public String helper(Model model){
+		model.addAttribute("homeContent", homeContent());
 		return "proscenium/helper";
+	}
+	
+	/**
+	 * 项目培训
+	 */ 
+	@GetMapping("/train")
+	public String train(Model model){
+		model.addAttribute("homeContent", homeContent());
+		return "proscenium/train";
+	}
+	
+	/**
+	 * 缴费查询
+	 */ 
+	@GetMapping("/payment")
+	public String payment(Model model){
+		model.addAttribute("homeContent", homeContent());
+		return "proscenium/payment";
 	}
 	
 	/**
