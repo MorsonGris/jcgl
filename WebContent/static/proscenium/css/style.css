@@ -31,12 +31,12 @@ a:active{
 /*	float start  */
 .float{
     width:40px;
-    height:40px;
+    height:100px;
     text-align: right;
     overflow:hidden;
     position:fixed;
     right:2px;;
-    bottom:300px;
+    bottom:290px;
 }
 .white_content {
     display: none;
@@ -45,6 +45,15 @@ a:active{
     left: 5%;
     width: 80%;
     
+    border: 1px solid #999999;
+    background-color: white;
+}
+.map_content {
+    display: none;
+    position: fixed;
+    top: 10%;
+    left: 5%;
+    width: 80%;
     border: 1px solid #999999;
     background-color: white;
 }
