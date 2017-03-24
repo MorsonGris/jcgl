@@ -92,7 +92,7 @@
                 <![CDATA[ and f_date <= #{endTime} ]]>
             </if>
             <if test=" stypeone != null and stypeone != 0 ">
-              	and (S.s_type = #{stypeone} or S.s_type = #{stypetwo})
+              	and (S.s_type = #{stypeone} or S.s_type = #{stypetwo} or S.s_type = #{stypethree})
             </if>
         </where>
 	</select>
@@ -119,7 +119,7 @@
                 <![CDATA[ and f_date <= #{createdateEnd} ]]>
             </if>
             <if test=" stypeone != null and stypeone != 0 ">
-              	and (S.s_type = #{stypeone} or S.s_type = #{stypetwo})
+              	and (S.s_type = #{stypeone} or S.s_type = #{stypetwo} or S.s_type = #{stypethree})
             </if>
         </where> order by f_date desc
 	</select>

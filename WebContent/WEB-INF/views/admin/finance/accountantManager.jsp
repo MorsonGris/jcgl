@@ -117,9 +117,11 @@
                         if(row.student.stype!= ''){
                             var type = row.student.stype;
                         	if(type==3) {
-                        		return "会计报名";
+                        		return "会计培训";
+                            }else if(type==4){
+                            	return "艺考培训";
                             }else {
-                            	return "艺考报名";
+                            	return "职业资格培训";
                             }
                         }else{
                             return '';

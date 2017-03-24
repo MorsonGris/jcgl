@@ -102,10 +102,12 @@ public class StudentController extends BaseController{
     		if(student.getStype()==1) {
     			map.put("stypeone", 1);
     			map.put("stypetwo", 2);
+    			map.put("stypethree", 6);
     			
     		}else{
     			map.put("stypeone", 3);
     			map.put("stypetwo", 4);
+    			map.put("stypethree", 5);
     		}
     	}
     	pageInfo.setCondition(map);

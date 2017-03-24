@@ -177,7 +177,7 @@
     			and s_studentno = #{studentNo}
     		</if>
     		<if test="stypeone != null and stypeone != '' ">
-    			and (s_type = #{stypeone} or s_type = #{stypetwo})
+    			and (s_type = #{stypeone} or s_type = #{stypetwo} or s_type = #{stypethree})
     		</if>
     	</where>
 	</select>
