@@ -163,8 +163,10 @@
                             var type = row.student.stype;
                         	if(type==1) {
                         		return "成人高考";
-                            }else {
+                            }else if(type==2){
                             	return "国家开放大学";
+                            }else {
+                            	return "远程教育";
                             }
                         }else{
                             return '';
