@@ -102,20 +102,33 @@
 		       <select id="school" name="academyId" class="form-control"> <option value="">---请选择---</option> </select> 
 		      </div> 
 		      <div class="form-group">
-				<div style="float:left">
-					<label for="profession">专业</label> 
-					<input type="text" id="sContent" name="sContent" class="form-control" style="width:170px;" /> 
+					<div class="row">
+						<div class="col-xs-6">
+							<label for="profession">专业</label> 
+							<input type="text" id="sContent" name="sContent" class="form-control" style="width:170px;" /> 
+						</div>
+					<div class="col-xs-6">
+						<label for="sGradations">层次</label> 
+						<select id="sGradations" name="sGradations" onclick="selected();" class="form-control" style="width:170px;"> 
+							<option value="">---请选择---</option>
+							<option value="高达本">高达本</option>
+							<option value="专达本">专达本</option>
+							<option value="高达专">高达专</option>
+						</select> 
+					</div>
+					</div>
 				</div>
-				<div style="margin-left: 205px;">
-					<label for="sGradations">层次</label> 
-					<select id="sGradations" name="sGradations" onclick="selected();" class="form-control" style="width:170px;"> 
-						<option value="">---请选择---</option>
-						<option value="高达本">高达本</option>
-						<option value="专达本">专达本</option>
-						<option value="高达专">高达专</option>
-					</select> 
-				</div>
-			  </div> 
+				<div class="form-group">
+					<div class="row">
+						<div class="col-xs-6">
+							<label for="sGradations">验证码：</label> 
+							<input type="text" class="form-control" style="width:200px;" />
+						</div>
+						<div class="col-xs-6">
+							<input style="margin-top:27px;" id="btnSendCode" type="button" value="获取验证码" onClick="sendMessage()" class="btn btn-primary btn-lg">
+						</div>
+					</div>
+				</div> 
 		      <div class="form-group" hidden="true"> 
 		       <input type="text" class="form-control" id="sSystme" name="sSystme" /> 
 		      </div> 
@@ -296,6 +309,53 @@ function selected(){
 		 }
 	 }
   }
+  
+var InterValObj; //timer变量，控制时间
+var count = 30; //间隔函数，1秒执行
+var curCount;//当前剩余秒数
+var code = ""; //验证码
+var codeLength = 6;//验证码长度
+function sendMessage() {
+	curCount = count;
+	var dealType; //验证方式
+	var uid=$("#uid").val();//用户uid
+	if ($("#phone").attr("checked") == true) {
+		dealType = "phone";
+	}
+	else {
+		dealType = "email";
+	}
+	//产生验证码
+	for (var i = 0; i < codeLength; i++) {
+		code += parseInt(Math.random() * 9).toString();
+	}
+	//设置button效果，开始计时
+	$("#btnSendCode").attr("disabled", "true");
+	$("#btnSendCode").val( + curCount + "秒再获取");
+	InterValObj = window.setInterval(SetRemainTime, 1000); //启动计时器，1秒执行一次
+	//向后台发送处理数据
+	/* $.ajax({
+		type: "POST", //用POST方式传输
+		dataType: "text", //数据格式:JSON
+		url: 'Login.ashx', //目标地址
+		data: "dealType=" + dealType +"&uid=" + uid + "&code=" + code,
+		error: function (XMLHttpRequest, textStatus, errorThrown) { },
+		success: function (msg){ }
+	}); */
+}
+//timer处理函数
+function SetRemainTime() {
+	if (curCount == 0) {                
+		window.clearInterval(InterValObj);//停止计时器
+		$("#btnSendCode").removeAttr("disabled");//启用按钮
+		$("#btnSendCode").val("重新发送验证码");
+		code = ""; //清除验证码。如果不清除，过时间后，输入收到的验证码依然有效    
+	}
+	else {
+		curCount--;
+		$("#btnSendCode").val( + curCount + "秒再获取");
+	}
+}
 </script>
 </body>
 </html>
