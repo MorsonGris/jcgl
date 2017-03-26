@@ -4,6 +4,9 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,6 +19,7 @@ import com.xin.bean.Student;
 import com.xin.bean.User;
 import com.xin.bean.vo.UserVo;
 import com.xin.commons.base.BaseController;
+import com.xin.commons.utils.CaptchaUtils;
 import com.xin.commons.utils.PageInfo;
 import com.xin.commons.utils.StudentNo;
 import com.xin.service.ArtexamService;
@@ -139,28 +143,36 @@ public class ArtexamController extends BaseController{
      */
     @RequestMapping("/add")
     @ResponseBody
-    public Object add(Student student){
-    	Student stu = studentservice.selectByNo();
-    	String No = StudentNo.getNo(stu);
-    	student.setStudentNo(No);
-    	if(student.getUserId() == null){
-    		UserVo uservo = new UserVo();
-    		uservo.setLoginName("admin");
-    		List<User> list = userService.selectByLoginName(uservo);
-    		User users = null;
-    		for(int i=0;i<list.size();i++){
-    			users = list.get(i);
+    public Object add(Student student,HttpServletRequest request){
+    	if(CaptchaUtils.validate(request,student.getCaptcha())){
+    		if(student.getCode().equals(student.getScode())){
+    			if(student.getCode().equals(student.getScode())){}
+        		
+        		Student stu = studentservice.selectByNo();
+            	String No = StudentNo.getNo(stu);
+            	student.setStudentNo(No);
+            	if(student.getUserId() == null){
+            		UserVo uservo = new UserVo();
+            		uservo.setLoginName("admin");
+            		List<User> list = userService.selectByLoginName(uservo);
+            		User users = null;
+            		for(int i=0;i<list.size();i++){
+            			users = list.get(i);
+            		}
+            		student.setUserId(users.getId());
+            	}
+            	if(student.getSDate() == null){
+            		student.setSDate(new Date());
+            	}
+            	boolean result = artexamService.insertByid(student);
+            	if(result == true){
+            		return renderSuccess("添加成功");
+            	}
+            	return renderError("添加失败");	
     		}
-    		student.setUserId(users.getId());
+    		return renderError("短信验证码错误");
     	}
-    	if(student.getSDate() == null){
-    		student.setSDate(new Date());
-    	}
-    	boolean result = artexamService.insertByid(student);
-    	if(result == true){
-    		return renderSuccess("添加成功");
-    	}
-    	return renderError("添加失败");
+    	return renderError("短信验证码错误");
     }
     
     /**

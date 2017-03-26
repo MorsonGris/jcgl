@@ -35,6 +35,10 @@ public class Student{
 	private Date sDate;
 	@TableField("s_type")
 	private Integer stype;
+	private String code;
+	private String scode;
+	
+	private String captcha;
 	
 	private List<Academy> listAcademy;
 	
@@ -150,5 +154,29 @@ public class Student{
 
 	public void setStype(Integer stype) {
 		this.stype = stype;
+	}
+
+	public String getCode() {
+		return code;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
+	}
+
+	public String getScode() {
+		return scode;
+	}
+
+	public void setScode(String scode) {
+		this.scode = scode;
+	}
+
+	public String getCaptcha() {
+		return captcha;
+	}
+
+	public void setCaptcha(String captcha) {
+		this.captcha = captcha;
 	}
 }

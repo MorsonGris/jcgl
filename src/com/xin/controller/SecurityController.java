@@ -1,29 +1,45 @@
 package com.xin.controller;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Set;
-import org.springframework.web.bind.annotation.GetMapping;
+
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+
 import com.cloopen.rest.sdk.CCPRestSmsSDK;
 import com.xin.commons.base.BaseController;
 
+@Controller
 @RequestMapping("/Security")
 public class SecurityController extends BaseController{
 	
 	private static final String APP_ID = "8aaf07085aabcbbd015ac54829f40725"; // 8a48b5514efd1c3a014f01bb44d7067b
 	private static final String ACOUNT_SID = "8aaf07085aabcbbd015ac548296c0720";// aaf98f894032b237014051abc35700f0
 	private static final String AUTH_TOKEN = "be4423c769ec47eeb4c2835cb49010c1";// 6c19475e5fa14fe3bf4cccc60e23c8ad
-	private static final String TEMPLATE_ID = "162847";//模板id
+	private static final String TEMPLATE_ID = "162847";//模板1ID(用于成人教育、国家开发大学、远程教育)
+	private static final String TEMPLATE_ID2 = "162847";//模板2ID(用于艺考、会计、教师资格培训)
 	private static final String TIME_LEN = "5";//通知时间（5分钟内有效）
 	
-	@GetMapping("/security")
-	public void security(String name,String phone,String school,String sContent,String sGradations,String code){
+	/**
+	 * 用于成人教育、国家开发大学、远程教育短信接口
+	 * @param name
+	 * @param phone
+	 * @param school
+	 * @param sContent
+	 * @param sGradations
+	 * @param code
+	 * @return
+	 */
+	@RequestMapping("/security")
+	public Object security(String name,String phone,String school,String sContent,String stype,String sGradations,String code,String type){
 		HashMap<String, Object> result = null;
 		CCPRestSmsSDK restAPI = new CCPRestSmsSDK();//初始化SDK
 		//*初始化服务器地址和端口 *
 		//*沙盒环境（用于应用开发调试）：restAPI.init("sandboxapp.cloopen.com", "8883");*
 		//*生产环境（用户应用上线使用）：restAPI.init("app.cloopen.com", "8883"); *
-		restAPI.init("https://app.cloopen.com", "8883");
+		restAPI.init("app.cloopen.com", "8883");
 		//*初始化主帐号和主帐号令牌,对应官网开发者主账号下的ACCOUNT SID和AUTH TOKEN *
 		//*ACOUNT SID和AUTH TOKEN在登陆官网后，在“应用-管理控制台”中查看开发者主账号获取*
 		//*参数顺序：第一个参数是ACOUNT SID，第二个参数是AUTH TOKEN。 *
@@ -46,8 +62,14 @@ public class SecurityController extends BaseController{
 		//String[]{"6532","5"}); *
 		//*则13800000000手机号收到的短信内容是：【云通讯】您使用的是云通讯短信模板，您的验证码是6532，请于5分钟内正确输入 *
 		//*********************************************************************************************************************
-		result = restAPI.sendTemplateSMS(phone, TEMPLATE_ID, new String[] {name,school,sContent,sGradations,code, TIME_LEN });
-		if ("000000".equals(result.get("statusCode"))) {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日");
+		String date = sdf.format(new Date());
+		if(type.equals("1")){
+			result = restAPI.sendTemplateSMS(phone, TEMPLATE_ID, new String[] {name,school,sContent,sGradations,code,TIME_LEN });
+		}else{
+			result = restAPI.sendTemplateSMS(phone, TEMPLATE_ID2, new String[] {date,stype,code,TIME_LEN });
+		}
+		if("000000".equals(result.get("statusCode"))) {
 			// 正常返回输出data包体信息（map）
 			@SuppressWarnings("unchecked")
 			HashMap<String, Object> retData = (HashMap<String, Object>)result.get("data");
@@ -57,12 +79,14 @@ public class SecurityController extends BaseController{
 				//log.info(key + " = " + object);
 				System.out.println(key+"="+object);
 			}
+			return renderSuccess("发送成功");
 		} else {
 			// 异常返回输出错误码和错误信息
 			String msg = "错误码=" + result.get("statusCode") + " 错误信息= "
 					+ result.get("statusMsg");
 			//log.error(msg);
 			System.out.println(msg);
+			return renderError(msg);
 		}
 	}
 }
