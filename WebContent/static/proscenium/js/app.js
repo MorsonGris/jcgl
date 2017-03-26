@@ -26,7 +26,7 @@ $(document).ready(function() {
     })   
 	$.goup({
         trigger: 100,
-        bottomOffset: 250,
+        bottomOffset: 300,
         locationOffset: 2,
     })
 	

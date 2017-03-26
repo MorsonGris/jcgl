@@ -2,6 +2,7 @@ package com.xin.controller;
 
 import java.util.Enumeration;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -14,18 +15,22 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.xin.bean.Relation;
 import com.xin.bean.vo.UserVo;
 import com.xin.commons.base.BaseController;
 import com.xin.commons.csrf.CsrfToken;
 import com.xin.commons.utils.CaptchaUtils;
 import com.xin.commons.utils.DigestUtils;
+import com.xin.commons.utils.PageInfo;
 import com.xin.commons.utils.StringUtils;
+import com.xin.service.IRelationService;
 import com.xin.service.IUserService;
 
 @Controller
 @RequestMapping("/index")
 public class IndexController extends BaseController{
 	@Autowired private IUserService userService;
+	@Autowired private IRelationService relationService;
 	/**
 	 * 前台登录
 	 */
@@ -97,6 +102,9 @@ public class IndexController extends BaseController{
 	@GetMapping("/apply")
 	public String apply(Model model){
 		model.addAttribute("homeContent", homeContent());
+		PageInfo pi = new PageInfo(0, 4, "r_id", "desc");
+    	List<Relation> relation = relationService.selectDataGrid(pi);
+    	model.addAttribute("relation", relation);
 		return "proscenium/apply";
 	}
 	
@@ -106,6 +114,9 @@ public class IndexController extends BaseController{
     @GetMapping("/learn")
     public String learn(Model model){
     	model.addAttribute("homeContent", homeContent());
+    	PageInfo pi = new PageInfo(0, 4, "r_id", "desc");
+    	List<Relation> relation = relationService.selectDataGrid(pi);
+    	model.addAttribute("relation", relation);
     	return "proscenium/learn";
     }
     
@@ -113,8 +124,117 @@ public class IndexController extends BaseController{
 	 * 招生简章
 	 */
 	@GetMapping("/eguide")
-	public String eguide(){
+	public String eguide(Model model){
+		model.addAttribute("homeContent", homeContent());
+		PageInfo pi = new PageInfo(0, 4, "r_id", "desc");
+    	List<Relation> relation = relationService.selectDataGrid(pi);
+    	model.addAttribute("relation", relation);
 		return "proscenium/eguide";
+	}
+	
+	/**
+	 * 学院简介
+	 */
+	@RequestMapping("/s1")
+	public String s1(Model model){
+		model.addAttribute("homeContent", homeContent());
+		return "proscenium/school/s1";
+	}
+	@RequestMapping("/s2")
+	public String s2(Model model){
+		model.addAttribute("homeContent", homeContent());
+		return "proscenium/school/s2";
+	}
+	@RequestMapping("/s3")
+	public String s3(Model model){
+		model.addAttribute("homeContent", homeContent());
+		return "proscenium/school/s3";
+	}
+	@RequestMapping("/s4")
+	public String s4(Model model){
+		model.addAttribute("homeContent", homeContent());
+		return "proscenium/school/s4";
+	}
+	@RequestMapping("/s5")
+	public String s5(Model model){
+		model.addAttribute("homeContent", homeContent());
+		return "proscenium/school/s5";
+	}
+	
+	@RequestMapping("/s6")
+	public String s6(Model model){
+		model.addAttribute("homeContent", homeContent());
+		return "proscenium/school/s6";
+	}
+	@RequestMapping("/s7")
+	public String s7(Model model){
+		model.addAttribute("homeContent", homeContent());
+		return "proscenium/school/s7";
+	}
+	@RequestMapping("/s8")
+	public String s8(Model model){
+		model.addAttribute("homeContent", homeContent());
+		return "proscenium/school/s8";
+	}
+	@RequestMapping("/s9")
+	public String s9(Model model){
+		model.addAttribute("homeContent", homeContent());
+		return "proscenium/school/s9";
+	}
+	@RequestMapping("/s10")
+	public String s10(Model model){
+		model.addAttribute("homeContent", homeContent());
+		return "proscenium/school/s10";
+	}
+	@RequestMapping("/s11")
+	public String s11(Model model){
+		model.addAttribute("homeContent", homeContent());
+		return "proscenium/school/s11";
+	}
+	@RequestMapping("/s12")
+	public String s12(Model model){
+		model.addAttribute("homeContent", homeContent());
+		return "proscenium/school/s12";
+	}
+	@RequestMapping("/s13")
+	public String s13(Model model){
+		model.addAttribute("homeContent", homeContent());
+		return "proscenium/school/s13";
+	}
+	@RequestMapping("/s14")
+	public String s14(Model model){
+		model.addAttribute("homeContent", homeContent());
+		return "proscenium/school/s14";
+	}
+	@RequestMapping("/s15")
+	public String s15(Model model){
+		model.addAttribute("homeContent", homeContent());
+		return "proscenium/school/s15";
+	}
+	@RequestMapping("/s16")
+	public String s16(Model model){
+		model.addAttribute("homeContent", homeContent());
+		return "proscenium/school/s16";
+	}
+	@RequestMapping("/s17")
+	public String s17(Model model){
+		model.addAttribute("homeContent", homeContent());
+		return "proscenium/school/s17";
+	}
+	@RequestMapping("/s18")
+	public String s18(Model model){
+		model.addAttribute("homeContent", homeContent());
+		return "proscenium/school/s18";
+	}
+	@RequestMapping("/s19")
+	public String s19(Model model){
+		model.addAttribute("homeContent", homeContent());
+		return "proscenium/school/s19";
+	}
+	@RequestMapping("/s20")
+	public String s20(Model model){
+		model.addAttribute("homeContent", homeContent());
+		return "proscenium/school/s20";
 	}
 	
 	/**
@@ -123,6 +243,9 @@ public class IndexController extends BaseController{
 	@GetMapping("/helper")
 	public String helper(Model model){
 		model.addAttribute("homeContent", homeContent());
+		PageInfo pi = new PageInfo(0, 4, "r_id", "desc");
+    	List<Relation> relation = relationService.selectDataGrid(pi);
+    	model.addAttribute("relation", relation);
 		return "proscenium/helper";
 	}
 	
@@ -132,6 +255,9 @@ public class IndexController extends BaseController{
 	@GetMapping("/train")
 	public String train(Model model){
 		model.addAttribute("homeContent", homeContent());
+		PageInfo pi = new PageInfo(0, 4, "r_id", "desc");
+    	List<Relation> relation = relationService.selectDataGrid(pi);
+    	model.addAttribute("relation", relation);
 		return "proscenium/train";
 	}
 	
@@ -141,6 +267,9 @@ public class IndexController extends BaseController{
 	@GetMapping("/payment")
 	public String payment(Model model){
 		model.addAttribute("homeContent", homeContent());
+		PageInfo pi = new PageInfo(0, 4, "r_id", "desc");
+    	List<Relation> relation = relationService.selectDataGrid(pi);
+    	model.addAttribute("relation", relation);
 		return "proscenium/payment";
 	}
 	
@@ -150,6 +279,9 @@ public class IndexController extends BaseController{
 	@GetMapping("/notice")
 	public String notice(Model model){
 		model.addAttribute("homeContent", homeContent());
+		PageInfo pi = new PageInfo(0, 4, "r_id", "desc");
+    	List<Relation> relation = relationService.selectDataGrid(pi);
+    	model.addAttribute("relation", relation);
 		return "proscenium/notice";
 	}
 	
@@ -167,6 +299,9 @@ public class IndexController extends BaseController{
 	@GetMapping("/accountant")
 	public String accountant(Model model){
 		model.addAttribute("homeContent", homeContent());
+		PageInfo pi = new PageInfo(0, 4, "r_id", "desc");
+    	List<Relation> relation = relationService.selectDataGrid(pi);
+    	model.addAttribute("relation", relation);
 		return "proscenium/accountant";
 	}
 	
@@ -176,6 +311,9 @@ public class IndexController extends BaseController{
 	@GetMapping("/country")
 	public String country(Model model){
 		model.addAttribute("homeContent", homeContent());
+		PageInfo pi = new PageInfo(0, 4, "r_id", "desc");
+    	List<Relation> relation = relationService.selectDataGrid(pi);
+    	model.addAttribute("relation", relation);
 		return "proscenium/country";
 	}
 	
@@ -185,6 +323,9 @@ public class IndexController extends BaseController{
 	@GetMapping("/adult")
 	public String adult(Model model){
 		model.addAttribute("homeContent", homeContent());
+		PageInfo pi = new PageInfo(0, 4, "r_id", "desc");
+    	List<Relation> relation = relationService.selectDataGrid(pi);
+    	model.addAttribute("relation", relation);
 		return "proscenium/adult";
 	}
 	
@@ -195,6 +336,9 @@ public class IndexController extends BaseController{
 	@GetMapping("art")
 	public String art(Model model){
 		model.addAttribute("homeContent", homeContent());
+		PageInfo pi = new PageInfo(0, 4, "r_id", "desc");
+    	List<Relation> relation = relationService.selectDataGrid(pi);
+    	model.addAttribute("relation", relation);
 		return "proscenium/art";
 	}
 		
@@ -204,6 +348,9 @@ public class IndexController extends BaseController{
 	@GetMapping("/nation")
 	public String nation(Model model){
 		model.addAttribute("homeContent", homeContent());
+		PageInfo pi = new PageInfo(0, 4, "r_id", "desc");
+    	List<Relation> relation = relationService.selectDataGrid(pi);
+    	model.addAttribute("relation", relation);
 		return "proscenium/nation";
 	}
 	
@@ -221,6 +368,9 @@ public class IndexController extends BaseController{
 	@GetMapping("/teacher")
 	public String teacher(Model model){
 		model.addAttribute("homeContent", homeContent());
+		PageInfo pi = new PageInfo(0, 4, "r_id", "desc");
+    	List<Relation> relation = relationService.selectDataGrid(pi);
+    	model.addAttribute("relation", relation);
 		return "proscenium/teacher";
 	}
 }

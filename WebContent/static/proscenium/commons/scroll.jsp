@@ -10,18 +10,6 @@
         <a href = "JavaScript:void(0)" id="maps">
             <img src="<%=path %>/static/proscenium/icon/maps.png" style="width: 100%; border-radius: 10px;">
         </a>
-    <%-- <p>
-        <a href = "JavaScript:void(0)" id="phone">
-            <img src="<%=path %>/static/proscenium/images/phone2.png" style="width: 50%;">
-        </a>
-    </p> 
-
-    <p>
-        <a href="JavaScript:scroll(0,0)" >
-            <img src="<%=path %>/static/proscenium/icon/gotop.png" style="width: 60%;">
-        </a>
-    </p>
-	--%>
 </div>
 <div id="light" class="white_content">
     <div class="phone-head" style="text-align: right;background-color: burlywood;">
@@ -57,11 +45,8 @@
         </a>
     </div>
     <div class="phone-body" style="text-align: left;margin-top: 20px;">
-    	<div class="container">
-    	
+    	<div class="container"> 	
     		<div class ="row">
-    		<h4 style="margin-left: 5px;">联系人：李主任</h4>
-    		<h4 style="margin-left: 5px;">电话：1254457849</h4>
     		<h4 style="margin-left: 5px;">地址：江西省赣州市红旗大道55号</h4>
 			<iframe style="width: 284px; height: 338px;frameborder: 0;scrolling: no; marginheight: 0px; marginwidth: 0;margin-left: 5px;"    src="http://j.map.baidu.com/KlYke"></iframe>	    	
 			</div>   

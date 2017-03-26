@@ -17,7 +17,8 @@
 <body>
 <jsp:include page="/static/proscenium/commons/head.jsp"></jsp:include>
 <div class="container">
-	<div class="row" style="margin-bottom: 20px;">
+	<h3 style="text-align: center;">公告列表</h3>
+	<div class="row" style="margin-top: 40px;">
 		<div class="col-xs-12">
 			<table id="noticeTable" data-toggle="table"
 			       data-url="queryBypages"
@@ -49,7 +50,7 @@
 </div>
 <jsp:include page="/static/proscenium/commons/bottom.jsp"></jsp:include>
 
-<jsp:include page="/static/proscenium/commons/scroll.jsp"></jsp:include>
+<%-- <jsp:include page="/static/proscenium/commons/scroll.jsp"></jsp:include> --%>
 <!--	***********************************************************  -->
 <script src="${path }/static/proscenium/js/jquery.min.js"></script>
 <script src="${path }/static/proscenium/js/bootstrap.min.js"></script>

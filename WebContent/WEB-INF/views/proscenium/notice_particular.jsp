@@ -39,7 +39,7 @@
     </div>
     <jsp:include page="/static/proscenium/commons/bottom.jsp"></jsp:include>
 </div>
-<jsp:include page="/static/proscenium/commons/scroll.jsp"></jsp:include>
+<%-- <jsp:include page="/static/proscenium/commons/scroll.jsp"></jsp:include> --%>
 <!-- ************************************************* -->
 <script src="${path }/static/proscenium/js/jquery.min.js"></script>
 <script src="${path }/static/proscenium/js/bootstrap.min.js"></script>
