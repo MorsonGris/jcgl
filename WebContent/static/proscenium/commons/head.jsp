@@ -11,7 +11,7 @@
                    <span class="icon-bar"></span>
                    <span class="icon-bar"></span>
                </button>
-               <a class="navbar-brand" href="${path }/index"  style="padding: 0 0;margin-left: 10px;width:68%;">
+               <a class="navbar-brand" href="${path }/index"  style="padding: 0 0;width:68%;">
           <img src="${path }/static/proscenium/logo/logo5.png" >
             </a>
         </div>

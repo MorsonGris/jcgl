@@ -139,19 +139,38 @@
 			       <label for="name">姓名</label> 
 			       <input type="text" class="form-control" id="name" name="sName" /> 
 			      </div> 
-			      <!-- <div class="form-group">
-			           <label for="id-card">身份证号码</label>
-			           <input type="text" class="form-control" id="id-card" name="idNumber" />
-			       </div> --> 
+			      <div class="form-group">
+	      		  	 <div class="row"> 
+		           		<div class="col-xs-6">
+		           		 	<label for="name">验证码</label> 
+		           			<input class="form-control" type="text" id="yzm" name="captcha"/>
+		           		</div>
+		           		<div class="col-xs-6">
+		           			<img  style="margin-top:27px;" id="captcha" alt="验证码" src="${path }/captcha.jpg" data-src="${path }/captcha.jpg?t=" style="vertical-align:middle;border-radius:4px;width:100%;height:50px;cursor:pointer;">
+		           		</div>
+	           		</div>
+	              </div>
 			      <div class="form-group"> 
 			       <label for="phone">手机号码</label> 
 			       <input type="text" class="form-control" id="phone" name="sPhone" /> 
-			      </div> 
+			      </div>
+			      <div class="form-group">
+					  <div class="row">
+						<div class="col-xs-6">
+							<label for="sGradations">短信验证码：</label>
+							<input type="hidden" id="code" name="code">
+							<input type="text" id="scode" name="scode" class="form-control" style="width:200px;" />
+						</div>
+						<div class="col-xs-6">
+							<input style="margin-top:27px;" id="btnSendCode" type="button" value="获取验证码" onClick="sendMessage()" class="btn btn-primary btn-lg">
+						</div>
+					  </div>
+				  </div>
 			      <div class="form-group"> 
-			       <label for="content">学习内容</label> 
-			       <textarea class="form-control" rows="3" id="content" name="sContent"></textarea> 
+			      <label for="content">学习内容</label> 
+			      <textarea class="form-control" rows="3" id="content" name="sContent"></textarea> 
 			      </div> 
-			      <input type="hidden" name="stype" value="5" /> 
+			      <input type="hidden" id="stype" name="stype" value="5" /> 
 			      <input type="hidden" id="id" name="userId" /> 
 			      <button type="submit" class="btn btn-primary btn-lg">提交</button> 
 			     </form> 
@@ -186,6 +205,12 @@
 <script src="${path }/static/proscenium/js/app.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
+	$("#captcha").click(function() {
+	    var $this = $(this);
+	    var url = $this.data("src") + new Date().getTime();
+	    $this.attr("src", url);
+	});
+	
 	var url = (window.location.href.split("?")[1]).split("&")[0];
 	var id = url.split("=")[1];
 	if(id != null && id != ''){
@@ -204,7 +229,7 @@ $(document).ready(function() {
 				  if(data.success == true){
 					  swal(
 					      '添加成功!',
-					      '',
+					      data.msg,
 					      'success'
 						);
 						$("#adultEnroll").bootstrapValidator('resetForm');
@@ -230,30 +255,6 @@ $(document).ready(function() {
 			   }
 			  }
 			},
-			/* idNumber: {
-			   validators: {
-				   notEmpty: {
-                       message: '身份证号码不能为空'
-                   },
-                   stringLength: {
-                       min: 18,
-                       max: 18,
-                       message: '身份证号码格式不正确'
-                   },
-                   threshold :18 ,
-                   remote: {
-                       url: '${path }/Bookkeeper/validatori',
-                       message: '身份证号码已存在',
-                       delay :  2000,
-                       type: 'POST',
-                   	   data: function(validator) {
-                          return {
-                        	  idNumber: $('#id-card').val(),
-                          };
-                       }
-                   }
-			   }
-			 }, */
 			 sPhone: {
                 validators: {
                     notEmpty: {
@@ -278,6 +279,20 @@ $(document).ready(function() {
                     }
                 }
 			},
+			scode: {
+				  validators: {
+				   notEmpty: {
+					  message: '短信验证不能为空'
+				   }
+				}
+			},
+			captcha: {
+				  validators: {
+				   notEmpty: {
+				    message: '验证码不能为空'
+				   }
+				}
+			},
 			sContent: {
 			  validators: {
 			   notEmpty: {
@@ -288,6 +303,57 @@ $(document).ready(function() {
 	    }
 	})
 })
+
+var InterValObj; //timer变量，控制时间
+var count = 60; //间隔函数，1秒执行
+var curCount;//当前剩余秒数
+var code = ""; //验证码
+var codeLength = 6;//验证码长度
+function sendMessage() {
+	var name = $("#name").val();
+	var phone = $("#phone").val();
+	var stype = $("#stype").val();
+	
+	if(phone != null && phone!=''){
+		curCount = count;
+		//产生验证码
+		for (var i = 0; i < codeLength; i++) {
+			code += parseInt(Math.random() * 9).toString();
+		}
+		//设置button效果，开始计时
+		$("#btnSendCode").attr("disabled", "true");
+		$("#btnSendCode").val( + curCount + "秒再获取");
+		InterValObj = window.setInterval(SetRemainTime, 1000); //启动计时器，1秒执行一次
+		//向后台发送处理数据
+		$.ajax({
+			type: "POST", //用POST方式传输
+			dataType: "text", //数据格式:JSON
+			url: '${path}/Security/security', //目标地址
+			data: "name=" + name +"&phone="+ phone +"&stype="+ stype + "&type="+ 2 +"&code=" + code,
+			error: function (XMLHttpRequest, textStatus, errorThrown) {},
+			success: function (msg){}
+			});
+		}else{
+			swal(
+			      '手机号码不能为空!',
+			      '',
+			      'error'
+			)
+		}
+	}
+//timer处理函数
+function SetRemainTime() {
+	if (curCount == 0) {                
+		window.clearInterval(InterValObj);//停止计时器
+		$("#btnSendCode").removeAttr("disabled");//启用按钮
+		$("#btnSendCode").val("重新发送验证码");
+		code = ""; //清除验证码。如果不清除，过时间后，输入收到的验证码依然有效    
+	}
+	else {
+		curCount--;
+		$("#btnSendCode").val( + curCount + "秒再获取");
+	}
+}
 </script>
 </body>
 </html>
