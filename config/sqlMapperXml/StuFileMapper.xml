@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xin.mapper.StuFileMapper">
+
+	<!-- 通用查询映射结果 -->
+	<resultMap id="BaseResultMap" type="com.xin.bean.StuFile">
+		<id column="sf_id" property="sfId" />
+		<result column="stu_id" property="stuId" />
+		<result column="sf_photo" property="sfPhoto" />
+		<result column="sf_voucher" property="sfVoucher" />
+		<result column="sf_paper" property="sfPaper" />
+		<result column="sf_date" property="sfDate" />
+		<association property="student" javaType="com.xin.bean.Student">
+			<id property="sId" column="s_id" />
+			<result property="sName" column="s_name" />
+		</association>
+	</resultMap>
+
+	<sql id="Base_stuFile">
+		SF.sf_id,SF.stu_id,SF.sf_photo,SF.sf_voucher,SF.sf_paper,SF.sf_date,S.s_name
+	</sql>
+	
+	<select id="selectStuFilePage" resultMap="BaseResultMap">
+		select <include refid="Base_stuFile" /> from stu_file SF inner join Student S on SF.stu_id=S.s_id
+		<where>
+            <if test=" stuname != null and stuname != '' ">
+                S.s_name like #{stuname}
+            </if>
+            <if test=" startTime != null ">
+                <![CDATA[ and n_date >= #{startTime} ]]>
+            </if>
+            <if test=" endTime != null ">
+                <![CDATA[ and n_date <= #{endTime} ]]>
+            </if>
+        </where>
+	</select>
+		
+	<select id="selectStuFileById" parameterType="Integer" resultMap="BaseResultMap">
+		select <include refid="Base_stuFile" /> from stu_file SF inner join Student S on SF.stu_id=S.s_id where SF.sf_id = #{id}
+	</select>
+	
+	<insert id="stuFileInsert" parameterType="com.xin.bean.StuFile">
+		insert into stu_file(stu_id,sf_photo,sf_voucher,sf_paper,sf_date) values(
+			#{stuId},
+			#{sfPhoto},
+			#{sfVoucher},
+			#{sfPaper},
+			#{sfDate}
+		)
+	</insert>
+	
+	<update id="updateStuFile" parameterType="com.xin.bean.StuFile">
+		update stu_file 
+		<set>
+			<if test="sfPhoto!=null and sfPhoto!='' ">
+				sf_photo=#{sfPhoto},
+			</if>
+			<if test="sfVoucher!=null and sfVoucher!='' ">
+				sf_voucher=#{sfVoucher},
+			</if>
+			<if test="sfPaper!=null and sfPaper!='' ">
+				sf_paper=#{sfPaper},
+			</if>
+		</set>
+		where sf_id=#{sfId}
+	</update>
+	
+	<delete id="deleteStuFile" parameterType="Integer">
+		delete from stu_file where sf_id=#{sfId}
+	</delete>
+</mapper>
