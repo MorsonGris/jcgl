@@ -70,7 +70,7 @@
                 </a>
             </div>
             <div class="col-xs-4 column">
-                <a href="http://江西教育网.com/articleAction!init2.action">
+                <a href="index/upload">
                     <img alt="80x80" src="${path }/static/proscenium/icon/arrow-up.png" class="img-circle home-ico" />
                     <br>
                     <span class="home_operation">上传文件</span>

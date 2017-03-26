@@ -90,7 +90,7 @@ public class StuFileController extends BaseController{
      * @param notice
      * @return
      */
-    @PostMapping("/add")
+    @RequestMapping("/add")
     @ResponseBody
     public Object add(
     		@RequestParam(value="sfPhoto",required=false)MultipartFile sfPhoto,
@@ -111,6 +111,7 @@ public class StuFileController extends BaseController{
     	if(sfPaper!=null) {
     		stuFile.setSfPaper(id+sfPaper.getOriginalFilename());
     	}
+    	System.out.println(stuFile.getSfPhoto()+" ///////"+stuFile.getSfVoucher());
     	int result = stuFileService.stuFileInsert(stuFile);
     	if(result>0) {
     		return renderSuccess("添加成功");
@@ -120,6 +121,8 @@ public class StuFileController extends BaseController{
     }
     
     /**下载相片
+     * @param stuname
+     * @param photo
 	 * @param response
 	 * @throws Exception
 	 */
@@ -127,6 +130,30 @@ public class StuFileController extends BaseController{
 	public void downphoto(@RequestParam(value="stuname")String stuname,
 			@RequestParam(value="photo")String photo,HttpServletResponse response)throws Exception{
 		FileDownload.fileDownload(response, PathUtil.getClasspath() + "uploadFile/" + photo, stuname+photo);
+	}
+	
+	/**下载缴费凭证
+     * @param stuname
+     * @param voucher
+	 * @param response
+	 * @throws Exception
+	 */
+	@RequestMapping(value="/downvoucher")
+	public void downvoucher(@RequestParam(value="stuname")String stuname,
+			@RequestParam(value="voucher")String voucher,HttpServletResponse response)throws Exception{
+		FileDownload.fileDownload(response, PathUtil.getClasspath() + "uploadFile/" + voucher, stuname+voucher);
+	}
+	
+	/**下载论文
+     * @param stuname
+     * @param paper
+	 * @param response
+	 * @throws Exception
+	 */
+	@RequestMapping(value="/downpaper")
+	public void downpaper(@RequestParam(value="stuname")String stuname,
+			@RequestParam(value="paper")String paper,HttpServletResponse response)throws Exception{
+		FileDownload.fileDownload(response, PathUtil.getClasspath() + "uploadFile/" + paper, stuname+paper);
 	}
     
     /**
