@@ -28,8 +28,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.xin.commons.utils.StringUtils;
-import com.xin.commons.utils.PathUtil;
 import com.xin.bean.Finance;
 import com.xin.commons.base.BaseController;
 import com.xin.commons.utils.ExcelUtil;
@@ -37,6 +35,9 @@ import com.xin.commons.utils.FileDownload;
 import com.xin.commons.utils.FileUpload;
 import com.xin.commons.utils.ObjectExcelRead;
 import com.xin.commons.utils.PageInfo;
+import com.xin.commons.utils.PageJson;
+import com.xin.commons.utils.PathUtil;
+import com.xin.commons.utils.StringUtils;
 import com.xin.service.IFinanceService;
 
 /**
@@ -94,6 +95,15 @@ public class FinanceController extends BaseController{
         pageInfo.setCondition(condition);
         financeService.selectFinancePage(pageInfo);
         return pageInfo;
+    }
+    
+    @RequestMapping("/financepage")
+    @ResponseBody
+    public PageJson<Finance> financepage(PageJson<Finance> pages,@RequestParam int offset,@RequestParam int limit,HttpServletRequest request){
+    	String stuno = request.getParameter("stuno");
+    	pages.setRows(financeService.financepage(stuno, offset, limit));
+		pages.setTotal(financeService.queryTotal(stuno));
+		return pages;
     }
     
     /**

@@ -219,7 +219,11 @@ $(document).ready(function() {
 							window.location="${path }/index";
 						});
 					}else if(data.success == false){ 
-						
+						swal(
+							      '',
+							      data.msg,
+							      'error'
+						)
 					}else if(data.result=="exist"){
 						
 					}

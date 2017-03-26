@@ -31,6 +31,9 @@
 			<result property="aMajor" column="a_major" />
 		</association>
 	</resultMap>
+	<resultMap type="com.xin.commons.utils.PageJson" id="PageResult">
+		<result property="total" column="total"/>
+	</resultMap>
 	
 	<!-- 字段 -->
 	<sql id="field">
@@ -69,6 +72,16 @@
 	<sql id="tableName">
 		finance
 	</sql>
+	
+	<select id="financepage" resultMap="BaseResultMap">
+		select * from finance F left join student S 
+		on F.stu_no=S.s_studentno
+		where stu_no = #{arg0} limit #{arg1},#{arg2}
+	</select>
+	
+	<select id="queryTotal" resultMap="PageResult">
+		select count(*) total from finance where stu_no = #{arg0};
+	</select>
 	
 	<select id="selectFinancePage" resultMap="BaseResultMap">
 		select 

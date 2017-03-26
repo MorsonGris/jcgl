@@ -241,7 +241,11 @@ $(document).ready(function() {
 							window.location="${path }/index";
 						});
 					}else if(data.success == false){ 
-						
+						swal(
+							      '',
+							      data.msg,
+							      'error'
+						)
 					}else if(data.result=="exist"){
 						
 					}
@@ -324,6 +328,8 @@ function sendMessage() {
 		$("#btnSendCode").attr("disabled", "true");
 		$("#btnSendCode").val( + curCount + "秒再获取");
 		InterValObj = window.setInterval(SetRemainTime, 1000); //启动计时器，1秒执行一次
+		
+		$("#code").val(code);
 		//向后台发送处理数据
 		$.ajax({
 			type: "POST", //用POST方式传输

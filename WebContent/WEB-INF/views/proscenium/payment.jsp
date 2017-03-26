@@ -10,15 +10,40 @@
 	<link rel="shortcut icon" href="${path }/static/proscenium/logo/favicon2.ico" /> 
     <link href="${path }/static/proscenium/css/bootstrap.min.css" rel="stylesheet">
     <link href="${path }/static/proscenium/plugin/bootstrap-validator/bootstrapValidator.min.css" rel="stylesheet">
+     <link rel="stylesheet" href="${path }/static/proscenium/plugin/bootstrap-tables/bootstrap-table.min.css" />
     <link href="${path }/static/proscenium/css/style.css" rel="stylesheet">
 <title>聚成教育-缴费查询</title>
 </head>
 <body>
 	<jsp:include page="/static/proscenium/commons/head.jsp"></jsp:include>
 	<div class="container" style="height:300px;">
-	<div class="row" style="margin: 20px;">
+	<div class="row">
 		<div class="col-xs-12">
-			<h2>开发建设中......</h2>
+			<div class="col-xs-12">
+				<table id="noticeTable" data-toggle="table"
+				       data-url="${path}/finance/financepage?stuno=201701"
+				       data-pagination="true"
+				       data-locale="zh-CN"
+				       data-side-pagination="server"
+				       
+				       data-toolbar="#toolbar"
+				       data-show-refresh="true"
+				       data-show-toggle="true"
+				       data-show-columns="true"
+				       data-show-export="true" 
+				       data-minimum-count-columns="2" 
+				       data-id-field="id" 
+				       data-show-footer="false"
+				       data-row-style="rowStyle">
+				    <thead>
+				    <tr>
+				    	<th data-field="student.sname" data-align="left" data-sortable="false" >姓名</th>
+				    	<th data-field="practicalMoney" data-align="left" data-sortable="false" >金额</th>
+				    	<th data-field="fdate" data-align="center" data-formatter="dateFormatter" data-sortable="false" >缴费时间</th>
+				    </tr>
+				    </thead>
+				</table>
+			</div>
 		</div>
 	</div>
 	</div>
@@ -30,5 +55,13 @@
 	<script src="${path }/static/proscenium/plugin/bootstrap-validator/bootstrapValidator.min.js"></script>
 	<script src="${path }/static/proscenium/plugin/goup/jquery.goup.min.js"></script>
 	<script src="${path }/static/proscenium/js/app.js"></script>
+	<script src="${path }/static/proscenium/plugin/bootstrap-tables/bootstrap-table.min.js"></script>
+	<script src="${path }/static/proscenium/plugin/bootstrap-tables/bootstrap-table-zh-CN.min.js"></script>
+<script>
+function dateFormatter(value) {
+	var date = value.split("-")[0]+"/"+value.split("-")[1]+"/"+(value.split("-")[2]).split(" ")[0];
+    return date
+} 
+</script>
 </body>
 </html>

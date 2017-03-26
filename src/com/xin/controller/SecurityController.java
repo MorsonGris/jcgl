@@ -4,10 +4,9 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Set;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-
+import org.springframework.web.bind.annotation.ResponseBody;
 import com.cloopen.rest.sdk.CCPRestSmsSDK;
 import com.xin.commons.base.BaseController;
 
@@ -18,8 +17,8 @@ public class SecurityController extends BaseController{
 	private static final String APP_ID = "8aaf07085aabcbbd015ac54829f40725"; // 8a48b5514efd1c3a014f01bb44d7067b
 	private static final String ACOUNT_SID = "8aaf07085aabcbbd015ac548296c0720";// aaf98f894032b237014051abc35700f0
 	private static final String AUTH_TOKEN = "be4423c769ec47eeb4c2835cb49010c1";// 6c19475e5fa14fe3bf4cccc60e23c8ad
-	private static final String TEMPLATE_ID = "162847";//模板1ID(用于成人教育、国家开发大学、远程教育)
-	private static final String TEMPLATE_ID2 = "162847";//模板2ID(用于艺考、会计、教师资格培训)
+	private static final String TEMPLATE_ID = "162943";//模板1ID(用于成人教育、国家开发大学、远程教育)
+	private static final String TEMPLATE_ID2 = "162945";//模板2ID(用于艺考、会计、教师资格培训)
 	private static final String TIME_LEN = "5";//通知时间（5分钟内有效）
 	
 	/**
@@ -33,7 +32,8 @@ public class SecurityController extends BaseController{
 	 * @return
 	 */
 	@RequestMapping("/security")
-	public Object security(String name,String phone,String school,String sContent,String stype,String sGradations,String code,String type){
+	@ResponseBody
+	public Object security(String name,String phone,String school,String sContent,int stype,String sGradations,String code,String type){
 		HashMap<String, Object> result = null;
 		CCPRestSmsSDK restAPI = new CCPRestSmsSDK();//初始化SDK
 		//*初始化服务器地址和端口 *
@@ -64,10 +64,18 @@ public class SecurityController extends BaseController{
 		//*********************************************************************************************************************
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日");
 		String date = sdf.format(new Date());
-		if(type.equals("1")){
+		if(type != null && type.equals("1")){
 			result = restAPI.sendTemplateSMS(phone, TEMPLATE_ID, new String[] {name,school,sContent,sGradations,code,TIME_LEN });
 		}else{
-			result = restAPI.sendTemplateSMS(phone, TEMPLATE_ID2, new String[] {date,stype,code,TIME_LEN });
+			String t = null;
+			if(stype == 3){
+				t = "会计培训";
+			}else if(stype == 4){
+				t = "艺考培训";
+			}else if(stype == 5){
+				t = "教师资格培训";
+			}
+			result = restAPI.sendTemplateSMS(phone, TEMPLATE_ID2, new String[] {date,t,code,TIME_LEN });
 		}
 		if("000000".equals(result.get("statusCode"))) {
 			// 正常返回输出data包体信息（map）
@@ -76,7 +84,6 @@ public class SecurityController extends BaseController{
 			Set<String> keySet = retData.keySet();
 			for (String key : keySet) {
 				Object object = retData.get(key);
-				//log.info(key + " = " + object);
 				System.out.println(key+"="+object);
 			}
 			return renderSuccess("发送成功");
@@ -84,7 +91,6 @@ public class SecurityController extends BaseController{
 			// 异常返回输出错误码和错误信息
 			String msg = "错误码=" + result.get("statusCode") + " 错误信息= "
 					+ result.get("statusMsg");
-			//log.error(msg);
 			System.out.println(msg);
 			return renderError(msg);
 		}
