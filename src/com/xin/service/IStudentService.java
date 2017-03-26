@@ -3,6 +3,7 @@ package com.xin.service;
 import java.util.List;
 
 import com.xin.bean.Student;
+import com.xin.bean.vo.UserVo;
 import com.xin.commons.utils.PageInfo;
 
 /**
@@ -12,6 +13,7 @@ import com.xin.commons.utils.PageInfo;
 public interface IStudentService{
 	List<Student> selectByName(Student student);
 	Student selectByNo();
+	Student stuLogin(Student stu);
 	List<Student> selectAll();
 	boolean deleteById(int id);
 	Student selectById(int id);
