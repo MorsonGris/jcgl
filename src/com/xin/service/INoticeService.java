@@ -1,15 +1,8 @@
 package com.xin.service;
 
-import com.xin.bean.Notice;
-import com.xin.bean.Relation;
-import com.xin.commons.utils.PageInfo;
-import com.xin.commons.utils.PageJson;
-
 import java.util.List;
-import java.util.Map;
-
-import com.baomidou.mybatisplus.plugins.pagination.Pagination;
-import com.baomidou.mybatisplus.service.IService;
+import com.xin.bean.Notice;
+import com.xin.commons.utils.PageInfo;
 
 /**
  * <p>

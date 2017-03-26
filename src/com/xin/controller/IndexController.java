@@ -115,7 +115,7 @@ public class IndexController extends BaseController{
 	public String loginout(HttpServletRequest request){
 		  Enumeration<String> en=request.getSession().getAttributeNames();
 		  while(en.hasMoreElements()){//判断是否还有下一个元素
-		 //除移所有session   
+			  //除移所有session   
 			  request.getSession().removeAttribute(en.nextElement().toString());
 		  }
 		  return "redirect:"+"/index";

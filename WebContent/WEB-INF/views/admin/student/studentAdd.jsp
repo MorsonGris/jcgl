@@ -3,7 +3,7 @@
 <script type="text/javascript">
     $(function() {
         $('#studentAddForm').form({
-            url : '${path }/student/add',
+            url : '${path }/student/adda',
             onSubmit : function() {
                 progressLoad();
                 var isValid = $(this).form('enableValidation').form('validate');

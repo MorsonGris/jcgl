@@ -58,9 +58,9 @@
                 width : 130,
                 formatter : function(value, row, index) {
                     var str = '';
-                        <shiro:hasPermission name="/stuFile/edit">
+                        /* <shiro:hasPermission name="/stuFile/edit">
                             str += $.formatString('<a href="javascript:void(0)" class="stuFile-easyui-linkbutton-edit" data-options="plain:true,iconCls:\'fi-pencil icon-blue\'" onclick="editstuFileFun(\'{0}\');" >编辑</a>', row.sfId);
-                        </shiro:hasPermission>
+                        </shiro:hasPermission> */
                         <shiro:hasPermission name="/stuFile/delete">
                             str += '&nbsp;&nbsp;|&nbsp;&nbsp;';
                             str += $.formatString('<a href="javascript:void(0)" class="stuFile-easyui-linkbutton-del" data-options="plain:true,iconCls:\'fi-x icon-red\'" onclick="deletestuFileFun(\'{0}\');" >删除</a>', row.sfId);
@@ -69,7 +69,7 @@
                 }
             }] ],
             onLoadSuccess:function(data){
-                $('.stuFile-easyui-linkbutton-edit').linkbutton({text:'编辑'});
+                /* $('.stuFile-easyui-linkbutton-edit').linkbutton({text:'编辑'}); */
                 $('.stuFile-easyui-linkbutton-del').linkbutton({text:'删除'});
             },
             toolbar : '#stuFileToolbar'
@@ -142,23 +142,48 @@
         });
     }
 
-	function downphoto() {
+	function downphoto(obj) {
 		var stuname;
 		var photo;
+		var paper;
+		var voucher;
     	var rows = $('#stuFileDataGrid').datagrid('getSelections');
     	for(var i=0; i<rows.length; i++){
     		/* ids.push(rows[i].sfId); */
     		stuname = rows[i].student.sname;
     		photo = rows[i].sfPhoto;
+    		paper = rows[i].sfPaper;
+    		voucher = rows[i].sfVoucher;
     	}
-    	if(stuname!='' && stuname!=null) {
-    		window.location.href='${path}/stuFile/downphoto?stuname='+stuname+'&photo='+photo;
+    	if(obj=='photo') {
+    		if(stuname!='' && stuname!=null) {
+        		window.location.href='${path}/stuFile/downphoto?stuname='+stuname+'&photo='+photo;
+            }else {
+            	parent.$.messager.show({
+                    title : '提示',
+                    msg : '请选择下载相片学生！'
+                });
+            }
+        }else if(obj=='sfPaper') {
+        	if(stuname!='' && stuname!=null) {
+        		window.location.href='${path}/stuFile/downpaper?stuname='+stuname+'&paper='+paper;
+            }else {
+            	parent.$.messager.show({
+                    title : '提示',
+                    msg : '请选择需下载论文学生！'
+                });
+            }
         }else {
-        	parent.$.messager.show({
-                title : '提示',
-                msg : '请选择需缴费学生！'
-            });
+        	if(stuname!='' && stuname!=null) {
+        		window.location.href='${path}/stuFile/downvoucher?stuname='+stuname+'&voucher='+voucher;
+            }else {
+            	parent.$.messager.show({
+                    title : '提示',
+                    msg : '请选择需下载缴费凭证学生！'
+                });
+            }
         }
+    	
 	}
     
     function searchstuFileFun() {
@@ -187,7 +212,7 @@
             </table>
         </form>
     </div>
-    <div data-options="region:'center',border:true,title:'公告列表'" >
+    <div data-options="region:'center',border:true,title:'文件上传列表'" >
         <table id="stuFileDataGrid" data-options="fit:true,border:false"></table>
     </div>
 </div>
@@ -195,7 +220,13 @@
     <shiro:hasPermission name="/stuFile/add">
         <a onclick="addstuFileFun();" href="javascript:void(0);" class="easyui-linkbutton" data-options="plain:true,iconCls:'fi-plus icon-green'">添加</a>
     </shiro:hasPermission>
-    <shiro:hasPermission name="/stuFile/add">
-        <a onclick="downphoto();" href="javascript:void(0);" class="easyui-linkbutton" data-options="plain:true,iconCls:'fi-download icon-green'">下载相片</a>
+    <shiro:hasPermission name="/stuFile/downphoto">
+        <a onclick="downphoto('photo');" href="javascript:void(0);" class="easyui-linkbutton" data-options="plain:true,iconCls:'fi-download icon-green'">下载相片</a>
+    </shiro:hasPermission>
+    <shiro:hasPermission name="/stuFile/downvoucher">
+        <a onclick="downphoto('sfVoucher');" href="javascript:void(0);" class="easyui-linkbutton" data-options="plain:true,iconCls:'fi-download icon-green'">下载缴费凭证</a>
+    </shiro:hasPermission>
+    <shiro:hasPermission name="/stuFile/downpaper">
+        <a onclick="downphoto('sfPaper');" href="javascript:void(0);" class="easyui-linkbutton" data-options="plain:true,iconCls:'fi-download icon-green'">下载论文</a>
     </shiro:hasPermission>
 </div>
