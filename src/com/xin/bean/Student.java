@@ -43,6 +43,12 @@ public class Student{
 	private List<Academy> listAcademy;
 	
 	private List<User> listUser;
+	
+	public Student() {}
+	public Student(String sName,String idNumber) {
+		this.sName = sName;
+		this.idNumber = idNumber;
+	}
 
 	public Integer getSId() {
 		return sId;

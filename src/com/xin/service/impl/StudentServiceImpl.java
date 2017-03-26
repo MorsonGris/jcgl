@@ -70,5 +70,10 @@ public class StudentServiceImpl implements IStudentService {
 	public List<Student> selectByName(Student student) {
 		return Studentmapper.selectByName(student);
 	}
+
+	@Override
+	public Student stuLogin(Student stu) {
+		return Studentmapper.stuLogin(stu);
+	}
 	
 }

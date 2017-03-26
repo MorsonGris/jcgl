@@ -29,17 +29,31 @@
 	               		<div style="padding: 10px 15px;">
 	               			<img alt="" src="${path }/static/proscenium/icon/user62.png" style="width: 30px;">
               				${user.name }
-	               		</div>
+	                		</div>
+	               		</c:when>
+	               		<c:when test="${stu.studentNo != null }">
+	               		<div style="padding: 10px 15px;">
+	               			<img alt="" src="${path }/static/proscenium/icon/user62.png" style="width: 30px;">
+              				${stu.SName }
+	                		</div>
 	               		</c:when>
 	               		<c:otherwise>
-	               			<a href="${path }/index/login">
+	               			<a href="${path }/index/teaLogin">
 	             				<img alt="" src="${path }/static/proscenium/icon/user62.png" style="width: 30px;">
-	              				 用户登录
-	             		 		</a>
+	              				 教师登录
+             		 		</a>
+             		 		<a href="${path }/index/stuLogin">
+	             				<img alt="" src="${path }/static/proscenium/icon/user62.png" style="width: 30px;">
+	              				 学生登录
+             		 		</a>
+             		 		<a href="${path }/login">
+	             				<img alt="" src="${path }/static/proscenium/icon/user62.png" style="width: 30px;">
+	              				 后台登录
+             		 		</a>
 	               		</c:otherwise>
 	               	</c:choose>
                 </li>
-                <c:if test="${user.id != null }">
+                <c:if test="${user.id != null || stu.SId != null }">
                 	<li>
                     <a href="${path }/index/loginout">
 	                    <img alt="" src="${path }/static/proscenium/icon/logout2.png" style="width: 30px;">

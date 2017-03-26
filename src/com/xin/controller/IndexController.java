@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.xin.bean.Relation;
+import com.xin.bean.Student;
 import com.xin.bean.vo.UserVo;
 import com.xin.commons.base.BaseController;
 import com.xin.commons.csrf.CsrfToken;
@@ -24,28 +25,36 @@ import com.xin.commons.utils.DigestUtils;
 import com.xin.commons.utils.PageInfo;
 import com.xin.commons.utils.StringUtils;
 import com.xin.service.IRelationService;
+import com.xin.service.IStudentService;
 import com.xin.service.IUserService;
 
 @Controller
 @RequestMapping("/index")
 public class IndexController extends BaseController{
 	@Autowired private IUserService userService;
+	@Autowired private IStudentService studentService;
+	
+	
 	@Autowired private IRelationService relationService;
 	/**
 	 * 前台登录
 	 */
-	@GetMapping("/login")
-	public String login(){
-		return "proscenium/login";
+	@GetMapping("/teaLogin")
+	public String teaLogin(){
+		return "proscenium/teaLogin";
 	}
-	@RequestMapping("/homeLogin")
+	@GetMapping("/stuLogin")
+	public String stuLogin(){
+		return "proscenium/stuLogin";
+	}
+	
+	@RequestMapping("/teaHome")
     @CsrfToken(remove = true)
     @ResponseBody
-    public Map<String,Object> homeLogin(HttpServletRequest request,String phone,String password,String captcha,HttpSession sion) {
+    public Map<String,Object> teaHome(HttpServletRequest request,String name,String password,String captcha,HttpSession sion) {
 		Map<String,Object> resultMap = new HashMap<String, Object>();
-        // 改为全部抛出异常，避免ajax csrf token被刷新
-        if (StringUtils.isBlank(phone)) {
-        	resultMap.put("result", "手机号码不能为空");
+        if (StringUtils.isBlank(name)) {
+        	resultMap.put("result", "用户名不能为空");
             return resultMap;
         }
         if (StringUtils.isBlank(password)) {
@@ -60,13 +69,45 @@ public class IndexController extends BaseController{
         	resultMap.put("result", "验证码错误");
             return resultMap;
         }
-        UserVo login = new UserVo(phone,  DigestUtils.md5Hex(password));
-        UserVo user = userService.homeLogin(login);
+        UserVo login = new UserVo(name,  DigestUtils.md5Hex(password));
+        UserVo user = userService.teaLogin(login);
         if(user==null){
         	resultMap.put("result", "账户密码错误");
             return resultMap;
         }
         sion.setAttribute("user", user);
+        resultMap.put("result", true);
+        return resultMap;
+    }
+	
+	@RequestMapping("/stuHome")
+    @CsrfToken(remove = true)
+    @ResponseBody
+    public Map<String,Object> stuHome(HttpServletRequest request,String name,String password,String captcha,HttpSession sion) {
+		Map<String,Object> resultMap = new HashMap<String, Object>();
+        if (StringUtils.isBlank(name)) {
+        	resultMap.put("result", "姓名不能为空");
+            return resultMap;
+        }
+        if (StringUtils.isBlank(password)) {
+        	resultMap.put("result", "密码不能为空");
+            return resultMap;
+        }
+        if (StringUtils.isBlank(captcha)) {
+        	resultMap.put("result", "验证码不能为空");
+            return resultMap;
+        }
+        if (!CaptchaUtils.validate(request, captcha)) {
+        	resultMap.put("result", "验证码错误");
+            return resultMap;
+        }
+        Student login = new Student(name,  password);
+        Student stu = studentService.stuLogin(login);
+        if(stu==null){
+        	resultMap.put("result", "账户密码错误");
+            return resultMap;
+        }
+        sion.setAttribute("stu", stu);
         resultMap.put("result", true);
         return resultMap;
     }
