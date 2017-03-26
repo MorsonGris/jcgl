@@ -33,7 +33,7 @@ public class SecurityController extends BaseController{
 	 */
 	@RequestMapping("/security")
 	@ResponseBody
-	public Object security(String name,String phone,String school,String sContent,int stype,String sGradations,String code,String type){
+	public Object security(String name,String phone,String school,String sContent,String sGradations,String code,String type){
 		HashMap<String, Object> result = null;
 		CCPRestSmsSDK restAPI = new CCPRestSmsSDK();//初始化SDK
 		//*初始化服务器地址和端口 *
@@ -67,15 +67,8 @@ public class SecurityController extends BaseController{
 		if(type != null && type.equals("1")){
 			result = restAPI.sendTemplateSMS(phone, TEMPLATE_ID, new String[] {name,school,sContent,sGradations,code,TIME_LEN });
 		}else{
-			String t = null;
-			if(stype == 3){
-				t = "会计培训";
-			}else if(stype == 4){
-				t = "艺考培训";
-			}else if(stype == 5){
-				t = "教师资格培训";
-			}
-			result = restAPI.sendTemplateSMS(phone, TEMPLATE_ID2, new String[] {date,t,code,TIME_LEN });
+			String success = "成功";
+			result = restAPI.sendTemplateSMS(phone, TEMPLATE_ID2, new String[] {date,success,code,TIME_LEN });
 		}
 		if("000000".equals(result.get("statusCode"))) {
 			// 正常返回输出data包体信息（map）
