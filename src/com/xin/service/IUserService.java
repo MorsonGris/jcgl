@@ -20,7 +20,7 @@ public interface IUserService extends IService<User> {
 
     UserVo selectVoById(Long id);
     
-    UserVo homeLogin(UserVo userVo);
+    UserVo teaLogin(UserVo userVo);
 
     void updateByVo(UserVo userVo);
 

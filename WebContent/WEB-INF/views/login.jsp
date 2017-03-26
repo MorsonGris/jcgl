@@ -11,7 +11,7 @@
 </head>
 <body onkeydown="enterlogin();">
 <div class="top_div"></div>
-<div style="background: rgb(255, 255, 255); margin: -100px auto auto; border: 1px solid rgb(231, 231, 231);border-image:none;width:400px;text-align: center;">
+<div style="background: rgb(255, 255, 255); margin: -100px auto auto; border: 1px solid rgb(231, 231, 231);border-image:none;width:350px;;text-align: center;">
     <form method="post" id="loginform">
         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
         <div style="width: 165px; height: 96px; position: absolute;">
@@ -20,11 +20,11 @@
             <div class="initial_right_hand" id="right_hand"></div>
         </div>
         <P style="padding: 30px 0px 10px; position: relative;">
-            <span class="u_logo"></span>
+            <!-- <span class="u_logo"></span> -->
             <input class="ipt" type="text" name="username" placeholder="请输入用户名或邮箱"/>
         </P>
         <P style="position: relative;">
-            <span class="p_logo"></span>
+            <!-- <span class="p_logo"></span> -->
             <input class="ipt" id="password" type="password" name="password" placeholder="请输入密码"/>
         </P>
         <P style="padding: 10px 0px 10px; position: relative;">

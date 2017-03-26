@@ -38,6 +38,31 @@
 		SELECT <include refid="Studentcolumn" /> FROM student where s_type = 1 or s_type = 2 or s_type = 6
 	</select>
 	
+	<select id="stuLogin" resultMap="BaseResultMap">
+        SELECT
+        s_id,
+    	s_studentno,
+    	s_name,
+    	user_id,
+    	id_number,
+    	s_phone,
+    	academy_id,
+    	s_gradations,
+    	s_systme,
+    	s_date,
+    	s_content,
+    	s_type,
+    	a.a_id,
+    	a.a_school,
+    	u.id,
+    	u.`name`
+        FROM
+        student s
+        LEFT JOIN academy a ON s.academy_id = a.a_id
+    	LEFT JOIN user u ON s.user_id = u.id
+        WHERE  s_name = #{sName} and id_number=#{idNumber};
+    </select>
+	
 	<select id="selectByName" resultMap="BaseResultMap">
 		SELECT id_number,s_phone FROM student 
 		<where>
