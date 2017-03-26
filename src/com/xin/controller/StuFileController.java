@@ -90,7 +90,7 @@ public class StuFileController extends BaseController{
      * @param notice
      * @return
      */
-    @PostMapping("/add")
+    @RequestMapping("/add")
     @ResponseBody
     public Object add(
     		@RequestParam(value="sfPhoto",required=false)MultipartFile sfPhoto,
@@ -111,6 +111,7 @@ public class StuFileController extends BaseController{
     	if(sfPaper!=null) {
     		stuFile.setSfPaper(id+sfPaper.getOriginalFilename());
     	}
+    	System.out.println(stuFile.getSfPhoto()+" ///////"+stuFile.getSfVoucher());
     	int result = stuFileService.stuFileInsert(stuFile);
     	if(result>0) {
     		return renderSuccess("添加成功");

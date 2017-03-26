@@ -291,6 +291,18 @@ public class IndexController extends BaseController{
 	}
 	
 	/**
+	 * 工作助手
+	 */ 
+	@GetMapping("/upload")
+	public String upload(Model model){
+		model.addAttribute("homeContent", homeContent());
+		PageInfo pi = new PageInfo(0, 4, "r_id", "desc");
+    	List<Relation> relation = relationService.selectDataGrid(pi);
+    	model.addAttribute("relation", relation);
+		return "proscenium/upload";
+	}
+	
+	/**
 	 * 项目培训
 	 */ 
 	@GetMapping("/train")
