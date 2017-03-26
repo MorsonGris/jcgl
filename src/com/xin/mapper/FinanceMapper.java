@@ -1,11 +1,11 @@
 package com.xin.mapper;
 
-import com.xin.bean.Finance;
-
 import java.util.List;
 import java.util.Map;
 
 import com.baomidou.mybatisplus.plugins.pagination.Pagination;
+import com.xin.bean.Finance;
+import com.xin.commons.utils.PageJson;
 
 /**
  *缴费管理接口
@@ -26,4 +26,7 @@ public interface FinanceMapper {
 	int updateBatchFinance(Finance finance);
 	
 	List<Finance> selectFinanceAll(Finance finance);
+	
+	List<Finance> financepage(String stuno,int offset,int limit);
+	PageJson<Finance> queryTotal(String stuno);
 }

@@ -146,8 +146,6 @@ public class ArtexamController extends BaseController{
     public Object add(Student student,HttpServletRequest request){
     	if(CaptchaUtils.validate(request,student.getCaptcha())){
     		if(student.getCode().equals(student.getScode())){
-    			if(student.getCode().equals(student.getScode())){}
-        		
         		Student stu = studentservice.selectByNo();
             	String No = StudentNo.getNo(stu);
             	student.setStudentNo(No);
@@ -174,6 +172,34 @@ public class ArtexamController extends BaseController{
     	}
     	return renderError("短信验证码错误");
     }
+    
+    @RequestMapping("/adda")
+    @ResponseBody
+    public Object adda(Student student,HttpServletRequest request){
+		Student stu = studentservice.selectByNo();
+    	String No = StudentNo.getNo(stu);
+    	student.setStudentNo(No);
+    	if(student.getUserId() == null){
+    		UserVo uservo = new UserVo();
+    		uservo.setLoginName("admin");
+    		List<User> list = userService.selectByLoginName(uservo);
+    		User users = null;
+    		for(int i=0;i<list.size();i++){
+    			users = list.get(i);
+    		}
+    		student.setUserId(users.getId());
+    	}
+    	if(student.getSDate() == null){
+    		student.setSDate(new Date());
+    	}
+    	boolean result = artexamService.insertByid(student);
+    	if(result == true){
+    		return renderSuccess("添加成功");
+    	}
+    	return renderError("添加失败");	
+    }
+    
+   
     
     /**
      * 删除

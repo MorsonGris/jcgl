@@ -188,7 +188,11 @@ $(document).ready(function() {
 							window.location="${path }/index";
 						});
 					}else if(data.success == false){ 
-						
+						swal(
+							      '',
+							      data.msg,
+							      'error'
+						)
 					}else if(data.result=="exist"){
 						
 					}
@@ -267,6 +271,8 @@ function sendMessage() {
 		for (var i = 0; i < codeLength; i++) {
 			code += parseInt(Math.random() * 9).toString();
 		}
+		
+		$("#code").val(code);
 		//设置button效果，开始计时
 		$("#btnSendCode").attr("disabled", "true");
 		$("#btnSendCode").val( + curCount + "秒再获取");
@@ -276,7 +282,7 @@ function sendMessage() {
 			type: "POST", //用POST方式传输
 			dataType: "text", //数据格式:JSON
 			url: '${path}/Security/security', //目标地址
-			data: "name=" + name +"&phone="+ phone +"&stype="+ stype + "&type="+ 2 +"&code=" + code,
+			data: "name=" + name +"&phone="+ phone +"&stype="+ stype + "&type=2" +"&code=" + code,
 			error: function (XMLHttpRequest, textStatus, errorThrown) {},
 			success: function (msg){}
 			});

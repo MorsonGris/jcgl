@@ -5,7 +5,6 @@ import java.util.List;
 import com.xin.bean.Finance;
 import com.xin.commons.utils.PageInfo;
 
-
 /**
  * <p>
  *  服务类
@@ -28,4 +27,7 @@ public interface IFinanceService {
 	int updateBatchFinance(Finance finance);	
 	
 	List<Finance> selectFinanceAll(Finance finance);
+	
+	List<Finance> financepage(String stuno,int offset,int limit);
+	long queryTotal(String stuno);
 }

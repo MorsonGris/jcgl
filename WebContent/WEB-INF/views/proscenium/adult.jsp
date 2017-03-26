@@ -219,8 +219,12 @@ $(document).ready(function() {
 						$(".swal2-styled").click(function(){
 							window.location="${path }/index";
 						});
-					}else if(data.success == false){ 
-						
+					}else if(data.success == false){
+						swal(
+							      '',
+							      data.msg,
+							      'error'
+						)
 					}else if(data.result=="exist"){
 						
 					}
@@ -382,9 +386,14 @@ function sendMessage() {
 			type: "POST", //用POST方式传输
 			dataType: "text", //数据格式:JSON
 			url: '${path}/Security/security', //目标地址
-			data: "name=" + name +"&phone="+ phone +"&school="+ school +"&sContent="+ sContent +"&sGradations=" + sGradations + "&type="+ 1 + "&code=" + code,
-			error: function (XMLHttpRequest, textStatus, errorThrown) { },
-			success: function (msg){ }
+			data: "name=" + name +"&phone="+ phone +"&school="+ school +"&sContent="+ sContent +"&sGradations=" + sGradations + "&type=1" + "&code=" + code,
+			error: function (data) {
+				swal(
+				      '手机号码不能为空!',
+				      data.msg,
+				      'error'
+				)
+			}
 		});
 	}else{
 		swal(

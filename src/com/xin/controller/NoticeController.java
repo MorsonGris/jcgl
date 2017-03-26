@@ -76,7 +76,6 @@ public class NoticeController extends BaseController{
     @ResponseBody
     public PageJson<Notice> queryByPages(PageJson<Notice> pages,@RequestParam int offset,@RequestParam int limit,HttpServletRequest request){
     	String search = request.getParameter("search");
-    	System.out.println("**************");
 		if(search==null||("").equals(search.trim())||("null").equals(search)){
 			search="";		
 		}

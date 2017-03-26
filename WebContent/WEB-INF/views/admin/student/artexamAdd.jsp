@@ -3,7 +3,7 @@
 <script type="text/javascript">
     $(function() {
         $('#ArtexamAddForm').form({
-            url : '${path }/Artexam/add',
+            url : '${path }/Artexam/adda',
             onSubmit : function() {
                 progressLoad();
                 var isValid = $(this).form('enableValidation').form('validate');

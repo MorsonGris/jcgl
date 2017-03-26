@@ -3,6 +3,7 @@ package com.xin.service.impl;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.xin.bean.Finance;
 import com.xin.commons.utils.PageInfo;
+import com.xin.commons.utils.PageJson;
 import com.xin.mapper.FinanceMapper;
 import com.xin.service.IFinanceService;
 
@@ -32,7 +33,6 @@ public class FinanceServiceImpl implements IFinanceService {
 		String orderField = com.baomidou.mybatisplus.toolkit.StringUtils.camelToUnderline(pageInfo.getSort());
         page.setOrderByField(orderField);
         page.setAsc(pageInfo.getOrder().equalsIgnoreCase("asc"));
-        /*page.setAsc(false);*/
 		List<Finance> list = financeMapper.selectFinancePage(page, pageInfo.getCondition());
 		pageInfo.setRows(list);
 		pageInfo.setTotal(page.getTotal());
@@ -69,6 +69,17 @@ public class FinanceServiceImpl implements IFinanceService {
 	public List<Finance> selectFinanceAll(Finance finance) {
 		List<Finance> list = financeMapper.selectFinanceAll(finance);
 		return list;
+	}
+
+	@Override
+	public List<Finance> financepage(String stuno, int offset, int limit) {
+		return financeMapper.financepage(stuno, offset, limit);
+	}
+
+	@Override
+	public long queryTotal(String stuno) {
+		PageJson<Finance> pages = financeMapper.queryTotal(stuno);
+		return pages.getTotal();
 	}
 	
 }

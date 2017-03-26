@@ -1,18 +1,15 @@
 package com.xin.service.impl;
 
+import java.util.Date;
+import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import com.baomidou.mybatisplus.plugins.Page;
 import com.xin.bean.Notice;
 import com.xin.commons.utils.PageInfo;
 import com.xin.commons.utils.PageJson;
 import com.xin.mapper.NoticeMapper;
 import com.xin.service.INoticeService;
-import com.baomidou.mybatisplus.plugins.Page;
-
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 /**
  * <p>
