@@ -12,7 +12,7 @@
     <link href="${path }/static/proscenium/plugin/bootstrap-validator/bootstrapValidator.min.css" rel="stylesheet">
     <link href="${path }/static/proscenium/css/style.css" rel="stylesheet">
     <link href="${path }/static/proscenium/plugin/sweetalert2/sweetalert2.min.css" rel="stylesheet">
-<title>聚成教育-工作助手</title>
+<title>聚成教育-文件上传</title>
 </head>
 <body>
 	<jsp:include page="/static/proscenium/commons/head.jsp"></jsp:include>
@@ -57,12 +57,6 @@
 	<script src="${path }/static/proscenium/js/ajaxfileupload.js"></script>
 	<script src="${path }/static/proscenium/plugin/sweetalert2/sweetalert2.min.js"></script>
 	<!-- *************************** -->
-	<%-- <script src="${path }/static/proscenium/plugin/sweetalert2/sweetalert2.min.js"></script>
-	<script src="${path }/static/proscenium/js/jquery.min.js"></script>
-	<script src="${path }/static/proscenium/js/bootstrap.min.js"></script>
-	<script src="${path }/static/proscenium/plugin/bootstrap-validator/bootstrapValidator.min.js"></script>
-	<script src="${path }/static/proscenium/plugin/goup/jquery.goup.min.js"></script>
-	<script src="${path }/static/proscenium/js/app.js"></script> --%>
 	<script type="text/javascript">
 	$(document).ready(function() {
 		$("#captcha").click(function() {
@@ -128,8 +122,8 @@
 					   notEmpty: {
 					    message: '请登录后上传！'
 					   }
-					  }
 					}
+				}
 		    }
 		})
 	})
@@ -164,9 +158,8 @@
 		    	document.getElementById("voucher").files[0] = '请选择jpeg或png格式的文件';
 			}
 		}
-	    
 	}
-
-	</script>
+	
+</script>
 </body>
 </html>

@@ -271,7 +271,6 @@ function sendMessage() {
 		for (var i = 0; i < codeLength; i++) {
 			code += parseInt(Math.random() * 9).toString();
 		}
-		
 		$("#code").val(code);
 		//设置button效果，开始计时
 		$("#btnSendCode").attr("disabled", "true");

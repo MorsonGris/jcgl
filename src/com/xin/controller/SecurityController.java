@@ -22,7 +22,6 @@ public class SecurityController extends BaseController{
 	private static final String TIME_LEN = "5";//通知时间（5分钟内有效）
 	
 	/**
-	 * 用于成人教育、国家开发大学、远程教育短信接口
 	 * @param name
 	 * @param phone
 	 * @param school
