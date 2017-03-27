@@ -150,7 +150,7 @@
 							<div class="form-group" hidden="true"> 
 								<input type="text" class="form-control" id="sSystme" name="sSystme" /> 
 							</div> 
-							<input type="hidden" name="stype" value="1" /> 
+							<input type="hidden" id="stype" name="stype" value="1" /> 
 							<input type="hidden" id="id" name="userId" /> 
 							<button type="submit" class="btn btn-primary btn-lg">提交</button> 
 						</form> 
@@ -368,6 +368,7 @@ function sendMessage() {
 	var school =options[index].text;
 	var sContent = $("#sContent").val();
 	var sGradations = $("#sGradations").val();
+	var type = 1;
 	
 	if(phone != null && phone!=''){
 		curCount = count;
@@ -386,7 +387,7 @@ function sendMessage() {
 			type: "POST", //用POST方式传输
 			dataType: "text", //数据格式:JSON
 			url: '${path}/Security/security', //目标地址
-			data: "name=" + name +"&phone="+ phone +"&school="+ school +"&sContent="+ sContent +"&sGradations=" + sGradations + "&type=1" + "&code=" + code,
+			data: "name=" + name +"&phone="+ phone +"&school="+ school +"&sContent="+ sContent +"&sGradations=" + sGradations + "&type="+ type + "&code=" + code,
 			error: function (data) {
 				swal(
 				      '手机号码不能为空!',

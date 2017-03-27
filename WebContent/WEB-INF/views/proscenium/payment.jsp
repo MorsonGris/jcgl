@@ -21,7 +21,7 @@
 		<div class="col-xs-12">
 			<div class="col-xs-12">
 				<table id="noticeTable" data-toggle="table"
-				       data-url="${path}/finance/financepage?stuno=201701"
+					   data-url="${path}/finance/financepage?stuno=${stu.studentNo}"
 				       data-pagination="true"
 				       data-locale="zh-CN"
 				       data-side-pagination="server"
