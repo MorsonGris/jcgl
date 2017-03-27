@@ -28,15 +28,18 @@
 			<form role="form" id="uploadForm" method="post" enctype="multipart/form-data">
 				<div class="form-group">
 					 <label for="photo">相片</label>
-					 <input type="file" name="sfPhoto" id="photo" />
+					 <input type="file" name="sfPhoto" id="photo" onchange="fileType2(this,'t1')" />
+					 <span id="tishi1" style="color:red;font-weight:bold"></span>
 				</div>
 				<div class="form-group">
 					 <label for="voucher">缴费凭证</label>
-					 <input type="file" name="sfVoucher" id="voucher" />
+					 <input type="file" name="sfVoucher" id="voucher" onchange="fileType2(this,'t2')" />
+					 <span id="tishi2" style="color:red;font-weight:bold"></span>
 				</div>
 				<div class="form-group">
 					 <label for="paper">论文</label>
-					 <input type="file" name="sfPaper" id="paper" />
+					 <input type="file" name="sfPaper" id="paper" onchange="fileType1(this)" />
+					 <span id="tishi3" style="color:red;font-weight:bold"></span>
 				</div>
 				<input type="hidden" name="sstuId" value="${stu.SId }">
 				<button type="submit" class="btn btn-info btn-lg">上传</button>
@@ -112,7 +115,11 @@
 						}
 		          },  
 		          error: function (returndata) {  
-		              alert(returndata);
+		        	  swal(
+						      '上传文件失败，请登录后重试！',
+						      returndata.msg,
+						      'error'
+					);
 		          }  
 		     });
 		    },fields: {
@@ -126,8 +133,39 @@
 		    }
 		})
 	})
+	
+	function fileType1(obj){
+			var fileType=obj.value.substr(obj.value.lastIndexOf(".")).toLowerCase();//获得文件后缀名
+		    if(fileType != '.doc'){
+		    	$("#tishi3").html("<b>*请选择doc格式的文件</b>");
+		    	$("#paper").val('');
+		    	document.getElementById("paper").files[0] = '请选择doc格式的文件';
+		    }else {
+		    	$("#tishi3").html('');
+			}
+	}
 
-
+	function fileType2(obj,t){
+		var fileType=obj.value.substr(obj.value.lastIndexOf(".")).toLowerCase();//获得文件后缀名
+		if(t=='t1') {
+			if(fileType == '.jpeg' | fileType == '.png'){
+				$("#tishi1").html('');
+		    }else {
+		    	$("#tishi1").html("<b>*请选择jpeg或png格式的文件</b>");
+		    	$("#photo").val('');
+		    	document.getElementById("photo").files[0] = '请选择jpeg或png格式的文件';
+			}
+		}else {
+			if(fileType == '.jpeg' | fileType == '.png'){
+				$("#tishi2").html('');
+		    }else {
+		    	$("#tishi2").html("<b>*请选择jpeg或png格式的文件</b>");
+		    	$("#voucher").val('');
+		    	document.getElementById("voucher").files[0] = '请选择jpeg或png格式的文件';
+			}
+		}
+	    
+	}
 
 	</script>
 </body>

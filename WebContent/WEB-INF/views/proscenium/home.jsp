@@ -13,6 +13,7 @@
     <link rel="shortcut icon" href="${path }/static/proscenium/logo/favicon2.ico" />
 	<link href="${path }/static/proscenium/css/bootstrap.min.css" rel="stylesheet">
 	<link href="${path }/static/proscenium/css/style.css" rel="stylesheet">
+	<link href="${path }/static/proscenium/plugin/sweetalert2/sweetalert2.min.css" rel="stylesheet">
 </head>
 <body id="home">
 <div class="wrapper">
@@ -70,11 +71,23 @@
                 </a>
             </div>
             <div class="col-xs-4 column">
-                <a href="index/upload">
-                    <img alt="80x80" src="${path }/static/proscenium/icon/arrow-up.png" class="img-circle home-ico" />
-                    <br>
-                    <span class="home_operation">上传文件</span>
-                </a>
+            	<c:choose>
+            		<c:when test="${stu.SId != null}">
+            			<a href="index/upload">
+		                   <img alt="80x80" src="${path }/static/proscenium/icon/arrow-up.png" class="img-circle home-ico" />
+		                   <br>
+		                   <span class="home_operation">上传文件</span>
+		               </a>
+            		</c:when>
+            		<c:otherwise>
+            			<a href="javascript:0;" id="fi">
+		                   <img alt="80x80" src="${path }/static/proscenium/icon/arrow-up.png" class="img-circle home-ico" />
+		                   <br>
+		                   <span class="home_operation">上传文件</span>
+		               </a>
+            		</c:otherwise>
+            	</c:choose>
+                
             </div>
         </div>
         <div class="row clearfix" style="text-align: center;margin-top: 20px;">
@@ -175,12 +188,22 @@
 <script src="${path }/static/proscenium/js/jquery.min.js"></script>
 <script src="${path }/static/proscenium/js/bootstrap.min.js"></script>
 <script src="${path }/static/proscenium/plugin/goup/jquery.goup.min.js"></script>
+<script src="${path }/static/proscenium/plugin/sweetalert2/sweetalert2.min.js"></script>
 <script src="${path }/static/proscenium/js/app.js"></script>
 <script type="text/javascript">
 //防止页面后退
 history.pushState(null, null, document.URL);
 window.addEventListener('popstate', function () {
     history.pushState(null, null, document.URL);
+});
+$(document).ready(function() {
+	$("#fi").click(function(){
+		swal(
+			      '请先登录!',
+			      '',
+			      'error'
+				);
+	});
 });
 </script>
 </body>
