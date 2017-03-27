@@ -77,33 +77,18 @@
 		        validating: 'glyphicon glyphicon-refresh'
 		    },
 		    submitHandler: function(validator, form, submitButton) {
-		    	/* $.ajaxFileUpload({
-                //处理文件上传操作的服务器端地址(可以传参数,已亲测可用)
-                url:'${path }/stuFile/add',
-                secureuri:false, 
-                data:formData,
-                dataType:'json',                       
-                success:function(data, status){      
-                    $('#result').html('文件上传成功' + data);
-                },
-                error:function(data, status, e){ 
-                    $('#result').html('文件上传失败，请重试！！');
-                }
-            }); */
 		     var formData = new FormData($( "#uploadForm" )[0]);
 		     $.ajax({  
 		          url: '${path }/stuFile/add' ,  
 		          type: 'POST',  
 		          data: formData,  
-		          async: false,  
+		          async: true,  
 		          cache: false,  
 		          contentType: false,  
 		          processData: false,  
 		          success: function (returndata) {  
-			          alert(returndata);
-			          alert(returndata.success);
-			          alert(returndata.msg);
-		        	 /*  if(returndata.success == true){
+		        	  returndata = $.parseJSON(returndata);
+		        	 if(returndata.success == true){
 		        		  swal(
 							      '上传文件成功!',
 							      returndata.msg,
@@ -120,11 +105,11 @@
 								      'error'
 							);
 							 $(".swal2-styled").click(function(){
-									window.location="${path }/index";
+									window.location="${path }/index/stuLogin";
 								});
 						}else if(returndata.result=="exist"){
 							
-						} */
+						}
 		          },  
 		          error: function (returndata) {  
 		              alert(returndata);

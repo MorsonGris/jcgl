@@ -124,10 +124,10 @@ public class StuFileController extends BaseController{
         	if(result>0) {
         		return renderSuccess("添加成功");
         	}else {
-        		return renderSuccess("添加失败");
+        		return renderError("添加失败");
         	}
     	}else {
-    		return renderSuccess("请先登录后重试！");
+    		return renderError("请先登录！");
     	}
     	
     }
@@ -193,7 +193,7 @@ public class StuFileController extends BaseController{
     	if(result>0) {
     		return renderSuccess("添加成功");
     	}else {
-    		return renderSuccess("添加失败");
+    		return renderError("添加失败");
     	}
     }
     

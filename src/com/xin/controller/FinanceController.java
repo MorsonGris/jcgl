@@ -132,7 +132,7 @@ public class FinanceController extends BaseController{
     	if(result>0) {
     		return renderSuccess("添加成功");
     	}else {
-    		return renderSuccess("添加失败");
+    		return renderError("添加失败");
     	}
     }
     
@@ -161,7 +161,7 @@ public class FinanceController extends BaseController{
     	if(result>0) {
     		return renderSuccess("添加成功");
     	}else {
-    		return renderSuccess("添加失败");
+    		return renderError("添加失败");
     	}
     }
     
@@ -196,7 +196,7 @@ public class FinanceController extends BaseController{
     	if(result>0) {
     		return renderSuccess("缴费成功");
     	}else {
-    		return renderSuccess("缴费失败");
+    		return renderError("缴费失败");
     	}
     }
     

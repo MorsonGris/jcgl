@@ -108,7 +108,7 @@ public class NoticeController extends BaseController{
     	if(result>0) {
     		return renderSuccess("添加成功");
     	}else {
-    		return renderSuccess("添加失败");
+    		return renderError("添加失败");
     	}
     }
     
@@ -137,7 +137,7 @@ public class NoticeController extends BaseController{
     	if(result>0) {
     		return renderSuccess("添加成功");
     	}else {
-    		return renderSuccess("添加失败");
+    		return renderError("添加失败");
     	}
     }
     
