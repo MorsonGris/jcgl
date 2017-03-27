@@ -87,7 +87,14 @@ public class StuFileController extends BaseController{
     /**
      * 添加文件上传
      *
-     * @param notice
+     * @param sfPhoto
+     * @param sfVoucher
+     * @param sfPaper
+     * @param id
+     * @param request
+     * @param response
+     * @throws IllegalStateException
+     * @throws IOException
      * @return
      */
     @RequestMapping("/add")
@@ -97,27 +104,32 @@ public class StuFileController extends BaseController{
     		@RequestParam(value="sfVoucher",required=false)MultipartFile sfVoucher,
     		@RequestParam(value="sfPaper",required=false)MultipartFile sfPaper,
     		@RequestParam(value="sstuId")String id,HttpServletRequest request,HttpServletResponse response) throws IllegalStateException, IOException {
-    	FileUpload.pictureUpload(request, response,id+"",PathUtil.getClasspath()+"uploadFile/");
-    	StuFile stuFile = new StuFile();
-    	if(id!=null) {
-    		stuFile.setStuId(Integer.parseInt(id));
-    	}
-    	if(sfPhoto!=null) {
-    		stuFile.setSfPhoto(id+sfPhoto.getOriginalFilename());
-    	}
-    	if(sfVoucher!=null) {
-    		stuFile.setSfVoucher(id+sfVoucher.getOriginalFilename());
-    	}
-    	if(sfPaper!=null) {
-    		stuFile.setSfPaper(id+sfPaper.getOriginalFilename());
-    	}
-    	System.out.println(stuFile.getSfPhoto()+" ///////"+stuFile.getSfVoucher());
-    	int result = stuFileService.stuFileInsert(stuFile);
-    	if(result>0) {
-    		return renderSuccess("添加成功");
+    	if(id!=null&&!id.equals("")) {
+    		FileUpload.pictureUpload(request, response,id+"",PathUtil.getClasspath()+"uploadFile/");
+        	StuFile stuFile = new StuFile();
+        	if(id!=null) {
+        		stuFile.setStuId(Integer.parseInt(id));
+        	}
+        	if(sfPhoto!=null) {
+        		stuFile.setSfPhoto(id+sfPhoto.getOriginalFilename());
+        	}
+        	if(sfVoucher!=null) {
+        		stuFile.setSfVoucher(id+sfVoucher.getOriginalFilename());
+        	}
+        	if(sfPaper!=null) {
+        		stuFile.setSfPaper(id+sfPaper.getOriginalFilename());
+        	}
+        	System.out.println(stuFile.getSfPhoto()+" ///////"+stuFile.getSfVoucher());
+        	int result = stuFileService.stuFileInsert(stuFile);
+        	if(result>0) {
+        		return renderSuccess("添加成功");
+        	}else {
+        		return renderSuccess("添加失败");
+        	}
     	}else {
-    		return renderSuccess("添加失败");
+    		return renderSuccess("请先登录后重试！");
     	}
+    	
     }
     
     /**下载相片

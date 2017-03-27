@@ -216,6 +216,9 @@ $(document).ready(function() {
 							      data.msg,
 							      'error'
 						)
+						$(".swal2-styled").click(function(){
+							window.location="${path }/index/stuLogin";
+						});
 					}else if(data.result=="exist"){
 						
 					}

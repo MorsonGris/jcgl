@@ -11,6 +11,7 @@
     <link href="${path }/static/proscenium/css/bootstrap.min.css" rel="stylesheet">
     <link href="${path }/static/proscenium/plugin/bootstrap-validator/bootstrapValidator.min.css" rel="stylesheet">
     <link href="${path }/static/proscenium/css/style.css" rel="stylesheet">
+    <link href="${path }/static/proscenium/plugin/sweetalert2/sweetalert2.min.css" rel="stylesheet">
 <title>聚成教育-工作助手</title>
 </head>
 <body>
@@ -24,9 +25,9 @@
 	<div class="row" style="margin: 20px;">
 		<div class="col-md-12">
 			<h3>文件上传</h3>
-			<form role="form" id="upload" method="post" enctype="multipart/form-data">
+			<form role="form" id="uploadForm" method="post" enctype="multipart/form-data">
 				<div class="form-group">
-					 <label for="photo">图片</label>
+					 <label for="photo">相片</label>
 					 <input type="file" name="sfPhoto" id="photo" />
 				</div>
 				<div class="form-group">
@@ -51,6 +52,14 @@
 	<script src="${path }/static/proscenium/plugin/goup/jquery.goup.min.js"></script>
 	<script src="${path }/static/proscenium/js/app.js"></script>
 	<script src="${path }/static/proscenium/js/ajaxfileupload.js"></script>
+	<script src="${path }/static/proscenium/plugin/sweetalert2/sweetalert2.min.js"></script>
+	<!-- *************************** -->
+	<%-- <script src="${path }/static/proscenium/plugin/sweetalert2/sweetalert2.min.js"></script>
+	<script src="${path }/static/proscenium/js/jquery.min.js"></script>
+	<script src="${path }/static/proscenium/js/bootstrap.min.js"></script>
+	<script src="${path }/static/proscenium/plugin/bootstrap-validator/bootstrapValidator.min.js"></script>
+	<script src="${path }/static/proscenium/plugin/goup/jquery.goup.min.js"></script>
+	<script src="${path }/static/proscenium/js/app.js"></script> --%>
 	<script type="text/javascript">
 	$(document).ready(function() {
 		$("#captcha").click(function() {
@@ -59,7 +68,7 @@
 		    $this.attr("src", url);
 		});
 		
-		$('#upload').bootstrapValidator({
+		$('#uploadForm').bootstrapValidator({
 			message: 'This value is not valid',
 		    live: 'disabled',
 		    feedbackIcons: {
@@ -68,23 +77,59 @@
 		        validating: 'glyphicon glyphicon-refresh'
 		    },
 		    submitHandler: function(validator, form, submitButton) {
-		    	$.ajaxFileUpload({
-	                //处理文件上传操作的服务器端地址(可以传参数,已亲测可用)
-	                url:'${path }/stuFile/add}',
-	                secureuri:false, 
-	                data:{
-						"sstuId" : "${stu.SId"},
-					},
-	                fileElementId:['photo','voucher','paper'],
-	                dataType:'json',                       
-	                success:function(data, status){      
-	                    $('#result').html('修改头像成功' + data);
-	                },
-	                error:function(data, status, e){ 
-	                    $('#result').html('图片上传失败，请重试！！');
-	                }
-	            });
-				 
+		    	/* $.ajaxFileUpload({
+                //处理文件上传操作的服务器端地址(可以传参数,已亲测可用)
+                url:'${path }/stuFile/add',
+                secureuri:false, 
+                data:formData,
+                dataType:'json',                       
+                success:function(data, status){      
+                    $('#result').html('文件上传成功' + data);
+                },
+                error:function(data, status, e){ 
+                    $('#result').html('文件上传失败，请重试！！');
+                }
+            }); */
+		     var formData = new FormData($( "#uploadForm" )[0]);
+		     $.ajax({  
+		          url: '${path }/stuFile/add' ,  
+		          type: 'POST',  
+		          data: formData,  
+		          async: false,  
+		          cache: false,  
+		          contentType: false,  
+		          processData: false,  
+		          success: function (returndata) {  
+			          alert(returndata);
+			          alert(returndata.success);
+			          alert(returndata.msg);
+		        	 /*  if(returndata.success == true){
+		        		  swal(
+							      '上传文件成功!',
+							      returndata.msg,
+							      'success'
+								);
+		        		  $("#uploadForm").bootstrapValidator('resetForm');
+		        		  $(".swal2-styled").click(function(){
+								window.location="${path }/index";
+							});
+			          }else if(returndata.success == false){ 
+							swal(
+								      '上传文件失败，请登录后重试！',
+								      returndata.msg,
+								      'error'
+							);
+							 $(".swal2-styled").click(function(){
+									window.location="${path }/index";
+								});
+						}else if(returndata.result=="exist"){
+							
+						} */
+		          },  
+		          error: function (returndata) {  
+		              alert(returndata);
+		          }  
+		     });
 		    },fields: {
 		    	sstuId: {
 					  validators: {
