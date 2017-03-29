@@ -279,6 +279,91 @@ public class IndexController extends BaseController{
 	}
 	
 	/**
+	 * 考证简介
+	 */
+	@RequestMapping("/p1")
+	public String p1(Model model){
+		model.addAttribute("homeContent", homeContent());
+		PageInfo pi = new PageInfo(0, 4, "r_id", "desc");
+    	List<Relation> relation = relationService.selectDataGrid(pi);
+    	model.addAttribute("relation", relation);
+		return "proscenium/profession/p1";
+	}
+	@RequestMapping("/p2")
+	public String p2(Model model){
+		model.addAttribute("homeContent", homeContent());
+		PageInfo pi = new PageInfo(0, 4, "r_id", "desc");
+    	List<Relation> relation = relationService.selectDataGrid(pi);
+    	model.addAttribute("relation", relation);
+		return "proscenium/profession/p2";
+	}
+	@RequestMapping("/p3")
+	public String p3(Model model){
+		model.addAttribute("homeContent", homeContent());
+		PageInfo pi = new PageInfo(0, 4, "r_id", "desc");
+    	List<Relation> relation = relationService.selectDataGrid(pi);
+    	model.addAttribute("relation", relation);
+		return "proscenium/profession/p3";
+	}
+	@RequestMapping("/p4")
+	public String p4(Model model){
+		model.addAttribute("homeContent", homeContent());
+		PageInfo pi = new PageInfo(0, 4, "r_id", "desc");
+    	List<Relation> relation = relationService.selectDataGrid(pi);
+    	model.addAttribute("relation", relation);
+		return "proscenium/profession/p4";
+	}
+	@RequestMapping("/p5")
+	public String p5(Model model){
+		model.addAttribute("homeContent", homeContent());
+		PageInfo pi = new PageInfo(0, 4, "r_id", "desc");
+    	List<Relation> relation = relationService.selectDataGrid(pi);
+    	model.addAttribute("relation", relation);
+		return "proscenium/profession/p5";
+	}
+	
+	@RequestMapping("/p6")
+	public String p6(Model model){
+		model.addAttribute("homeContent", homeContent());
+		PageInfo pi = new PageInfo(0, 4, "r_id", "desc");
+    	List<Relation> relation = relationService.selectDataGrid(pi);
+    	model.addAttribute("relation", relation);
+		return "proscenium/profession/p6";
+	}
+	@RequestMapping("/p7")
+	public String p7(Model model){
+		model.addAttribute("homeContent", homeContent());
+		PageInfo pi = new PageInfo(0, 4, "r_id", "desc");
+    	List<Relation> relation = relationService.selectDataGrid(pi);
+    	model.addAttribute("relation", relation);
+		return "proscenium/profession/p7";
+	}
+	@RequestMapping("/p8")
+	public String p8(Model model){
+		model.addAttribute("homeContent", homeContent());
+		PageInfo pi = new PageInfo(0, 4, "r_id", "desc");
+    	List<Relation> relation = relationService.selectDataGrid(pi);
+    	model.addAttribute("relation", relation);
+		return "proscenium/profession/p8";
+	}
+	@RequestMapping("/p9")
+	public String p9(Model model){
+		model.addAttribute("homeContent", homeContent());
+		PageInfo pi = new PageInfo(0, 4, "r_id", "desc");
+    	List<Relation> relation = relationService.selectDataGrid(pi);
+    	model.addAttribute("relation", relation);
+		return "proscenium/profession/p9";
+	}
+	@RequestMapping("/p10")
+	public String p10(Model model){
+		model.addAttribute("homeContent", homeContent());
+		PageInfo pi = new PageInfo(0, 4, "r_id", "desc");
+    	List<Relation> relation = relationService.selectDataGrid(pi);
+    	model.addAttribute("relation", relation);
+		return "proscenium/profession/p10";
+	}
+	
+	/**
 	 * 工作助手
 	 */ 
 	@GetMapping("/helper")
