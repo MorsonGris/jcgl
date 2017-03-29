@@ -17,12 +17,12 @@
 		<result column="s_date" property="sDate" />
 		<result column="s_type" property="stype"/>
 		
-		<collection property="listAcademy" ofType ="com.xin.bean.Academy">
+		<!-- <collection property="listAcademy" ofType ="com.xin.bean.Academy">
 			<id column="a_id" property="aId" />
 			<result column="a_school" property="aSchool" />
 			<result column="a_major" property="aMajor" />
 			<result column="a_flag" property="aFlag" />
-		</collection>
+		</collection> -->
 		
 		<collection property="listUser" ofType="com.xin.bean.User">
 			<id column="id" property="id" />
@@ -52,13 +52,10 @@
     	s_date,
     	s_content,
     	s_type,
-    	a.a_id,
-    	a.a_school,
     	u.id,
     	u.`name`
         FROM
-        student s
-        LEFT JOIN academy a ON s.academy_id = a.a_id
+        student s 
     	LEFT JOIN user u ON s.user_id = u.id
         WHERE  s_name = #{sName} and id_number=#{idNumber};
     </select>
@@ -110,12 +107,9 @@
 	    	s_date,
 	    	s_content,
 	    	s_type,
-	    	a.a_id,
-	    	a.a_school,
 	    	u.id,
 	    	u.`name`
-    	FROM student s
-    	LEFT JOIN academy a ON s.academy_id = a.a_id
+    	FROM student s 
     	LEFT JOIN user u ON s.user_id = u.id
 		WHERE s_id = #{sId}
 	</select>
@@ -154,12 +148,9 @@
 	    	s_content,
 	    	s_date,
 	    	s_type,
-	    	a.a_id,
-	    	a.a_school,
 	    	u.id,
 	    	u.`name`
     	FROM student s
-    	LEFT JOIN academy a ON s.academy_id = a.a_id
     	LEFT JOIN user u ON s.user_id = u.id
     	<where>
     		s_type = 1 or s_type = 2 or s_type = 6
@@ -187,12 +178,9 @@
 	    	s_systme,
 	    	s_content,
 	    	s_date,
-	    	a.a_id,
-	    	a.a_school,
 	    	u.id,
 	    	u.`name`
     	FROM student s
-    	LEFT JOIN academy a ON s.academy_id = a.a_id
     	LEFT JOIN user u ON s.user_id = u.id
     	<where>
     		<if test="name != null and name != '' ">

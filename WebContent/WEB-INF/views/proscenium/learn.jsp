@@ -16,7 +16,7 @@
 <body>
 <div class="wrapper">
     <jsp:include page="/static/proscenium/commons/head.jsp"></jsp:include>
-    <div><img src="${path }/static/proscenium/images/learn.jpg" width="100%"></div>
+    <%-- <div><img src="${path }/static/proscenium/images/learn.jpg" width="100%"></div> --%>
     <div class="container">
         <div class="row clearfix" style="text-align: center;margin-top: 20px; color: #d58512;">
             <div class="col-xs-4 column">
@@ -54,6 +54,13 @@
                     <img alt="80x80" src="${path }/static/proscenium/images/Jiangxi.jpg" class="img-circle apply-ico" />
                     <br>
                     <span class="home_operation">江西师范学习平台</span>
+                </a>
+            </div>
+            <div class="col-xs-4 column">
+                <a href="http://degree.qingshuxuetang.com/jxstnu/Home?schoolCategory=1">
+                    <img alt="80x80" src="${path }/static/proscenium/images/jxkjsf.jpg" class="img-rounded apply-ico"/>
+                    <br>
+                    <span class="home_operation">江西科技师范大学</span>
                 </a>
             </div>
         </div>

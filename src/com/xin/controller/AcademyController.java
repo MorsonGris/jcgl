@@ -105,10 +105,10 @@ public class AcademyController extends BaseController{
     public Object delete(int id){
     	List<Student> list = studentService.selectAll();
     	for(int i=0;i<list.size();i++){
-    		Student student= list.get(i);
+    		/*Student student= list.get(i);
     		if(student.getAcademyId() == id){
     			return renderError("删除失败,该专业已有学生选择,不能删除!");
-    		}
+    		}*/
     		boolean result = academyService.deleteById(id);
         	if(result == true){
         		return renderSuccess("删除成功");

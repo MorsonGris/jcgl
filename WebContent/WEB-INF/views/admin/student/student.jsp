@@ -50,6 +50,11 @@
             },{
                 width : '120',
                 title : '报考院校',
+                field : 'academyId',
+                sortable : true
+            }/* {
+                width : '120',
+                title : '报考院校',
                 field : 'listAcademy',
                 sortable : true,
                 formatter : function(value, row, index) {
@@ -59,7 +64,7 @@
                     }
                     return(roles.join('\n'));
                 }
-            },{
+            } */,{
                 width : '100',
                 title : '专业',
                 field : 'scontent',

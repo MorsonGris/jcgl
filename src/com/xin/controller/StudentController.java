@@ -120,8 +120,8 @@ public class StudentController extends BaseController{
     
     @GetMapping("/addpage")
     public String addpage(Model model){
-    	List<Academy> list = academyService.selectadult();
-    	model.addAttribute("academy", list);
+    	/*List<Academy> list = academyService.selectadult();
+    	model.addAttribute("academy", list);*/
     	return "admin/student/studentAdd";
     }
     

@@ -172,12 +172,13 @@
                 <tr>
 	                <td>报考院校</td>
                     <td>
-                    	<select id="academyId" name="academyId" style="width:120px;height:22px;">
+                    	<%-- <select id="academyId" name="academyId" style="width:120px;height:22px;">
                     	 	<option value="">--请选择--</option>
                     		<c:forEach var="academy" items="${academy}" varStatus="s">
                     			<option value="${academy.AId}">${academy.ASchool}</option>
                     		</c:forEach>
-                    	</select>
+                    	</select> --%>
+                    	<input name="academyId" type="text" placeholder="请输入报考院校" class="easyui-validatebox" data-options="required:true,novalidate:true" value="">
                     </td> 
                 	<td>报考专业</td>
                 	<td>

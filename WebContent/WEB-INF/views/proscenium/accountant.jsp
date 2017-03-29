@@ -264,27 +264,36 @@ function sendMessage() {
 	var name = $("#name").val();
 	var phone = $("#phone").val();
 	var stype = $("#stype").val();
-	
+	var yz = /^1[3-8]+\d{9}$/.test(phone);
 	if(phone != null && phone!=''){
-		curCount = count;
-		//产生验证码
-		for (var i = 0; i < codeLength; i++) {
-			code += parseInt(Math.random() * 9).toString();
-		}
-		$("#code").val(code);
-		//设置button效果，开始计时
-		$("#btnSendCode").attr("disabled", "true");
-		$("#btnSendCode").val( + curCount + "秒再获取");
-		InterValObj = window.setInterval(SetRemainTime, 1000); //启动计时器，1秒执行一次
-		//向后台发送处理数据
-		$.ajax({
-			type: "POST", //用POST方式传输
-			dataType: "text", //数据格式:JSON
-			url: '${path}/Security/security', //目标地址
-			data: "name=" + name +"&phone="+ phone +"&stype="+ stype + "&type=2" +"&code=" + code,
-			error: function (XMLHttpRequest, textStatus, errorThrown) {},
-			success: function (msg){}
-			});
+		if(yz) {
+			curCount = count;
+			//产生验证码
+			for (var i = 0; i < codeLength; i++) {
+				code += parseInt(Math.random() * 9).toString();
+			}
+			$("#code").val(code);
+			//设置button效果，开始计时
+			$("#btnSendCode").attr("disabled", "true");
+			$("#btnSendCode").val( + curCount + "秒再获取");
+			InterValObj = window.setInterval(SetRemainTime, 1000); //启动计时器，1秒执行一次
+			//向后台发送处理数据
+			$.ajax({
+				type: "POST", //用POST方式传输
+				dataType: "text", //数据格式:JSON
+				url: '${path}/Security/security', //目标地址
+				data: "name=" + name +"&phone="+ phone +"&stype="+ stype + "&type=2" +"&code=" + code,
+				error: function (XMLHttpRequest, textStatus, errorThrown) {},
+				success: function (msg){}
+				});
+			}else {
+				swal(
+					      '请输入正确的手机号码!',
+					      '',
+					      'error'
+					)
+			}
+		
 		}else{
 			swal(
 			      '手机号码不能为空!',

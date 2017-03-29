@@ -99,9 +99,10 @@
 							</div> 
 							<div class="form-group"> 
 								<label for="school">报考院校</label> 
-								<select id="school" name="academyId" class="form-control"> 
+								<!-- <select id="school" name="academyId" class="form-control"> 
 									<option value="">---请选择---</option> 
-								</select> 
+								</select>  -->
+								<input type="text" class="form-control" id="school" name="academyId" />
 							</div> 
 							<div class="form-group">
 								<div class="row">
@@ -324,7 +325,7 @@ $(document).ready(function() {
 	})
 })
 
-$(function(){
+/* $(function(){
 	var url = (window.location.href.split("?")[1]).split("&")[0];
 	var id = url.split("=")[1];
 	if(id != null && id != ''){
@@ -339,7 +340,7 @@ $(function(){
 			  school.append("<option value='"+json[i].aid+"'>"+json[i].aschool+"</option>")
 		  }
 	 });
-})
+}) */
 
 function selected(){
 	 var valeu =  $('#sGradations option:selected').val();//选中的值
@@ -362,39 +363,48 @@ var codeLength = 6;//验证码长度
 function sendMessage() {
 	var name = $("#name").val();
 	var phone = $("#phone").val();
-	var select = document.getElementById("school");
-	var options = select.options;
+/* 	var select = document.getElementById("school");
+	var options = select.options; 
 	var index = select.selectedIndex;
-	var school =options[index].text;
+ 	var school =options[index].text; 获取下拉框显示值*/
+ 	var school = $("#school").val();
 	var sContent = $("#sContent").val();
 	var sGradations = $("#sGradations").val();
 	var type = 1;
-	
+	var yz = /^1[3-8]+\d{9}$/.test(phone);
 	if(phone != null && phone!=''){
-		curCount = count;
-		//产生验证码
-		for (var i = 0; i < codeLength; i++) {
-			code += parseInt(Math.random() * 9).toString();
-		}
-		$("#code").val(code);
-		//设置button效果，开始计时
-		$("#btnSendCode").attr("disabled", "true");
-		$("#btnSendCode").val( + curCount + "秒再获取");
-		InterValObj = window.setInterval(SetRemainTime, 1000); //启动计时器，1秒执行一次
-		//向后台发送处理数据
-		$.ajax({
-			type: "POST", //用POST方式传输
-			dataType: "text", //数据格式:JSON
-			url: '${path}/Security/security', //目标地址
-			data: "name=" + name +"&phone="+ phone +"&school="+ school +"&sContent="+ sContent +"&sGradations=" + sGradations + "&type="+ type + "&code=" + code,
-			error: function (data) {
-				swal(
-				      '手机号码不能为空!',
-				      data.msg,
+		if(yz) {
+			curCount = count;
+			//产生验证码
+			for (var i = 0; i < codeLength; i++) {
+				code += parseInt(Math.random() * 9).toString();
+			}
+			$("#code").val(code);
+			//设置button效果，开始计时
+			$("#btnSendCode").attr("disabled", "true");
+			$("#btnSendCode").val( + curCount + "秒再获取");
+			InterValObj = window.setInterval(SetRemainTime, 1000); //启动计时器，1秒执行一次
+			//向后台发送处理数据
+			$.ajax({
+				type: "POST", //用POST方式传输
+				dataType: "text", //数据格式:JSON
+				url: '${path}/Security/security', //目标地址
+				data: "name=" + name +"&phone="+ phone +"&school="+ school +"&sContent="+ sContent +"&sGradations=" + sGradations + "&type="+ type + "&code=" + code,
+				error: function (data) {
+					swal(
+					      '手机号码不能为空!',
+					      data.msg,
+					      'error'
+					)
+				}
+			});
+		}else {
+			swal(
+				      '请输入正确的手机号码!',
+				      '',
 				      'error'
 				)
-			}
-		});
+		}
 	}else{
 		swal(
 		      '手机号码不能为空!',

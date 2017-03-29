@@ -43,11 +43,11 @@
             },{
                 width : '80',
                 title : '学校',
-                field : 'academyaschool',
+                field : 'studentacademy',
                 formatter : function(value, row, index) {
-                	if (row.academy){
-                        if(row.academy.aschool!= '')
-                            return row.academy.aschool;
+                	if (row.student){
+                        if(row.student.academyId!= '')
+                            return row.student.academyId;
                         else{
                             return '';
                         }
@@ -58,11 +58,11 @@
             },{
             	width : '110',
                 title : '专业',
-                field : 'academyamajor',
+                field : 'studentscontent',
                 formatter : function(value, row, index) {
-                	if (row.academy){
-                        if(row.academy.amajor!= '')
-                            return row.academy.amajor;
+                	if (row.student){
+                        if(row.student.scontent!= '')
+                            return row.student.scontent;
                         else{
                             return '';
                         }
