@@ -131,16 +131,17 @@
 			       <input type="text" class="form-control" id="phone" name="sPhone" /> 
 		     	</div> 
 				<div class="form-group">
-				<div class="row">
-					<div class="col-xs-6">
-						<label for="sGradations">短信验证码：</label>
-						<input type="hidden" id="code" name="code">
-						<input type="text" id="scode" name="scode" class="form-control" style="width:200px;" />
+					<label for="sGradations">短信验证码</label>
+					<div class="row">
+						<div class="col-xs-6">
+							
+							<input type="hidden" id="code" name="code">
+							<input type="text" id="scode" name="scode" class="form-control"/>
+						</div>
+						<div class="col-xs-6">
+							<input  id="btnSendCode" type="button" value="获取验证码" onClick="sendMessage()" class="btn btn-primary">
+						</div>
 					</div>
-					<div class="col-xs-6">
-						<input style="margin-top:27px;" id="btnSendCode" type="button" value="获取验证码" onClick="sendMessage()" class="btn btn-primary btn-lg">
-					</div>
-				</div>
 			  </div>
 		      <div class="form-group" hidden="true"> 
 		       <input type="text" class="form-control" id="sSystme" name="sSystme" /> 
