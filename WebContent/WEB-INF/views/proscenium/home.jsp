@@ -122,7 +122,7 @@
                 </a>
             </div>
            <div class="col-xs-4 column">
-                <a href="index/train">
+                <a href="index/train?id=${user.id }">
                     <img alt="80x80" src="${path }/static/proscenium/icon/train.png" class="img-circle home-ico" />
                     <br>
                     <span class="home_operation">培训管理</span>

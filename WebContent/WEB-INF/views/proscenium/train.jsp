@@ -214,11 +214,11 @@ $(document).ready(function() {
 	    $this.attr("src", url);
 	});
 	
-	/* var url = (window.location.href.split("?")[1]).split("&")[0];
+	var url = (window.location.href.split("?")[1]).split("&")[0];
 	var id = url.split("=")[1];
 	if(id != null && id != ''){
 		$("#id").val(id);
-	} */
+	}
 	$('#adultEnroll').bootstrapValidator({
 		message: 'This value is not valid',
 	    live: 'disabled',
