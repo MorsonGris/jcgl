@@ -26,7 +26,7 @@ public class Student{
 	@TableField("s_content")
 	private String sContent;
 	@TableField("academy_id")
-	private Integer academyId;
+	private String academyId;
 	@TableField("s_gradations")
 	private String sGradations;
 	@TableField("s_systme")
@@ -106,11 +106,11 @@ public class Student{
 		this.sContent = sContent;
 	}
 
-	public Integer getAcademyId() {
+	public String getAcademyId() {
 		return academyId;
 	}
 
-	public void setAcademyId(Integer academyId) {
+	public void setAcademyId(String academyId) {
 		this.academyId = academyId;
 	}
 

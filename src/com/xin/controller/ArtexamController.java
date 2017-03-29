@@ -149,6 +149,9 @@ public class ArtexamController extends BaseController{
         		Student stu = studentservice.selectByNo();
             	String No = StudentNo.getNo(stu);
             	student.setStudentNo(No);
+            	if(student.getSDate() == null){
+            		student.setSDate(new Date());
+            	}
             	if(student.getUserId() == null){
             		UserVo uservo = new UserVo();
             		uservo.setLoginName("admin");
@@ -158,9 +161,6 @@ public class ArtexamController extends BaseController{
             			users = list.get(i);
             		}
             		student.setUserId(users.getId());
-            	}
-            	if(student.getSDate() == null){
-            		student.setSDate(new Date());
             	}
             	boolean result = artexamService.insertByid(student);
             	if(result == true){

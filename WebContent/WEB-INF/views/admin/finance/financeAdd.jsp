@@ -40,6 +40,11 @@
                 field : 'sphone',
                 sortable : true
             },{
+            	width : '80',
+                title : '院校',
+                field : 'academyId',
+                sortable : true
+            }/* {
                 width : '80',
                 title : '院校',
                 field : 'listAcademy',
@@ -50,7 +55,7 @@
                     }
                     return(roles.join('\n'));
                 }
-            },{
+            } */,{
             	width : '80',
                 title : '报考层次',
                 field : 'sgradations',

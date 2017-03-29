@@ -17,6 +17,8 @@
 		<association property="student" javaType="com.xin.bean.Student">
 			<id property="sId" column="s_id" />
 			<result property="sName" column="s_name" />
+			<result column="s_content" property="sContent" />
+			<result column="academy_id" property="academyId" />
 			<result property="sGradations" column="s_gradations" />
 			<result property="sContent" column="s_content" />
 			<result property="stype" column="s_type" />
@@ -25,11 +27,11 @@
 			<id property="id" column="id" />
 			<result property="name" column="name" />
 		</association>
-		<association property="academy" javaType="com.xin.bean.Academy">
+		<!-- <association property="academy" javaType="com.xin.bean.Academy">
 			<id property="aId" column="a_id" />
 			<result property="aSchool" column="a_school" />
 			<result property="aMajor" column="a_major" />
-		</association>
+		</association> -->
 	</resultMap>
 	<resultMap type="com.xin.commons.utils.PageJson" id="PageResult">
 		<result property="total" column="total"/>
@@ -42,9 +44,9 @@
 		S.s_gradations,
 		S.s_content,
 		S.s_type,
+		S.s_content,
+		S.academy_id,
 		U.`name`,
-		A.a_school,
-		A.a_major,
 		F.stu_no,
 		F.tea_class,
 		F.need_money,
@@ -87,7 +89,6 @@
 		select 
 			<include refid="field" /> 
 		from finance F left join student S on F.stu_no=S.s_studentno left join `user` U on S.user_id=U.id 
-		left join academy A on S.academy_id=A.a_id 
 		<where>
             <if test=" username != null and username != '' ">
                 U.`name` like #{username}
@@ -114,7 +115,6 @@
 		select 
 			<include refid="field" /> 
 		from finance F left join student S on F.stu_no=S.s_studentno left join `user` U on S.user_id=U.id 
-		left join academy A on S.academy_id=A.a_id 
 		<where>
             <if test=" teaClass != null and teaClass != '' ">
                 U.`name` like #{teaClass}
