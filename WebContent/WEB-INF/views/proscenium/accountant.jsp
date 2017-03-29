@@ -110,7 +110,7 @@
 						<input type="text" id="scode" name="scode" class="form-control" style="width:200px;" />
 					</div>
 					<div class="col-xs-6">
-						<input style="margin-top:27px;" id="btnSendCode" type="button" value="获取短信验证码" onClick="sendMessage()" class="btn btn-primary btn-lg">
+						<input style="margin-top:27px;" id="btnSendCode" type="button" value="获取验证码" onClick="sendMessage()" class="btn btn-primary btn-lg">
 					</div>
 			    </div>
 		      </div>

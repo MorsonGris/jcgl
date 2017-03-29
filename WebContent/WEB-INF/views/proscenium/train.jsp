@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="shortcut icon" href="${path }/static/proscenium/logo/favicon2.ico" /> 
     <link href="${path }/static/proscenium/css/bootstrap.min.css" rel="stylesheet">
-       <link href="${path }/static/proscenium/plugin/sweetalert2/sweetalert2.min.css" rel="stylesheet">
+    <link href="${path }/static/proscenium/plugin/sweetalert2/sweetalert2.min.css" rel="stylesheet">
     <link href="${path }/static/proscenium/plugin/bootstrap-validator/bootstrapValidator.min.css" rel="stylesheet">
     <link href="${path }/static/proscenium/css/style.css" rel="stylesheet">
 <title>聚成教育-职业培训</title>
@@ -135,56 +135,29 @@
 									<p style="color: red;font-size: 18px;">聚成教育培训机构现已开启职业技能培训</p>
 									<p style="font-size: 16px;">抓紧报名，考取职业技能培训证书</p>
 								</div>
-								<form role="form" id="adultEnroll"> 
-									<div class="form-group"> 
-										<label for="name">姓名</label> 
-										<input type="text" class="form-control" id="name" name="sName" /> 
-									</div> 
-									<div class="form-group"> 
-										<label for="id-card">身份证号码</label> 
-										<input type="text" class="form-control" id="id-card" name="idNumber" /> 
-									</div> 
-									<div class="form-group"> 
-										<label for="school">报考职业</label> 
-										<select id="school" name="academyId" class="form-control"> 
-											<option value="">---请选择---</option> 
-										</select> 
-									</div> 
-									<div class="form-group">
-										<div class="row">
-											<div class="col-xs-6">
-												<label for="profession">专业</label> 
-												<input type="text" id="sContent" name="sContent" class="form-control" style="width:170px;" /> 
-											</div>
-										<div class="col-xs-6">
-											<label for="sGradations">层次</label> 
-											<select id="sGradations" name="sGradations" onclick="selected();" class="form-control" style="width:170px;"> 
-												<option value="">---请选择---</option>
-												<option value="高达本">高达本</option>
-												<option value="专达本">专达本</option>
-												<option value="高达专">高达专</option>
-											</select> 
-										</div>
-										</div>
-									</div>
-									<div class="form-group">
-					      		  	<div class="row"> 
-						           		<div class="col-xs-6">
-						           		 	<label for="name">验证码</label> 
-						           			<input class="form-control" type="text" id="yzm" name="captcha"/>
+									<form role="form" id="adultEnroll"> 
+								      <div class="form-group"> 
+								       <label for="name">姓名</label> 
+								       <input type="text" class="form-control" id="name" name="sName" /> 
+								      </div> 
+						      		  <div class="form-group">
+						      		  	 <div class="row"> 
+							           		<div class="col-xs-6">
+							           		 	<label for="name">验证码</label> 
+							           			<input class="form-control" type="text" id="yzm" name="captcha"/>
+							           		</div>
+							           		<div class="col-xs-6">
+							           			<img  style="margin-top:27px;" id="captcha" alt="验证码" src="${path }/captcha.jpg" data-src="${path }/captcha.jpg?t=" style="vertical-align:middle;border-radius:4px;width:100%;height:50px;cursor:pointer;">
+							           		</div>
 						           		</div>
-						           		<div class="col-xs-6">
-						           			<img  style="margin-top:27px;" id="captcha" alt="验证码" src="${path }/captcha.jpg" data-src="${path }/captcha.jpg?t=" style="vertical-align:middle;border-radius:4px;width:100%;height:50px;cursor:pointer;">
-						           		</div>
-					           			</div>
-					                </div>
-									<div class="form-group"> 
-										<label for="phone">手机号码</label> 
-										<input type="text" class="form-control" id="phone" name="sPhone" /> 
-									</div> 
-									<div class="form-group">
-										<label for="sGradations">短信验证码</label>
-										<div class="row">
+						              </div>
+								      <div class="form-group"> 
+								       <label for="phone">手机号码</label> 
+								       <input type="text" class="form-control" id="phone" name="sPhone" /> 
+								      </div> 
+								      <div class="form-group">
+								      	<!--<label for="sGradations">短信验证码</label>
+										 <div class="row">
 											<div class="col-xs-6">
 												
 												<input type="hidden" id="code" name="code">
@@ -193,15 +166,27 @@
 											<div class="col-xs-6">
 												<input  id="btnSendCode" type="button" value="获取验证码" onClick="sendMessage()" class="btn btn-primary">
 											</div>
-										</div>
-									</div>
-									<div class="form-group" hidden="true"> 
-										<input type="text" class="form-control" id="sSystme" name="sSystme" /> 
-									</div> 
-									<input type="hidden" id="stype" name="stype" value="1" /> 
-									<input type="hidden" id="id" name="userId" /> 
-									<button type="submit" class="btn btn-primary btn-lg">提交</button> 
-								</form> 
+										</div> -->
+										<div class="row">
+											<div class="col-xs-6">
+												<label for="sGradations">短信验证码：</label>
+												<input type="hidden" id="code" name="code">
+												<input type="text" id="scode" name="scode" class="form-control" style="width:200px;" />
+											</div>
+											<div class="col-xs-6">
+												<input style="margin-top:27px;" id="btnSendCode" type="button" value="获取验证码" onClick="sendMessage()" class="btn btn-primary btn-lg">
+											</div>
+									    </div>
+								      </div>
+								      <div class="form-group"> 
+								       <label for="content">报考职业</label> 
+								       <!-- <textarea class="form-control" rows="3" id="content" name="sContent"></textarea> --> 
+								      	<input type="text" class="form-control" id="content" name="sContent" />
+								      </div> 
+								      <input type="hidden" id="stype" name="stype" value="5" /> 
+								      <input type="hidden" id="id" name="userId" /> 
+								      <button type="submit" class="btn btn-primary btn-lg">提交</button> 
+								     </form>
 							</div>
 						</div>
 					</div>
@@ -214,10 +199,10 @@
 	</div>
 	<jsp:include page="/static/proscenium/commons/bottom.jsp"></jsp:include>
 	<jsp:include page="/static/proscenium/commons/scroll.jsp"></jsp:include>
-
+<!-- **************************************** -->
+<script src="${path }/static/proscenium/plugin/sweetalert2/sweetalert2.min.js"></script>
 <script src="${path }/static/proscenium/js/jquery.min.js"></script>
 <script src="${path }/static/proscenium/js/bootstrap.min.js"></script>
-<script src="${path }/static/proscenium/plugin/sweetalert2/sweetalert2.min.js"></script>
 <script src="${path }/static/proscenium/plugin/bootstrap-validator/bootstrapValidator.min.js"></script>
 <script src="${path }/static/proscenium/plugin/goup/jquery.goup.min.js"></script>
 <script src="${path }/static/proscenium/js/app.js"></script>
@@ -229,6 +214,11 @@ $(document).ready(function() {
 	    $this.attr("src", url);
 	});
 	
+	/* var url = (window.location.href.split("?")[1]).split("&")[0];
+	var id = url.split("=")[1];
+	if(id != null && id != ''){
+		$("#id").val(id);
+	} */
 	$('#adultEnroll').bootstrapValidator({
 		message: 'This value is not valid',
 	    live: 'disabled',
@@ -238,7 +228,7 @@ $(document).ready(function() {
 	        validating: 'glyphicon glyphicon-refresh'
 	    },
 	    submitHandler: function(validator, form, submitButton) {
-			 $.post("${path }/student/add",form.serialize(),function(data){
+			 $.post("${path }/Artexam/add",form.serialize(),function(data){
 				  if(data.success == true){
 					  swal(
 					      '添加成功!',
@@ -249,13 +239,11 @@ $(document).ready(function() {
 						$("#name").val("");
 						$("#id-card").val("");
 						$("#phone").val("");
-						$("#school").val("");
-						$("#aMajor").val("");
-						$("#sGradations").val("");
+						$("#content").val("");
 						$(".swal2-styled").click(function(){
 							window.location="${path }/index";
 						});
-					}else if(data.success == false){
+					}else if(data.success == false){ 
 						swal(
 							      '',
 							      data.msg,
@@ -265,7 +253,8 @@ $(document).ready(function() {
 						
 					}
 			  },'JSON');
-	    },fields: {
+	    },
+	    fields: {
 	    	sName: {
 			  validators: {
 			   notEmpty: {
@@ -273,33 +262,9 @@ $(document).ready(function() {
 			   }
 			  }
 			},
-			idNumber: {
-			   validators: {
-				   notEmpty: {
-                       message: '身份证号码不能为空'
-                   },
-                   stringLength: {
-                       min: 18,
-                       max: 18,
-                       message: '身份证号码格式不正确'
-                   },
-                   threshold :18 ,
-                   remote: {
-                       url: '${path }/student/validatori',
-                       message: '身份证号码已存在',
-                       delay :  2000,
-                       type: 'POST',
-                   	   data: function(validator) {
-                          return {
-                        	  idNumber: $('#id-card').val(),
-                          };
-                       }
-                   }
-			   }
-			},
-			sPhone: {
-               validators: {
-                   notEmpty: {
+			 sPhone: {
+                validators: {
+                    notEmpty: {
                         message: '手机号不能为空'
                     },
                     stringLength: {
@@ -309,7 +274,7 @@ $(document).ready(function() {
                     },
                     threshold :11 ,
                     remote: {
-                        url: '${path }/student/validatorp',
+                        url: '${path }/Artexam/validatorp',
                         message: '手机号码已存在',
                         delay :  2000,
                         type: 'POST',
@@ -322,23 +287,9 @@ $(document).ready(function() {
                 }
 			},
 			scode: {
-				  validators: {
-				   notEmpty: {
-					  message: '短信验证不能为空'
-				   }
-				  }
-				},
-			academyId: {
 			  validators: {
 			   notEmpty: {
-			    message: '学校不能为空'
-			   }
-			  }
-			},
-			sContent: {
-			  validators: {
-			   notEmpty: {
-			    message: '专业不能为空'
+			    message: '短信验证不能为空'
 			   }
 			  }
 			},
@@ -349,10 +300,10 @@ $(document).ready(function() {
 				   }
 				}
 			},
-			sGradations: {
+			sContent: {
 			  validators: {
 			   notEmpty: {
-			    message: '层次不能为空'
+			    message: '报考职业不能为空'
 			   }
 			  }
 			}
@@ -360,36 +311,6 @@ $(document).ready(function() {
 	})
 })
 
-$(function(){
-	var url = (window.location.href.split("?")[1]).split("&")[0];
-	var id = url.split("=")[1];
-	if(id != null && id != ''){
-		$("#id").val(id);
-	}
-	var school = $("#school");
-	$.get("${path }/academy/selectadult",function(data){
-		  var json = JSON.parse(data); 
-		  school.empty();
-		  school.append("<option value=''>---请选择---</option>")
-		  for(var i=0;i<json.length;i++){
-			  school.append("<option value='"+json[i].aid+"'>"+json[i].aschool+"</option>")
-		  }
-	 });
-})
-
-function selected(){
-	 var valeu =  $('#sGradations option:selected').val();//选中的值
-	 if(valeu != "请选择"){
-		 if(valeu == "高达本"){//高达本
-			 $("#sSystme").val("五年"); 
-		 }else if(valeu == "专达本"){//专达本
-			 $("#sSystme").val("三年"); 
-		 }else if(valeu == "高达专"){//高达专
-			 $("#sSystme").val("三年"); 
-		 }
-	 }
-  }
-  
 var InterValObj; //timer变量，控制时间
 var count = 60; //间隔函数，1秒执行
 var curCount;//当前剩余秒数
@@ -398,47 +319,45 @@ var codeLength = 6;//验证码长度
 function sendMessage() {
 	var name = $("#name").val();
 	var phone = $("#phone").val();
-	var select = document.getElementById("school");
-	var options = select.options;
-	var index = select.selectedIndex;
-	var school =options[index].text;
-	var sContent = $("#sContent").val();
-	var sGradations = $("#sGradations").val();
-	var type = 1;
-	
+	var stype = $("#stype").val();
+	var yz = /^1[3-8]+\d{9}$/.test(phone);
 	if(phone != null && phone!=''){
-		curCount = count;
-		//产生验证码
-		for (var i = 0; i < codeLength; i++) {
-			code += parseInt(Math.random() * 9).toString();
-		}
-		$("#code").val(code);
-		//设置button效果，开始计时
-		$("#btnSendCode").attr("disabled", "true");
-		$("#btnSendCode").val( + curCount + "秒再获取");
-		InterValObj = window.setInterval(SetRemainTime, 1000); //启动计时器，1秒执行一次
-		//向后台发送处理数据
-		$.ajax({
-			type: "POST", //用POST方式传输
-			dataType: "text", //数据格式:JSON
-			url: '${path}/Security/security', //目标地址
-			data: "name=" + name +"&phone="+ phone +"&school="+ school +"&sContent="+ sContent +"&sGradations=" + sGradations + "&type="+ type + "&code=" + code,
-			error: function (data) {
-				swal(
-				      '手机号码不能为空!',
-				      data.msg,
-				      'error'
-				)
+		if(yz) {
+			curCount = count;
+			//产生验证码
+			for (var i = 0; i < codeLength; i++) {
+				code += parseInt(Math.random() * 9).toString();
 			}
-		});
-	}else{
-		swal(
-		      '手机号码不能为空!',
-		      '',
-		      'error'
-		)
+			$("#code").val(code);
+			//设置button效果，开始计时
+			$("#btnSendCode").attr("disabled", "true");
+			$("#btnSendCode").val( + curCount + "秒再获取");
+			InterValObj = window.setInterval(SetRemainTime, 1000); //启动计时器，1秒执行一次
+			//向后台发送处理数据
+			$.ajax({
+				type: "POST", //用POST方式传输
+				dataType: "text", //数据格式:JSON
+				url: '${path}/Security/security', //目标地址
+				data: "name=" + name +"&phone="+ phone +"&stype="+ stype + "&type=2" +"&code=" + code,
+				error: function (XMLHttpRequest, textStatus, errorThrown) {},
+				success: function (msg){}
+				});
+			}else {
+				swal(
+					      '请输入正确的手机号码!',
+					      '',
+					      'error'
+					)
+			}
+		
+		}else{
+			swal(
+			      '手机号码不能为空!',
+			      '',
+			      'error'
+			)
+		}
 	}
-}
 //timer处理函数
 function SetRemainTime() {
 	if (curCount == 0) {                

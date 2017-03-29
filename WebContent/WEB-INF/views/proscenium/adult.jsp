@@ -366,7 +366,7 @@ function sendMessage() {
 /* 	var select = document.getElementById("school");
 	var options = select.options; 
 	var index = select.selectedIndex;
- 	var school =options[index].text; 获取下拉框显示值*/
+ 	var school =options[index].text; 获取下拉框显示值 */
  	var school = $("#school").val();
 	var sContent = $("#sContent").val();
 	var sGradations = $("#sGradations").val();
