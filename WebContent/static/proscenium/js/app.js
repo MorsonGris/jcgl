@@ -23,7 +23,7 @@ $(document).ready(function() {
     $("#closeMap").click(function () {
         document.getElementById('map').style.display='none';
         /* document.getElementById('fade').style.display='none'; */
-    })   
+    })
 	$.goup({
         trigger: 100,
         bottomOffset: 300,

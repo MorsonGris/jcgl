@@ -523,4 +523,28 @@ public class IndexController extends BaseController{
     	model.addAttribute("relation", relation);
 		return "proscenium/finance/accountingcost";
 	}
+	
+	/**
+	 * 艺考缴费
+	 */
+	@GetMapping("/artcost")
+	public String artcost(Model model){
+		model.addAttribute("homeContent", homeContent());
+		PageInfo pi = new PageInfo(0, 4, "r_id", "desc");
+    	List<Relation> relation = relationService.selectDataGrid(pi);
+    	model.addAttribute("relation", relation);
+		return "proscenium/finance/artcost";
+	}
+	
+	/**
+	 * 资格证缴费
+	 */
+	@GetMapping("/certificationcost")
+	public String certificationcost(Model model){
+		model.addAttribute("homeContent", homeContent());
+		PageInfo pi = new PageInfo(0, 4, "r_id", "desc");
+    	List<Relation> relation = relationService.selectDataGrid(pi);
+    	model.addAttribute("relation", relation);
+		return "proscenium/finance/certificationcost";
+	}
 }

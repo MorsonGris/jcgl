@@ -113,14 +113,14 @@
 							</a>
 							</div>
 							<div class="col-xs-4">
-							<a href="p10">
+							<a href="certificationcost">
 								<img alt="" style="width: 100%;" src="${path }/static/proscenium/icon/hotair.png">
 								<br>
 								<span>资格证缴费</span>
 							</a>
 							</div>
 							<div class="col-xs-4">
-							<a href="p10">
+							<a href="artcost">
 								<img alt="" style="width: 100%;" src="${path }/static/proscenium/icon/trophy.png">
 								<br>
 								<span>艺考缴费</span>

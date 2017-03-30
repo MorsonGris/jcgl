@@ -7,7 +7,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>聚成教育-会计缴费</title>
+    <title>聚成教育-资格证缴费</title>
     <link href="${path }/static/proscenium/plugin/sweetalert2/sweetalert2.min.css" rel="stylesheet">
     <link rel="shortcut icon" href="${path }/static/proscenium/logo/favicon2.ico" /> 
     <link href="${path }/static/proscenium/css/bootstrap.min.css" rel="stylesheet">
@@ -34,7 +34,7 @@
 	    <div class="col-md-12"> 
 	     <div class="piece form-piece" data-idx="18" style="margin-bottom: 10px;"> 
 	      <div class="panel-heading">
-			<h4 style="color:#5D5D5D;text-align: center;">会计缴费</h4><hr />
+			<h4 style="color:#5D5D5D;text-align: center;">资格证缴费</h4><hr />
 		  </div>
 	      <form role="form" id="adultEnroll"> 
 	       <div class="form-group"> 
@@ -74,7 +74,7 @@
 	        <input type="text" class="form-control" id="idNumber" name="idNumber" /> 
 	       </div>
 	       <div class="form-group"> 
-	        <label for="major">专业</label> 
+	        <label for="major">证书/级别</label> 
 	        <input type="text" class="form-control" id="major" name="major" /> 
 	       </div>
 	       <div class="form-group"> 
@@ -226,7 +226,7 @@ $(document).ready(function() {
 			major: {
 				  validators: {
 					   notEmpty: {
-					    message: '专业不能为空'
+					    message: '证书/级别不能为空'
 					   }
 					}
 			},
