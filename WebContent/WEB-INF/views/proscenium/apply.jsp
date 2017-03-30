@@ -43,7 +43,7 @@
         <div class="row clearfix" style="text-align: center;margin-top: 20px;">
             <div class="col-xs-4 column">
                 <a href="nation?id=${user.id }">
-                    <img alt="80x80" src="${path }/static/proscenium/icon/cloud.png" class="img-circle apply-ico" />
+                    <img alt="80x80" src="${path }/static/proscenium/icon/cloud.png" class="img-rounded apply-ico" />
                     <br>
                     <span>远程教育<br>报名</span>
                 </a>

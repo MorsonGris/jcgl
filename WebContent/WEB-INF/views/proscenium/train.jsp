@@ -104,7 +104,7 @@
 							</a>
 							</div>
 						</div>
-						<div class="row" style="text-align: center;">
+						<div class="row" style="text-align: center;margin-bottom: 20px;">
 							<div class="col-xs-4">
 							<a href="p10">
 								<img alt="" style="width: 100%;" src="${path }/static/proscenium/images/profession/p10.png">
@@ -113,8 +113,27 @@
 							</a>
 							</div>
 							<div class="col-xs-4">
+							<a href="p10">
+								<img alt="" style="width: 100%;" src="${path }/static/proscenium/icon/hotair.png">
+								<br>
+								<span>资格证缴费</span>
+							</a>
 							</div>
 							<div class="col-xs-4">
+							<a href="p10">
+								<img alt="" style="width: 100%;" src="${path }/static/proscenium/icon/trophy.png">
+								<br>
+								<span>艺考缴费</span>
+							</a>
+							</div>
+						</div>
+						<div class="row" style="text-align: center;">
+							<div class="col-xs-4">
+							<a href="accountingcost">
+								<img alt="" style="width: 100%;" src="${path }/static/proscenium/icon/rulertriangle.png">
+								<br>
+								<span>会计缴费</span>
+							</a>
 							</div>
 						</div>
 					</div>

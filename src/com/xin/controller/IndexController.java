@@ -511,4 +511,16 @@ public class IndexController extends BaseController{
     	model.addAttribute("relation", relation);
 		return "proscenium/teacher";
 	}
+	
+	/**
+	 * 会计缴费
+	 */
+	@GetMapping("/accountingcost")
+	public String accountingcost(Model model){
+		model.addAttribute("homeContent", homeContent());
+		PageInfo pi = new PageInfo(0, 4, "r_id", "desc");
+    	List<Relation> relation = relationService.selectDataGrid(pi);
+    	model.addAttribute("relation", relation);
+		return "proscenium/finance/accountingcost";
+	}
 }
