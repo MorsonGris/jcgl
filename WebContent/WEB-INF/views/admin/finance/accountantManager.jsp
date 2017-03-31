@@ -242,7 +242,7 @@
             title : '上传',
             width : 300,
             height : 150,
-            href : '${path }/finance/goUploadExcel',
+            href : '${path }/finance/goUploadExcell',
             buttons : [ {
                 text : '导入',
                 handler : function() {

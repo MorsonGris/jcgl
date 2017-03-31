@@ -168,7 +168,7 @@
 		    </div> 
 		    <div class="piece image-con" style="padding-left: 0px; padding-right: 0px; padding-top: 0px; padding-bottom: 0px;" data-idx="19"> 
 		     <div class="image-box"> 
-		      <a target="_blank" class="image-link" href="javascript:void(0);"> <img class="image-item" src="${path }/static/proscenium/images/1191000404564478855c.png" /> </a> 
+		      <a target="_blank" class="image-link" href="javascript:void(0);"> <img class="image-item" src="${path }/static/proscenium/images/1191000404564478855b.png" /> </a> 
 		      <span class="image-text"></span> 
 		     </div> 
 		    </div> 

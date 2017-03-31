@@ -29,6 +29,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.xin.bean.Finance;
+import com.xin.bean.Student;
 import com.xin.commons.base.BaseController;
 import com.xin.commons.utils.ExcelUtil;
 import com.xin.commons.utils.FileDownload;
@@ -39,6 +40,7 @@ import com.xin.commons.utils.PageJson;
 import com.xin.commons.utils.PathUtil;
 import com.xin.commons.utils.StringUtils;
 import com.xin.service.IFinanceService;
+import com.xin.service.IStudentService;
 
 /**
  * 缴费控制器
@@ -50,6 +52,8 @@ import com.xin.service.IFinanceService;
 public class FinanceController extends BaseController{
     
     @Autowired private IFinanceService financeService;
+    
+    @Autowired private IStudentService studentService;
     
     /**
      * 成考国家报名缴费管理页
@@ -92,6 +96,7 @@ public class FinanceController extends BaseController{
         }
         condition.put("stypeone", 1);
         condition.put("stypetwo", 2);
+        condition.put("stypethree", 6);
         pageInfo.setCondition(condition);
         financeService.selectFinancePage(pageInfo);
         return pageInfo;
@@ -242,6 +247,7 @@ public class FinanceController extends BaseController{
         }
         f.setStypeone(1);
         f.setStypetwo(2);
+        f.setStypethree(6);
         List<Finance> finances = financeService.selectFinanceAll(f);
         List<Map<String,Object>> list=createExcelRecord(finances);
         String columnNames[]={"序号","姓名","学号","学校","专业","层次","班主任","合作人","需缴金额","实缴金额","缴费时间","缴费方式","累计金额","缴费状态"};//列名
@@ -343,7 +349,18 @@ public class FinanceController extends BaseController{
 	 * @throws Exception
 	 */
 	@GetMapping(value="/goUploadExcel")
-	public String goUploadExcel() {
+	public String goUploadExcel(Model model) {
+		model.addAttribute("stype", "1");
+		return "admin/finance/uploadexcel";
+	}
+	
+	/**打开上传EXCEL页面
+	 * @return
+	 * @throws Exception
+	 */
+	@GetMapping(value="/goUploadExcell")
+	public String goUploadExcell(Model model) {
+		model.addAttribute("stype", "2");
 		return "admin/finance/uploadexcel";
 	}
 	
@@ -367,7 +384,8 @@ public class FinanceController extends BaseController{
 	@RequestMapping("/upload_finance")
 	@ResponseBody
 	public Object upload_finance(
-			@RequestParam(value="excel",required=false) MultipartFile file, HttpServletRequest request) throws Exception{
+			@RequestParam(value="excel",required=false) MultipartFile file,
+			@RequestParam(value="type") String stype, HttpServletRequest request) throws Exception{
 		Finance finance = new Finance();
 		int result = 0;
 		int way = 0;
@@ -377,6 +395,33 @@ public class FinanceController extends BaseController{
 			String filePath = PathUtil.getClasspath() + "uploadFile/file/";								//文件上传路径
 			String fileName = FileUpload.fileUp(file, filePath, "financeExcel");							//执行上传
 			List<Map<String,Object>> listm = (List)ObjectExcelRead.readExcel(filePath, fileName, 2, 0, 0);  //执行读EXCEL操作,读出的数据导入List 2:从第3行开始；0:从第A列开始；0:第0个sheet
+			for(int i=0; i<listm.size(); i++) {
+				if(!listm.isEmpty()) {
+					String studentNo = listm.get(i).get("var0").toString();
+					Student s = new Student();
+					s.setStudentNo(studentNo);
+					if(stype.equals("1")) {
+						s.setStypeone(1);
+						s.setStypetwo(2);
+						s.setStypethree(6);
+						if(studentNo!=null && !studentNo.equals("")) {
+							if(studentService.selectByStuNo(s)==null){
+								return renderError("上传错误！学号"+studentNo+"不存在该表类型(成考,国考,远程)！,请核对后上传！！！");
+							}
+						}
+					}else {
+						s.setStypeone(3);
+						s.setStypetwo(4);
+						s.setStypethree(5);
+						if(studentNo!=null && !studentNo.equals("")) {
+							if(studentService.selectByStuNo(s)==null){
+								return renderError("上传错误！学号"+studentNo+"不存在该表类型(会计,艺考,职培)！,请核对后上传！！！");
+							}
+						}
+					}
+					
+				}
+			}
 			for(int i=0; i<listm.size(); i++) {
 				if(listm.get(i).get("var3") != null && !listm.get(i).get("var3").equals("")) {
 					finance.setStuNo(listm.get(i).get("var0").toString());	//学号

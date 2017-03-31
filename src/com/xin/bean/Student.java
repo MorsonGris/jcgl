@@ -37,6 +37,9 @@ public class Student{
 	private Integer stype;
 	private String code;
 	private String scode;
+	private Integer stypeone;
+	private Integer stypetwo;
+	private Integer stypethree;
 	
 	private String captcha;
 	
@@ -184,5 +187,23 @@ public class Student{
 
 	public void setCaptcha(String captcha) {
 		this.captcha = captcha;
+	}
+	public Integer getStypeone() {
+		return stypeone;
+	}
+	public void setStypeone(Integer stypeone) {
+		this.stypeone = stypeone;
+	}
+	public Integer getStypetwo() {
+		return stypetwo;
+	}
+	public void setStypetwo(Integer stypetwo) {
+		this.stypetwo = stypetwo;
+	}
+	public Integer getStypethree() {
+		return stypethree;
+	}
+	public void setStypethree(Integer stypethree) {
+		this.stypethree = stypethree;
 	}
 }

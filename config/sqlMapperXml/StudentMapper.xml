@@ -75,8 +75,12 @@
 	<select id="selectByNo" resultMap="BaseResultMap">
 		select Max(s_studentno) as s_studentno from student  
 	</select>
+	
+	<select id="selectByStuNo" resultMap="BaseResultMap">
+		select s_studentno from student where s_studentno=#{studentNo} and (s_type = #{stypeone} or s_type = #{stypetwo} or s_type = #{stypethree})
+	</select>
 
-	<insert id="insertByid" >
+	<insert id="insertByid">
 		INSERT INTO student(<include refid="Studentcolumn" />) 
 		VALUES(
 		#{studentNo},

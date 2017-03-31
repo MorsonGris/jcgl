@@ -4,7 +4,7 @@
 		$(function() {
 
 			$('#uploadForm').form({
-	            url : '${path }/finance/upload_finance',
+	            url : '${path }/finance/upload_finance?type='+'${stype}',
 	            onSubmit : function() {
 	            	if($("#excel").val()=="" || document.getElementById("excel").files[0] =='请选择xls格式的文件'){
 	    		        $("#tishi").html("<b>*请选择文件</b>");
@@ -27,6 +27,7 @@
 	                    parent.$.modalDialog.handler.dialog('close');
 	                } else {
 	                    parent.$.messager.alert('提示', result.msg, 'warning');
+	                    parent.$.modalDialog.handler.dialog('close');
 	                }
 	            }
 	        });

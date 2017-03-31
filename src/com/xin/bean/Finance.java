@@ -40,6 +40,7 @@ public class Finance extends Model<Finance> {
 	private Date createdateEnd;
 	private Integer stypeone;
 	private Integer stypetwo;
+	private Integer stypethree;
 
 	private Student student;
 	
@@ -181,6 +182,14 @@ public class Finance extends Model<Finance> {
 
 	public void setStypetwo(Integer stypetwo) {
 		this.stypetwo = stypetwo;
+	}
+
+	public Integer getStypethree() {
+		return stypethree;
+	}
+
+	public void setStypethree(Integer stypethree) {
+		this.stypethree = stypethree;
 	}
 
 	@Override

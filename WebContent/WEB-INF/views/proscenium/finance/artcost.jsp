@@ -127,7 +127,7 @@ $(document).ready(function() {
 	        validating: 'glyphicon glyphicon-refresh'
 	    },
 	    submitHandler: function(validator, form, submitButton) {
-			 $.post("${path }/Artexam/add",form.serialize(),function(data){
+			 $.post("${path }/index",form.serialize(),function(data){
 				  if(data.success == true){
 					  swal(
 					      '添加成功!',

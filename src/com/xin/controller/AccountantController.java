@@ -82,6 +82,7 @@ public class AccountantController extends BaseController{
         }
         condition.put("stypeone", 3);
         condition.put("stypetwo", 4);
+        condition.put("stypethree", 5);
         pageInfo.setCondition(condition);
         financeService.selectFinancePage(pageInfo);
         return pageInfo;
@@ -127,6 +128,7 @@ public class AccountantController extends BaseController{
         }
         f.setStypeone(3);
         f.setStypetwo(4);
+        f.setStypethree(5);
         List<Finance> finances = financeService.selectFinanceAll(f);
         List<Map<String,Object>> list=createExcelRecord(finances);
         String columnNames[]={"序号","姓名","学号","班主任","合作人","需缴金额","实缴金额","缴费时间","缴费方式","累计金额","缴费状态","学习内容"};//列名

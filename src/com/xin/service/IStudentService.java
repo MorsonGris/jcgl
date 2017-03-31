@@ -19,6 +19,7 @@ public interface IStudentService{
 	Student selectById(int id);
 	boolean updateById(Student student);
 	boolean insertByid(Student student);
+	Student selectByStuNo(Student student);
 	void selectDataGrid(PageInfo pageInfo);
 	List<Student> selectByStudent(PageInfo pageInfo);
 }

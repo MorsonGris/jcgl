@@ -44,7 +44,6 @@
 		S.s_gradations,
 		S.s_content,
 		S.s_type,
-		S.s_content,
 		S.academy_id,
 		U.`name`,
 		F.stu_no,

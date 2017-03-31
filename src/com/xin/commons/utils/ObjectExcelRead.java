@@ -6,11 +6,14 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFDateUtil;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
 
 
 /**
@@ -90,4 +93,66 @@ public class ObjectExcelRead {
 		
 		return varList;
 	}
+	
+	
+	/** 
+	    * 用来得到真实行数 
+	    * @param sheet 
+	    * @param flag  需要写进数据库的列数用逗号隔开 比如  (Sheet sheet,int 2,int 3);随意个 
+	    * @return 
+	    *  
+	    */  
+	public static int findRealRows(Sheet sheet, int... flag) {  
+	       int row_real = 0;  
+	       int rows = sheet.getPhysicalNumberOfRows();// 此处物理行数统计有错误,  
+	       int size = flag.length;  
+	       try {  
+	  
+	  
+	       for (int i = 1; i < rows; i++) {  
+	           Row row = sheet.getRow(i);  
+	           int total = 0;  
+	           ArrayList<Integer> blank =new ArrayList<Integer>();  
+	           int type=-1;  
+	           String s = null;  
+	           for(int j:flag){  
+	               if(!(row.getCell(j) == null)&&row.getCell(j).getCellType()<2){  
+	                   type=row.getCell(j).getCellType();  
+	                   row.getCell(j).setCellType(1);  
+	               }  
+	  
+	               if (row.getCell(j) == null||row.getCell(j).getStringCellValue().matches("^\\s+$")||row.getCell(j).getCellType()>2) {  
+	                   total++;  
+	  
+	                   if(!(row.getCell(j) == null)&&row.getCell(j).getCellType()<2){  
+	                   row.getCell(j).setCellType(type);  
+	                   }  
+	                   blank.add(j);  
+	               }  
+	           }  
+	           System.out.println(s+"我");  
+	           // 如果4列都是空说明就该返回  
+	           if (total == flag.length) {  
+	  
+	               return row_real;  
+	           } else if (total == 0) {  
+	               row_real++;  
+	  
+	           } else {  
+	               String h="";  
+	               for(Integer b:blank){  
+	  
+	                    h=h+"第"+(b+1)+"列"+" ";  
+	               }  
+	               /*throw new BusinessException("第" + (i + 1) + "行" + h  
+	                       + "不能为空");*/  
+	           }  
+	  
+	       }  
+	       } catch (NullPointerException e) {  
+	           /*throw new BusinessException("excel格式异常,请检查excel格式有无数据缺失,无效数据行!");  */
+	    	   e.printStackTrace();
+	       }  
+	       return row_real;  
+	   }  
 }
