@@ -388,7 +388,7 @@ public class IndexController extends BaseController{
 	}
 	
 	/**
-	 * 项目培训
+	 * 培训管理
 	 */ 
 	@GetMapping("/train")
 	public String train(Model model){
@@ -397,6 +397,18 @@ public class IndexController extends BaseController{
     	List<Relation> relation = relationService.selectDataGrid(pi);
     	model.addAttribute("relation", relation);
 		return "proscenium/train";
+	}
+	
+	/**
+	 * 职业资格培训
+	 */ 
+	@GetMapping("/jobTrain")
+	public String jobTrain(Model model){
+		model.addAttribute("homeContent", homeContent());
+		PageInfo pi = new PageInfo(0, 4, "r_id", "desc");
+    	List<Relation> relation = relationService.selectDataGrid(pi);
+    	model.addAttribute("relation", relation);
+		return "proscenium/jobTrain";
 	}
 	
 	/**

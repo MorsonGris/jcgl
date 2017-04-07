@@ -262,25 +262,25 @@ public class StudentController extends BaseController{
     @GetMapping("/editpage")
     public String editpage(Model model,String type,int id){
     	Student student = studentService.selectById(id);
-    	List<Academy> academieslist = student.getListAcademy();
+    	/*List<Academy> academieslist = student.getListAcademy();*/
     	List<User> studentlsit = student.getListUser();
-    	Academy aca = null;
+    	/*Academy aca = null;*/
     	User user = null;
-    	for(int i=0;i<academieslist.size();i++){
+    	/*for(int i=0;i<academieslist.size();i++){
     		aca = academieslist.get(i);
-    	}
+    	}*/
     	for(int j=0;j<studentlsit.size();j++){
     		 user = studentlsit.get(j);
     	}
-    	Academy academ = new Academy();
+    	/*Academy academ = new Academy();
     	if(Integer.valueOf(type) == 2 || Integer.valueOf(type) == 6){
     		academ.setAFlag(2);
     	}else{
     		academ.setAFlag(1);
     	}
     	List<Academy> list = academyService.selectBytype(academ);
-    	model.addAttribute("academy", list);
-    	model.addAttribute("aca", aca);
+    	model.addAttribute("academy", list);*/
+    	/*model.addAttribute("aca", aca);*/
     	model.addAttribute("user", user);
     	model.addAttribute("student", student);
     	return "admin/student/studentEdit";

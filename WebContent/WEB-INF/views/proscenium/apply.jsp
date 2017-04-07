@@ -56,7 +56,7 @@
                 </a>
             </div>
             <div class="col-xs-4 column">
-                <a href="train?id=${user.id }">
+                <a href="jobTrain?id=${user.id }">
                     <img alt="140x140" src="${path }/static/proscenium/icon/hotair.png" class="img-circle apply-ico" />
                     <br>
                     <span class="home_operation">职业资格<br>培训</span>

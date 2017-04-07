@@ -34,7 +34,7 @@
 				</ul>
 				<div class="tab-content">
 					<div class="tab-pane active" id="panel-course" style="margin-top: 20px;">
-						<%-- <div class="row" style="text-align: center;margin-bottom: 20px;">
+						<div class="row" style="text-align: center;margin-bottom: 20px;">
 							<div class="col-xs-4">
 							<a href="p1">
 								<img alt="" style="width: 100%;" src="${path }/static/proscenium/images/profession/p1.png">
@@ -103,40 +103,18 @@
 								<span>中医调理师</span>
 							</a>
 							</div>
-						</div> --%>
+						</div>
 						<div class="row" style="text-align: center;">
-							<%-- <div class="col-xs-4">
+							<div class="col-xs-4">
 							<a href="p10">
 								<img alt="" style="width: 100%;" src="${path }/static/proscenium/images/profession/p10.png">
 								<br>
 								<span>催乳师</span>
 							</a>
-							</div> --%>
-							<div class="col-xs-4">
-							<a href="accountingcost">
-								<img alt="" style="width: 100%;" src="${path }/static/proscenium/icon/rulertriangle.png">
-								<br>
-								<span>会计缴费</span>
-							</a>
 							</div>
-							<div class="col-xs-4">
-							<a href="certificationcost">
-								<img alt="" style="width: 100%;" src="${path }/static/proscenium/icon/hotair.png">
-								<br>
-								<span>资格证缴费</span>
-							</a>
-							</div>
-							<div class="col-xs-4">
-							<a href="artcost">
-								<img alt="" style="width: 100%;" src="${path }/static/proscenium/icon/trophy.png">
-								<br>
-								<span>艺考缴费</span>
-							</a>
-							</div>
-						</div>
-						<!-- <div class="row" style="text-align: center;">
-							
-						</div> -->
+							<div class="col-xs-4"></div>
+							<div class="col-xs-4"></div>
+					</div>
 					</div>
 					<div class="tab-pane" id="panel-sign" style="margin-top: 20px;">
 						<div class="row">
