@@ -108,7 +108,6 @@
 						<label for="sGradations">层次</label> 
 						<select id="sGradations" name="sGradations" onclick="selected();" class="form-control" style="width:170px;"> 
 							<option value="">---请选择---</option>
-							<option value="高达本">高达本</option>
 							<option value="专达本">专达本</option>
 							<option value="高达专">高达专</option>
 						</select> 
@@ -354,12 +353,8 @@ var curCount;//当前剩余秒数
 var code = ""; //验证码
 var codeLength = 6;//验证码长度
 function sendMessage() {
-	var name = $("#name").val();
+	var stype = $("#stype").val();
 	var phone = $("#phone").val();
-	/* var select = document.getElementById("school");
-	var options = select.options;
-	var index = select.selectedIndex;
-	var school =options[index].text; */
 	var school = $("#school").val();
 	var sContent = $("#sContent").val();
 	var sGradations = $("#sGradations").val();
@@ -381,7 +376,7 @@ function sendMessage() {
 				type: "POST", //用POST方式传输
 				dataType: "text", //数据格式:JSON
 				url: '${path}/Security/security', //目标地址
-				data: "name=" + name +"&phone="+ phone +"&school="+ school +"&sContent="+ sContent +"&sGradations=" + sGradations + "&type="+ 1 +"&code=" + code,
+				data: "stype=" + stype +"&phone="+ phone +"&school="+ school +"&sContent="+ sContent +"&sGradations=" + sGradations + "&type="+ 1 +"&code=" + code,
 				error: function (XMLHttpRequest, textStatus, errorThrown) { },
 				success: function (msg){ }
 			});

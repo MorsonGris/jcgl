@@ -17,8 +17,8 @@ public class SecurityController extends BaseController{
 	private static final String APP_ID = "8aaf07085aabcbbd015ac54829f40725"; // 8a48b5514efd1c3a014f01bb44d7067b
 	private static final String ACOUNT_SID = "8aaf07085aabcbbd015ac548296c0720";// aaf98f894032b237014051abc35700f0
 	private static final String AUTH_TOKEN = "be4423c769ec47eeb4c2835cb49010c1";// 6c19475e5fa14fe3bf4cccc60e23c8ad
-	private static final String TEMPLATE_ID = "162943";//模板1ID(用于成人教育、国家开发大学、远程教育)
-	private static final String TEMPLATE_ID2 = "162945";//模板2ID(用于艺考、会计、教师资格培训)
+	private static final String TEMPLATE_ID = "166140";//模板1ID(用于成人教育、国家开发大学、远程教育)
+	private static final String TEMPLATE_ID2 = "166141";//模板2ID(用于艺考、会计、教师资格培训)
 	private static final String TIME_LEN = "5";//通知时间（5分钟内有效）
 	
 	/**
@@ -32,7 +32,7 @@ public class SecurityController extends BaseController{
 	 */
 	@RequestMapping("/security")
 	@ResponseBody
-	public Object security(String name,String phone,String school,String sContent,String sGradations,String code,String type){
+	public Object security(int stype,String phone,String school,String sContent,String sGradations,String code,String type){
 		HashMap<String, Object> result = null;
 		CCPRestSmsSDK restAPI = new CCPRestSmsSDK();//初始化SDK
 		//*初始化服务器地址和端口 *
@@ -61,13 +61,26 @@ public class SecurityController extends BaseController{
 		//String[]{"6532","5"}); *
 		//*则13800000000手机号收到的短信内容是：【云通讯】您使用的是云通讯短信模板，您的验证码是6532，请于5分钟内正确输入 *
 		//*********************************************************************************************************************
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日");
-		String date = sdf.format(new Date());
 		if(type != null && type.equals("1")){
-			result = restAPI.sendTemplateSMS(phone, TEMPLATE_ID, new String[] {name,school,sContent,sGradations,code,TIME_LEN });
+			String name = null;
+			if(stype == 1){
+				name = "成人教育报名";
+			}else if(stype == 2){
+				name = "国家开发大学报名";
+			}else if(stype == 6){
+				name = "远程教育报名";
+			}
+			result = restAPI.sendTemplateSMS(phone, TEMPLATE_ID, new String[] {name,school,sContent,sGradations,"招生管理公共平台",code,TIME_LEN });
 		}else{
-			String success = "成功";
-			result = restAPI.sendTemplateSMS(phone, TEMPLATE_ID2, new String[] {date,success,code,TIME_LEN });
+			String s = null;
+			if(stype == 3){
+				s = "会计报名";
+			}else if(stype == 4){
+				s = "艺考报名";
+			}else if(stype == 5){
+				s = "职业资格培训";
+			}
+			result = restAPI.sendTemplateSMS(phone, TEMPLATE_ID2, new String[] {s,"招生管理公共平台",code,TIME_LEN });
 		}
 		if("000000".equals(result.get("statusCode"))) {
 			// 正常返回输出data包体信息（map）

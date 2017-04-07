@@ -75,6 +75,7 @@ public class StudentController extends BaseController{
     	if(getUserId() != null){
     		//只能看到自己推荐的学生
     		map.put("uid", getUserId());
+    		System.out.println( getUserId());
     	}
     	pageInfo.setCondition(map);
     	studentService.selectDataGrid(pageInfo);

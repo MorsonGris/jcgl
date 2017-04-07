@@ -315,7 +315,6 @@ var curCount;//当前剩余秒数
 var code = ""; //验证码
 var codeLength = 6;//验证码长度
 function sendMessage() {
-	var name = $("#name").val();
 	var phone = $("#phone").val();
 	var stype = $("#stype").val();
 	var yz = /^1[3-8]+\d{9}$/.test(phone);
@@ -336,7 +335,7 @@ function sendMessage() {
 					type: "POST", //用POST方式传输
 					dataType: "text", //数据格式:JSON
 					url: '${path}/Security/security', //目标地址
-					data: "name=" + name +"&phone="+ phone +"&stype="+ stype + "&type="+ 2 +"&code=" + code,
+					data: "stype=" + stype +"&phone="+ phone + "&type="+ 2 +"&code=" + code,
 					error: function (XMLHttpRequest, textStatus, errorThrown) {},
 					success: function (msg){}
 					});

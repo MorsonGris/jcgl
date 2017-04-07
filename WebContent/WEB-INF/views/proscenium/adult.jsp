@@ -346,9 +346,7 @@ $(document).ready(function() {
 function selected(){
 	 var valeu =  $('#sGradations option:selected').val();//选中的值
 	 if(valeu != "请选择"){
-		 if(valeu == "高达本"){//高达本
-			 $("#sSystme").val("五年"); 
-		 }else if(valeu == "专达本"){//专达本
+		 if(valeu == "专达本"){//专达本
 			 $("#sSystme").val("三年"); 
 		 }else if(valeu == "高达专"){//高达专
 			 $("#sSystme").val("三年"); 
@@ -362,12 +360,7 @@ var curCount;//当前剩余秒数
 var code = ""; //验证码
 var codeLength = 6;//验证码长度
 function sendMessage() {
-	var name = $("#name").val();
-	var phone = $("#phone").val();
-/* 	var select = document.getElementById("school");
-	var options = select.options; 
-	var index = select.selectedIndex;
- 	var school =options[index].text; 获取下拉框显示值 */
+	var stype = $("#stype").val();
  	var school = $("#school").val();
 	var sContent = $("#sContent").val();
 	var sGradations = $("#sGradations").val();
@@ -390,7 +383,7 @@ function sendMessage() {
 				type: "POST", //用POST方式传输
 				dataType: "text", //数据格式:JSON
 				url: '${path}/Security/security', //目标地址
-				data: "name=" + name +"&phone="+ phone +"&school="+ school +"&sContent="+ sContent +"&sGradations=" + sGradations + "&type="+ type + "&code=" + code,
+				data: "stype=" + stype +"&phone="+ phone +"&school="+ school +"&sContent="+ sContent +"&sGradations=" + sGradations + "&type="+ type + "&code=" + code,
 				error: function (data) {
 					swal(
 					      '手机号码不能为空!',
