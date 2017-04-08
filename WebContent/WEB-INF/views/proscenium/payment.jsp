@@ -19,7 +19,7 @@
 	<div class="container" style="height:300px;">
 	<div class="row">
 		<div class="col-xs-12">
-			<div class="col-xs-12">
+			<div class="col-xs-12" style="font-size: 14px;">
 				<table id="noticeTable" data-toggle="table"
 					   data-url="${path}/finance/financepage?stuno=${stu.studentNo}"
 				       data-pagination="true"
@@ -38,7 +38,9 @@
 				    <thead>
 				    <tr>
 				    	<th data-field="student.sname" data-align="left" data-sortable="false" >姓名</th>
+				    	<c:if test="${stu.stype==1 or stu.stype==2 or stu.stype==6}"><th data-field="student.academyId" data-align="left" data-sortable="false" >报考学校</th></c:if>
 				    	<th data-field="practicalMoney" data-align="left" data-sortable="false" >金额</th>
+				    	<th data-field="teaClass" data-align="left" data-sortable="false" >老师</th>
 				    	<th data-field="fdate" data-align="center" data-formatter="dateFormatter" data-sortable="false" >缴费时间</th>
 				    </tr>
 				    </thead>
