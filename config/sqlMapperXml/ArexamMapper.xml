@@ -105,9 +105,8 @@
     	LEFT JOIN user u ON s.user_id = u.id
     	<where>
     		<if test="uid != null and uid != '' and uid != 1">
-    			user_id = #{uid} and 
+    			(s_type = 4 or s_type = 3 or s_type = 5) and  user_id = #{uid} 
     		</if>
-    		s_type = 4 or s_type = 3 or s_type = 5
     		<if test="name != null and name != '' ">
     			and s_name = #{name}
     		</if>
