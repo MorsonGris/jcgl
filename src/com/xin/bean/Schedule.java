@@ -15,10 +15,14 @@ public class Schedule {
 	private Integer sId;
 	@TableField("user_id")
 	private Long userId;
+	@TableField("s_title")
+	private String sTitle;
 	@TableField("s_content")
 	private String sContent;
 	@TableField("s_date")
 	private Date sDate;
+	@TableField("s_finishdate")
+	private Date sFinishdate;
 	@TableField("s_flag")
 	private Integer sFlag;
 	private String Day;
@@ -97,6 +101,22 @@ public class Schedule {
 
 	public void setDay(String day) {
 		Day = day;
+	}
+
+	public String getsTitle() {
+		return sTitle;
+	}
+
+	public void setsTitle(String sTitle) {
+		this.sTitle = sTitle;
+	}
+
+	public Date getsFinishdate() {
+		return sFinishdate;
+	}
+
+	public void setsFinishdate(Date sFinishdate) {
+		this.sFinishdate = sFinishdate;
 	}
 
 }

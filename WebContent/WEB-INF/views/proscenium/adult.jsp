@@ -249,7 +249,7 @@ $(document).ready(function() {
                        max: 18,
                        message: '身份证号码格式不正确'
                    },
-                   threshold :18 ,
+                   threshold :18 /* ,
                    remote: {
                        url: '${path }/student/validatori',
                        message: '身份证号码已存在',
@@ -260,7 +260,7 @@ $(document).ready(function() {
                         	  idNumber: $('#id-card').val(),
                           };
                        }
-                   }
+                   } */
 			   }
 			},
 			sPhone: {
@@ -273,7 +273,7 @@ $(document).ready(function() {
                         max: 11,
                         message: '手机号码格式不正确'
                     },
-                    threshold :11 ,
+                    threshold :11 /* ,
                     remote: {
                         url: '${path }/student/validatorp',
                         message: '手机号码已存在',
@@ -284,7 +284,7 @@ $(document).ready(function() {
                          	 sPhone: $('#phone').val(),
                            };
                         }
-                    }
+                    } */
                 }
 			},
 			scode: {

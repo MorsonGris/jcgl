@@ -219,7 +219,7 @@ $(document).ready(function() {
                         max: 11,
                         message: '手机号码格式不正确'
                     },
-                    threshold :11 ,
+                    threshold :11 /* ,
                     remote: {
                         url: '${path }/Artexam/validatorp',
                         message: '手机号码已存在',
@@ -230,7 +230,7 @@ $(document).ready(function() {
                          	 sPhone: $('#phone').val(),
                            };
                         }
-                    }
+                    } */
                 }
 			},
 			scode: {

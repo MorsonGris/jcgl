@@ -6,8 +6,10 @@
 	<resultMap id="BaseResultMap" type="com.xin.bean.Schedule">
 		<id column="s_id" property="sId" />
 		<result column="user_id" property="userId" />
+		<result column="s_title" property="sTitle" />
 		<result column="s_content" property="sContent" />
 		<result column="s_date" property="sDate" />
+		<result column="s_finishdate" property="sFinishdate" />
 		<result column="s_flag" property="sFlag" />
 		
 		<collection property="listUser" ofType="com.xin.bean.User">
@@ -32,7 +34,9 @@
 		SELECT 
 			s_id,
 			s_content,
+			s_title,
 			s_date,
+			s_finishdate,
 			s_flag,
 			u.id,
 	    	u.`name`
@@ -45,7 +49,9 @@
 		SELECT 
 			s_id,
 			s_content,
+			s_title,
 			s_date,
+			s_finishdate,
 			s_flag,
 			u.id,
 	    	u.`name`
@@ -55,19 +61,41 @@
 	</select>
 	
 	<update id="updateById">
-		UPDATE schedule SET user_id=#{userId} ,s_content=#{sContent} ,s_date=#{sDate} WHERE s_id=#{sId}
+		update schedule 
+		<set>
+			<if test="userId!=null and userId!='' ">
+				user_id=#{userId},
+			</if>
+			<if test="sTitle!=null and sTitle!='' ">
+				s_title=#{sTitle},
+			</if>
+			<if test="sContent!=null and sContent!='' ">
+				s_content=#{sContent},
+			</if>
+			<if test="sDate!=null and sDate!='' ">
+				s_date=#{sDate},
+			</if>
+			<if test="sFinishdate!=null and sFinishdate!='' ">
+				s_finishdate=#{sFinishdate},
+			</if>
+		</set>
+		where s_id=#{sId}
 	</update>
 	
 	<insert id="insertByid">
 		INSERT INTO schedule (
 			user_id,
+			s_title,
 			s_content,
 			s_date,
+			s_finishdate,
 			s_flag
 		) VALUES (
 			#{userId},
+			#{sTitle},
 			#{sContent},
 			#{sDate},
+			#{sFinishdate},
 			#{sFlag}
 		)
 	</insert>
@@ -75,8 +103,10 @@
 	<select id="selectPage" resultMap="BaseResultMap">
 		SELECT 
     		s_id,
+    		s_title,
     		s_content,
     		s_date,
+    		s_finishdate,
     		s_flag,
 	    	u.id,
 	    	u.`name`
