@@ -194,10 +194,16 @@
 					        </div>
 					    </div>
 					    <div style="float: left;margin-left:30px;">
-					    	<h2>工作提示：</h2>
-					    	<c:forEach var="schedule" items="${schedule}" varStatus="idxStatus">
-					    		<p style="font-size:18px;"><c:out value='${idxStatus.count}'/>、<c:out value="${schedule.SContent}"></c:out></p>
-					    	</c:forEach>
+					    	<c:if test="${empty schedule }">
+					    		<h3>暂无工作安排..</h3>
+					    	</c:if>
+					    	
+					    	<c:if test="${!empty schedule }">
+					    		<h2>工作提示：</h2>
+						    	<c:forEach var="schedule" items="${schedule}" varStatus="idxStatus">
+						    		<p style="font-size:18px;"><c:out value='${idxStatus.count}'/>、<c:out value="${schedule.SContent}"></c:out></p>
+						    	</c:forEach>
+					    	</c:if>
 					    </div>
 					    <script>
 						     var myCalendar = new SimpleCalendar('#calendar');

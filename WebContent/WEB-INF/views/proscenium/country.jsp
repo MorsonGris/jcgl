@@ -337,9 +337,7 @@ $(function(){
 function selected(){
 	 var valeu =  $('#sGradations option:selected').val();//选中的值
 	 if(valeu != "请选择"){
-		 if(valeu == "高达本"){//高达本
-			 $("#sSystme").val("五年"); 
-		 }else if(valeu == "专达本"){//专达本
+		if(valeu == "专达本"){//专达本
 			 $("#sSystme").val("三年"); 
 		 }else if(valeu == "高达专"){//高达专
 			 $("#sSystme").val("三年"); 
