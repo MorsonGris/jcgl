@@ -272,8 +272,8 @@ $(document).ready(function() {
                         min: 11,
                         max: 11,
                         message: '手机号码格式不正确'
-                    },
-                    threshold :11 /* ,
+                    }
+                    /* ,threshold :11 ,
                     remote: {
                         url: '${path }/student/validatorp',
                         message: '手机号码已存在',

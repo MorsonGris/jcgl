@@ -239,8 +239,8 @@ $(document).ready(function() {
                        min: 18,
                        max: 18,
                        message: '身份证号码格式不正确'
-                   },
-                   threshold :18 /* ,
+                   }/* ,
+                   threshold :18 ,
                    remote: {
                        url: '${path }/student/validatori',
                        message: '身份证号码已存在',
