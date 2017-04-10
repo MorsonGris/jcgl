@@ -96,19 +96,29 @@
                 <tr>
                     <td>姓名</td>
                     <td>
-                    	<input id="userId" name="userId" hidden="true">
-                    	<input id="name" name="atName" type="text" placeholder="请选择计划执行人" class="easyui-validatebox" style="width:100px;" data-options="required:true,novalidate:true" value="">
-                    	<input type="button" onclick="selectUser();" value="点击选择">
+                    	<c:if test="${userid eq 1}">
+                    		<input id="userId" name="userId" hidden="true">
+	                    	<input id="name" name="atName" type="text" placeholder="请选择计划执行人" class="easyui-validatebox" style="width:100px;" data-options="required:true,novalidate:true" readonly="readonly" value="">
+	                    	<input type="button" onclick="selectUser();" value="点击选择">
+                    	</c:if>
+                    	<c:if test="${userid ne 1}">
+                    		<input id="userId" name="userId" value="${userid}" hidden="true">
+	                    	<input id="name" name="atName" type="text" class="easyui-validatebox" style="width:100px;" data-options="required:true,novalidate:true" readonly="readonly" value="${username}">
+                    	</c:if>
                     </td>
                 </tr>
                 <tr>
-                	<td>时间</td>
-                    <td><input name="sDate" type="text" placeholder="请选择时间" class="easyui-datetimebox" data-options="required:true,novalidate:true" value=""></td>
+                	<td>计划标题</td>
+                    <td>
+                    	<input name="sTitle" type="text" placeholder="请输入标题" class="easyui-validatebox" data-options="required:true,novalidate:true" value="">
+                    </td>
                 </tr>
                 <tr>
                 	<td>计划内容</td>
                     <td>
-                    <input name="sContent" placeholder="请输入计划内容" class="easyui-textbox" data-options="multiline:true,required:true,novalidate:true" value="" style="width:180px;height:50px">
+                    	<input name="sContent" placeholder="请输入计划内容" class="easyui-textbox" data-options="multiline:true,required:true,novalidate:true" value="" style="width:180px;height:50px">
+                    	<input id="sFlag" name="sFlag" value="0" hidden="true">
+                    </td>
                 </tr>
             </table>
         </form>

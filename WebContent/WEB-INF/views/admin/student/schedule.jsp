@@ -10,9 +10,10 @@
             striped : true,
             rownumbers : true,
             pagination : true,
-            singleSelect : true,
-            idField : 'sId',
-	        sortOrder : 'asc',
+            singleSelect : false,
+            idField : 'sid',
+            sortName : 's_date',
+	        sortOrder : 'desc',
             pageSize : 20,
             pageList : [ 10, 20, 30, 40, 50, 100, 200, 300, 400, 500 ],
             columns : [ [ {
@@ -29,15 +30,37 @@
                 }
             }, {
                 width : '120',
+                title : '计划标题',
+                field : 'sTitle',
+                sortable : true
+            },{
+                width : '120',
                 title : '计划内容',
                 field : 'scontent',
                 sortable : true
             },{
                 width : '120',
-                title : '时间',
+                title : '创建时间',
                 field : 'sdate',
                 sortable : true,
                 formatter: formatDatebox
+            },{
+                width : '120',
+                title : '完成时间',
+                field : 'sFinishdate',
+                sortable : true,
+                formatter: formatDatebox
+            },{
+                width : '80',
+                title : '报考类型',
+                field : 'sFlag',
+                formatter : function(value, row, index) {
+               	   if(value==0) {
+               			return "未完成";
+                   }else {
+                   		return "已完成";
+                   }
+                }
             },{
                 field : 'action',
                 title : '操作',
@@ -163,6 +186,46 @@
         $('#searchScheduleForm input').val('');
         scheduleDataGrid.datagrid('load', {});
     }
+
+    function batch_complete() {
+    	var ids = [];
+    	var k=0;
+    	var rows = $('#scheduleDataGrid').datagrid('getSelections');
+    	for(var i=0; i<rows.length; i++){
+    		ids.push(rows[i].sid);
+			if(rows[i].sFlag==1){
+				k++;
+			}
+    	}
+    	if(ids!='' && ids!=null) {
+        	if(k==0) {
+        		parent.$.messager.confirm('询问', '您确定完成选中的工作提醒吗？', function(b) {
+    	            if (b) {
+    		            progressLoad();
+    		            $.post('${path }/schedule/batch_complete', {
+    		            	ids : ids.join(',')
+    		            }, function(result) {
+    		                if (result.success) {
+    		                    parent.$.messager.alert('提示', result.msg, 'info');
+    		                    scheduleDataGrid.datagrid('reload');
+    		                }
+    		                progressClose();
+    		            }, 'JSON');
+    	            }
+    	        });
+            }else {
+            	parent.$.messager.show({
+                    title : '提示',
+                    msg : '请选择未完成工作提醒！'
+                });
+            }
+        }else {
+        	parent.$.messager.show({
+                title : '提示',
+                msg : '请选择未完成工作提醒！'
+            });
+        }
+    }
 </script>
 <div class="easyui-layout" data-options="fit:true,border:false">
     <div data-options="region:'north',border:false" style="height: 30px; overflow: hidden;background-color: #fff">
@@ -187,5 +250,8 @@
 <div id="scheduleToolbar" style="display: none;">
     <shiro:hasPermission name="/schedule/add">
         <a onclick="addScheduleFun();" href="javascript:void(0);" class="easyui-linkbutton" data-options="plain:true,iconCls:'fi-plus icon-green'">添加</a>
+    </shiro:hasPermission>
+    <shiro:hasPermission name="/schedule/add">
+        <a onclick="batch_complete();" href="javascript:void(0);" class="easyui-linkbutton" data-options="plain:true,iconCls:'fi-social-foursquare icon-green'">批量完成</a>
     </shiro:hasPermission>
 </div>

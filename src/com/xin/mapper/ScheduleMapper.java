@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 import com.baomidou.mybatisplus.plugins.pagination.Pagination;
 import com.xin.bean.Schedule;
+import com.xin.commons.utils.PageJson;
 
 /**
  * <p>
@@ -22,4 +23,6 @@ public interface ScheduleMapper{
 	boolean updateById(Schedule schedule);
 	boolean insertByid(Schedule schedule);
 	List<Schedule> selectPage(Pagination page, Map<String, Object> params);
+	List<Schedule> queryByPages(long uid);
+	PageJson<Schedule> queryTotal(long uid);
 }

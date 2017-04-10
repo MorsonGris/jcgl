@@ -9,7 +9,7 @@
 		<result column="s_title" property="sTitle" />
 		<result column="s_content" property="sContent" />
 		<result column="s_date" property="sDate" />
-		<result column="s_finishdate" property="sFinishdate" />
+		<result column="s_finishdate" property="sFinishdate" jdbcType="TIMESTAMP" />
 		<result column="s_flag" property="sFlag" />
 		
 		<collection property="listUser" ofType="com.xin.bean.User">
@@ -17,7 +17,9 @@
 			<result column="name" property="name" />
 		</collection>	
 	</resultMap>
-	
+	<resultMap type="com.xin.commons.utils.PageJson" id="PageResult">
+		<result property="total" column="total"/>
+	</resultMap>
 	<select id="selectAll" resultMap="BaseResultMap">
 		SELECT * FROM schedule
 	</select>
@@ -60,6 +62,22 @@
 		WHERE user_id = #{userId}
 	</select>
 	
+	<select id="queryByPages" resultMap="BaseResultMap">
+		select 
+			s_id,
+			s_content,
+			s_title,
+			s_date,
+			s_finishdate,
+			s_flag,
+			u.id,
+	    	u.`name` from schedule s left join user u on s.user_id = u.id where u.id=#{uid} order by s_date desc limit 0,4
+	</select>
+	
+	<select id="queryTotal" resultMap="PageResult">
+		select count(*) total from schedule s left join user u on s.user_id = u.id where u.id=#{uid}
+	</select>
+	
 	<update id="updateById">
 		update schedule 
 		<set>
@@ -75,8 +93,11 @@
 			<if test="sDate!=null and sDate!='' ">
 				s_date=#{sDate},
 			</if>
-			<if test="sFinishdate!=null and sFinishdate!='' ">
-				s_finishdate=#{sFinishdate},
+			<if test="sFinishdate!=null">
+				s_finishdate=#{sFinishdate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="sFlag!=null and sFlag!='' ">
+				s_flag=#{sFlag},
 			</if>
 		</set>
 		where s_id=#{sId}
@@ -118,6 +139,9 @@
 			</if>
 			<if test="end != null and end != '' ">
 				 <![CDATA[ and s_date <= #{end} ]]>
+			</if>
+			<if test="uid != null and uid != '' and uid != 1">
+				 and u.id = #{uid}
 			</if>
 		</where>		
 	</select>

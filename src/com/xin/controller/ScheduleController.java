@@ -2,19 +2,27 @@ package com.xin.controller;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.xin.bean.Schedule;
 import com.xin.bean.User;
+import com.xin.bean.vo.UserVo;
 import com.xin.commons.base.BaseController;
 import com.xin.commons.utils.PageInfo;
+import com.xin.commons.utils.PageJson;
 import com.xin.service.IScheduleService;
 
 /**
@@ -45,8 +53,8 @@ public class ScheduleController extends BaseController{
 	 */
    @RequestMapping("/dataGrid")
    @ResponseBody
-   public Object dataGrid(Schedule cSchedule,Integer page, Integer rows) throws ParseException{
-	   PageInfo pageInfo = new PageInfo(page,rows);
+   public Object dataGrid(Schedule cSchedule,Integer page, Integer rows, String sort, String order) throws ParseException{
+	   PageInfo pageInfo = new PageInfo(page,rows,sort,order);
 	   Map<String, Object> map = new HashMap<>();
 	   SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	   if(cSchedule.getBegintime() != null){
@@ -55,25 +63,44 @@ public class ScheduleController extends BaseController{
 	   if(cSchedule.getEndtime() != null){
 		   map.put("end", sdf.format(cSchedule.getEndtime()));
 	   }
+	   if(getUserId() != null){
+	   	   //只能看到自己添加的工作提醒
+	   	   map.put("uid", getUserId());
+   		}
 	   pageInfo.setCondition(map);
 	   scheduleService.selectPage(pageInfo);
 	   return pageInfo;
    }
    
-   @GetMapping("/addpage")
-   public String addpage(){
-	  return "admin/student/scheduleAdd"; 
+   @RequestMapping("/queryBypages")
+   @ResponseBody
+   public PageJson<Schedule> queryByPages(PageJson<Schedule> pages,HttpServletRequest request){
+	   HttpSession ses = request.getSession();
+	   UserVo user = (UserVo)ses.getAttribute("user");
+	   pages.setRows(scheduleService.queryByPages(user.getId()));
+	   pages.setTotal(scheduleService.queryTotal(user.getId()));
+	   return pages;
    }
    
    /**
     * 添加页面
+    * @return
+    */
+   @GetMapping("/addpage")
+   public String addpage(Model model){
+	  model.addAttribute("userid", getUserId());
+	  model.addAttribute("username", getStaffName());
+	  return "admin/student/scheduleAdd"; 
+   }
+   
+   /**
+    * 添加
     * @param cSchedule
     * @return
     */
    @RequestMapping("/add")
    @ResponseBody
    public Object add(Schedule cSchedule){
-	   cSchedule.setsFlag(0);
 	   boolean result = scheduleService.insertByid(cSchedule);
 	   if(result == true){
 		   return renderSuccess("添加成功");
@@ -117,12 +144,36 @@ public class ScheduleController extends BaseController{
    @RequestMapping("/edit")
    @ResponseBody
    public Object edit(Schedule cSchedule){
-	   cSchedule.setsFlag(1);
 	   boolean result = scheduleService.updateById(cSchedule);
 	   if(result == true){
 		   return renderSuccess("修改成功");
 	   }
 	   return renderError("修改失败");
    }
-    
+   
+   /**
+    * 批量修改完成计划
+ * @throws ParseException 
+    * */
+   @PostMapping("/batch_complete")
+   @ResponseBody
+   public Object batchPay(String ids){
+	   	String DATA_IDS = ids;
+	   	boolean result = false;
+	   	Schedule schedule = new Schedule();
+	   	if(null != DATA_IDS && !"".equals(DATA_IDS)){
+				String ArrayDATA_IDS[] = DATA_IDS.split(",");
+				for(int i=0; i<ArrayDATA_IDS.length; i++) {
+					schedule.setSId(Integer.parseInt(ArrayDATA_IDS[i]));
+					schedule.setsFlag(1);
+					schedule.setsFinishdate(new Date());
+					result = scheduleService.updateById(schedule);
+				}
+	   	}
+	   	if(result) {
+	   		return renderSuccess("修改成功");
+	   	}else {
+	   		return renderError("修改失败");
+	   	}
+   }
 }

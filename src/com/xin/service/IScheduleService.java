@@ -22,4 +22,6 @@ public interface IScheduleService{
 	boolean updateById(Schedule schedule);
 	boolean insertByid(Schedule schedule);
 	void selectPage(PageInfo pageInfo);
+	List<Schedule> queryByPages(long uid);
+	long queryTotal(long uid);
 }

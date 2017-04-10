@@ -129,11 +129,23 @@
                 </a>
             </div>
             <div class="col-xs-4 column">
-                <a href="index/helper">
-                    <img alt="80x80" src="${path }/static/proscenium/icon/assistant.png" class="img-circle home-ico" />
-                    <br>
-                    <span class="home_operation">工作助手</span>
-                </a>
+            	<c:choose>
+            		<c:when test="${user.id != null}">
+            			<a href="index/workAssistant">
+		                    <img alt="80x80" src="${path }/static/proscenium/icon/assistant.png" class="img-circle home-ico" />
+		                    <br>
+		                    <span class="home_operation">工作助手</span>
+		                </a>
+            		</c:when>
+            		<c:otherwise>
+		               <a href="javascript:0;" id="assistant">
+		                    <img alt="80x80" src="${path }/static/proscenium/icon/assistant.png" class="img-circle home-ico" />
+		                    <br>
+		                    <span class="home_operation">工作助手</span>
+		                </a>
+            		</c:otherwise>
+            	</c:choose>
+                
             </div>
         </div>
         <div class="row" style="text-align: left;margin-top: 20px;margin-bottom: 20px;">
@@ -199,7 +211,15 @@ window.addEventListener('popstate', function () {
 $(document).ready(function() {
 	$("#fi").click(function(){
 		swal(
-			      '请先登录!',
+			      '请先登录学生账号!',
+			      '',
+			      'error'
+				);
+	});
+
+	$("#assistant").click(function(){
+		swal(
+			      '请先登录教师账号!',
 			      '',
 			      'error'
 				);

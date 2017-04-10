@@ -360,6 +360,7 @@ var curCount;//当前剩余秒数
 var code = ""; //验证码
 var codeLength = 6;//验证码长度
 function sendMessage() {
+	var phone = $("#phone").val();
 	var stype = $("#stype").val();
  	var school = $("#school").val();
 	var sContent = $("#sContent").val();

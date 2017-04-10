@@ -559,4 +559,13 @@ public class IndexController extends BaseController{
     	model.addAttribute("relation", relation);
 		return "proscenium/finance/certificationcost";
 	}
+	
+   /**
+    * 首页工作助手
+    * */
+   @GetMapping("/workAssistant")
+   public String selectMore(Model model) {
+   	model.addAttribute("homeContent", homeContent());
+   	return "proscenium/work_assistant";
+   }
 }

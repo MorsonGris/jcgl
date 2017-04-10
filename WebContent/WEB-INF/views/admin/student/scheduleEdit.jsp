@@ -103,8 +103,10 @@
                     </td>
                 </tr>
                 <tr>
-                	<td>时间</td>
-                    <td><input name="sDate" type="text" placeholder="请选择时间" class="easyui-datetimebox" data-options="required:true,novalidate:true" value="${cSchedule.SDate}"></td>
+                	<td>计划标题</td>
+                    <td>
+                    	<input name="sTitle" type="text" placeholder="请输入标题" class="easyui-validatebox" data-options="required:true,novalidate:true" value="${cSchedule.sTitle}">
+                    </td>
                 </tr>
                 <tr>
                 	<td>计划内容</td>
