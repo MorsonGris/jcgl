@@ -84,6 +84,17 @@
 		select count(*) total from finance where stu_no = #{arg0};
 	</select>
 	
+	<select id="financepagebyteaid" resultMap="BaseResultMap">
+		select 
+			<include refid="field" /> 
+		from finance F left join student S on F.stu_no=S.s_studentno left join `user` U on S.user_id=U.id 
+		where U.id = #{arg0} limit #{arg1},#{arg2}
+	</select>
+	
+	<select id="queryTotalbyteaid" resultMap="PageResult">
+		select count(*) total from finance F left join student S on F.stu_no=S.s_studentno left join `user` U on S.user_id=U.id  where U.id = #{arg0};
+	</select>
+	
 	<select id="selectFinancePage" resultMap="BaseResultMap">
 		select 
 			<include refid="field" /> 

@@ -16,16 +16,15 @@
 </head>
 <body>
 	<jsp:include page="/static/proscenium/commons/head.jsp"></jsp:include>
-	<div class="container" style="height:300px;">
+	<div class="container" style="height:400px;">
 	<div class="row">
 		<div class="col-xs-12">
 			<div class="col-xs-12" style="font-size: 14px;">
 				<table id="noticeTable" data-toggle="table"
-					   data-url="${path}/finance/financepage?stuno=${stu.studentNo}"
+					   data-url="${path}/finance/financepage?stuno=${stu.studentNo}&teaid=${user.id}"
 				       data-pagination="true"
 				       data-locale="zh-CN"
 				       data-side-pagination="server"
-				       
 				       data-toolbar="#toolbar"
 				       data-show-refresh="true"
 				       data-show-toggle="true"

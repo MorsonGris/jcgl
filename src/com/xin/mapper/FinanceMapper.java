@@ -29,4 +29,7 @@ public interface FinanceMapper {
 	
 	List<Finance> financepage(String stuno,int offset,int limit);
 	PageJson<Finance> queryTotal(String stuno);
+	
+	List<Finance> financepagebyteaid(String teaid,int offset,int limit);
+	PageJson<Finance> queryTotalbyteaid(String teaid);
 }

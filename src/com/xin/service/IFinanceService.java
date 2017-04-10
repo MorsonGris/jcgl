@@ -30,4 +30,7 @@ public interface IFinanceService {
 	
 	List<Finance> financepage(String stuno,int offset,int limit);
 	long queryTotal(String stuno);
+	
+	List<Finance> financepagebyteaid(String teaid,int offset,int limit);
+	long queryTotalbyteaid(String teaid);
 }

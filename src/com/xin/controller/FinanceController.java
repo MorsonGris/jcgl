@@ -105,14 +105,18 @@ public class FinanceController extends BaseController{
     @RequestMapping("/financepage")
     @ResponseBody
     public Object financepage(PageJson<Finance> pages,@RequestParam int offset,@RequestParam int limit,HttpServletRequest request){
+    	String teaid = request.getParameter("teaid");
     	String stuno = request.getParameter("stuno");
 		if(!stuno.equals("") && stuno != null){
 			pages.setRows(financeService.financepage(stuno, offset, limit));
 			pages.setTotal(financeService.queryTotal(stuno));
 			return pages;
-    	}else{
-    		return renderError("未登录，请先登录！");
+    	}else if(teaid != null && !teaid.equals("")){
+    		pages.setRows(financeService.financepagebyteaid(teaid, offset, limit));
+			pages.setTotal(financeService.queryTotalbyteaid(teaid));
+			return pages;
     	}
+		return renderError("未登录，请先登录！");
     }
     
     /**
