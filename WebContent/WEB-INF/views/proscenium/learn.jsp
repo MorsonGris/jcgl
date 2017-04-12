@@ -64,6 +64,17 @@
                 </a>
             </div>
         </div>
+        <div class="row clearfix" style="text-align: center;margin-top: 20px; color: #d58512;">
+        	<div class="col-xs-4 column">
+                <a href="http://degree.qingshuxuetang.com/jgs/Home?schoolCategory=1">
+                    <img alt="80x80" src="${path }/static/proscenium/images/jgslogo.jpg" class="img-circle apply-ico" />
+                    <br>
+                    <span class="home_operation">井冈山大学</span>
+                </a>
+            </div>
+            <div class="col-xs-4 column"></div>
+            <div class="col-xs-4 column"></div>
+        </div>
     </div>
     <jsp:include page="/static/proscenium/commons/bottom.jsp"></jsp:include>
     

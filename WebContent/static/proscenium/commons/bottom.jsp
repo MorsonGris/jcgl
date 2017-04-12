@@ -29,7 +29,7 @@
 			</div>
 			<div class="col-xs-12 column">
 				<span>
-					Copyright © 2015- 2017&nbsp;赣州聚成教育咨询有限公司&nbsp;版权所有&nbsp;赣ICP备15003379号-3
+					Copyright © 2015- 2017&nbsp;招生管理公共平台&nbsp;版权所有&nbsp;赣ICP备15003379号-3
 				</span>
 			</div>
     	</div>

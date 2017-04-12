@@ -30,6 +30,7 @@
 			       data-search="false"
 			       data-show-refresh="true"
 			       data-show-toggle="true"
+			       data-card-view="ture"
 			       data-show-columns="true"
 			       data-show-export="true" 
 			       data-minimum-count-columns="2" 

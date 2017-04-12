@@ -12,7 +12,7 @@
                    <span class="icon-bar"></span>
                </button>
                <a class="navbar-brand" href="${path }/index"  style="padding: 0 0;width:68%;">
-          			<img src="${path }/static/proscenium/logo/logo5.png" style="width: 100%;">
+          			<img src="${path }/static/proscenium/logo/logo.png" style="width: 100%;">
            	   </a>
         </div>
         <div class="collapse navbar-collapse" id="navbar-menu">

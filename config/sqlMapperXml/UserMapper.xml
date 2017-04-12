@@ -44,7 +44,7 @@
         FROM
         user t
         LEFT JOIN organization s ON s.id = t.organization_id
-        WHERE  login_name = #{loginName} and password=#{password};
+        WHERE  (login_name = #{loginName} or phone = #{loginName}) and password=#{password};
     </select>
 	
     <select id="selectUserVoById" resultMap="userVoResultMap" parameterType="java.lang.Long">
