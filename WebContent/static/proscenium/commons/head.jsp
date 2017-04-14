@@ -49,7 +49,7 @@
             			<div style="padding: 10px 15px;">
             			<a href="${path }/index/teaLogin">
           				<img alt="" src="${path }/static/proscenium/icon/user62.png" style="width: 30px;">
-           				 教师登录
+           				 合作招生
          		 		</a>
          		 		</div>
    		 			</li>

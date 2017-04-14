@@ -78,7 +78,11 @@ public class ScheduleController extends BaseController{
 	   HttpSession ses = request.getSession();
 	   UserVo user = (UserVo)ses.getAttribute("user");
 	   pages.setRows(scheduleService.queryByPages(user.getId()));
-	   pages.setTotal(scheduleService.queryTotal(user.getId()));
+	   long total = scheduleService.queryTotal(user.getId());
+	   if(total>4) {
+		   total = 4;
+	   }
+	   pages.setTotal(total);
 	   return pages;
    }
    

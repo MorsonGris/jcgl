@@ -12,7 +12,7 @@
     <link href="${path }/static/proscenium/plugin/sweetalert2/sweetalert2.min.css" rel="stylesheet">
     <link href="${path }/static/proscenium/plugin/bootstrap-validator/bootstrapValidator.min.css" rel="stylesheet">
     <link href="${path }/static/proscenium/css/style.css" rel="stylesheet">
-<title>聚成教育-职业培训</title>
+<title>招生管理公共平台-职业培训</title>
 </head>
 <body>
 	<jsp:include page="/static/proscenium/commons/head.jsp"></jsp:include>
@@ -129,10 +129,6 @@
 								<p style="text-indent: 20px;">
 									2016年12月16日，人力资源和社会保障部公示了国家职业资格目录清单，拟列入职业资格目录清单151项。除此之外，在总理力推下，从2014年至今，国务院部门设置的职业资格许可和认定事项已实现“七连消”，累计占到总数70%以上。
 								</p>
-								<div style="margin-top: 40px;text-align: center;">
-									<p style="color: red;font-size: 18px;">聚成教育培训机构现已开启职业技能培训</p>
-									<p style="font-size: 16px;">抓紧报名，考取职业技能培训证书</p>
-								</div>
 									<form role="form" id="adultEnroll"> 
 								      <div class="form-group"> 
 								       <label for="name">姓名</label> 

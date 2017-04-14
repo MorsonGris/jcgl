@@ -10,51 +10,23 @@
     <link rel="shortcut icon" href="${path }/static/proscenium/logo/favicon2.ico" /> 
     <link href="${path }/static/proscenium/css/bootstrap.min.css" rel="stylesheet">
     <link href="${path }/static/proscenium/css/style.css" rel="stylesheet">
-<title>聚成教育-招生简章</title>
+<title>招生管理公共平台-招生简章</title>
 </head>
 <body>
 <jsp:include page="/static/proscenium/commons/head.jsp"></jsp:include>
 
-<img alt="" src="${path }/static/proscenium/images/eguide.jpg" style="width: 100%;">
 <div class="container">
 	<div class="row">
 		<div class="col-md-12">
 			<div class="tabbable" id="tabs-680011">
 				<ul class="nav nav-tabs">
 					<li class="active">
-						 <a href="#panel-about" data-toggle="tab">关于我们</a>
-					</li>
-					<li>
 						 <a href="#panel-friends" data-toggle="tab">合作院校</a>
 					</li>
 					
 				</ul>
 				<div class="tab-content">
-					<div class="tab-pane active" id="panel-about" style="margin-top: 20px;">
-						<p style="text-indent: 20px;">
-							赣州聚成教育以打造学历培训等全方位教育服务类网站为中心，
-							为广大学员提供更专业、更贴心、更灵活、更高效、更优秀的学
-							习与培训指导。聚成教育是以学业规划、成人教育、职业培训为
-							主的民办教育机构，经过多年的摸索和努力，学校把“厚于德，诚
-							于信，敏于行”作为学校校训，秉承“打造国内优秀教育品牌，用心
-							服务好每位学生”的办学服务理念。
-						</p>
-						<p style="text-indent: 20px;">
-							本校以成人高考、自学考试、远程教育、在职研究生及职业资格证
-							书为办学主体，多年来深得当地教育主管部门、各合作高校以及社
-							会各界的一致好评，连续多年被评为“先进集体”、“优秀单位”、“先
-							进函授站”等荣誉称号。
-						</p>
-						<p style="text-indent: 20px;">
-							目前，在赣州聚成教育顺利毕业的学生已达4千多人，上万余学员
-							选择赣州聚成教育就读，我们的学员分布于社会各个阶层，针对不
-							同需求的学员，制定全面客观的具体学习方案，提供优质、便捷的
-							学习服务平台，解决学员在学习过程中的疑点、难点问题，真正让
-							学员顺利稳定地学习、深造和提升学历，轻松实现找工作、升职、
-							加薪、出国留学、评职称、考公务员、晋级和考研等愿望。
-						</p>
-					</div>
-					<div class="tab-pane" id="panel-friends" style="margin-top: 20px;">
+					<div class="tab-pane active" id="panel-friends" style="margin-top: 20px;">
 						<div class="row" style="text-align: center;">
 							<div class="col-xs-4">
 							<a href="s1">

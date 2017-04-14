@@ -9,7 +9,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>聚成教育-聚成学习中心</title>
+    <title>招生管理公共平台</title>
     <link rel="shortcut icon" href="${path }/static/proscenium/logo/favicon2.ico" />
 	<link href="${path }/static/proscenium/css/bootstrap.min.css" rel="stylesheet">
 	<link href="${path }/static/proscenium/css/style.css" rel="stylesheet">

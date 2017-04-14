@@ -7,7 +7,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>聚成教育-网上学习</title>
+    <title>招生管理公共平台-网上学习</title>
     <link rel="shortcut icon" href="${path }/static/proscenium/logo/favicon2.ico" />
 	<link href="${path }/static/proscenium/css/bootstrap.min.css" rel="stylesheet">
 	<link href="${path }/static/proscenium/css/style.css" rel="stylesheet">
@@ -21,9 +21,9 @@
         <div class="row clearfix" style="text-align: center;margin-top: 20px; color: #d58512;">
             <div class="col-xs-4 column">
                 <a href="http://www.jxck168.com/web/kaochang.jsp">
-                    <img alt="80x80" src="${path }/static/proscenium/images/xin.jpg" class="img-circle apply-ico" />
+                    <img alt="80x80" src="${path }/static/proscenium/images/xin1.jpg" class="img-rounded apply-ico" />
                     <br>
-                    <span class="home_operation">聚成模拟考场</span>
+                    <span class="home_operation">入学测试模考</span>
                 </a>
             </div>
             <div class="col-xs-4 column">
@@ -69,7 +69,7 @@
                 <a href="http://degree.qingshuxuetang.com/jgs/Home?schoolCategory=1">
                     <img alt="80x80" src="${path }/static/proscenium/images/jgslogo.jpg" class="img-circle apply-ico" />
                     <br>
-                    <span class="home_operation">井冈山大学</span>
+                    <span class="home_operation">井冈山大学学习平台</span>
                 </a>
             </div>
             <div class="col-xs-4 column"></div>

@@ -13,7 +13,7 @@
     <link href="${path }/static/proscenium/plugin/bootstrap-validator/bootstrapValidator.min.css" rel="stylesheet">
     <link href="${path }/static/proscenium/plugin/sweetalert2/sweetalert2.min.css" rel="stylesheet">
     <link href="${path }/static/proscenium/css/style.css" rel="stylesheet">
-<title>聚成教育-工作助手</title>
+<title>招生管理公共平台-工作助手</title>
 </head>
 <body>
 <jsp:include page="/static/proscenium/commons/head.jsp"></jsp:include>

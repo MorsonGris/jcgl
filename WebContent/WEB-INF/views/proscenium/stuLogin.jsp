@@ -20,7 +20,7 @@
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="assets/ico/apple-touch-icon-72-precomposed.png">
     <link rel="apple-touch-icon-precomposed" href="assets/ico/apple-touch-icon-57-precomposed.png">
 	
-<title>聚成教育-学生登录</title>
+<title>招生管理公共平台-学生登录</title>
 </head>
 <body>
 <jsp:include page="/static/proscenium/commons/head.jsp"></jsp:include>

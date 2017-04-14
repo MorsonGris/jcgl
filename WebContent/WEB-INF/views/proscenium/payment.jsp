@@ -12,38 +12,48 @@
     <link href="${path }/static/proscenium/plugin/bootstrap-validator/bootstrapValidator.min.css" rel="stylesheet">
      <link rel="stylesheet" href="${path }/static/proscenium/plugin/bootstrap-tables/bootstrap-table.min.css" />
     <link href="${path }/static/proscenium/css/style.css" rel="stylesheet">
-<title>聚成教育-缴费查询</title>
+<title>招生管理公共平台-缴费查询</title>
 </head>
 <body>
 	<jsp:include page="/static/proscenium/commons/head.jsp"></jsp:include>
-	<div class="container" style="height:400px;">
+	<div class="container" style="height:640px;margin-bottom: 10px;">
 	<div class="row">
 		<div class="col-xs-12">
-			<div class="col-xs-12" style="font-size: 14px;">
+			<div id="prints" class="col-xs-12" style="font-size: 14px;">
 				<table id="noticeTable" data-toggle="table"
 					   data-url="${path}/finance/financepage?stuno=${stu.studentNo}&teaid=${user.id}"
 				       data-pagination="true"
 				       data-locale="zh-CN"
 				       data-side-pagination="server"
+				       data-page-number="1"
+				       data-page-size="10"
+				       data-page-list="[10, 25, 50, 100]"
 				       data-toolbar="#toolbar"
 				       data-show-refresh="true"
-				       data-show-toggle="true"
+				       data-show-toggle="false"
 				       data-show-columns="true"
 				       data-show-export="true" 
 				       data-minimum-count-columns="2" 
-				       data-id-field="id" 
+				       data-id-field="f_id" 
 				       data-show-footer="false"
 				       data-row-style="rowStyle">
 				    <thead>
 				    <tr>
 				    	<th data-field="student.sname" data-align="left" data-sortable="false" >姓名</th>
-				    	<c:if test="${stu.stype==1 or stu.stype==2 or stu.stype==6}"><th data-field="student.academyId" data-align="left" data-sortable="false" >报考学校</th></c:if>
+				    	<%-- <c:if test="${stu.stype==1 or stu.stype==2 or stu.stype==6}"><th data-field="student.academyId" data-align="left" data-sortable="false" >报考学校</th></c:if> --%>
 				    	<th data-field="practicalMoney" data-align="left" data-sortable="false" >金额</th>
 				    	<th data-field="teaClass" data-align="left" data-sortable="false" >老师</th>
 				    	<th data-field="fdate" data-align="center" data-formatter="dateFormatter" data-sortable="false" >缴费时间</th>
 				    </tr>
 				    </thead>
 				</table>
+				
+			</div>
+			<div>
+				<!-- <span>总金额:2342</span> -->
+				<button type="submit" class="btn btn-primary btn-sm" onclick="windowprint();">
+				<span class="glyphicon glyphicon-print"></span>
+				打印</button>
 			</div>
 		</div>
 	</div>
@@ -63,6 +73,21 @@ function dateFormatter(value) {
 	var date = value.split("-")[0]+"/"+value.split("-")[1]+"/"+(value.split("-")[2]).split(" ")[0];
     return date
 } 
+
+function windowprint() {
+	var headstr = "<html><head><title></title></head><body>";  
+	var footstr = "</body>";
+	var printDatad = document.getElementById("prints").innerHTML; 
+	var oldstr = document.body.innerHTML;  
+	document.body.innerHTML = headstr+printDatad+footstr; 
+	window.print();  
+	document.body.innerHTML = oldstr; 
+	return false;
+	
+	/* var f = document.getElementById('print').innerHTML;
+	window.print();
+	location.reload([true]); */
+}
 </script>
 </body>
 </html>
