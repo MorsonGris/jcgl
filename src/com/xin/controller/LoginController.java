@@ -239,7 +239,7 @@ public class LoginController extends BaseController {
      * 退出
      * @return {Result}
      */
-    @PostMapping("/logout")
+    @RequestMapping("/logout")
     @ResponseBody
     public Object logout() {
         logger.info("登出");

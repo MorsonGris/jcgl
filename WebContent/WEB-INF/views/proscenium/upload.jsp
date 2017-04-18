@@ -142,20 +142,20 @@
 	function fileType2(obj,t){
 		var fileType=obj.value.substr(obj.value.lastIndexOf(".")).toLowerCase();//获得文件后缀名
 		if(t=='t1') {
-			if(fileType == '.jpeg' | fileType == '.png'){
+			if(fileType == '.jpeg' | fileType == '.png' | fileType == '.jpg'){
 				$("#tishi1").html('');
 		    }else {
-		    	$("#tishi1").html("<b>*请选择jpeg或png格式的文件</b>");
+		    	$("#tishi1").html("<b>*请选择jpeg、jpg或png格式的文件</b>");
 		    	$("#photo").val('');
-		    	document.getElementById("photo").files[0] = '请选择jpeg或png格式的文件';
+		    	document.getElementById("photo").files[0] = '请选择jpeg、jpg或png格式的文件';
 			}
 		}else {
-			if(fileType == '.jpeg' | fileType == '.png'){
+			if(fileType == '.jpeg' | fileType == '.png' | fileType == '.jpg'){
 				$("#tishi2").html('');
 		    }else {
-		    	$("#tishi2").html("<b>*请选择jpeg或png格式的文件</b>");
+		    	$("#tishi2").html("<b>*请选择jpeg、jpg或png格式的文件</b>");
 		    	$("#voucher").val('');
-		    	document.getElementById("voucher").files[0] = '请选择jpeg或png格式的文件';
+		    	document.getElementById("voucher").files[0] = '请选择jpeg、jpg或png格式的文件';
 			}
 		}
 	}

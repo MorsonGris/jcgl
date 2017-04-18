@@ -66,7 +66,7 @@
         <div class="row" style="text-align: center;margin-bottom: 20px; margin-top: 20px;">
          <div class="col-xs-12 column">
              <div style="border-bottom: 2px solid #e0e0e0; margin-bottom: 10px;">
-                 <h3>聚成教育，助你平步青云！</h3>
+                 <h4 style="font-weight: bold;">招生管理公共平台，助你平步青云！</h4>
              </div>
 			<div class="row">
                     <div class="col-md-4">
@@ -77,7 +77,7 @@
           							学习
                                 </h4>
                                 <p>
-                                	“聚成教育”是让各种学生成功就业的学习平台，学历终身可查，
+                                	“招生管理公共平台”是让各种学生成功就业的学习平台，学历终身可查，
                                 	保证学生的就业，月拿高薪不是梦！
                                 </p>
                             </div>

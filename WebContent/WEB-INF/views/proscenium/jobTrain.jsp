@@ -125,7 +125,7 @@
 								<p style="text-indent: 20px;">
 								很多职业都要求任职者具备职业资格证，这是对任职者专业基础掌握程度的检验和实践能力证明，确保企事业单位员工的办公能力和对专业知识的掌握层度。
 								</p>
-								<img alt="" src="${path }/static/proscenium/images/500.jpg" width="100%">
+								<img alt="" src="${path }/static/proscenium/images/639.jpg" width="100%">
 								<p style="text-indent: 20px;">
 									2016年12月16日，人力资源和社会保障部公示了国家职业资格目录清单，拟列入职业资格目录清单151项。除此之外，在总理力推下，从2014年至今，国务院部门设置的职业资格许可和认定事项已实现“七连消”，累计占到总数70%以上。
 								</p>

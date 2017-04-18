@@ -3,11 +3,10 @@
 <script type="text/javascript">
     var organizationTreeGrid;
     $(function() {
+    	
         organizationTreeGrid = $('#organizationTreeGrid').treegrid({
             url : '${path }/organization/treeGrid',
-            idField : 'id',
-            treeField : 'name',
-            parentField : 'pid',
+            
             fit : true,
             fitColumns : false,
             border : false,

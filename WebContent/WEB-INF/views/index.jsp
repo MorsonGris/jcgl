@@ -4,162 +4,212 @@
 <html>
 <head>
 <%@ include file="/commons/basejs.jsp" %>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="UTF-8">
+<link rel="stylesheet" href="${staticPath}/static/ztree/css/zTreeStyle/zTreeStyle.css" type="text/css">
 <link rel="stylesheet" type="text/css" href="${staticPath }/static/style/css/simple-calendar.css" />
 <script type="text/javascript" src="${staticPath}/static/style/simple-calendar.js"></script>
-<title>聚成教育-聚成学习中心</title>
+<script type="text/javascript" src="${staticPath}/static/ztree/js/jquery.ztree.core.js"></script>
+<title>招生管理公共平台</title>
 <script type="text/javascript">
-    var index_tabs;
-    var layout_west_tree;
-    var indexTabsMenu;
-    $(function() {
-        $('#index_layout').layout({fit : true});
-        
-        index_tabs = $('#index_tabs').tabs({
-            fit : true,
-            border : false,
-            onContextMenu : function(e, title) {
-                e.preventDefault();
-                indexTabsMenu.menu('show', {
-                    left : e.pageX,
-                    top : e.pageY
-                }).data('tabTitle', title);
-            },
-            tools : [{
-                iconCls : 'fi-home',
-                handler : function() {
-                    index_tabs.tabs('select', 0);
-                }
-            }, {
-                iconCls : 'fi-loop',
-                handler : function() {
-                    refreshTab();
-                }
-            }, {
-                iconCls : 'fi-x',
-                handler : function() {
-                    var index = index_tabs.tabs('getTabIndex', index_tabs.tabs('getSelected'));
-                    var tab = index_tabs.tabs('getTab', index);
-                    if (tab.panel('options').closable) {
-                        index_tabs.tabs('close', index);
-                    }
-                }
-            } ]
-        });
-        // 选项卡菜单
-        indexTabsMenu = $('#tabsMenu').menu({
-            onClick : function(item) {
-                var curTabTitle = $(this).data('tabTitle');
-                var type = $(item.target).attr('type');
-                if (type === 'refresh') {
-                    refreshTab();
-                    return;
-                }
-                if (type === 'close') {
-                    var t = index_tabs.tabs('getTab', curTabTitle);
-                    if (t.panel('options').closable) {
-                        index_tabs.tabs('close', curTabTitle);
-                    }
-                    return;
-                }
-                var allTabs = index_tabs.tabs('tabs');
-                var closeTabsTitle = [];
-                $.each(allTabs, function() {
-                    var opt = $(this).panel('options');
-                    if (opt.closable && opt.title != curTabTitle
-                            && type === 'closeOther') {
-                        closeTabsTitle.push(opt.title);
-                    } else if (opt.closable && type === 'closeAll') {
-                        closeTabsTitle.push(opt.title);
-                    }
-                });
-                for ( var i = 0; i < closeTabsTitle.length; i++) {
-                    index_tabs.tabs('close', closeTabsTitle[i]);
-                }
-            }
-        });
-        
-        layout_west_tree = $('#layout_west_tree').tree({
-            url : '${path }/resource/tree',
-            parentField :'pid',
-            lines : true,
-            onClick : function(node) {
-                var opts = {
-                    title : node.text,
-                    border : false,
-                    closable : true,
-                    fit : true,
-                    iconCls : node.iconCls
-                };
-                var url = node.attributes;
-                if (url && url.indexOf("http") == -1) {
-                    url = '${path }' + url;
-                }
-                if (node.openMode == 'iframe') {
-                    opts.content = '<iframe src="' + url + '" frameborder="0" style="border:0;width:100%;height:99.5%;"></iframe>';
-                    addTab(opts);
-                } else if (url) {
-                    opts.href = url;
-                    addTab(opts);
-                }
-            }
-        });
-    });
-
-    function addTab(opts) {
-        var t = $('#index_tabs');
-        if (t.tabs('exists', opts.title)) {
-            t.tabs('select', opts.title);
-        } else {
-            t.tabs('add', opts);
-        }
-    }
+var zTreeObj;
+var index_tabs;
+var tree;
+var indexTabsMenu;
+$(function() {
+    $('#index_layout').layout({fit : true});
     
-    function refreshTab() {
-        var index = index_tabs.tabs('getTabIndex', index_tabs.tabs('getSelected'));
-        var tab = index_tabs.tabs('getTab', index);
-        var options = tab.panel('options');
-        if (options.content) {
-            index_tabs.tabs('update', {
-                tab: tab,
-                options: {
-                    content: options.content
+    index_tabs = $('#index_tabs').tabs({
+        fit : true,
+        border : false,
+        onContextMenu : function(e, title) {
+            e.preventDefault();
+            indexTabsMenu.menu('show', {
+                left : e.pageX,
+                top : e.pageY
+            }).data('tabTitle', title);
+        },
+        tools : [{
+            iconCls : 'fi-home',
+            handler : function() {
+                index_tabs.tabs('select', 0);
+            }
+        }, {
+            iconCls : 'fi-loop',
+            handler : function() {
+                refreshTab();
+            }
+        }, {
+            iconCls : 'fi-x',
+            handler : function() {
+                var index = index_tabs.tabs('getTabIndex', index_tabs.tabs('getSelected'));
+                var tab = index_tabs.tabs('getTab', index);
+                if (tab.panel('options').closable) {
+                    index_tabs.tabs('close', index);
+                }
+            }
+        } ]
+    });
+    // 选项卡菜单
+    indexTabsMenu = $('#tabsMenu').menu({
+        onClick : function(item) {
+            var curTabTitle = $(this).data('tabTitle');
+            var type = $(item.target).attr('type');
+            if (type === 'refresh') {
+                refreshTab();
+                return;
+            }
+            if (type === 'close') {
+                var t = index_tabs.tabs('getTab', curTabTitle);
+                if (t.panel('options').closable) {
+                    index_tabs.tabs('close', curTabTitle);
+                }
+                return;
+            }
+            var allTabs = index_tabs.tabs('tabs');
+            var closeTabsTitle = [];
+            $.each(allTabs, function() {
+                var opt = $(this).panel('options');
+                if (opt.closable && opt.title != curTabTitle
+                        && type === 'closeOther') {
+                    closeTabsTitle.push(opt.title);
+                } else if (opt.closable && type === 'closeAll') {
+                    closeTabsTitle.push(opt.title);
                 }
             });
-        } else {
-            tab.panel('refresh', options.href);
-        }
-    }
-    
-    function logout(){
-        $.messager.confirm('提示','确定要退出?',function(r){
-            if (r){
-                progressLoad();
-                $.post('${path }/logout', function(result) {
-                    if(result.success){
-                        progressClose();
-                        window.location.href='${path }/login';
-                    }
-                }, 'json');
+            for ( var i = 0; i < closeTabsTitle.length; i++) {
+                index_tabs.tabs('close', closeTabsTitle[i]);
             }
-        });
-    }
+        }
+    });
+});
+// zTree 的参数配置，深入使用请参考 API 文档（setting 配置详解）
+var setting = {
+	 view: {
+			dblClickExpand: false,
+			showLine: true,
+			selectedMulti: false
+		},
+		data: {
+			simpleData: {
+				enable:true,
+				idKey: "id",
+				pIdKey: "pid",
+				rootPId: ""
+			}
+		},
+		callback: {
+			beforeClick: function(treeId, treeNode) {
+				var zTree = $.fn.zTree.getZTreeObj("tree");
+				var opts = {
+		                title : treeNode.name,
+		                border : false,
+		                closable : true,
+		                fit : true
+	            };
+	            var url = treeNode.attributes;
+	            if (url && url.indexOf("http") == -1) {
+	                url = '${path }' + url;
+	            }
+	            if (treeNode.openMode == 'iframe') {
+	                opts.content = '<iframe src="' + url + '" frameborder="0" style="border:0;width:100%;height:99.5%;"></iframe>';
+	                addTab(opts);
+	            } else if (url) {
+	                opts.href = url;
+	                addTab(opts);
+	            }
+			}
+		}
+};
 
-    function editUserPwd() {
-        parent.$.modalDialog({
-            title : '修改密码',
-            width : 300,
-            height : 250,
-            href : '${path }/user/editPwdPage',
-            buttons : [ {
-                text : '确定',
-                handler : function() {
-                    var f = parent.$.modalDialog.handler.find('#editUserPwdForm');
-                    f.submit();
-                }
-            } ]
-        });
-    }
+$(document).ready(function(){
+	var treeNodes;
+	 var t = $("#tree");
+	 	$.ajax({  //JQuery的Ajax  
+	        type: 'POST',    
+	        dataType : "json",//返回数据类型  
+	        async:false,  
+	        url: "${path }/resource/tree",//请求的action路径  
+	        data: {"flag":true},  //同步请求将锁住浏览器，用户其它操作必须等待请求完成才可以执行  
+	        error: function () {//请求失败处理函数    
+	            alert('请求失败');    
+	        },  
+	        success:function(data){ //请求成功后处理函数。  取到Json对象data  
+	            treeNodes = data;   //把后台封装好的简单Json格式赋给treeNodes      
+	            t = $.fn.zTree.init(t, setting, treeNodes);//初始化树，传入树的Dom<pre name="code" class="html">  
+			} 
+		}); 
+		
+		demoIframe = $("#testIframe");
+		demoIframe.bind("load", loadReady);
+		var zTree = $.fn.zTree.getZTreeObj("tree");
+		zTree.selectNode(zTree.getNodeByParam("id", 101));
+ 		zTreeObj = $.fn.zTree.init($("#tree"), setting, treeNodes);
+});
+function loadReady() {
+		var bodyH = demoIframe.contents().find("body").get(0).scrollHeight,
+		htmlH = demoIframe.contents().find("html").get(0).scrollHeight,
+		maxH = Math.max(bodyH, htmlH), minH = Math.min(bodyH, htmlH),
+		h = demoIframe.height() >= maxH ? minH:maxH ;
+		if (h < 530) h = 530;
+		demoIframe.height(h);
+}
+   
+
+   function addTab(opts) {
+       var t = $('#index_tabs');
+       if (t.tabs('exists', opts.title)) {
+           t.tabs('select', opts.title);
+       } else {
+           t.tabs('add', opts);
+       }
+   }
+   
+   function refreshTab() {
+       var index = index_tabs.tabs('getTabIndex', index_tabs.tabs('getSelected'));
+       var tab = index_tabs.tabs('getTab', index);
+       var options = tab.panel('options');
+       if (options.content) {
+           index_tabs.tabs('update', {
+               tab: tab,
+               options: {
+                   content: options.content
+               }
+           });
+       } else {
+           tab.panel('refresh', options.href);
+       }
+   }
+   
+   function logout(){
+       $.messager.confirm('提示','确定要退出?',function(r){
+           if (r){
+               /* progressLoad(); */
+               $.post('${path }/logout', function(result) {
+                   if(result.success){
+                       /* progressClose(); */
+                       window.location.href='${path }/login';
+                   }
+               }, 'json');
+           }
+       });
+   }
+
+   function editUserPwd() {
+       parent.$.modalDialog({
+           title : '修改密码',
+           width : 300,
+           height : 250,
+           href : '${path }/user/editPwdPage',
+           buttons : [ {
+               text : '确定',
+               handler : function() {
+                   var f = parent.$.modalDialog.handler.find('#editUserPwdForm');
+                   f.submit();
+               }
+           } ]
+       });
+   }
+
 </script>
 </head>
 <body>
@@ -182,7 +232,7 @@
         </div>
         <div data-options="region:'west',split:true" title="菜单" style="width: 160px; overflow: hidden;overflow-y:auto; padding:0px">
             <div class="well well-small" style="padding: 5px 5px 5px 5px;">
-                <ul id="layout_west_tree"></ul>
+                <ul id="tree" class="ztree"></ul>
             </div>
         </div>
         <div data-options="region:'center'" style="overflow: hidden;">
