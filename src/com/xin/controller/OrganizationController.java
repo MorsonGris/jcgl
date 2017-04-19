@@ -1,6 +1,7 @@
 package com.xin.controller;
 
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -64,7 +65,9 @@ public class OrganizationController extends BaseController {
      * @return
      */
     @RequestMapping("/addPage")
-    public String addPage() {
+    public String addPage(Model model) {
+    	List<Organization> list = organizationService.selectTree();
+    	 model.addAttribute("list", list);
         return "admin/organizationAdd";
     }
 
@@ -78,6 +81,9 @@ public class OrganizationController extends BaseController {
     @ResponseBody
     public Object add(Organization organization) {
         organization.setCreateTime(new Date());
+        if(organization.getPid()==0){
+        	organization.setPid(null);
+        }
         organizationService.insert(organization);
         return renderSuccess("添加成功！");
     }
@@ -91,8 +97,10 @@ public class OrganizationController extends BaseController {
      */
     @GetMapping("/editPage")
     public String editPage(Model model, Long id) {
+    	List<Organization> list = organizationService.selectTree();
         Organization organization = organizationService.selectById(id);
         model.addAttribute("organization", organization);
+        model.addAttribute("list", list);
         return "admin/organizationEdit";
     }
 
@@ -105,6 +113,9 @@ public class OrganizationController extends BaseController {
     @RequestMapping("/edit")
     @ResponseBody
     public Object edit(Organization organization) {
+    	if(organization.getPid()==0){
+    		organization.setPid(null);
+    	}
         organizationService.updateById(organization);
         return renderSuccess("编辑成功！");
     }

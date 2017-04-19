@@ -5,17 +5,15 @@
     $(function() {
         resourceTreeGrid = $('#resourceTreeGrid').treegrid({
             url : '${path }/resource/treeGrid',
-            idField : 'id',
-            treeField : 'name',
-            parentField : 'pid',
             fit : true,
-            fitColumns : false,
-            border : false,
-            frozenColumns : [ [ {
-                title : '编号',
-                field : 'id',
-                width : 40
-            } ] ],
+            striped : true,
+            rownumbers : true,
+            pagination : true,
+            singleSelect : true,
+            idField : 'id',
+	        sortOrder : 'asc',
+            pageSize : 20,
+            pageList : [ 10, 20, 30, 40, 50, 100, 200, 300, 400, 500 ],
             columns : [ [ {
                 field : 'name',
                 title : '资源名称',
