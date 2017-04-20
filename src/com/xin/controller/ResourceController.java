@@ -1,6 +1,8 @@
 package com.xin.controller;
 
 import java.util.Date;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.xin.bean.Resource;
 import com.xin.commons.base.BaseController;
+import com.xin.commons.result.Tree;
 import com.xin.commons.shiro.ShiroUser;
 import com.xin.service.IResourceService;
 
@@ -63,7 +66,9 @@ public class ResourceController extends BaseController {
      * @return
      */
     @GetMapping("/addPage")
-    public String addPage() {
+    public String addPage(Model model) {
+    	List<Tree> list = resourceService.selectAllTree();
+    	model.addAttribute("list", list);
         return "admin/resourceAdd";
     }
 
@@ -81,6 +86,9 @@ public class ResourceController extends BaseController {
         Integer type = resource.getResourceType();
         if (null != type && type == 0) {
             resource.setOpenMode(null);
+        }
+        if(resource.getPid()==0){
+        	resource.setPid(null);
         }
         resourceService.insert(resource);
         return renderSuccess("添加成功！");
@@ -113,8 +121,10 @@ public class ResourceController extends BaseController {
      */
     @RequestMapping("/editPage")
     public String editPage(Model model, Long id) {
+    	List<Tree> list = resourceService.selectAllTree();
         Resource resource = resourceService.selectById(id);
         model.addAttribute("resource", resource);
+        model.addAttribute("list", list);
         return "admin/resourceEdit";
     }
 
@@ -131,6 +141,9 @@ public class ResourceController extends BaseController {
         Integer type = resource.getResourceType();
         if (null != type && type == 0) {
             resource.setOpenMode(null);
+        }
+        if(resource.getPid() == 0){
+        	resource.setPid(null);
         }
         resourceService.updateById(resource);
         return renderSuccess("编辑成功！");

@@ -82,7 +82,12 @@
             <tr>
                 <td>上级资源</td>
                 <td colspan="3">
-                    <select id="resourceAddPid" name="pid" style="width: 200px; height: 29px;"></select>
+                   <select id="organizationEditPid" name="pid" style="width: 140px; height: 29px;" class="easyui-validatebox" data-options="required:true">
+           			<option value="0" selected>请选择上级资源</option>
+           			<c:forEach items="${list}" var="list">
+           				<c:if test="${list.pid==null}"><option value="${list.id}">${list.name}</option></c:if>
+           			</c:forEach>
+                </select>
                     <a class="easyui-linkbutton" href="javascript:void(0)" onclick="$('#pid').combotree('clear');" >清空</a>
                 </td>
             </tr>

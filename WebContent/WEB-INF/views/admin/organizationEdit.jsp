@@ -2,14 +2,6 @@
 <%@ include file="/commons/global.jsp" %>
 <script type="text/javascript">
     $(function() {
-        $('#organizationEditPid').combotree({
-            url : '${path }/organization/tree?flag=false',
-            parentField : 'pid',
-            lines : true,
-            panelHeight : 'auto',
-            value :'${organization.pid}'
-        });
-        
         $('#organizationEditForm').form({
             url : '${path }/organization/edit',
             onSubmit : function() {
@@ -53,7 +45,13 @@
             </tr>
             <tr>
                 <td>上级资源</td>
-                <td colspan="3"><select id="organizationEditPid" name="pid" style="width: 200px; height: 29px;"></select>
+                <td colspan="3">
+                <select id="organizationEditPid" name="pid" style="width: 140px; height: 29px;" class="easyui-validatebox" data-options="required:true">
+           			<option value="0" selected>请选择部门</option>
+           			<c:forEach items="${list}" var="list">
+           				<option value="${list.id}" <c:if test="${list.id==user.organizationId}">selected</c:if>>${list.name}</option>
+           			</c:forEach>
+                </select>
                 <a class="easyui-linkbutton" href="javascript:void(0)" onclick="$('#pid').combotree('clear');" >清空</a></td>
             </tr>
         </table>
