@@ -142,7 +142,7 @@ $(document).ready(function(){
 		demoIframe = $("#testIframe");
 		demoIframe.bind("load", loadReady);
 		var zTree = $.fn.zTree.getZTreeObj("tree");
-		zTree.selectNode(zTree.getNodeByParam("id", 101));
+		zTree.selectNode(zTree.getNodeByParam("id", 1));
  		zTreeObj = $.fn.zTree.init($("#tree"), setting, treeNodes);
 });
 function loadReady() {

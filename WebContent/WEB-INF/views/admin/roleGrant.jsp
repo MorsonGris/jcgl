@@ -1,7 +1,74 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/commons/global.jsp" %>
+<link rel="stylesheet" href="${staticPath}/static/ztree/css/zTreeStyle/zTreeStyle.css" type="text/css">
+<script type="text/javascript" src="${staticPath}/static/ztree/js/jquery.ztree.core.js"></script>
+<script type="text/javascript" src="${staticPath}/static/ztree/js/jquery.ztree.excheck.js"></script>
 <script type="text/javascript">
-    var resourceTree;
+
+var setting = {
+		 view: {
+				dblClickExpand: false,
+				showLine: true,
+				selectedMulti: false
+			},
+			check: {
+				enable: true,
+				nocheckInherit: false
+			},
+			data: {
+				simpleData: {
+					enable:true,
+					idKey: "id",
+					pIdKey: "pid",
+					rootPId: "0"
+				}
+			},
+			callback: {
+				beforeClick: function(treeId, treeNode) {
+					var zTree = $.fn.zTree.getZTreeObj("resourceTree");
+					var opts = {
+			                title : treeNode.name,
+			                border : false,
+			                closable : true,
+			                fit : true
+		            };
+				}
+			}
+		};
+
+  		$(document).ready(function(){
+  			var treeNodes;
+  		 	var t = $("#resourceTree");
+  		 	$.ajax({  //JQuery的Ajax  
+  		        type: 'POST',    
+  		        dataType : "json",//返回数据类型  
+  		        async:false,  
+  		        url: "${path }/resource/allTrees",//请求的action路径  
+  		        data: {"flag":true},  //同步请求将锁住浏览器，用户其它操作必须等待请求完成才可以执行  
+  		        error: function () {//请求失败处理函数    
+  		            alert('请求失败');    
+  		        },  
+  		        success:function(data){ //请求成功后处理函数。  取到Json对象data  
+  		            treeNodes = data;   //把后台封装好的简单Json格式赋给treeNodes      
+  		            t = $.fn.zTree.init(t, setting, treeNodes);//初始化树，传入树的Dom<pre name="code" class="html">  
+  				} 
+  			}); 
+  			
+  			demoIframe = $("#testIframe");
+  			demoIframe.bind("load", loadReady);
+  			var zTree = $.fn.zTree.getZTreeObj("resourceTree");
+  			zTree.selectNode(zTree.getNodeByParam("id", 101));
+  	 		zTreeObj = $.fn.zTree.init($("#resourceTree"), setting, treeNodes);
+  		});
+  		function loadReady() {
+  			var bodyH = demoIframe.contents().find("body").get(0).scrollHeight,
+  			htmlH = demoIframe.contents().find("html").get(0).scrollHeight,
+  			maxH = Math.max(bodyH, htmlH), minH = Math.min(bodyH, htmlH),
+  			h = demoIframe.height() >= maxH ? minH:maxH ;
+  			if (h < 530) h = 530;
+  			demoIframe.height(h);
+  		}
+    /* var resourceTree;
     $(function() {
         resourceTree = $('#resourceTree').tree({
             url : '${path }/resource/allTrees',
@@ -60,7 +127,7 @@
                 }
             }
         });
-    });
+    }); */
 
     function checkAll() {
         var nodes = resourceTree.tree('getChecked', 'unchecked');
@@ -98,7 +165,7 @@
         <div class="well well-small">
             <form id="roleGrantForm" method="post">
                 <input name="id" type="hidden"  value="${id}" readonly="readonly">
-                <ul id="resourceTree"></ul>
+                <ul id="resourceTree" class="ztree"></ul>
                 <input id="resourceIds" name="resourceIds" type="hidden" />
             </form>
         </div>
