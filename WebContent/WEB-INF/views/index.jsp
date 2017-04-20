@@ -184,7 +184,7 @@ function loadReady() {
        $.messager.confirm('提示','确定要退出?',function(r){
            if (r){
                /* progressLoad(); */
-               $.post('${path }/logout', function(result) {
+               $.post('${path }/logout',{}, function(result) {
                    if(result.success){
                        /* progressClose(); */
                        window.location.href='${path }/login';

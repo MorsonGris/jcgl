@@ -51,6 +51,28 @@ var setting = {
   		        success:function(data){ //请求成功后处理函数。  取到Json对象data  
   		            treeNodes = data;   //把后台封装好的简单Json格式赋给treeNodes      
   		            t = $.fn.zTree.init(t, setting, treeNodes);//初始化树，传入树的Dom<pre name="code" class="html">  
+
+			         $.post( '${path }/role/findResourceIdListByRoleId', {
+			                 id : '${id}'
+			             }, function(result) {
+			                 var ids;
+			                 if (result.success == true && result.obj != undefined) {
+			                     ids = $.stringToList(result.obj + '');
+			                 }
+			               //获取当前的树对象  
+			            	 var zTree = $.fn.zTree.getZTreeObj("resourceTree");
+			            	 /* zTree.selectNode(zTree.getNodeByParam("id", "269")); */
+			            	 alert(zTree.selectNode(zTree.getNodeByParam("id", "269")));
+			            	//根据过滤机制获得zTree的所有节点        
+			            	 var nodes = zTree.getNodesByFilter(filter);
+			                 if (ids.length > 0) {
+			                     for ( var i = 0; i < ids.length; i++) {
+			                    	 zTree.checkNode(ids[i], true, true);
+			                    	 zTree.updateNode(nodes);  //重新更新该节点
+			                     }
+			                 }
+			             }, 'json');
+  		          	
   				} 
   			}); 
   			
@@ -68,35 +90,8 @@ var setting = {
   			if (h < 530) h = 530;
   			demoIframe.height(h);
   		}
-    /* var resourceTree;
+  		
     $(function() {
-        resourceTree = $('#resourceTree').tree({
-            url : '${path }/resource/allTrees',
-            parentField : 'pid',
-            lines : true,
-            checkbox : true,
-            onClick : function(node) {},
-            onLoadSuccess : function(node, data) {
-                progressLoad();
-                $.post( '${path }/role/findResourceIdListByRoleId', {
-                    id : '${id}'
-                }, function(result) {
-                    var ids;
-                    if (result.success == true && result.obj != undefined) {
-                        ids = $.stringToList(result.obj + '');
-                    }
-                    if (ids.length > 0) {
-                        for ( var i = 0; i < ids.length; i++) {
-                            if (resourceTree.tree('find', ids[i])) {
-                                resourceTree.tree('check', resourceTree.tree('find', ids[i]).target);
-                            }
-                        }
-                    }
-                }, 'json');
-                progressClose();
-            },
-            cascadeCheck : false
-        });
 
         $('#roleGrantForm').form({
             url : '${path }/role/grant',
@@ -106,11 +101,17 @@ var setting = {
                 if (!isValid) {
                     progressClose();
                 }
-                var checknodes = resourceTree.tree('getChecked');
+	             //获取当前的树对象  
+	           	 var zTree = $.fn.zTree.getZTreeObj("resourceTree");
+	           	 //根据过滤机制获得zTree的所有节点        
+	           	 var nodes = zTree.getNodesByFilter(filter);
                 var ids = [];
-                if (checknodes && checknodes.length > 0) {
-                    for ( var i = 0; i < checknodes.length; i++) {
-                        ids.push(checknodes[i].id);
+                if (nodes && nodes.length > 0) {
+      	          for ( var i = 0; i < nodes.length; i++) {
+	      	        	var checked = nodes[i].checked;
+	  	                if(checked) {
+	  	                	ids.push(nodes[i].id);
+		  	            }
                     }
                 }
                 $('#resourceIds').val(ids);
@@ -127,37 +128,56 @@ var setting = {
                 }
             }
         });
-    }); */
-
+    });
+    
+  //过滤节点的机制 直接return node表示不做任何过滤  
+    function filter(node) {  
+        return node;  
+    } 
     function checkAll() {
-        var nodes = resourceTree.tree('getChecked', 'unchecked');
+    	//获取当前的树对象  
+    	 var zTree = $.fn.zTree.getZTreeObj("resourceTree");
+    	//根据过滤机制获得zTree的所有节点        
+    	 var nodes = zTree.getNodesByFilter(filter);
         if (nodes && nodes.length > 0) {
             for ( var i = 0; i < nodes.length; i++) {
-                resourceTree.tree('check', nodes[i].target);
+            	zTree.checkNode(nodes[i], true, true);
+            	zTree.updateNode(nodes);  //重新更新该节点
             }
-        }
+        } 
     }
     function uncheckAll() {
-        var nodes = resourceTree.tree('getChecked');
-        if (nodes && nodes.length > 0) {
-            for ( var i = 0; i < nodes.length; i++) {
-                resourceTree.tree('uncheck', nodes[i].target);
-            }
-        }
+    	//获取当前的树对象  
+ 	 	  var zTree = $.fn.zTree.getZTreeObj("resourceTree");
+ 		  //根据过滤机制获得zTree的所有节点        
+ 		  var nodes = zTree.getNodesByFilter(filter);
+	      if (nodes && nodes.length > 0) {
+	          for ( var i = 0; i < nodes.length; i++) {
+	              var checked = nodes[i].checked;
+	              if(checked) {
+	            	  zTree.checkNode(nodes[i], false, false);   //设置节点选中
+		              zTree.updateNode(nodes);  //重新更新该节点
+		          }
+	          }
+	      } 
     }
     function checkInverse() {
-        var unchecknodes = resourceTree.tree('getChecked', 'unchecked');
-        var checknodes = resourceTree.tree('getChecked');
-        if (unchecknodes && unchecknodes.length > 0) {
-            for ( var i = 0; i < unchecknodes.length; i++) {
-                resourceTree.tree('check', unchecknodes[i].target);
-            }
-        }
-        if (checknodes && checknodes.length > 0) {
-            for ( var i = 0; i < checknodes.length; i++) {
-                resourceTree.tree('uncheck', checknodes[i].target);
-            }
-        }
+    	  //获取当前的树对象  
+   	 	  var zTree = $.fn.zTree.getZTreeObj("resourceTree");
+   		  //根据过滤机制获得zTree的所有节点        
+   		  var nodes = zTree.getNodesByFilter(filter);
+	      if (nodes && nodes.length > 0) {
+	          for ( var i = 0; i < nodes.length; i++) {
+	              var checked = nodes[i].checked;
+	              if(checked) {
+	            	  zTree.checkNode(nodes[i], false, false);   //设置节点选中
+		              zTree.updateNode(nodes);  //重新更新该节点
+		          }else {
+		        	  zTree.checkNode(nodes[i], true, true);	 //设置节点取消
+		              zTree.updateNode(nodes);  //重新更新该节点
+			      }
+	          }
+	      } 
     }
 </script>
 <div id="roleGrantLayout" class="easyui-layout" data-options="fit:true,border:false">
