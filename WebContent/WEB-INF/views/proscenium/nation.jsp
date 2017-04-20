@@ -7,7 +7,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>招生管理公共平台-远程教育培训报名</title>
+    <title>招生管理公共平台-培训报名</title>
     <link rel="shortcut icon" href="${path }/static/proscenium/logo/favicon2.ico" /> 
     <link href="${path }/static/proscenium/css/bootstrap.min.css" rel="stylesheet">
     <link href="${path }/static/proscenium/plugin/bootstrap-validator/bootstrapValidator.min.css" rel="stylesheet">
@@ -243,13 +243,13 @@ $(document).ready(function() {
 			   validators: {
 				   notEmpty: {
                        message: '身份证号码不能为空'
-                   },
+                   } /*,
                    stringLength: {
                        min: 18,
                        max: 18,
                        message: '身份证号码格式不正确'
                    },
-                   threshold :18 /* ,
+                   threshold :18  ,
                    remote: {
                        url: '${path }/student/validatori',
                        message: '身份证号码已存在',
@@ -260,7 +260,7 @@ $(document).ready(function() {
                         	  idNumber: $('#id-card').val(),
                           };
                        }
-                   } */
+                   }*/
 			   }
 			 },
 			 sPhone: {

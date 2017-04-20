@@ -234,12 +234,12 @@ $(document).ready(function() {
 			   validators: {
 				   notEmpty: {
                        message: '身份证号码不能为空'
-                   },
+                   } /*,
                    stringLength: {
                        min: 18,
                        max: 18,
                        message: '身份证号码格式不正确'
-                   }/* ,
+                   } ,
                    threshold :18 ,
                    remote: {
                        url: '${path }/student/validatori',
@@ -251,7 +251,7 @@ $(document).ready(function() {
                         	  idNumber: $('#id-card').val(),
                           };
                        }
-                   } */
+                   }*/
 			   }
 			 },
 			 sPhone: {
