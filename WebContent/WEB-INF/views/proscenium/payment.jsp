@@ -10,7 +10,7 @@
 	<link rel="shortcut icon" href="${path }/static/proscenium/logo/favicon2.ico" /> 
     <link href="${path }/static/proscenium/css/bootstrap.min.css" rel="stylesheet">
     <link href="${path }/static/proscenium/plugin/bootstrap-validator/bootstrapValidator.min.css" rel="stylesheet">
-     <link rel="stylesheet" href="${path }/static/proscenium/plugin/bootstrap-tables/bootstrap-table.min.css" />
+    <link rel="stylesheet" href="${path }/static/proscenium/plugin/bootstrap-tables/bootstrap-table.min.css" />
     <link href="${path }/static/proscenium/css/style.css" rel="stylesheet">
 <title>招生管理公共平台-缴费查询</title>
 </head>
@@ -35,13 +35,13 @@
 				       data-show-export="true" 
 				       data-minimum-count-columns="2" 
 				       data-id-field="f_id" 
-				       data-show-footer="false"
+				       data-show-footer="true"
 				       data-row-style="rowStyle">
 				    <thead>
 				    <tr>
-				    	<th data-field="student.sname" data-align="left" data-sortable="false" >姓名</th>
-				    	<%-- <c:if test="${stu.stype==1 or stu.stype==2 or stu.stype==6}"><th data-field="student.academyId" data-align="left" data-sortable="false" >报考学校</th></c:if> --%>
-				    	<th data-field="practicalMoney" data-align="left" data-sortable="false" >金额</th>
+				    	<th data-field="student.sname" data-align="left" data-footer-formatter="汇总" data-sortable="false" >姓名</th>
+				    	<c:if test="${stu.stype==1 or stu.stype==2 or stu.stype==6}"><th data-field="student.academyId" data-align="left" data-sortable="false" >报考学校</th></c:if>
+				    	<th data-field="practicalMoney" data-align="left" data-footer-formatter="sumFormatter" data-sortable="false" >金额</th>
 				    	<th data-field="teaClass" data-align="left" data-sortable="false" >老师</th>
 				    	<th data-field="fdate" data-align="center" data-formatter="dateFormatter" data-sortable="false" >缴费时间</th>
 				    </tr>
@@ -69,6 +69,12 @@
 	<script src="${path }/static/proscenium/plugin/bootstrap-tables/bootstrap-table.min.js"></script>
 	<script src="${path }/static/proscenium/plugin/bootstrap-tables/bootstrap-table-zh-CN.min.js"></script>
 <script>
+function sumFormatter(data) {
+    field = this.field;
+    return data.reduce(function(sum, row) { 
+        return sum + (+row[field]);
+    }, 0);
+}
 function dateFormatter(value) {
 	var date = value.split("-")[0]+"/"+value.split("-")[1]+"/"+(value.split("-")[2]).split(" ")[0];
     return date

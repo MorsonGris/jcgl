@@ -167,7 +167,7 @@
                 	<td>手机号码</td>
                     <td><input name="sPhone" type="text" placeholder="请输入手机号码" class="easyui-validatebox"  data-options="required:true,novalidate:true,prompt:'请输入正确的手机号码。',validType:'phoneNum'" value="${student.SPhone}"></td>
                 	<td>身份证号码</td>
-                    <td><input name="idNumber" type="text" placeholder="请输入身份证号码" class="easyui-validatebox" data-options="required:true,novalidate:true,prompt:'请输入正确的身份证号码。',validType:'idcared'" value="${student.idNumber}"></td>
+                    <td><input name="idNumber" type="text" placeholder="请输入身份证号码" class="easyui-validatebox" data-options="required:true,novalidate:true" value="${student.idNumber}"></td>
                 </tr>
                 <tr>
 	                <td>报考院校</td>

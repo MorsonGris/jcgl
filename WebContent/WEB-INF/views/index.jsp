@@ -180,19 +180,19 @@ function loadReady() {
        }
    }
    
-   function logout(){
+   /* function logout(){
        $.messager.confirm('提示','确定要退出?',function(r){
            if (r){
-               /* progressLoad(); */
+               progressLoad(); 
                $.post('${path }/logout',{}, function(result) {
                    if(result.success){
-                       /* progressClose(); */
+                       progressClose();
                        window.location.href='${path }/login';
                    }
                }, 'json');
            }
        });
-   }
+   }*/
 
    function editUserPwd() {
        parent.$.modalDialog({
@@ -225,7 +225,7 @@ function loadReady() {
                     <shiro:hasPermission name="/user/editPwdPage">
                         <a href="javascript:void(0)" onclick="editUserPwd()" class="easyui-linkbutton" plain="true" icon="fi-unlock" >修改密码</a>
                     </shiro:hasPermission>&nbsp;&nbsp;
-                    <a href="javascript:void(0)" onclick="logout()" class="easyui-linkbutton" plain="true" icon="fi-x">安全退出</a>
+                    <a href="${path }/logout" class="easyui-linkbutton" plain="true" icon="fi-x">安全退出</a>
                 </span>
                 <span class="header"></span>
             </div>

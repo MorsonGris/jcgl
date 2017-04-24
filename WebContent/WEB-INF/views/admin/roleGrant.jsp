@@ -62,15 +62,15 @@ var setting = {
 			               //获取当前的树对象  
 			            	 var zTree = $.fn.zTree.getZTreeObj("resourceTree");
 			            	 /* zTree.selectNode(zTree.getNodeByParam("id", "269")); */
-			            	 alert(zTree.selectNode(zTree.getNodeByParam("id", "269")));
 			            	//根据过滤机制获得zTree的所有节点        
 			            	 var nodes = zTree.getNodesByFilter(filter);
 			                 if (ids.length > 0) {
 			                     for ( var i = 0; i < ids.length; i++) {
-			                    	 zTree.checkNode(ids[i], true, true);
-			                    	 zTree.updateNode(nodes);  //重新更新该节点
+			                    	  zTree.checkNode(zTree.getNodeByParam("id", ids[i]), true, true);
+			                    	  zTree.updateNode(nodes);  //重新更新该节点
 			                     }
 			                 }
+			                 
 			             }, 'json');
   		          	
   				} 

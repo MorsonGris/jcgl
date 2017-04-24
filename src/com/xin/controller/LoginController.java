@@ -1,5 +1,6 @@
 package com.xin.controller;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -7,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.DisabledAccountException;
@@ -241,11 +243,18 @@ public class LoginController extends BaseController {
      */
     @RequestMapping("/logout")
     @ResponseBody
-    public Object logout() {
+    public void logout(HttpServletRequest req,HttpServletResponse response) {
         logger.info("登出");
-        Subject subject = SecurityUtils.getSubject();
+        try {
+			response.sendRedirect(req.getContextPath()+"/login");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        /*Subject subject = SecurityUtils.getSubject();
         subject.logout();
-        return renderSuccess();
+        return renderSuccess();*/
+        //return "redirect:/login";
     }
 
 }

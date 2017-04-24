@@ -7,7 +7,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>聚成教育-学院简介</title>
+    <title>招生管理公共平台-学院简介</title>
     <link rel="shortcut icon" href="${path }/static/proscenium/logo/favicon2.ico" />
 	<link href="${path }/static/proscenium/css/bootstrap.min.css" rel="stylesheet">
 	<link href="${path }/static/proscenium/css/style.css" rel="stylesheet">
@@ -22,16 +22,15 @@
 	    		<div style="margin-top: 20px;margin-bottom: 10px;">
 					<img style="width: 100%;" alt="" src="${path }/static/proscenium/images/school/4/school.jpg">
                     <h3>赣南师范大学</h3>
-                    <p style="text-indent: 20px;">北京外国语大学，简称北外，由中华人民共和国教育部直属，位列国家首批“211工程”，入选“985工程优势学科创新平台”、“2011计划”</p>
+                    <p style="text-indent: 20px;">涵盖法学、经济学、史学、文学、理学、工学、教育学、管理学、艺术学等9个学科门类，形成了以教师教育、文理学科为特色，文理管工多学科协调发展的办学格局。</p>
                 </div>
                 <div style="margin-bottom: 40px;">
                     <h3>学校简介</h3>
                     <p style="text-indent: 20px;">
-                   		 北京外国语大学（Beijing Foreign Studies University），简称北外，由中华人民共和国教育部直属，位列国家首批“211工程”，入选“985工程优势学科创新平台”、“2011计划”，为财政部6所“小规模试点高校“之一，国际大学翻译学院联合会成员，设有研究生院，是中国外国语类高等院校中历史悠久、教授语种最多、办学层次齐全的全国重点大学，被誉为“共和国外交官摇篮”。
-    					北京外国语大学前身是1941年成立于延安的中国人民抗日军事政治大学三分校俄文大队，后发展为延安外国语学校，建校始隶属于中国共产党领导。新中国成立后，学校归外交部领导。1954年，更名为北京外国语学院；1959年，与北京俄语学院合并组建新的北京外国语学院。1980年后直属国家教育部领导。1994年，正式更名为北京外国语大学。
-
+                   		 学校创办于1958年6月，赣南师范专科学校，1984年升格为本科师范院校，成为省属两所本科师范院校之一，2003年成为硕士学位授予权单位，2009获教育硕士专业学位研究生培养资格。
+                   		 涵盖法学、经济学、史学、文学、理学、工学、教育学、管理学、艺术学等9个学科门类，形成了以教师教育、文理学科为特色，文理管工多学科协调发展的办学格局。
                     </p>
-                    <img style="width: 100%;height: 150%;" alt="" src="${path }/static/proscenium/images/school/4/zy.png">
+                    <img style="width: 100%;height: 150%;" alt="" src="${path }/static/proscenium/images/school/4/zy.jpg">
                 	
                 </div>
                 <div style="margin-bottom: 20px;">

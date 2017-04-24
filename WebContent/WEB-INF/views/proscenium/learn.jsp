@@ -72,7 +72,13 @@
                     <span class="home_operation">井冈山大学学习平台</span>
                 </a>
             </div>
-            <div class="col-xs-4 column"></div>
+            <div class="col-xs-4 column">
+            	 <a href="http://degree.qingshuxuetang.com/jxddc/Home">
+                    <img alt="80x80" src="${path }/static/proscenium/images/jxgbdsdx.jpg" class="img-circle apply-ico" />
+                    <br>
+                    <span class="home_operation">江西广播电视大学学习平台</span>
+                </a>
+            </div>
             <div class="col-xs-4 column"></div>
         </div>
     </div>
