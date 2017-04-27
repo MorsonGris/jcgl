@@ -43,6 +43,9 @@ public class Student{
 	
 	private String captcha;
 	
+	private Date createdateStart;
+	private Date createdateEnd;
+	
 	private List<Academy> listAcademy;
 	
 	private List<User> listUser;
@@ -205,5 +208,17 @@ public class Student{
 	}
 	public void setStypethree(Integer stypethree) {
 		this.stypethree = stypethree;
+	}
+	public Date getCreatedateStart() {
+		return createdateStart;
+	}
+	public void setCreatedateStart(Date createdateStart) {
+		this.createdateStart = createdateStart;
+	}
+	public Date getCreatedateEnd() {
+		return createdateEnd;
+	}
+	public void setCreatedateEnd(Date createdateEnd) {
+		this.createdateEnd = createdateEnd;
 	}
 }

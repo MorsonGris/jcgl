@@ -166,6 +166,21 @@
     		<if test="studentNo != null and studentNo != '' ">
     			and s_studentno = #{studentNo}
     		</if>
+    		<if test="phone != null and phone != '' ">
+    			and s_phone = #{phone}
+    		</if>
+    		<if test="userId != null">
+    			and u.id = #{userId}
+    		</if>
+    		<if test="type != null">
+    			and s_type = #{type}
+    		</if>
+    		<if test="start != null">
+    			<![CDATA[ and s_date >= #{start} ]]>
+    		</if>
+    		<if test="end != null">
+    			<![CDATA[ and s_date <= #{end} ]]>
+    		</if>
     	</where>
     </select>
 	<select id="selectByStudent" resultMap="BaseResultMap">

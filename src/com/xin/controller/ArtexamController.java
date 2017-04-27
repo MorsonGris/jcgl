@@ -51,7 +51,9 @@ public class ArtexamController extends BaseController{
     @Autowired private IUserService userService;
     
     @GetMapping("/studentpage")
-    public String student(){
+    public String student(Model model){
+    	List<User> list = userService.selectBylist();
+    	model.addAttribute("list",list);
     	return "admin/student/artexam";
     }
     
@@ -76,7 +78,23 @@ public class ArtexamController extends BaseController{
     		map.put("studentNo", student.getStudentNo());
     	}
     	if(getUserId() != null){
+    		//只能看到自己推荐的学生
     		map.put("uid", getUserId());
+    	}
+    	if(student.getSPhone() != null){
+    		map.put("phone", student.getSPhone());
+    	}
+    	if(student.getUserId()!=null && student.getUserId() != 0){
+    		map.put("userId", student.getUserId());
+    	}
+    	if(student.getStype()!=null && student.getStype() != 0){
+    		map.put("type", student.getStype());
+    	}
+    	if(student.getCreatedateStart()!= null){
+    		map.put("start", student.getCreatedateStart());
+    	}
+    	if(student.getCreatedateEnd()!=null){
+    		map.put("end", student.getCreatedateEnd());
     	}
     	pageInfo.setCondition(map);
     	artexamService.selectDataGrid(pageInfo);

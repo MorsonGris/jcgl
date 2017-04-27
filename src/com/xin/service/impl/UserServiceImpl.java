@@ -125,6 +125,16 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
 		return userMapper.teaLogin(userVo);
 	}
 
+	@Override
+	public List<User> selectByorganizationid(Long id) {
+		return userMapper.selectByorganizationid(id);
+	}
+
+	@Override
+	public List<User> selectBylist() {
+		return userMapper.selectBylist();
+	}
+
 	
 
 }

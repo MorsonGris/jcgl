@@ -107,11 +107,11 @@ public class FinanceController extends BaseController{
     public Object financepage(PageJson<Finance> pages,@RequestParam int offset,@RequestParam int limit,HttpServletRequest request){
     	String teaid = request.getParameter("teaid");
     	String stuno = request.getParameter("stuno");
-		if(!stuno.equals("") && stuno != null){
+		if(!stuno.equals("") && stuno != null){//学生登陆查询学费
 			pages.setRows(financeService.financepage(stuno, offset, limit));
 			pages.setTotal(financeService.queryTotal(stuno));
 			return pages;
-    	}else if(teaid != null && !teaid.equals("")){
+    	}else if(teaid != null && !teaid.equals("")){//教师登陆查询
     		pages.setRows(financeService.financepagebyteaid(teaid, offset, limit));
 			pages.setTotal(financeService.queryTotalbyteaid(teaid));
 			return pages;

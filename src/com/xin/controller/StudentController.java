@@ -48,7 +48,9 @@ public class StudentController extends BaseController{
     @Autowired private IFinanceService financeService;
     
     @GetMapping("/studentpage")
-    public String student(){
+    public String student(Model model){
+    	List<User> list = userService.selectBylist();
+    	model.addAttribute("list",list);
     	return "admin/student/student";
     }
     
@@ -75,6 +77,21 @@ public class StudentController extends BaseController{
     	if(getUserId() != null){
     		//只能看到自己推荐的学生
     		map.put("uid", getUserId());
+    	}
+    	if(student.getSPhone() != null){
+    		map.put("phone", student.getSPhone());
+    	}
+    	if(student.getUserId()!=null && student.getUserId() != 0){
+    		map.put("userId", student.getUserId());
+    	}
+    	if(student.getStype()!=null && student.getStype() != 0){
+    		map.put("type", student.getStype());
+    	}
+    	if(student.getCreatedateStart()!= null){
+    		map.put("start", student.getCreatedateStart());
+    	}
+    	if(student.getCreatedateEnd()!=null){
+    		map.put("end", student.getCreatedateEnd());
     	}
     	pageInfo.setCondition(map);
     	studentService.selectDataGrid(pageInfo);

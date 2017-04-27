@@ -93,11 +93,6 @@
 		       <label for="id-card">身份证号码</label> 
 		       <input type="text" class="form-control" id="id-card" name="idNumber" /> 
 		      </div> 
-		      <div class="form-group"> 
-		       <label for="school">报考院校</label> 
-		       <!-- <select id="school" name="academyId" class="form-control"> <option value="">---请选择---</option> </select> --> 
-		       <input type="text" class="form-control" id="school" name="academyId" />
-		      </div> 
 		      <div class="form-group">
 					<div class="row">
 						<div class="col-xs-6">

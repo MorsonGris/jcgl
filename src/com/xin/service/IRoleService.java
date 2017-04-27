@@ -17,7 +17,7 @@ public interface IRoleService extends IService<Role> {
 
     void selectDataGrid(PageInfo pageInfo);
      
-    Object selectTree();
+    List<Role> selectTree();
 
     List<Long> selectResourceIdListByRoleId(Long id);
 

@@ -59,10 +59,12 @@
                             str += '&nbsp;&nbsp;|&nbsp;&nbsp;';
                             str += $.formatString('<a href="javascript:void(0)" class="role-easyui-linkbutton-edit" data-options="plain:true,iconCls:\'fi-pencil icon-blue\'" onclick="editRoleFun(\'{0}\');" >编辑</a>', row.id);
                         </shiro:hasPermission>
-                        <shiro:hasPermission name="/role/delete">
-                            str += '&nbsp;&nbsp;|&nbsp;&nbsp;';
-                            str += $.formatString('<a href="javascript:void(0)" class="role-easyui-linkbutton-del" data-options="plain:true,iconCls:\'fi-x icon-red\'" onclick="deleteRoleFun(\'{0}\');" >删除</a>', row.id);
-                        </shiro:hasPermission>
+                        if(row.id != 1){
+	                        <shiro:hasPermission name="/role/delete">
+	                            str += '&nbsp;&nbsp;|&nbsp;&nbsp;';
+	                            str += $.formatString('<a href="javascript:void(0)" class="role-easyui-linkbutton-del" data-options="plain:true,iconCls:\'fi-x icon-red\'" onclick="deleteRoleFun(\'{0}\');" >删除</a>', row.id);
+	                        </shiro:hasPermission>
+                        }
                     return str;
                 }
             } ] ],

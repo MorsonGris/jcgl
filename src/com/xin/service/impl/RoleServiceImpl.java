@@ -53,7 +53,7 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements IR
     }
 
     @Override
-    public Object selectTree() {
+    public List<Role> selectTree() {
         List<Role> roles = this.selectAll();
         return roles;
     }

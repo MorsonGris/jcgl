@@ -1,25 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/commons/global.jsp" %>
 <script type="text/javascript">
-    $(function() {
-       	 var dd = $("#userAddOrganizationId");
-       	 $.post("${path }/organization/tree",function(data){
-			  var json = JSON.parse(data); 
-			  dd.empty();
-			  for(var i=0;i<json.length;i++){
-				  dd.append("<option value='"+json[i].id+"'>"+json[i].name+"</option>")
-			  }
-		  });
-
-       	var d = $("#userAddRoleIds");
-      	 $.post("${path }/role/tree",function(data){
-			  var json = JSON.parse(data); 
-			  d.empty();
-			  for(var i=0;i<json.length;i++){
-				  d.append("<option value='"+json[i].id+"'>"+json[i].description+"</option>")
-			  }
-		  });
-
         $('#userAddForm').form({
             url : '${path }/user/add',
             onSubmit : function() {
@@ -41,8 +22,6 @@
                 }
             }
         });
-        
-    });
 </script>
 <div class="easyui-layout" data-options="fit:true,border:false">
     <div data-options="region:'center',border:false" title="" style="overflow: hidden;padding: 3px;">
@@ -79,11 +58,19 @@
                 <tr>
                     <td>部门</td>
                     <td>
-                    	<select id="userAddOrganizationId" name="organizationId" style="width: 140px; height: 29px;" class="easyui-validatebox" data-options="required:true"></select>
+                    	<select id="organizationId" name="organizationId" style="width: 140px; height: 29px;" class="easyui-validatebox" data-options="required:true">
+		           			<c:forEach items="${list}" var="list">
+		           				<option value="${list.id}">${list.name}</option>
+		           			</c:forEach>
+                    	</select>
                     </td>
                     <td>角色</td>
                     <td>
-                    	<select id="userAddRoleIds" name="roleIds" style="width: 140px; height: 29px;"></select>
+                    	<select id="roleIds" name="roleIds" style="width: 140px; height: 29px;">
+		           			<c:forEach items="${slist}" var="slist">
+		           				<option value="${slist.id}">${slist.name}</option>
+		           			</c:forEach>
+                    	</select>
                     </td>
                 </tr>
                 <tr>

@@ -15,6 +15,8 @@ import com.xin.bean.vo.UserVo;
 public interface IUserService extends IService<User> {
 	
     List<User> selectByLoginName(UserVo userVo);
+    
+    List<User> selectByorganizationid(Long id);
 
     void insertByVo(UserVo userVo);
 
@@ -29,4 +31,6 @@ public interface IUserService extends IService<User> {
     void selectDataGrid(PageInfo pageInfo);
 
     void deleteUserById(Long id);
+    
+    List<User> selectBylist();
 }

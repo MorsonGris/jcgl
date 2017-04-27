@@ -42,7 +42,7 @@
 				    	<th data-field="student.sname" data-align="left" data-footer-formatter="汇总" data-sortable="false" >姓名</th>
 				    	<c:if test="${stu.stype==1 or stu.stype==2 or stu.stype==6}"><th data-field="student.academyId" data-align="left" data-sortable="false" >报考学校</th></c:if>
 				    	<th data-field="practicalMoney" data-align="left" data-footer-formatter="sumFormatter" data-sortable="false" >金额</th>
-				    	<th data-field="teaClass" data-align="left" data-sortable="false" >老师</th>
+				    	<th data-field="user.name" data-align="left" data-sortable="false" >班主任</th>
 				    	<th data-field="fdate" data-align="center" data-formatter="dateFormatter" data-sortable="false" >缴费时间</th>
 				    </tr>
 				    </thead>
@@ -76,8 +76,10 @@ function sumFormatter(data) {
     }, 0);
 }
 function dateFormatter(value) {
-	var date = value.split("-")[0]+"/"+value.split("-")[1]+"/"+(value.split("-")[2]).split(" ")[0];
-    return date
+	if(value!=null){
+		var date = value.split("-")[0]+"/"+value.split("-")[1]+"/"+(value.split("-")[2]).split(" ")[0];
+	    return date
+	}
 } 
 
 function windowprint() {

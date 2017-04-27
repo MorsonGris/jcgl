@@ -89,7 +89,11 @@ public class UserController extends BaseController {
      * @return
      */
     @GetMapping("/addPage")
-    public String addPage() {
+    public String addPage(Model Model) {
+    	 List<Organization> list = organizationService.selectTree();
+    	 List<Role> slist = roleService.selectTree();
+    	 Model.addAttribute("list", list);
+    	 Model.addAttribute("slist", slist);
         return "admin/userAdd";
     }
 

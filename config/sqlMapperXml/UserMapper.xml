@@ -26,6 +26,14 @@
     <sql id="Base_Column_List">
         id, login_name AS loginName, name, password, sex, age, phone, user_type AS userType, status, organization_id AS organizationId, create_time AS createTime
     </sql>
+    
+    <select id="selectByorganizationid"  resultMap="userVoResultMap">
+    	SELECT <include refid="Base_Column_List"></include> FROM user WHERE organization_id = #{id}
+    </select>
+    
+    <select id="selectBylist" resultMap="userVoResultMap">
+    	SELECT <include refid="Base_Column_List"></include> FROM user
+    </select>
 	
 	<select id="teaLogin" resultMap="userVoResultMap">
         SELECT
@@ -107,6 +115,7 @@
             <if test=" endTime != null ">
                 <![CDATA[ and t.create_time <= #{endTime} ]]>
             </if>
+            and t.status = 0
         </where>
     </select>
 
