@@ -273,7 +273,7 @@ public class StudentController extends BaseController{
         		return renderSuccess("删除成功");
         	}
     	}
-    	return renderError("删除失败");
+    	return renderError("该学生应经缴纳学费，删除失败");
     }
     
     @GetMapping("/editpage")

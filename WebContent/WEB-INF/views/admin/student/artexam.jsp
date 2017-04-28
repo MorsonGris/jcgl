@@ -125,6 +125,8 @@
 	                if (result.success) {
 	                    parent.$.messager.alert('提示', result.msg, 'info');
 	                    artexamDataGrid.datagrid('reload');
+	                }else{
+	                	 parent.$.messager.alert('提示', result.msg, 'info');
 	                }
 	                progressClose();
 	            }, 'JSON');
@@ -160,6 +162,8 @@
     }
     function cleanArtexamFun() {
         $('#searchArtexamForm input').val('');
+        $('#ateaid').find("option").eq(0).prop("selected",true);
+        $('#as').find("option").eq(0).prop("selected",true);
         artexamDataGrid.datagrid('load', {});
     }
     
@@ -208,7 +212,7 @@
                    <td><input name="sPhone" placeholder="请输入学生手机号码"/></td>
                    <th>老师姓名:</th>
                    <td>
-                   	<select name="userId" style="height:20px;">
+                   	<select id="ateaid" name="userId" style="height:20px;">
                    		<option value="0">请选择老师</option>
                    		<c:forEach var="list" items="${list}">
                    			<option value="${list.id}">${list.name}</option>
@@ -217,7 +221,7 @@
                    </td>
                    <th>报名类型:</th>
                    <td>
-	                   <select name="stype" style="height:20px;">
+	                   <select id="as" name="stype" style="height:20px;">
 	                   		<option value="0">请选择报名类型</option>
 		                   	<option value="3">会计</option>
 		                   	<option value="4">艺考</option>

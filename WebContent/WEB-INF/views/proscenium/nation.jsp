@@ -345,7 +345,7 @@ $(document).ready(function() {
 
 function selected(){
 	 var valeu =  $('#sGradations option:selected').val();//选中的值
-	 if(valeu != "请选择"){
+	 if(valeu != "---请选择---"){
 		 if(valeu == "高达本"){//高达本
 			 $("#sSystme").val("五年"); 
 		 }else if(valeu == "专达本"){//专达本
@@ -362,7 +362,7 @@ var curCount;//当前剩余秒数
 var code = ""; //验证码
 var codeLength = 6;//验证码长度
 function sendMessage() {
-	var stype = $("#stype").val();
+	var stype =6;
 	var phone = $("#phone").val();
 	var school = $("#school").val();
 	var sContent = $("#sContent").val();

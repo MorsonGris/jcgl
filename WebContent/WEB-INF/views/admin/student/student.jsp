@@ -52,19 +52,7 @@
                 title : '报考院校',
                 field : 'academyId',
                 sortable : true
-            }/* {
-                width : '120',
-                title : '报考院校',
-                field : 'listAcademy',
-                sortable : true,
-                formatter : function(value, row, index) {
-                    var roles = [];
-                    for(var i = 0; i< value.length; i++) {
-                        roles.push(value[i].aschool);  
-                    }
-                    return(roles.join('\n'));
-                }
-            } */,{
+            },{
                 width : '100',
                 title : '专业',
                 field : 'scontent',
@@ -157,6 +145,8 @@
 	                if (result.success) {
 	                    parent.$.messager.alert('提示', result.msg, 'info');
 	                    studentDataGrid.datagrid('reload');
+	                }else{
+	                	 parent.$.messager.alert('提示', result.msg, 'info');
 	                }
 	                progressClose();
 	            }, 'JSON');
@@ -193,6 +183,8 @@
     }
     function cleanStudentFun() {
         $('#searchStudentForm input').val('');
+        $('#teaid').find("option").eq(0).prop("selected",true);
+        $('#s').find("option").eq(0).prop("selected",true);
         studentDataGrid.datagrid('load', {});
     }
     
@@ -241,7 +233,7 @@
                    <td><input name="sPhone" placeholder="请输入学生手机号码"/></td>
                    <th>老师姓名:</th>
                    <td>
-	                   <select name="userId" style="height:20px;">
+	                   <select id="teaid" name="userId" style="height:20px;">
 	                   		<option value="0">请选择老师</option>
 	                   		<c:forEach var="list" items="${list}">
 	                   			<option value="${list.id}">${list.name}</option>
@@ -250,11 +242,11 @@
                    </td>
                    <th>报名类型:</th>
                    <td>
-	                   <select name="stype" style="height:20px;">
+	                   <select id="s" name="stype" style="height:20px;">
 	                   		<option value="0">请选择报名类型</option>
-		                   	<option value="3">成人教育</option>
-		                   	<option value="4">国家开放大学</option>
-		                   	<option value="5">远程教育</option>
+		                   	<option value="1">成人教育</option>
+		                   	<option value="2">国家开放大学</option>
+		                   	<option value="6">远程教育</option>
 	                   </select>
                    </td>
                    <th>报名日期:</th>

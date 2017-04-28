@@ -331,7 +331,7 @@ $(function(){
 
 function selected(){
 	 var valeu =  $('#sGradations option:selected').val();//选中的值
-	 if(valeu != "请选择"){
+	 if(valeu != "---请选择---"){
 		if(valeu == "专达本"){//专达本
 			 $("#sSystme").val("三年"); 
 		 }else if(valeu == "高达专"){//高达专
@@ -346,7 +346,7 @@ var curCount;//当前剩余秒数
 var code = ""; //验证码
 var codeLength = 6;//验证码长度
 function sendMessage() {
-	var stype = $("#stype").val();
+	var stype = 2;
 	var phone = $("#phone").val();
 	var school = $("#school").val();
 	var sContent = $("#sContent").val();
@@ -369,7 +369,7 @@ function sendMessage() {
 				type: "POST", //用POST方式传输
 				dataType: "text", //数据格式:JSON
 				url: '${path}/Security/security', //目标地址
-				data: "stype=" + stype +"&phone="+ phone +"&school="+ school +"&sContent="+ sContent +"&sGradations=" + sGradations + "&type="+ 1 +"&code=" + code,
+				data: "stype=" + stype +"&phone="+ phone +"&sContent="+ sContent +"&sGradations=" + sGradations + "&type="+ 1 +"&code=" + code,
 				error: function (XMLHttpRequest, textStatus, errorThrown) { },
 				success: function (msg){ }
 			});

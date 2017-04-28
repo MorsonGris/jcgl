@@ -63,12 +63,14 @@ public class SecurityController extends BaseController{
 			String name = null;
 			if(stype == 1){
 				name = "成人教育报名";
+				result = restAPI.sendTemplateSMS(phone, TEMPLATE_ID, new String[] {name,school,sContent,sGradations,"招生管理公共平台",code,TIME_LEN });
 			}else if(stype == 2){
 				name = "国家开发大学报名";
+				result = restAPI.sendTemplateSMS(phone, TEMPLATE_ID, new String[] {name,sContent,sGradations,"招生管理公共平台",code,TIME_LEN });
 			}else if(stype == 6){
 				name = "远程教育报名";
+				result = restAPI.sendTemplateSMS(phone, TEMPLATE_ID, new String[] {name,school,sContent,sGradations,"招生管理公共平台",code,TIME_LEN });
 			}
-			result = restAPI.sendTemplateSMS(phone, TEMPLATE_ID, new String[] {name,school,sContent,sGradations,"招生管理公共平台",code,TIME_LEN });
 		}else{
 			String s = null;
 			if(stype == 3){

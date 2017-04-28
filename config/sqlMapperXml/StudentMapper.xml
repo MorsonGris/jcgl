@@ -157,6 +157,9 @@
     	FROM student s
     	LEFT JOIN user u ON s.user_id = u.id
     	<where>
+    		<if test="uid == 1">
+    			(s_type = 1 or s_type = 2 or s_type = 6)
+    		</if>
     		<if test="uid != null and uid != '' and uid != 1">
     			(s_type = 1 or s_type = 2 or s_type = 6) and  user_id = #{uid} 
     		</if>
