@@ -198,7 +198,6 @@ public class FinanceController extends BaseController{
 			String ArrayDATA_IDS[] = DATA_IDS.split(",");
 			for(int i=0; i<ArrayDATA_IDS.length; i++) {
 				finance.setFId(Integer.parseInt(ArrayDATA_IDS[i]));
-				System.out.println(Integer.parseInt(ArrayDATA_IDS[i]));
 				result = financeService.updateBatchFinance(finance);
 			}
     	}
