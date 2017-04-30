@@ -204,7 +204,7 @@
 				f_accumulative=f_accumulative+#{fAccumulative},
 			</if>
 			<if test="fWay!=null and fWay!='' ">
-				f_way=#{f_way},
+				f_way=#{fWay},
 			</if>
 		</set>
 		where f_id = #{fId}
