@@ -309,8 +309,8 @@ public class FinanceController extends BaseController{
 			vpd.put("var1", i+1+"");
 			vpd.put("var2", finance.getStudent().getSName());   //1
 			vpd.put("var3", finance.getStuNo());				//2
-			vpd.put("var4", finance.getAcademy().getASchool());	//3
-			vpd.put("var5", finance.getAcademy().getAMajor());	//4
+			vpd.put("var4", finance.getStudent().getAcademyId());	//3
+			vpd.put("var5", finance.getStudent().getSContent());	//4
 			vpd.put("var6", finance.getStudent().getSGradations());	//5
 			vpd.put("var7", finance.getTeaClass());				//6
 			vpd.put("var8", finance.getUser().getName());	//7
