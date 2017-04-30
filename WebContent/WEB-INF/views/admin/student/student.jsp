@@ -221,43 +221,49 @@
     
 </script>
 <div class="easyui-layout" data-options="fit:true,border:false">
-    <div data-options="region:'north',border:false" style="height: 30px; overflow: hidden;background-color: #fff">
+    <div data-options="region:'north',border:false" style="height:30px; overflow: hidden;background-color: #fff">
         <form id="searchStudentForm">
             <table>
                 <tr>
                    <th>学生编号:</th>
-                   <td><input name="studentNo" placeholder="请输入学生编号"/></td>
+                   <td>
+                   	<input name="studentNo" style="width:85px;" placeholder="请输入学生编号"/>
+                   </td>
                    <th>学生姓名:</th>
-                   <td><input name="sName" placeholder="请输入学生姓名"/></td>
+                   <td>
+                   	<input name="sName" style="width:85px;" placeholder="请输入学生姓名"/>
+                   </td>
                    <th>手机号码:</th>
-                   <td><input name="sPhone" placeholder="请输入学生手机号码"/></td>
+                   <td>
+                   		<input name="sPhone" style="width:110px;" placeholder="请输入学生手机号码"/>
+                   </td>
                    <th>老师姓名:</th>
                    <td>
-	                   <select id="teaid" name="userId" style="height:20px;">
-	                   		<option value="0">请选择老师</option>
-	                   		<c:forEach var="list" items="${list}">
-	                   			<option value="${list.id}">${list.name}</option>
-	                   		</c:forEach>
+	                  <select id="teaid" name="userId" style="height:20px;">
+	                   	<option value="0">请选择老师</option>
+	                   	<c:forEach var="list" items="${list}">
+	                   		<option value="${list.id}">${list.name}</option>
+	                   	</c:forEach>
 	                   </select>
                    </td>
                    <th>报名类型:</th>
                    <td>
-	                   <select id="s" name="stype" style="height:20px;">
-	                   		<option value="0">请选择报名类型</option>
-		                   	<option value="1">成人教育</option>
-		                   	<option value="2">国家开放大学</option>
-		                   	<option value="6">远程教育</option>
-	                   </select>
+	                  <select id="s" name="stype" style="height:20px;">
+	                   	<option value="0">报名类型</option>
+		                <option value="1">成人教育</option>
+		                <option value="2">开放大学</option>
+		                <option value="6">远程教育</option>
+	                  </select>
                    </td>
-                   <th>报名日期:</th>
-                   <td>
-                   		<input id="createdateStart" name="createdateStart" placeholder="点击选择时间" onclick="WdatePicker({readOnly:true,dateFmt:'yyyy-MM-dd HH:mm:ss'})" readonly="readonly" />至
-                        <input id="createdateEnd" name="createdateEnd" placeholder="点击选择时间" onclick="WdatePicker({readOnly:true,dateFmt:'yyyy-MM-dd HH:mm:ss'})" readonly="readonly" />
-                   </td>
-                   <td>
-	                   	<a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'fi-magnifying-glass',plain:true" onclick="searchStudentFun();">查询</a>
-	                    <a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'fi-x-circle',plain:true" onclick="cleanStudentFun();">清空</a>
-                   </td>
+                  <th>报名日期:</th>
+                  <td>
+                   	<input id="createdateStart" name="createdateStart" style="width:120px;" placeholder="点击选择时间" onclick="WdatePicker({readOnly:true,dateFmt:'yyyy-MM-dd HH:mm:ss'})" readonly="readonly" />至
+                    <input id="createdateEnd" name="createdateEnd" style="width:120px;" placeholder="点击选择时间" onclick="WdatePicker({readOnly:true,dateFmt:'yyyy-MM-dd HH:mm:ss'})" readonly="readonly" />
+                  </td>
+                  <td>
+	                 <a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'fi-magnifying-glass',plain:true" onclick="searchStudentFun();">查询</a>
+	                 <a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'fi-x-circle',plain:true" onclick="cleanStudentFun();">清空</a>
+                  </td>
                 </tr>
             </table>
         </form>
