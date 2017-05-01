@@ -20,6 +20,7 @@ public interface UserMapper extends BaseMapper<User> {
     UserVo selectUserVoById(@Param("id") Long id);
     List<User> selectByorganizationid(Long id);
     UserVo teaLogin(UserVo userVo);
+    UserVo selectByphone(String phone);
     List<UserVo> selectUserVoPage(Pagination page, Map<String, Object> params);
     List<User> selectBylist();
 

@@ -3,7 +3,6 @@ package com.xin.service;
 import java.util.List;
 
 import com.xin.bean.Student;
-import com.xin.bean.vo.UserVo;
 import com.xin.commons.utils.PageInfo;
 
 /**
@@ -19,6 +18,7 @@ public interface IStudentService{
 	Student selectById(int id);
 	boolean updateById(Student student);
 	boolean insertByid(Student student);
+	boolean add(List<Student> list);
 	Student selectByStuNo(Student student);
 	void selectDataGrid(PageInfo pageInfo);
 	List<Student> selectByStudent(PageInfo pageInfo);

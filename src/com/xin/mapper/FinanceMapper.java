@@ -19,6 +19,8 @@ public interface FinanceMapper {
 	
 	Finance selectfinanceById(int id);
 	
+	Finance selectBystuno(String id);
+	
 	int updateFinance(Finance finance);
 	
 	void deleteFinance(int id);

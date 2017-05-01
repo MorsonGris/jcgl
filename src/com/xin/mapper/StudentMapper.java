@@ -19,6 +19,7 @@ public interface StudentMapper{
 	Student selectById(int id);
 	boolean updateById(Student student);
 	boolean insertByid(Student student);
+	boolean add(List<Student> list);
 	Student selectByStuNo(Student student);
 	List<Student> selectPage(Pagination page, Map<String, Object> params);
 	List<Student> selectByStudent(Pagination page, Map<String, Object> params);

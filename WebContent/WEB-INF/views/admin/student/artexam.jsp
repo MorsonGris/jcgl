@@ -79,7 +79,7 @@
                         </shiro:hasPermission>
                         <shiro:hasPermission name="/Artexam/delete">
                             str += '&nbsp;&nbsp;|&nbsp;&nbsp;';
-                            str += $.formatString('<a href="javascript:void(0)" class="user-easyui-linkbutton-del" data-options="plain:true,iconCls:\'fi-x icon-red\'" onclick="deleteArtexamFun(\'{0}\');" >删除</a>', row.sid);
+                            str += $.formatString('<a href="javascript:void(0)" class="user-easyui-linkbutton-del" data-options="plain:true,iconCls:\'fi-x icon-red\'" onclick="deleteArtexamFun(\'{0}\');" >删除</a>', row.studentNo);
                         </shiro:hasPermission>
                     return str;
                 }
@@ -107,6 +107,23 @@
                 }
             } ]
         });
+    }
+    
+    function addArtexamFun1(){
+    	 parent.$.modalDialog({
+             title : '批量添加',
+             width : 250,
+             height : 120,
+             href : '${path }/Artexam/addallpage',
+             buttons : [ {
+                 text : '确定',
+                 handler : function() {
+                     parent.$.modalDialog.openner_dataGrid = artexamDataGrid;//因为添加成功之后，需要刷新这个dataGrid，所以先预定义好
+                     var f = parent.$.modalDialog.handler.find('#ArtexamAddallForm');
+                     f.submit();
+                 }
+             } ]
+         });
     }
     
     function deleteArtexamFun(id) {
@@ -254,5 +271,6 @@
 <div id="ArtexamToolbar" style="display: none;">
     <shiro:hasPermission name="/Artexam/add">
      	<a onclick="addArtexamFun();" href="javascript:void(0);" class="easyui-linkbutton" data-options="plain:true,iconCls:'fi-plus icon-green'">添加</a>
+     	<a onclick="addArtexamFun1();" href="javascript:void(0);" class="easyui-linkbutton" data-options="plain:true,iconCls:'fi-plus icon-green'">批量上传</a>
     </shiro:hasPermission>
 </div>

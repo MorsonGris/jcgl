@@ -92,5 +92,10 @@ public class FinanceServiceImpl implements IFinanceService {
 		PageJson<Finance> pages = financeMapper.queryTotalbyteaid(teaid);
 		return pages.getTotal();
 	}
+
+	@Override
+	public Finance selectBystuno(String id) {
+		return financeMapper.selectBystuno(id);
+	}
 	
 }

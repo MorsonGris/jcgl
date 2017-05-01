@@ -4,15 +4,15 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import com.xin.bean.Academy;
 import com.xin.bean.Finance;
 import com.xin.bean.Student;
@@ -20,7 +20,10 @@ import com.xin.bean.User;
 import com.xin.bean.vo.UserVo;
 import com.xin.commons.base.BaseController;
 import com.xin.commons.utils.CaptchaUtils;
+import com.xin.commons.utils.FileUpload;
+import com.xin.commons.utils.ObjectExcelRead;
 import com.xin.commons.utils.PageInfo;
+import com.xin.commons.utils.PathUtil;
 import com.xin.commons.utils.StudentNo;
 import com.xin.service.ArtexamService;
 import com.xin.service.IAcademyService;
@@ -154,6 +157,11 @@ public class ArtexamController extends BaseController{
     	return "admin/student/artexamAdd";
     }
     
+    @GetMapping("/addallpage")
+    public String addallpage(){
+    	return "admin/student/artexamAdd1";
+    }
+    
     /**
      * 添加
      * @param student
@@ -217,6 +225,44 @@ public class ArtexamController extends BaseController{
     	return renderError("添加失败");	
     }
     
+    @RequestMapping("/addall")
+    @ResponseBody
+    public Object addall(@RequestParam(value="stumessage",required=false) MultipartFile file,Student student){
+    	if(null != file && !file.isEmpty()){
+    		String filePath = PathUtil.getClasspath() + "uploadFile/file/";//文件上传路径
+			String fileName = FileUpload.fileUp(file, filePath, "financeExcel");//文件名称
+			@SuppressWarnings({ "unchecked", "rawtypes" })
+			List<Map<String,Object>> listm = (List)ObjectExcelRead.readExcel(filePath, fileName, 2, 0, 0);  //执行读EXCEL操作,读出的数据导入List 2:从第3行开始；0:从第A列开始；0:第0个sheet
+			int n = 0;
+			for(int i=0;i<=listm.size();i++){
+				Student stu = studentservice.selectByNo();
+				String No = StudentNo.getNo(stu);
+				if(listm.size()>0){
+					student.setStudentNo(No+n);//学号
+					n++;
+				}
+		    	student.setSName(listm.get(i).get("var0").toString());//学生姓名
+		    	UserVo uservo = userService.selectByphone(listm.get(i).get("var4").toString());
+		    	student.setUserId(uservo.getId());//老师
+		    	student.setSPhone(listm.get(i).get("var1").toString());//手机号码
+		    	if(listm.get(i).get("var2").toString().equals("艺考")){//报考类型
+		    		student.setStype(3);
+		    	}else if(listm.get(i).get("var2").toString().equals("会计")){
+		    		student.setStype(4);
+		    	}else if(listm.get(i).get("var2").toString().equals("职业资格")){
+		    		student.setStype(5);
+		    	}
+		    	student.setSContent(listm.get(i).get("var3").toString());//学习内容
+		    	student.setSDate(new Date());//报考时间
+		    	boolean restult = artexamService.insertByid(student);
+		    	if(restult == true){
+		    		return renderSuccess("添加成功");
+		    	}
+			}
+    	}
+    	return renderError("批量添加失败");
+    }
+    
    
     
     /**
@@ -226,15 +272,13 @@ public class ArtexamController extends BaseController{
      */
     @RequestMapping("/delete")
     @ResponseBody
-    public Object delete(int id){
-    	Finance finace = financeService.selectfinanceById(id);
-    	if(finace ==null){
-    	boolean result = artexamService.deleteById(id);
-	    	if(result == true){
-	    		return renderSuccess("删除成功");
-	    	}
+    public Object delete(String id){
+    	Finance finace = financeService.selectBystuno(id);
+    	if(finace != null){
+    		return renderError("该学生应经缴纳学费，删除失败");
     	}
-    	return renderError("该学生应经缴纳学费，删除失败");
+    	artexamService.deleteById(id);
+    	return renderSuccess("删除成功");
     }
     
     @GetMapping("/editpage")

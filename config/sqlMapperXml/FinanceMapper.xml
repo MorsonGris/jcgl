@@ -80,6 +80,10 @@
 		where stu_no = #{arg0} limit #{arg1},#{arg2}
 	</select>
 	
+	<select id="selectBystuno" resultMap="BaseResultMap">
+		select * from finance where stu_no = #{stuNo}
+	</select>
+	
 	<select id="queryTotal" resultMap="PageResult">
 		select count(*) total from finance where stu_no = #{arg0};
 	</select>
@@ -204,7 +208,7 @@
 				f_accumulative=f_accumulative+#{fAccumulative},
 			</if>
 			<if test="fWay!=null and fWay!='' ">
-				f_way=#{f_way},
+				f_way=#{fWay},
 			</if>
 		</set>
 		where f_id = #{fId}

@@ -12,9 +12,10 @@ import com.xin.bean.Student;
 public interface ArtexamMapper{
 	List<Student> selectByName(Student sutdent);
 	List<Student> selectAll();
-	boolean deleteById(int id);
+	boolean deleteById(String id);
 	Student selectById(int id);
 	boolean updateById(Student student);
+	boolean add(List<Student> list);
 	boolean insertByid(Student student);
 	List<Student> selectPage(Pagination page, Map<String, Object> params);
 }
