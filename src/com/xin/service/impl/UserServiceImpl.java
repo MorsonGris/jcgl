@@ -135,6 +135,11 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
 		return userMapper.selectBylist();
 	}
 
+	@Override
+	public UserVo selectByphone(String phone) {
+		return userMapper.selectByphone(phone);
+	}
+
 	
 
 }

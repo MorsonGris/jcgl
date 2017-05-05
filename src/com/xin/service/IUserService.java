@@ -25,6 +25,8 @@ public interface IUserService extends IService<User> {
     UserVo teaLogin(UserVo userVo);
 
     void updateByVo(UserVo userVo);
+    
+    UserVo selectByphone(String phone);
 
     void updatePwdByUserId(Long userId, String md5Hex);
 

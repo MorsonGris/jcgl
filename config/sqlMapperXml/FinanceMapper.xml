@@ -80,6 +80,10 @@
 		where stu_no = #{arg0} limit #{arg1},#{arg2}
 	</select>
 	
+	<select id="selectBystuno" resultMap="BaseResultMap">
+		select * from finance where stu_no = #{stuNo}
+	</select>
+	
 	<select id="queryTotal" resultMap="PageResult">
 		select count(*) total from finance where stu_no = #{arg0};
 	</select>

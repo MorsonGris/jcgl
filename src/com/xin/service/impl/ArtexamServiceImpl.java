@@ -20,7 +20,7 @@ public class ArtexamServiceImpl implements ArtexamService {
 	private  ArtexamMapper artexamMapper;
 
 	@Override
-	public boolean deleteById(int id) {
+	public boolean deleteById(String id) {
 		return artexamMapper.deleteById(id);
 	}
 
@@ -55,6 +55,11 @@ public class ArtexamServiceImpl implements ArtexamService {
 	@Override
 	public List<Student> selectByName(Student sutdent) {
 		return artexamMapper.selectByName(sutdent);
+	}
+
+	@Override
+	public boolean add(List<Student> list) {
+		return artexamMapper.add(list);
 	}
 	
 }

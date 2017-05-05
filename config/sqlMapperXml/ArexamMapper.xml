@@ -56,6 +56,19 @@
 		)
 	</insert>
 	
+	<insert id="add" >
+		INSERT INTO student(<include refid="Studentcolumn" />) 
+		VALUES(
+		#{studentNo},
+		#{sName},
+		#{userId},
+		#{sPhone},
+		#{sContent},
+		#{sDate},
+		#{stype}
+		)
+	</insert>
+	
 	<select id="selectById" resultMap="BaseResultMap">
 		SELECT 
     		s_id,
@@ -74,7 +87,7 @@
 	</select>
 	
 	<delete id="deleteById">
-		DELETE FROM student WHERE s_id = #{sId}
+		DELETE FROM student WHERE s_studentno = #{studentNo}
 	</delete>
 	
 	<update id="updateById">

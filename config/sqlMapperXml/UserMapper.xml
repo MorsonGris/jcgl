@@ -34,6 +34,10 @@
     <select id="selectBylist" resultMap="userVoResultMap">
     	SELECT <include refid="Base_Column_List"></include> FROM user
     </select>
+    
+    <select id="selectByphone" resultMap="userVoResultMap">
+    	select <include refid="Base_Column_List"></include> FROM user where phone = #{phone}
+    </select>
 	
 	<select id="teaLogin" resultMap="userVoResultMap">
         SELECT

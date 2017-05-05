@@ -80,5 +80,10 @@ public class StudentServiceImpl implements IStudentService {
 	public Student selectByStuNo(Student student) {
 		return Studentmapper.selectByStuNo(student);
 	}
+
+	@Override
+	public boolean add(List<Student> list) {
+		return Studentmapper.add(list);
+	}
 	
 }
