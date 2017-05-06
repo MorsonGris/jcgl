@@ -1,10 +1,13 @@
 package com.xin.controller;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,6 +23,7 @@ import com.xin.bean.User;
 import com.xin.bean.vo.UserVo;
 import com.xin.commons.base.BaseController;
 import com.xin.commons.utils.CaptchaUtils;
+import com.xin.commons.utils.FileDownload;
 import com.xin.commons.utils.FileUpload;
 import com.xin.commons.utils.ObjectExcelRead;
 import com.xin.commons.utils.PageInfo;
@@ -238,20 +242,14 @@ public class ArtexamController extends BaseController{
     	Student student = new Student();
     	boolean restult = false;
     	if(null != file && !file.isEmpty()){
-    		Student student = new Student();
     		String filePath = PathUtil.getClasspath() + "uploadFile/file/";//文件上传路径
 			String fileName = FileUpload.fileUp(file, filePath, "artexamExcel");//文件名称
 			List<Map<String,Object>> listm = (List)ObjectExcelRead.readExcel(filePath, fileName, 2, 0, 0);  //执行读EXCEL操作,读出的数据导入List 2:从第3行开始；0:从第A列开始；0:第0个sheet
-			int n = 0;
 			for(int i=0;i<listm.size();i++){
-				System.out.println("************");
 				if(listm.get(i).get("var0") != null && !listm.get(i).get("var0").equals("")) {
 					Student stu = studentservice.selectByNo();
 					String No = StudentNo.getNo(stu);
-					if(listm.size()>0){
-						student.setStudentNo(No+n);//学号
-						n++;
-					}
+					student.setStudentNo(No);//学号
 			    	student.setSName(listm.get(i).get("var0").toString());//学生姓名
 			    	UserVo uservo = userService.selectByphone(listm.get(i).get("var4").toString());
 			    	student.setUserId(uservo.getId());//老师
@@ -277,8 +275,17 @@ public class ArtexamController extends BaseController{
     	}
     }
     
+    /**下载模版
+	 * @param response
+	 * @throws Exception
+	 */
+	@RequestMapping(value="/downExcel")
+	public void downExcel(HttpServletResponse response)throws Exception{
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmm");
+		String n = sdf.format(new Date())+"会计艺考.xls";
+		FileDownload.fileDownload(response, PathUtil.getClasspath() + "uploadFile/file/" + "会计艺考.xls", n);
+	}
    
-    
     /**
      * 删除
      * @param id

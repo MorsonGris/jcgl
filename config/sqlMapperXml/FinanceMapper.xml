@@ -111,6 +111,18 @@
             <if test=" fState != null and fState != 0 ">
               	and F.f_state = #{fState}
             </if>
+             <if test=" fobligate != null">
+              	and F.f_obligate = #{fobligate}
+            </if>
+             <if test=" fway != null">
+              	and F.f_way = #{fway}
+            </if>
+             <if test=" name != null">
+              	and S.s_name like #{name}
+            </if>
+             <if test=" stype != null and stype != 0">
+              	and S.s_type = #{stype}
+            </if>
             <if test=" startTime != null ">
                 <![CDATA[ and f_date >= #{startTime} ]]>
             </if>

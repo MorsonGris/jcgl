@@ -2,8 +2,8 @@
 <%@ include file="/commons/global.jsp" %>
 <script type="text/javascript">
     $(function() {
-        $('#ArtexamAddallForm').form({
-            url : '${path }/Artexam/addall',
+        $('#StudentAddallForm').form({
+            url : '${path }/student/addall',
             onSubmit : function() {
                 progressLoad();
                 var isValid = $(this).form('enableValidation').form('validate');
@@ -29,12 +29,12 @@
 </script>
 <div class="easyui-layout" data-options="fit:true,border:false">
     <div data-options="region:'center',border:false" title="" style="overflow: hidden;padding: 3px;">
-        <form id="ArtexamAddallForm" method="post" enctype="multipart/form-data">
+        <form id="StudentAddallForm" method="post" enctype="multipart/form-data">
             <table class="grid">
                 <tr>
                     <td>
-                    	<p style="float:left;width:160px;"><input type="file" id="artexamexcel" name="artexamexcel"></p>
-                    	<p><a href="javascript:;" class="easyui-linkbutton" data-options="toggle:true,group:'g1'" onclick="window.location.href='${path}/Artexam/downExcel'">下载模版</a></p>
+                    	<p style="float:left;width:160px;"><input type="file" id="studentexcel" name="studentexcel"></p>
+                    	<p><a href="javascript:;" class="easyui-linkbutton" data-options="toggle:true,group:'g1'" onclick="window.location.href='${path}/student/downExcel'">下载模版</a></p>
                     </td>
                 </tr>
             </table>

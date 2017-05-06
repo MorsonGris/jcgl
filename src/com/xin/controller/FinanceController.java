@@ -94,9 +94,21 @@ public class FinanceController extends BaseController{
         if (finance.getCreatedateEnd() != null) {
             condition.put("endTime", finance.getCreatedateEnd());
         }
+        if(finance.getFObligate() != null){
+        	condition.put("fobligate", finance.getFObligate());//学期
+        }
+        if(finance.getFWay() != null){
+        	condition.put("fway", finance.getFWay());
+        }
+        if(finance.getStudent().getSName() != null){
+        	condition.put("name", finance.getStudent().getSName());
+        }
+        if(finance.getStudent().getStype() != null){
+        	condition.put("stype", finance.getStudent().getStype());
+        }
         condition.put("stypeone", 1);
         condition.put("stypetwo", 2);
-        condition.put("stypethree", 6);
+        condition.put("stypethree",6);
         pageInfo.setCondition(condition);
         financeService.selectFinancePage(pageInfo);
         return pageInfo;
@@ -455,6 +467,7 @@ public class FinanceController extends BaseController{
 						state = 0;
 					}
 					finance.setFState(state);	//缴费状态
+					finance.setFObligate(listm.get(i).get("var8").toString());//学期
 					result += financeService.financeInsert(finance);
 				}
 			}

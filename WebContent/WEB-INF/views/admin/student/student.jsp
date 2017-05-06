@@ -129,6 +129,23 @@
         });
     }
     
+    function addallStudentFun(){
+    	 parent.$.modalDialog({
+             title : '批量添加',
+             width : 250,
+             height : 120,
+             href : '${path }/student/addall',
+             buttons : [ {
+                 text : '确定',
+                 handler : function() {
+                     parent.$.modalDialog.openner_dataGrid = studentDataGrid;//因为添加成功之后，需要刷新这个dataGrid，所以先预定义好
+                     var f = parent.$.modalDialog.handler.find('#StudentAddallForm');
+                     f.submit();
+                 }
+             } ]
+         });
+    }
+    
     function deleteStudentFun(id) {
         if (id == undefined) {//点击右键菜单才会触发这个
             var rows = studentDataGrid.datagrid('getSelections');
@@ -275,5 +292,6 @@
 <div id="studentToolbar" style="display: none;">
     <shiro:hasPermission name="/student/add">
      	<a onclick="addStudentFun();" href="javascript:void(0);" class="easyui-linkbutton" data-options="plain:true,iconCls:'fi-plus icon-green'">添加</a>
+     	<a onclick="addallStudentFun();" href="javascript:void(0);" class="easyui-linkbutton" data-options="plain:true,iconCls:'fi-upload icon-green'">批量添加</a>
     </shiro:hasPermission>
 </div>

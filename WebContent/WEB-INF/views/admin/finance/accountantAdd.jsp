@@ -108,6 +108,16 @@
                     	<input name="fDate" placeholder="点击选择时间" onclick="WdatePicker({readOnly:true,dateFmt:'yyyy-MM-dd HH:mm:ss'})" readonly="readonly" />
                     </td>
                 </tr>
+                <tr>
+	               	 <td>学期</td>
+	               	 <td>
+	               	 	<select class="easyui-combobox" id="fObligate" name="fObligate" data-options="width:80,height:29,editable:false,panelHeight:'auto'" >
+	               	 		<option value="第一学期">第一学期</option>
+	               	 		<option value="第二学期">第二学期</option>
+	               	 		<option value="第三学期">第三学期</option>
+	               	 	</select>
+	               	 </td>
+                </tr>
             </table>
         </form>
     </div>

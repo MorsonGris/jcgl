@@ -1,19 +1,20 @@
 package com.xin.controller;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import javax.servlet.http.HttpServletRequest;
-
+import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-
+import org.springframework.web.multipart.MultipartFile;
 import com.xin.bean.Academy;
 import com.xin.bean.Finance;
 import com.xin.bean.Student;
@@ -21,7 +22,11 @@ import com.xin.bean.User;
 import com.xin.bean.vo.UserVo;
 import com.xin.commons.base.BaseController;
 import com.xin.commons.utils.CaptchaUtils;
+import com.xin.commons.utils.FileDownload;
+import com.xin.commons.utils.FileUpload;
+import com.xin.commons.utils.ObjectExcelRead;
 import com.xin.commons.utils.PageInfo;
+import com.xin.commons.utils.PathUtil;
 import com.xin.commons.utils.StudentNo;
 import com.xin.service.IAcademyService;
 import com.xin.service.IFinanceService;
@@ -137,8 +142,6 @@ public class StudentController extends BaseController{
     
     @GetMapping("/addpage")
     public String addpage(Model model){
-    	/*List<Academy> list = academyService.selectadult();
-    	model.addAttribute("academy", list);*/
     	return "admin/student/studentAdd";
     }
     
@@ -231,6 +234,72 @@ public class StudentController extends BaseController{
     	}
     	return renderError("短信验证码错误");
     }
+    
+    @GetMapping("/addall")
+    public String addall(){
+    	return "admin/student/studentAdd1";
+    }
+    
+    /**
+     * EXCEL文件上传
+     * @param file
+     * @param student
+     * @return
+     * */
+    @SuppressWarnings({ "unchecked", "rawtypes"})
+    @RequestMapping("/addall")
+    @ResponseBody
+    public Object addall(@RequestParam(value="studentexcel",required=false) MultipartFile file){
+    	Student student = new Student();
+    	boolean restult = false;
+    	if(null != file && !file.isEmpty()){
+    		String filePath = PathUtil.getClasspath() + "uploadFile/file/";//文件上传路径
+			String fileName = FileUpload.fileUp(file, filePath, "artexamExcel");//文件名称
+			List<Map<String,Object>> listm = (List)ObjectExcelRead.readExcel(filePath, fileName, 2, 0, 0);  //执行读EXCEL操作,读出的数据导入List 2:从第3行开始；0:从第A列开始；0:第0个sheet
+			for(int i=0;i<listm.size();i++){
+				if(listm.get(i).get("var0") != null && !listm.get(i).get("var0").equals("")) {
+					Student stu = studentService.selectByNo();
+					String No = StudentNo.getNo(stu);
+					student.setStudentNo(No);//学号
+			    	student.setSName(listm.get(i).get("var0").toString());//学生姓名
+			    	UserVo uservo = userService.selectByphone(listm.get(i).get("var8").toString());
+			    	student.setUserId(uservo.getId());//老师
+			    	student.setIdNumber(listm.get(i).get("var1").toString());//身份证号码
+			    	student.setSPhone(listm.get(i).get("var2").toString());//手机号码
+			    	student.setAcademyId(listm.get(i).get("var3").toString());//报考院校
+			    	student.setSContent(listm.get(i).get("var4").toString());//报考专业
+			    	student.setSGradations(listm.get(i).get("var5").toString());//报考层次
+			    	student.setSSystme(listm.get(i).get("var6").toString());//学制
+			    	if(listm.get(i).get("var7").toString().equals("成人教育")){//报考类型
+			    		student.setStype(1);
+			    	}else if(listm.get(i).get("var7").toString().equals("国家开放")){
+			    		student.setStype(2);
+			    	}else if(listm.get(i).get("var7").toString().equals("远程教育")){
+			    		student.setStype(6);
+			    	}
+			    	student.setSDate(new Date());//报考时间
+			    	restult = studentService.insertByid(student);
+			    	
+				}
+			}
+    	}
+    	if(restult == true){
+    		return renderSuccess("添加成功");
+    	}else {
+    		return renderError("修改失败");
+    	}
+    }
+    
+    /**下载模版
+   	 * @param response
+   	 * @throws Exception
+   	 */
+   	@RequestMapping(value="/downExcel")
+   	public void downExcel(HttpServletResponse response)throws Exception{
+   		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmm");
+   		String n = sdf.format(new Date())+"成教电大.xls";
+   		FileDownload.fileDownload(response, PathUtil.getClasspath() + "uploadFile/file/" + "成教电大.xls", n);
+   	}
     
     @RequestMapping("/adda")
     @ResponseBody

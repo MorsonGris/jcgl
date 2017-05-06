@@ -63,6 +63,11 @@
                 field : 'practicalMoney',
                 sortable : true
             },{
+                width : '60',
+                title : '学期',
+                field : 'fobligate',
+                sortable : true
+            },{
                 width : '130',
                 title : '缴费时间',
                 field : 'fdate',

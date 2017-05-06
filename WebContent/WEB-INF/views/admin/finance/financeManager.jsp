@@ -108,6 +108,11 @@
                 field : 'practicalMoney',
                 sortable : true
             },{
+                width : '60',
+                title : '学期',
+                field : 'fobligate',
+                sortable : true
+            },{
                 width : '130',
                 title : '缴费时间',
                 field : 'fdate',
@@ -266,6 +271,10 @@
     	financeDataGrid.datagrid('load', $.serializeObject($('#searchFinanceForm')));
     }
     function cleanFinanceFun() {
+    	$('#fObligate').find("option").eq(0).prop("selected",true);
+    	$('#fState').find("option").eq(0).prop("selected",true);
+    	$('#fway').find("option").eq(0).prop("selected",true);
+    	$('#studentstype').find("option").eq(0).prop("selected",true);
         $('#searchFinanceForm input').val('');
         financeDataGrid.datagrid('load', {});
     }
@@ -334,18 +343,31 @@
     }
 </script>
 <div class="easyui-layout" data-options="fit:true,border:false">
-    <div data-options="region:'north',border:false" style="height: 30px; overflow: hidden;background-color: #fff">
+    <div data-options="region:'north',border:false" style="height:60px; overflow: hidden;background-color: #fff">
         <form id="searchFinanceForm">
             <table>
                 <tr>
                     <th>合作人:</th>
-                    <td><input id="teaClass" name="teaClass" placeholder="请输入合作人"/></td>
+                    <td><input id="teaClass" name="teaClass" style="width:80px;" placeholder="请输入合作人"/></td>
                     <th>学号:</th>
-                    <td><input id="stuNo" name="stuNo" placeholder="请输入学号"/></td>
+                    <td><input id="stuNo" name="stuNo" style="width:90px;" placeholder="请输入学号"/></td>
+                    <th>学生姓名:</th>
+                    <td>
+                    	<input id="sName" name="sName" style="width:100px;" placeholder="请输入学生姓名">
+                    </td>
+                    <th>学期:</th>
+                    <td>
+                    	<select id="fObligate" name="fObligate">
+                    		<option value="请选择学期">请选择学期</option>
+                    		<option value="第一学期">第一学期</option>
+                    		<option value="第二学期">第二学期</option>
+                    		<option value="第三学期">第三学期</option>
+                    	</select>
+                    </td>
                     <th>缴费状态:</th>
                     <td>
-                    	<select class="easyui-combobox" id="fState" name="fState" data-options="width:80,height:29,editable:false,panelHeight:'auto'" >
-							<option value="0"></option>
+                    	<select id="fState" name="fState">
+							<option value="0">缴费状态</option>
 							<option value="1">未缴费</option>
 							<option value="2">已缴费</option>
 							<option value="3">已兑帐</option>
@@ -354,11 +376,32 @@
                     <th>缴费时间:</th>
                     <td>
                     	<!-- <input name="createdateStart" type="text" class="easyui-datetimebox" /> -->
-                    	<input id="createdateStart" name="createdateStart" placeholder="点击选择时间" onclick="WdatePicker({readOnly:true,dateFmt:'yyyy-MM-dd HH:mm:ss'})" readonly="readonly" />至
-                        <input id="createdateEnd" name="createdateEnd" placeholder="点击选择时间" onclick="WdatePicker({readOnly:true,dateFmt:'yyyy-MM-dd HH:mm:ss'})" readonly="readonly" />
+                    	<input id="createdateStart" name="createdateStart" style="width:120px;" placeholder="点击选择时间" onclick="WdatePicker({readOnly:true,dateFmt:'yyyy-MM-dd HH:mm:ss'})" readonly="readonly" />至
+                        <input id="createdateEnd" name="createdateEnd" style="width:120px;" placeholder="点击选择时间" onclick="WdatePicker({readOnly:true,dateFmt:'yyyy-MM-dd HH:mm:ss'})" readonly="readonly" />
                         <a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'fi-magnifying-glass',plain:true" onclick="searchFinanceFun();">查询</a>
                         <a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'fi-x-circle',plain:true" onclick="cleanFinanceFun();">清空</a>
                     </td>
+                </tr>
+                <tr>
+                	<th>缴费方式:</th>
+                	<td>
+                		<select id="fway" name="fway">
+                			<option value="缴费方式">缴费方式</option>
+                			<option value="支付宝">支付宝</option>
+                			<option value="微信">微信</option>
+                			<option value="银行卡转账">银行卡转账</option>
+                			<option value="现金">现金</option>
+                		</select>
+                	</td>
+                	<th>报考类型:</th>
+                	<td>
+                		<select id=stype name="stype">
+                			<option value="0">报考类型</option>
+                			<option value="1">成人高考</option>
+                			<option value="2">远程教育</option>
+                			<option value="6">开放大学</option>
+                		</select>
+                	</td>
                 </tr>
             </table>
         </form>
