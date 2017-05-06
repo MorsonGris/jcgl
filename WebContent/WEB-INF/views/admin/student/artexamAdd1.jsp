@@ -14,8 +14,13 @@
             },
             success : function(result) {
             	progressClose();
+<<<<<<< Updated upstream
                 result = $.parseJSON(result);
+=======
+            	result = $.parseJSON(result);
+>>>>>>> Stashed changes
                 if (result.success) {
+                	parent.$.messager.alert('提示', result.msg, 'warning');
                     parent.$.modalDialog.openner_dataGrid.datagrid('reload');
                     parent.$.modalDialog.handler.dialog('close');
                 } else {

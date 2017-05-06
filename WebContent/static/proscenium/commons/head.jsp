@@ -53,14 +53,14 @@
          		 		</a>
          		 		</div>
    		 			</li>
-       		 		<li>
+       		 		<%-- <li>
        		 			<div style="padding: 10px 15px;">
          		 		<a href="${path }/index/stuLogin">
           				<img alt="" src="${path }/static/proscenium/icon/user62.png" style="width: 30px;">
            				 学生登录
          		 		</a>
          		 		</div>
-   		 			</li>
+   		 			</li> --%>
    		 			<li>
    		 				<div style="padding: 10px 15px;">
          		 		<a href="${path }/login">

@@ -238,6 +238,7 @@ public class ArtexamController extends BaseController{
     	Student student = new Student();
     	boolean restult = false;
     	if(null != file && !file.isEmpty()){
+    		Student student = new Student();
     		String filePath = PathUtil.getClasspath() + "uploadFile/file/";//文件上传路径
 			String fileName = FileUpload.fileUp(file, filePath, "artexamExcel");//文件名称
 			List<Map<String,Object>> listm = (List)ObjectExcelRead.readExcel(filePath, fileName, 2, 0, 0);  //执行读EXCEL操作,读出的数据导入List 2:从第3行开始；0:从第A列开始；0:第0个sheet

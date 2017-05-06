@@ -245,16 +245,13 @@ public class LoginController extends BaseController {
     @ResponseBody
     public void logout(HttpServletRequest req,HttpServletResponse response) {
         logger.info("登出");
+        Subject subject = SecurityUtils.getSubject();
+        subject.logout();
         try {
 			response.sendRedirect(req.getContextPath()+"/login");
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-        /*Subject subject = SecurityUtils.getSubject();
-        subject.logout();
-        return renderSuccess();*/
-        //return "redirect:/login";
     }
 
 }

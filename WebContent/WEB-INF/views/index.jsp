@@ -180,7 +180,7 @@ function loadReady() {
        }
    }
    
-   /* function logout(){
+   function logout(){
        $.messager.confirm('提示','确定要退出?',function(r){
            if (r){
                progressLoad(); 
@@ -192,7 +192,7 @@ function loadReady() {
                }, 'json');
            }
        });
-   }*/
+   }
 
    function editUserPwd() {
        parent.$.modalDialog({
