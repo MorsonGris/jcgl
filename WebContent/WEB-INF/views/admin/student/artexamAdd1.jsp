@@ -13,8 +13,8 @@
                 return isValid;
             },
             success : function(result) {
-            	alert(result.success);
-                progressClose();
+            	progressClose();
+                result = $.parseJSON(result);
                 if (result.success) {
                     parent.$.modalDialog.openner_dataGrid.datagrid('reload');
                     parent.$.modalDialog.handler.dialog('close');
@@ -31,7 +31,7 @@
         <form id="ArtexamAddallForm" method="post" enctype="multipart/form-data">
             <table class="grid">
                 <tr>
-                    <td><input type="file" name="stumessage"></td>
+                    <td><input type="file" id="artexamexcel" name="artexamexcel"></td>
                 </tr>
             </table>
         </form>

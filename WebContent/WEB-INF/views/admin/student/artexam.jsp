@@ -271,6 +271,6 @@
 <div id="ArtexamToolbar" style="display: none;">
     <shiro:hasPermission name="/Artexam/add">
      	<a onclick="addArtexamFun();" href="javascript:void(0);" class="easyui-linkbutton" data-options="plain:true,iconCls:'fi-plus icon-green'">添加</a>
-     	<a onclick="addArtexamFun1();" href="javascript:void(0);" class="easyui-linkbutton" data-options="plain:true,iconCls:'fi-plus icon-green'">批量上传</a>
+     	<a onclick="addArtexamFun1();" href="javascript:void(0);" class="easyui-linkbutton" data-options="plain:true,iconCls:'fi-upload icon-green'">批量上传</a>
     </shiro:hasPermission>
 </div>

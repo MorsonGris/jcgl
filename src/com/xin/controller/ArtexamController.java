@@ -225,42 +225,55 @@ public class ArtexamController extends BaseController{
     	return renderError("添加失败");	
     }
     
+    /**
+     * EXCEL文件上传
+     * @param file
+     * @param student
+     * @return
+     * */
+    @SuppressWarnings({ "unchecked", "rawtypes"})
     @RequestMapping("/addall")
     @ResponseBody
-    public Object addall(@RequestParam(value="stumessage",required=false) MultipartFile file,Student student){
+    public Object addall(@RequestParam(value="artexamexcel",required=false) MultipartFile file){
+    	Student student = new Student();
+    	boolean restult = false;
     	if(null != file && !file.isEmpty()){
     		String filePath = PathUtil.getClasspath() + "uploadFile/file/";//文件上传路径
-			String fileName = FileUpload.fileUp(file, filePath, "financeExcel");//文件名称
-			@SuppressWarnings({ "unchecked", "rawtypes" })
+			String fileName = FileUpload.fileUp(file, filePath, "artexamExcel");//文件名称
 			List<Map<String,Object>> listm = (List)ObjectExcelRead.readExcel(filePath, fileName, 2, 0, 0);  //执行读EXCEL操作,读出的数据导入List 2:从第3行开始；0:从第A列开始；0:第0个sheet
 			int n = 0;
-			for(int i=0;i<=listm.size();i++){
-				Student stu = studentservice.selectByNo();
-				String No = StudentNo.getNo(stu);
-				if(listm.size()>0){
-					student.setStudentNo(No+n);//学号
-					n++;
+			for(int i=0;i<listm.size();i++){
+				System.out.println("************");
+				if(listm.get(i).get("var0") != null && !listm.get(i).get("var0").equals("")) {
+					Student stu = studentservice.selectByNo();
+					String No = StudentNo.getNo(stu);
+					if(listm.size()>0){
+						student.setStudentNo(No+n);//学号
+						n++;
+					}
+			    	student.setSName(listm.get(i).get("var0").toString());//学生姓名
+			    	UserVo uservo = userService.selectByphone(listm.get(i).get("var4").toString());
+			    	student.setUserId(uservo.getId());//老师
+			    	student.setSPhone(listm.get(i).get("var1").toString());//手机号码
+			    	if(listm.get(i).get("var2").toString().equals("艺考")){//报考类型
+			    		student.setStype(3);
+			    	}else if(listm.get(i).get("var2").toString().equals("会计")){
+			    		student.setStype(4);
+			    	}else if(listm.get(i).get("var2").toString().equals("职业资格")){
+			    		student.setStype(5);
+			    	}
+			    	student.setSContent(listm.get(i).get("var3").toString());//学习内容
+			    	student.setSDate(new Date());//报考时间
+			    	restult = artexamService.insertByid(student);
+			    	
 				}
-		    	student.setSName(listm.get(i).get("var0").toString());//学生姓名
-		    	UserVo uservo = userService.selectByphone(listm.get(i).get("var4").toString());
-		    	student.setUserId(uservo.getId());//老师
-		    	student.setSPhone(listm.get(i).get("var1").toString());//手机号码
-		    	if(listm.get(i).get("var2").toString().equals("艺考")){//报考类型
-		    		student.setStype(3);
-		    	}else if(listm.get(i).get("var2").toString().equals("会计")){
-		    		student.setStype(4);
-		    	}else if(listm.get(i).get("var2").toString().equals("职业资格")){
-		    		student.setStype(5);
-		    	}
-		    	student.setSContent(listm.get(i).get("var3").toString());//学习内容
-		    	student.setSDate(new Date());//报考时间
-		    	boolean restult = artexamService.insertByid(student);
-		    	if(restult == true){
-		    		return renderSuccess("添加成功");
-		    	}
 			}
     	}
-    	return renderError("批量添加失败");
+    	if(restult == true){
+    		return renderSuccess("添加成功");
+    	}else {
+    		return renderError("修改失败");
+    	}
     }
     
    
