@@ -80,6 +80,18 @@ public class AccountantController extends BaseController{
         if (finance.getCreatedateEnd() != null) {
             condition.put("endTime", finance.getCreatedateEnd());
         }
+        if(finance.getFObligate() != null && !finance.getFObligate().equals("请选择学期")){
+        	condition.put("fobligate", finance.getFObligate());//学期
+        }
+        if(finance.getFWay() != null && finance.getFWay()!= 0){
+        	condition.put("fway", finance.getFWay());
+        }
+        if(finance.getsName() != null && !finance.getsName().equals("")){
+        	condition.put("name", finance.getsName());
+        }
+        if(finance.getStype()!= null && finance.getStype() != 0){
+        	condition.put("stype", finance.getStype());
+        }
         condition.put("stypeone", 3);
         condition.put("stypetwo", 4);
         condition.put("stypethree", 5);

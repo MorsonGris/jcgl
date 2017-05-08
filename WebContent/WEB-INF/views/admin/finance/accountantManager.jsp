@@ -53,7 +53,7 @@
                     return value.name;
                 }
             },{
-                width : '80',
+                width : '60',
                 title : '需缴金额',
                 field : 'needMoney',
                 sortable : true
@@ -97,7 +97,7 @@
                 field : 'faccumulative',
                 sortable : true
             },{
-                width : '80',
+                width : '70',
                 title : '缴费状态',
                 field : 'fstate',
                 sortable : true,
@@ -138,12 +138,16 @@
             },{
                 field : 'action',
                 title : '操作',
-                width : 130,
+                width : 200,
                 formatter : function(value, row, index) {
                     var str = '';
                         <shiro:hasPermission name="/finance/edit">
                             str += $.formatString('<a href="javascript:void(0)" class="accountant-easyui-linkbutton-edit" data-options="plain:true,iconCls:\'fi-pencil icon-blue\'" onclick="editaccountantFun(\'{0}\');" >编辑</a>', row.fid);
                         </shiro:hasPermission>
+                        <shiro:hasPermission name="/finance/edit">
+                       		str += '&nbsp;&nbsp;|&nbsp;&nbsp;';
+                        	str += $.formatString('<a href="javascript:void(0)" class="accountant-easyui-linkbutton-print" data-options="plain:true,iconCls:\'fi-print icon-blue\'" onclick="previewaccount(1);" >打印</a>', row.fid);
+                   		</shiro:hasPermission>
                         <shiro:hasPermission name="/finance/delete">
                             str += '&nbsp;&nbsp;|&nbsp;&nbsp;';
                             str += $.formatString('<a href="javascript:void(0)" class="accountant-easyui-linkbutton-del" data-options="plain:true,iconCls:\'fi-x icon-red\'" onclick="deleteaccountantFun(\'{0}\');" >删除</a>', row.fid);
@@ -153,11 +157,28 @@
             }] ],
             onLoadSuccess:function(data){
                 $('.accountant-easyui-linkbutton-edit').linkbutton({text:'编辑'});
+                $('.accountant-easyui-linkbutton-print').linkbutton({text:'打印'});
                 $('.accountant-easyui-linkbutton-del').linkbutton({text:'删除'});
             },
             toolbar : '#accountantToolbar'
         });
     });
+    
+    function previewaccount(oper) {
+    	if (oper < 10){
+    		bdhtml=window.document.body.innerHTML;//获取当前页的html代码 
+    		sprnstr="<!--startprint"+oper+"-->";//设置打印开始区域 
+    		eprnstr="<!--endprint"+oper+"-->";//设置打印结束区域 
+    		prnhtml=bdhtml.substring(bdhtml.indexOf(sprnstr)+18); //从开始代码向后取html 
+    		
+    		prnhtml=prnhtml.substring(0,prnhtml.indexOf(eprnstr));//从结束代码向前取html 
+    		window.document.body.innerHTML=prnhtml;
+    		window.print();
+    		window.document.body.innerHTML=bdhtml;
+    	}else{
+    		window.print();
+    		}
+    	}
     
     function addaccountantFun() {
         parent.$.modalDialog({
@@ -226,6 +247,10 @@
     	accountantDataGrid.datagrid('load', $.serializeObject($('#searchAccountantsForm')));
     }
     function cleanAccountantFun() {
+    	$('#fObligate').find("option").eq(0).prop("selected",true);
+    	$('#fState').find("option").eq(0).prop("selected",true);
+    	$('#stype').find("option").eq(0).prop("selected",true);
+    	$('#fWay').find("option").eq(0).prop("selected",true);
         $('#searchAccountantsForm input').val('');
         accountantDataGrid.datagrid('load', {});
     }
@@ -294,18 +319,31 @@
     }
 </script>
 <div class="easyui-layout" data-options="fit:true,border:false">
-    <div data-options="region:'north',border:false" style="height: 30px; overflow: hidden;background-color: #fff">
+    <div data-options="region:'north',border:false" style="height:60px; overflow: hidden;background-color: #fff">
         <form id="searchAccountantsForm">
             <table>
                 <tr>
                     <th>合作人:</th>
-                    <td><input id="teaClass" name="teaClass" placeholder="请输入合作人"/></td>
+                    <td><input id="teaClass" name="teaClass" style="width:80px;" placeholder="请输入合作人"/></td>
                     <th>学号:</th>
-                    <td><input id="stuNo" name="stuNo" placeholder="请输入学号"/></td>
+                    <td><input id="stuNo" name="stuNo" style="width:90px;" placeholder="请输入学号"/></td>
+                    <th>学生姓名:</th>
+                    <td>
+                    	<input id="sName" name="sName" style="width:100px;" placeholder="请输入学生姓名">
+                    </td>
+                    <th>学期:</th>
+                    <td>
+                    	<select id="fObligate" name="fObligate">
+                    		<option value="请选择学期">请选择学期</option>
+                    		<option value="第一学期">第一学期</option>
+                    		<option value="第二学期">第二学期</option>
+                    		<option value="第三学期">第三学期</option>
+                    	</select>
+                    </td>
                     <th>缴费状态:</th>
                     <td>
-                    	<select class="easyui-combobox" id="fState" name="fState" data-options="width:80,height:29,editable:false,panelHeight:'auto'" >
-							<option value="0"></option>
+                    	<select id="fState" name="fState">
+							<option value="0">缴费状态</option>
 							<option value="1">未缴费</option>
 							<option value="2">已缴费</option>
 							<option value="3">已兑帐</option>
@@ -314,17 +352,40 @@
                     <th>缴费时间:</th>
                     <td>
                     	<!-- <input name="createdateStart" type="text" class="easyui-datetimebox" /> -->
-                    	<input id="createdateStart" name="createdateStart" placeholder="点击选择时间" onclick="WdatePicker({readOnly:true,dateFmt:'yyyy-MM-dd HH:mm:ss'})" readonly="readonly" />至
-                        <input id="createdateEnd" name="createdateEnd" placeholder="点击选择时间" onclick="WdatePicker({readOnly:true,dateFmt:'yyyy-MM-dd HH:mm:ss'})" readonly="readonly" />
+                    	<input id="createdateStart" name="createdateStart" style="width:120px;" placeholder="点击选择时间" onclick="WdatePicker({readOnly:true,dateFmt:'yyyy-MM-dd HH:mm:ss'})" readonly="readonly" />至
+                        <input id="createdateEnd" name="createdateEnd" style="width:120px;" placeholder="点击选择时间" onclick="WdatePicker({readOnly:true,dateFmt:'yyyy-MM-dd HH:mm:ss'})" readonly="readonly" />
                         <a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'fi-magnifying-glass',plain:true" onclick="searchAccountantFun();">查询</a>
                         <a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'fi-x-circle',plain:true" onclick="cleanAccountantFun();">清空</a>
                     </td>
+                </tr>
+                <tr>
+                	<th>缴费方式:</th>
+                	<td>
+                		<select id="fWay" name="fWay">
+                			<option value="0">缴费方式</option>
+                			<option value="1">支付宝</option>
+                			<option value="2">微信</option>
+                			<option value="3">银行卡转账</option>
+                			<option value="4">现金</option>
+                		</select>
+                	</td>
+                	<th>报考类型:</th>
+                	<td>
+                		<select id=stype name="stype">
+                			<option value="0">报考类型</option>
+                			<option value="3">会计</option>
+                			<option value="4">艺考</option>
+                			<option value="5">职业资格</option>
+                		</select>
+                	</td>
                 </tr>
             </table>
         </form>
     </div>
     <div data-options="region:'center',border:true,title:'缴费人员列表'" >
+       	<!--startprint1-->
         <table id="accountantDataGrid" data-options="fit:true,border:false"></table>
+    	<!--endprint1-->
     </div>
 </div>
 <div id="accountantToolbar" style="display: none;">

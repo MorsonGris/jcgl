@@ -22,7 +22,7 @@
 	<div class="row" style="margin-top: 40px;">
 		<div class="col-xs-12">
 			<table id="scheduleTable" data-toggle="table"
-			       data-url="${path }/schedule/queryBypages"
+			       data-url="${path }/schedule/queryBypages?id=${user.id}"
 			       data-pagination="true"
 			       data-locale="zh-CN"
 			       data-side-pagination="server"
@@ -30,7 +30,6 @@
 			       data-search="false"
 			       data-show-refresh="true"
 			       data-show-toggle="true"
-			       data-card-view="ture"
 			       data-show-columns="true"
 			       data-show-export="true" 
 			       data-minimum-count-columns="2" 
@@ -45,6 +44,7 @@
 			    	<th data-field="sdate" data-align="center" data-formatter="dateFormatter" data-sortable="false" >创建时间</th>
 			    	<th data-field="sFlag" data-align="left" data-formatter="stateFormatter" data-sortable="false" >是否完成</th>
 			    	<th data-field="sFinishdate" data-align="left" data-formatter="dateFormatter" data-sortable="false" >完成时间</th>
+			    	<th data-align="center"  data-formatter="actionFormatteradd" data-events="actionadd" data-sortable="false">操作</th>
 			    	<th data-field="sid" data-align="center"  data-formatter="actionFormatter" data-events="actionEvents" data-sortable="false">操作</th>
 			    </tr>
 			    </thead>
@@ -65,6 +65,13 @@
 <script src="${path }/static/proscenium/plugin/goup/jquery.goup.min.js"></script>
 <script src="${path }/static/proscenium/js/app.js"></script>
 <script type="text/javascript">
+function actionFormatteradd(value, row, index) {
+    return [
+        '<a class="open ml10" href="javascript:void(0)" title="添加">',
+        '<i class="glyphicon glyphicon-edit"></i>',
+        '</a>'
+    ].join('');
+}
 function actionFormatter(value, row, index) {
     return [
         '<a class="open ml10" href="javascript:void(0)" title="删除">',
@@ -73,8 +80,10 @@ function actionFormatter(value, row, index) {
     ].join('');
 }
 function dateFormatter(value) {
-	var date = value.split("-")[0]+"/"+value.split("-")[1]+"/"+(value.split("-")[2]).split(" ")[0];
-    return date
+	if(value != null){
+		var date = value.split("-")[0]+"/"+value.split("-")[1]+"/"+(value.split("-")[2]).split(" ")[0];
+	    return date
+	}
 }
 function stateFormatter(value) {
 	if(value=="0"){
@@ -84,6 +93,41 @@ function stateFormatter(value) {
 	}
 	return value;
 }
+
+window.actionadd = {
+	'click .open': function (e, value, row, index) {
+		swal({
+	    	  title: '',
+	    	  html:
+	    	    '标题<input id="sTitle" name="sTitle" type="text" class="swal2-input">' +
+	    	    '内容 <textarea id="scontent" name ="scontent" class="form-control" rows="3"></textarea>',
+	    	  preConfirm: function() {
+	    		  var sTitle = $('#sTitle').val();
+		          var scontent = $('#scontent').val();
+		          var id = ${user.id};
+	    	      return new Promise(function(resolve) {
+    	   			$.post("${path }/schedule/add1",{"sTitle":sTitle,"scontent":scontent,"id":id},function(data) {
+    	   				data = $.parseJSON(data);
+    	   				if(data.success == true){
+							sweetAlert(
+								data.msg,
+		   	   				  	'',
+		   	   				  	'success'
+		     	   			)
+						}else{
+							sweetAlert(
+								data.msg,
+		   	   				  	'',
+		   	   				  	'error'
+		     	   			)
+						}
+					});
+	    	    });
+	    	  }
+	    	})
+	    }
+	}
+
 window.actionEvents = {
 	'click .open': function (e, value, row, index) {
 	swal({
@@ -100,7 +144,7 @@ window.actionEvents = {
             }, function(result) {
                 if (result.success) {
                 	swal(
-              		      '添加成功!',
+              		      '删除成功!',
               		      result.msg,
               		      'success'
               		    );

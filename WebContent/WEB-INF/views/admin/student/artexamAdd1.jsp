@@ -45,22 +45,12 @@
 <div class="easyui-layout" data-options="fit:true,border:false">
     <div data-options="region:'center',border:false" title="" style="overflow: hidden;padding: 3px;">
         <form id="ArtexamAddallForm" method="post" enctype="multipart/form-data">
-            <%-- <table class="grid">
-                <tr>
-                    <td>
-                    	<p style="float:left;width:160px;"><input type="file" id="artexamexcel" name="artexamexcel"></p>
-                    	<p><a href="javascript:;" class="easyui-linkbutton" data-options="toggle:true,group:'g1'" onclick="window.location.href='${path}/Artexam/downExcel'">下载模版</a></p>
-                    </td>
-                </tr>
-            </table> --%>
             <div id="zhongxin">
-			<table style="width:95%;" >
+			<table style="width:100%;" >
 				<tr>
-					<td style="padding-top: 20px;">
-						<input type="file" id="artexamexcel" name="artexamexcel" style="width:200px;" onchange="fileType(this)" />
-					</td>
-					<td style="text-align: center;padding-top: 20px;">
-						<a href="javascript:;" class="easyui-linkbutton" data-options="toggle:true,group:'g1'" onclick="window.location.href='${path}/Artexam/downExcel''">下载模版</a>
+					<td style="padding-top:20px;">
+						<input type="file" id="artexamexcel" name="artexamexcel" style="width:180px;" onchange="fileType(this)" />
+						<a href="javascript:;" class="easyui-linkbutton" data-options="toggle:true,group:'g1'" onclick="window.location.href='${path}/Artexam/downExcel'">下载模版</a>
 					</td>
 				</tr>
 				<tr>

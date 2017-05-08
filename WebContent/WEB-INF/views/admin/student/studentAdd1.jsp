@@ -26,18 +26,36 @@
         });
     });
     
+    function fileType(obj){
+		var fileType=obj.value.substr(obj.value.lastIndexOf(".")).toLowerCase();//获得文件后缀名
+	    if(fileType != '.xls'){
+	    	$("#tishi").html("<b>*请选择xls格式的文件</b>");
+	    	$("#artexamexcel").val('');
+	    	document.getElementById("excel").files[0] = '请选择xls格式的文件';
+	    }else {
+	    	$("#tishi").html('');
+		}
+	}
 </script>
 <div class="easyui-layout" data-options="fit:true,border:false">
     <div data-options="region:'center',border:false" title="" style="overflow: hidden;padding: 3px;">
         <form id="StudentAddallForm" method="post" enctype="multipart/form-data">
-            <table class="grid">
-                <tr>
-                    <td>
-                    	<p style="float:left;width:160px;"><input type="file" id="studentexcel" name="studentexcel"></p>
-                    	<p><a href="javascript:;" class="easyui-linkbutton" data-options="toggle:true,group:'g1'" onclick="window.location.href='${path}/student/downExcel'">下载模版</a></p>
-                    </td>
-                </tr>
-            </table>
+            <div id="zhongxin">
+				<table style="width:100%;" >
+					<tr>
+						<td style="padding-top:20px;">
+							<input type="file" id="studentexcel" name="studentexcel" style="width:180px;" onchange="fileType(this)" />
+							<a href="javascript:;" class="easyui-linkbutton" data-options="toggle:true,group:'g1'" onclick="window.location.href='${path}/student/downExcel'">下载模版</a>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<span id="tishi" style="color:red;font-weight:bold"></span>
+						</td>
+					</tr>
+				</table>
+			</div>
+			<div id="zhongxin2" class="center" style="display:none"><br/><img src="${path}/static/style/images/jzx.gif" /><br/><h4 class="lighter block green"></h4></div>
         </form>
     </div>
 </div>

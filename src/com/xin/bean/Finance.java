@@ -41,6 +41,8 @@ public class Finance extends Model<Finance> {
 	private Integer stypeone;
 	private Integer stypetwo;
 	private Integer stypethree;
+	private String sName;
+	private Integer stype;
 
 	private Student student;
 	
@@ -190,6 +192,22 @@ public class Finance extends Model<Finance> {
 
 	public void setStypethree(Integer stypethree) {
 		this.stypethree = stypethree;
+	}
+
+	public String getsName() {
+		return sName;
+	}
+
+	public void setsName(String sName) {
+		this.sName = sName;
+	}
+
+	public Integer getStype() {
+		return stype;
+	}
+
+	public void setStype(Integer stype) {
+		this.stype = stype;
 	}
 
 	@Override

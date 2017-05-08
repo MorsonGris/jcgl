@@ -185,6 +185,24 @@ public class UserController extends BaseController {
         userService.updatePwdByUserId(getUserId(), DigestUtils.md5Hex(pwd));
         return renderSuccess("密码修改成功！");
     }
+    
+    /**
+     * 修改密码
+     *
+     * @param oldPwd
+     * @param pwd
+     * @return
+     */
+    @RequestMapping("/editUserPwd1")
+    @ResponseBody
+    public Object editUserPwd(String oldPwd, String pwd,long id) {
+        User user = userService.selectById(id);
+        if (!user.getPassword().equals(DigestUtils.md5Hex(oldPwd))) {
+            return renderError("老密码不正确!");
+        }
+        userService.updatePwdByUserId(id, DigestUtils.md5Hex(pwd));
+        return renderSuccess("密码修改成功，请重新登录！");
+    }
 
     /**
      * 删除用户

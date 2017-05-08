@@ -112,8 +112,8 @@
     function addArtexamFun1(){
     	 parent.$.modalDialog({
              title : '批量添加',
-             width : 250,
-             height : 150,
+             width : 270,
+             height : 160,
              href : '${path }/Artexam/addallpage',
              buttons : [ {
                  text : '确定',

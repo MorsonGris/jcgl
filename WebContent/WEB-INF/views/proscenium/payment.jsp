@@ -40,7 +40,12 @@
 				    <thead>
 				    <tr>
 				    	<th data-field="student.sname" data-align="left" data-footer-formatter="汇总" data-sortable="false" >姓名</th>
-				    	<c:if test="${stu.stype==1 or stu.stype==2 or stu.stype==6}"><th data-field="student.academyId" data-align="left" data-sortable="false" >报考学校</th></c:if>
+				    	<th data-field="student.idNumber" data-align="left" data-sortable="false" >身份证号</th>
+				    	<th data-field="student.academyId" data-align="left" data-sortable="false" >报考学校</th>
+				    	<th data-field="student.scontent" data-align="left" data-sortable="false" >专业</th>
+				    	<th data-field="student.sgradations" data-align="left" data-sortable="false" >层次</th>
+				    	<th data-field="student.ssystme" data-align="left" data-sortable="false" >学制</th>
+				    	<th data-field="fobligate" data-align="left" data-footer-formatter="sumFormatter" data-sortable="false" >学期</th>
 				    	<th data-field="practicalMoney" data-align="left" data-footer-formatter="sumFormatter" data-sortable="false" >金额</th>
 				    	<th data-field="user.name" data-align="left" data-sortable="false" >班主任</th>
 				    	<th data-field="fdate" data-align="center" data-formatter="dateFormatter" data-sortable="false" >缴费时间</th>

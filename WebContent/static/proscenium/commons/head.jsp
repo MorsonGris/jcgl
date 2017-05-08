@@ -26,31 +26,35 @@
             	<c:choose>
             		
             		<c:when test="${user.id != null }">
-            		<li>
-            			<div style="padding: 10px 15px;">
-            			
-            			<img alt="" src="${path }/static/proscenium/icon/user62.png" style="width: 30px;">
-          				${user.name }
-          				
-             			</div>
-           			</li>
+	            		<li>
+	            			<div style="padding: 10px 15px;">
+		            			<img alt="" src="${path }/static/proscenium/icon/user62.png" style="width: 30px;">
+		          				${user.name }
+	             			</div>
+	           			</li>
+	           			<li>
+            				<div style="padding: 10px 15px;">
+             					<img alt="" src="${path }/static/proscenium/icon/user62.png" style="width: 30px;">
+             					<a onclick="update();">修改密码</a>
+             				</div>
+            			</li>
             		</c:when>
             		
             		<c:when test="${stu.studentNo != null }">
             			<li>
-            			<div style="padding: 10px 15px;">
-            			<img alt="" src="${path }/static/proscenium/icon/user62.png" style="width: 30px;">
-          				${stu.SName }
-             			</div>
+            				<div style="padding: 10px 15px;">
+            					<img alt="" src="${path }/static/proscenium/icon/user62.png" style="width: 30px;">
+          						${stu.SName }
+             				</div>
             			</li>
             		</c:when>
             		<c:otherwise>
             		<li>
             			<div style="padding: 10px 15px;">
-            			<a href="${path }/index/teaLogin">
-          				<img alt="" src="${path }/static/proscenium/icon/user62.png" style="width: 30px;">
-           				 合作招生
-         		 		</a>
+            				<a href="${path }/index/teaLogin">
+          						<img alt="" src="${path }/static/proscenium/icon/user62.png" style="width: 30px;">
+           					 	合作招生
+         		 			</a>
          		 		</div>
    		 			</li>
        		 		<%-- <li>
@@ -81,5 +85,51 @@
                 </c:if>
             </ul>
         </div>
-    
+    <script type="text/javascript">
+    function update(){
+    	swal({
+    	  title: '',
+    	  html:
+    	    '旧密码<input id="oldPwd" name="oldPwd" type="password" class="swal2-input" autofocus>' +
+    	    '新密码<input id="pwd" name="pwd" type="password" class="swal2-input">'+
+    	    '确认新密码<input id="rePwd" name="rePwd" type="password" class="swal2-input">',
+    	  preConfirm: function() {
+    		  var oldPwd = $('#oldPwd').val();
+	          var pwd = $('#pwd').val();
+	          var rePwd = $('#rePwd').val();
+	          var id = ${user.id};
+    	      return new Promise(function(resolve) {
+    	   		if(pwd==rePwd){
+    	   			$.post("${path }/user/editUserPwd1",{"oldPwd":oldPwd,"pwd":rePwd,"id":id},function(data) {
+    	   				data = $.parseJSON(data);
+    	   				if(data.success == true){
+							sweetAlert(
+								data.msg,
+		   	   				  	'',
+		   	   				  	'success'
+		     	   			).then(function(isConfirm) {
+		     	   				if(isConfirm) {
+		     	   					window.location="${path }/index/loginout";
+		     	   				}
+		     	   			})
+						}else{
+							sweetAlert(
+								data.msg,
+		   	   				  	'',
+		   	   				  	'error'
+		     	   			)
+						}
+					});
+      		  	}else{
+      		  		sweetAlert(
+   	   				  '新密码不一致',
+   	   				  '',
+   	   				  'error'
+     	   			)
+      		  	}
+    	    });
+    	  }
+    	})
+    }
+    </script>
 </nav>

@@ -56,7 +56,7 @@
                     }
                 }
             },{
-            	width : '110',
+            	width : '70',
                 title : '专业',
                 field : 'studentscontent',
                 formatter : function(value, row, index) {
@@ -183,12 +183,16 @@
             },{
                 field : 'action',
                 title : '操作',
-                width : 130,
+                width : 200,
                 formatter : function(value, row, index) {
                     var str = '';
                         <shiro:hasPermission name="/finance/edit">
                             str += $.formatString('<a href="javascript:void(0)" class="finance-easyui-linkbutton-edit" data-options="plain:true,iconCls:\'fi-pencil icon-blue\'" onclick="editFinanceFun(\'{0}\');" >编辑</a>', row.fid);
                         </shiro:hasPermission>
+                        <shiro:hasPermission name="/finance/delete">
+	                        str += '&nbsp;&nbsp;|&nbsp;&nbsp;';
+	                        str += $.formatString('<a href="javascript:void(0)" class="finance-easyui-linkbutton-print" data-options="plain:true,iconCls:\'fi-print icon-blue\'" onclick="preview(1);" >打印</a>', row.fid);
+                    	</shiro:hasPermission>
                         <shiro:hasPermission name="/finance/delete">
                             str += '&nbsp;&nbsp;|&nbsp;&nbsp;';
                             str += $.formatString('<a href="javascript:void(0)" class="finance-easyui-linkbutton-del" data-options="plain:true,iconCls:\'fi-x icon-red\'" onclick="deleteFinanceFun(\'{0}\');" >删除</a>', row.fid);
@@ -198,11 +202,29 @@
             }] ],
             onLoadSuccess:function(data){
                 $('.finance-easyui-linkbutton-edit').linkbutton({text:'编辑'});
+                $('.finance-easyui-linkbutton-print').linkbutton({text:'打印'});
                 $('.finance-easyui-linkbutton-del').linkbutton({text:'删除'});
             },
             toolbar : '#financeToolbar'
         });
     });
+    
+
+	function preview(oper) {
+	if (oper < 10){
+		bdhtml=window.document.body.innerHTML;//获取当前页的html代码 
+		sprnstr="<!--startprint"+oper+"-->";//设置打印开始区域 
+		eprnstr="<!--endprint"+oper+"-->";//设置打印结束区域 
+		prnhtml=bdhtml.substring(bdhtml.indexOf(sprnstr)+18); //从开始代码向后取html 
+		
+		prnhtml=prnhtml.substring(0,prnhtml.indexOf(eprnstr));//从结束代码向前取html 
+		window.document.body.innerHTML=prnhtml;
+		window.print();
+		window.document.body.innerHTML=bdhtml;
+	}else{
+		window.print();
+		}
+	}
     
     function addFinanceFun() {
         parent.$.modalDialog({
@@ -273,7 +295,8 @@
     function cleanFinanceFun() {
     	$('#fObligate').find("option").eq(0).prop("selected",true);
     	$('#fState').find("option").eq(0).prop("selected",true);
-    	$('#fway').find("option").eq(0).prop("selected",true);
+    	$('#stype').find("option").eq(0).prop("selected",true);
+    	$('#fWay').find("option").eq(0).prop("selected",true);
     	$('#studentstype').find("option").eq(0).prop("selected",true);
         $('#searchFinanceForm input').val('');
         financeDataGrid.datagrid('load', {});
@@ -385,12 +408,12 @@
                 <tr>
                 	<th>缴费方式:</th>
                 	<td>
-                		<select id="fway" name="fway">
-                			<option value="缴费方式">缴费方式</option>
-                			<option value="支付宝">支付宝</option>
-                			<option value="微信">微信</option>
-                			<option value="银行卡转账">银行卡转账</option>
-                			<option value="现金">现金</option>
+                		<select id="fWay" name="fWay">
+                			<option value="0">缴费方式</option>
+                			<option value="1">支付宝</option>
+                			<option value="2">微信</option>
+                			<option value="3">银行卡转账</option>
+                			<option value="4">现金</option>
                 		</select>
                 	</td>
                 	<th>报考类型:</th>
@@ -398,8 +421,8 @@
                 		<select id=stype name="stype">
                 			<option value="0">报考类型</option>
                 			<option value="1">成人高考</option>
-                			<option value="2">远程教育</option>
-                			<option value="6">开放大学</option>
+                			<option value="6">远程教育</option>
+                			<option value="2">国家开放大学</option>
                 		</select>
                 	</td>
                 </tr>
@@ -407,7 +430,9 @@
         </form>
     </div>
     <div data-options="region:'center',border:true,title:'缴费人员列表'" >
+        <!--startprint1-->
         <table id="financeDataGrid" data-options="fit:true,border:false"></table>
+   		<!--endprint1-->
     </div>
 </div>
 <div id="financeToolbar" style="display: none;">

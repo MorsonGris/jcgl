@@ -132,8 +132,8 @@
     function addallStudentFun(){
     	 parent.$.modalDialog({
              title : '批量添加',
-             width : 250,
-             height : 120,
+             width : 270,
+             height : 160,
              href : '${path }/student/addall',
              buttons : [ {
                  text : '确定',

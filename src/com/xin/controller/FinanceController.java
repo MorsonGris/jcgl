@@ -94,17 +94,17 @@ public class FinanceController extends BaseController{
         if (finance.getCreatedateEnd() != null) {
             condition.put("endTime", finance.getCreatedateEnd());
         }
-        if(finance.getFObligate() != null){
+        if(finance.getFObligate() != null && !finance.getFObligate().equals("请选择学期")){
         	condition.put("fobligate", finance.getFObligate());//学期
         }
-        if(finance.getFWay() != null){
+        if(finance.getFWay() != null && finance.getFWay()!= 0){
         	condition.put("fway", finance.getFWay());
         }
-        if(finance.getStudent().getSName() != null){
-        	condition.put("name", finance.getStudent().getSName());
+        if(finance.getsName() != null && !finance.getsName().equals("")){
+        	condition.put("name", finance.getsName());
         }
-        if(finance.getStudent().getStype() != null){
-        	condition.put("stype", finance.getStudent().getStype());
+        if(finance.getStype()!= null && finance.getStype() != 0){
+        	condition.put("stype", finance.getStype());
         }
         condition.put("stypeone", 1);
         condition.put("stypetwo", 2);

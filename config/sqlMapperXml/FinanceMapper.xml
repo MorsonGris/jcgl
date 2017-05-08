@@ -17,6 +17,8 @@
 		<association property="student" javaType="com.xin.bean.Student">
 			<id property="sId" column="s_id" />
 			<result property="sName" column="s_name" />
+			<result property="idNumber" column="id_number" />
+			<result property="sSystme" column="s_systme" />
 			<result column="s_content" property="sContent" />
 			<result column="academy_id" property="academyId" />
 			<result property="sGradations" column="s_gradations" />
@@ -118,7 +120,7 @@
               	and F.f_way = #{fway}
             </if>
              <if test=" name != null">
-              	and S.s_name like #{name}
+              	and S.s_name = #{name}
             </if>
              <if test=" stype != null and stype != 0">
               	and S.s_type = #{stype}

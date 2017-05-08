@@ -113,6 +113,27 @@ public class ScheduleController extends BaseController{
    }
    
    /**
+    * 添加
+    * @param cSchedule
+    * @return
+    */
+   @RequestMapping("/add1")
+   @ResponseBody
+   public Object add1(String sTitle,String scontent,long id){
+	   Schedule schedule = new Schedule();
+	   schedule.setsTitle(sTitle);
+	   schedule.setSContent(scontent);
+	   schedule.setUserId(id);
+	   schedule.setSDate(new Date());
+	   schedule.setsFlag(0);
+	   boolean result = scheduleService.insertByid(schedule);
+	   if(result == true){
+		   return renderSuccess("添加成功");
+	   }
+	   return renderError("添加失败");
+   }
+   
+   /**
     * 删除
     * @param id
     * @return
