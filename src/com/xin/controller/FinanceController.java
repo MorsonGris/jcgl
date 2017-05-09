@@ -265,8 +265,8 @@ public class FinanceController extends BaseController{
         f.setStypethree(6);
         List<Finance> finances = financeService.selectFinanceAll(f);
         List<Map<String,Object>> list=createExcelRecord(finances);
-        String columnNames[]={"序号","姓名","学号","学校","专业","层次","班主任","合作人","需缴金额","实缴金额","缴费时间","缴费方式","累计金额","缴费状态"};//列名
-        String keys[]    =     {"var1","var2","var3","var4","var5","var6","var7","var8","var9","var10","var11","var12","var13","var14"};//map中的key
+        String columnNames[]={"序号","姓名","学号","学校","专业","层次","班主任","合作人","需缴金额","实缴金额","学期","缴费时间","缴费方式","累计金额","缴费状态"};//列名
+        String keys[]    =     {"var1","var2","var3","var4","var5","var6","var7","var8","var9","var10","var11","var12","var13","var14","var15"};//map中的key
         ByteArrayOutputStream os = new ByteArrayOutputStream();
         try {
             ExcelUtil.createWorkBook(list,keys,columnNames).write(os);
@@ -331,7 +331,8 @@ public class FinanceController extends BaseController{
 			String pmoney = finance.getPracticalMoney()+"";
 			vpd.put("var10", pmoney);		//10
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:MM:ss");
-			vpd.put("var11", sdf.format(finance.getFDate()));	//11
+			vpd.put("var11", finance.getFObligate());//11
+			vpd.put("var12", sdf.format(finance.getFDate()));	//12
 			state = finance.getFWay()+"";
 			if(state.equals("1")) {
 				state = "支付宝";
@@ -342,9 +343,9 @@ public class FinanceController extends BaseController{
 			}else {
 				state = "现金";
 			}
-			vpd.put("var12", state);		//12
+			vpd.put("var13", state);		//13
 			String fmoney = finance.getFAccumulative()+"";
-			vpd.put("var13", fmoney);		//13
+			vpd.put("var14", fmoney);		//14
 			state1 = finance.getFState()+"";
 			if(state1.equals("1")) {
 				state1 = "未缴费";
@@ -353,7 +354,7 @@ public class FinanceController extends BaseController{
 			}else{
 				state1 = "已兑账";
 			}
-			vpd.put("var14", state1);		//14
+			vpd.put("var15", state1);		//15
             listmap.add(vpd);
         }
         return listmap;

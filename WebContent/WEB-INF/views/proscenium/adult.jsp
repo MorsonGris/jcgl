@@ -114,7 +114,6 @@
 									<label for="sGradations">层次</label> 
 									<select id="sGradations" name="sGradations" onclick="selected();" class="form-control" style="width:170px;"> 
 										<option value="">---请选择---</option>
-										<option value="高达本">高达本</option>
 										<option value="专达本">专达本</option>
 										<option value="高达专">高达专</option>
 									</select> 

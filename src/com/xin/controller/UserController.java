@@ -137,6 +137,16 @@ public class UserController extends BaseController {
         model.addAttribute("user", userVo);
         return "admin/userEdit";
     }
+    
+    @RequestMapping("/editUserpass")
+    @ResponseBody
+    public Object editUserpass(long id){
+    	UserVo uservo = new UserVo();
+    	uservo.setId(id);
+    	uservo.setPassword(DigestUtils.md5Hex("123"));
+    	userService.editUserpass(uservo);
+    	return renderSuccess("重置成功");
+    }
 
     /**
      * 编辑用户

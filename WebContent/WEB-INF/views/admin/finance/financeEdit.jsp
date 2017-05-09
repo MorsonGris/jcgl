@@ -83,6 +83,14 @@
 							<option value="3">已兑帐</option>
 						</select>
                     </td>
+                     <td>学期</td>
+	               	 <td>
+	               	 	<select class="easyui-combobox" id="fObligate" name="fObligate" data-options="width:80,height:29,editable:false,panelHeight:'auto'" >
+	               	 		<option value="第一学期">第一学期</option>
+	               	 		<option value="第二学期">第二学期</option>
+	               	 		<option value="第三学期">第三学期</option>
+	               	 	</select>
+	               	 </td>
                 </tr>
         </table>
     </form>

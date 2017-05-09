@@ -103,22 +103,24 @@
             } , {
                 field : 'action',
                 title : '操作',
-                width : 130,
+                width : 150,
                 formatter : function(value, row, index) {
                     var str = '';
                         <shiro:hasPermission name="/user/edit">
                             str += $.formatString('<a href="javascript:void(0)" class="user-easyui-linkbutton-edit" data-options="plain:true,iconCls:\'fi-pencil icon-blue\'" onclick="editUserFun(\'{0}\');" >编辑</a>', row.id);
                         </shiro:hasPermission>
-                        <shiro:hasPermission name="/user/delete">
+                        if(row.id!=1){
+                        <shiro:hasPermission name="/user/add">
                             str += '&nbsp;&nbsp;|&nbsp;&nbsp;';
-                            str += $.formatString('<a href="javascript:void(0)" class="user-easyui-linkbutton-del" data-options="plain:true,iconCls:\'fi-x icon-red\'" onclick="deleteUserFun(\'{0}\');" >删除</a>', row.id);
+                            str += $.formatString('<a href="javascript:void(0)" class="user-easyui-linkbutton-add" data-options="plain:true,iconCls:\'fi-x icon-blue\'" onclick="editUserpass(\'{0}\');" >重置密码</a>', row.id);
                         </shiro:hasPermission>
+                        }
                     return str;
                 }
             }] ],
             onLoadSuccess:function(data){
                 $('.user-easyui-linkbutton-edit').linkbutton({text:'编辑'});
-                $('.user-easyui-linkbutton-del').linkbutton({text:'删除'});
+                $('.user-easyui-linkbutton-add').linkbutton({text:'重置密码'});
             },
             toolbar : '#userToolbar'
         });
@@ -141,33 +143,25 @@
         });
     }
     
-    function deleteUserFun(id) {
-        if (id == undefined) {//点击右键菜单才会触发这个
-            var rows = userDataGrid.datagrid('getSelections');
+    function editUserpass(id){
+    	if (id == undefined) {//点击右键菜单才会触发这个
+            var rows = roleDataGrid.datagrid('getSelections');
             id = rows[0].id;
         } else {//点击操作里面的删除图标会触发这个
-            userDataGrid.datagrid('unselectAll').datagrid('uncheckAll');
+        	userDataGrid.datagrid('unselectAll').datagrid('uncheckAll');
         }
-        parent.$.messager.confirm('询问', '您是否要删除当前用户？', function(b) {
-            if (b) {
-                var currentUserId = '${sessionInfo.id}';/*当前登录用户的ID*/
-                if (currentUserId != id) {
-                    progressLoad();
-                    $.post('${path }/user/delete', {
-                        id : id
-                    }, function(result) {
-                        if (result.success) {
-                            parent.$.messager.alert('提示', result.msg, 'info');
-                            userDataGrid.datagrid('reload');
-                        }
-                        progressClose();
-                    }, 'JSON');
-                } else {
-                    parent.$.messager.show({
-                        title : '提示',
-                        msg : '不可以删除自己！'
-                    });
-                }
+        parent.$.messager.confirm('询问', '您是否要重置当前角色密码？', function(b) {
+            if (b){
+                progressLoad();
+                $.post('${path }/user/editUserpass', {
+                    id : id
+                }, function(result) {
+                    if (result.success) {
+                        parent.$.messager.alert('提示', result.msg, 'info');
+                        userDataGrid.datagrid('reload');
+                    }
+                    progressClose();
+                }, 'JSON');
             }
         });
     }

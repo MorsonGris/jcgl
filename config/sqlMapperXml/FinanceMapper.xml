@@ -208,6 +208,9 @@
 			<if test="fState!=null and fState!='' ">
 				f_state=#{fState},
 			</if>
+			<if test="fState!=null and fState!='' ">
+				f_obligate=#{fObligate},
+			</if>
 		</set>
 		WHERE F_ID=#{fId}
 	</update>

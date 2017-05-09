@@ -140,6 +140,8 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
 		return userMapper.selectByphone(phone);
 	}
 
-	
-
+	@Override
+	public void editUserpass(UserVo uservo) {
+		userMapper.editUserpass(uservo);
+	}
 }

@@ -59,6 +59,10 @@
         WHERE  (login_name = #{loginName} or phone = #{loginName}) and password=#{password};
     </select>
 	
+	<update id="editUserpass">
+		UPDATE user SET password = #{password} WHERE id = #{id}
+	</update>
+	
     <select id="selectUserVoById" resultMap="userVoResultMap" parameterType="java.lang.Long">
         SELECT
         t.id,

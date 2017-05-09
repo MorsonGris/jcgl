@@ -23,5 +23,6 @@ public interface UserMapper extends BaseMapper<User> {
     UserVo selectByphone(String phone);
     List<UserVo> selectUserVoPage(Pagination page, Map<String, Object> params);
     List<User> selectBylist();
+    void editUserpass(UserVo uservo);
 
 }

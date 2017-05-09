@@ -35,4 +35,6 @@ public interface IUserService extends IService<User> {
     void deleteUserById(Long id);
     
     List<User> selectBylist();
+    
+    void editUserpass(UserVo uservo);
 }
