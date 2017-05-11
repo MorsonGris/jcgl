@@ -396,7 +396,7 @@ public class IndexController extends BaseController{
 		PageInfo pi = new PageInfo(0, 4, "r_id", "desc");
     	List<Relation> relation = relationService.selectDataGrid(pi);
     	model.addAttribute("relation", relation);
-		return "proscenium/train";
+		return "proscenium/education";
 	}
 	
 	/**
