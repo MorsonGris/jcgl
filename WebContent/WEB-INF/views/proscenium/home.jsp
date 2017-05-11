@@ -125,7 +125,7 @@
                 <a href="index/train?id=${user.id }">
                     <img alt="80x80" src="${path }/static/proscenium/icon/train.png" class="img-circle home-ico" />
                     <br>
-                    <span class="home_operation">培训管理</span>
+                    <span class="home_operation">共享合作</span>
                 </a>
             </div>
             <div class="col-xs-4 column">
@@ -211,7 +211,7 @@ window.addEventListener('popstate', function () {
 $(document).ready(function() {
 	$("#fi").click(function(){
 		swal(
-			      '请先登录学生账号!',
+			      '请先登录账号!',
 			      '',
 			      'error'
 				);
