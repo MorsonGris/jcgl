@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xin.mapper.ShareMapper">
+
+	<!-- 通用查询映射结果 -->
+	<resultMap id="BaseResultMap" type="com.xin.bean.Share">
+		<id column="share_id" property="shareid" />
+		<result column="share_title" property="sharetitle" />
+		<result column="share_phone" property="sharephone" />
+		<result column="share_content" property="sharecontent" />
+		<result column="share_picture" property="sharepicture" />
+	</resultMap>
+	
+	<select id="queryall" resultMap="BaseResultMap">
+		SELECT 
+			share_id,
+			share_title,
+			share_phone,
+			share_content,
+			share_picture
+		FROM share WHERE share_id = #{shareid}
+	</select>
+	
+	<delete id="delete">
+		DELETE FROM share WHERE share_id = #{shareid}
+	</delete>
+	
+	<update id="update">
+		UPDATE share SET 
+			share_title = #{sharetitle},
+			share_phone = #{sharephone},
+			share_content = #{sharecontent},
+			share_picture = #{sharepicture}
+		 WHERE 
+		 	share_id = #{shareid}
+	</update>
+	
+	<insert id="insert">
+		INSERT INTO share (
+			share_title,
+			share_phone,
+			share_content,
+			share_picture
+		) VALUES (
+			#{sharetitle},
+			#{sharephone},
+			#{sharecontent},
+			#{sharepicture},
+		)
+	</insert>
+	
+	<select id="selectPage" resultMap="BaseResultMap">
+		SELECT 
+    		share_id,
+			share_title,
+			share_phone,
+			share_content,
+			share_picture
+    	FROM share
+		<where>
+			<if test="sharetitle != null and sharetitle != ''">
+				 share_title = #{sharetitle}
+			</if>
+		</where>		
+	</select>
+</mapper>
