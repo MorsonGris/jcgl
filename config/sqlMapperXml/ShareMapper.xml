@@ -11,7 +11,7 @@
 		<result column="share_picture" property="sharepicture" />
 	</resultMap>
 	
-	<select id="queryall" resultMap="BaseResultMap">
+	<select id="queryById" resultMap="BaseResultMap">
 		SELECT 
 			share_id,
 			share_title,
@@ -26,13 +26,22 @@
 	</delete>
 	
 	<update id="update">
-		UPDATE share SET 
-			share_title = #{sharetitle},
-			share_phone = #{sharephone},
-			share_content = #{sharecontent},
-			share_picture = #{sharepicture}
-		 WHERE 
-		 	share_id = #{shareid}
+		UPDATE share 
+		<set>
+			<if test="sharetitle!=null and sharetitle!='' ">
+				share_title=#{sharetitle},
+			</if>
+			<if test="sharephone!=null and sharephone!='' ">
+				share_phone=#{sharephone},
+			</if>
+			<if test="sharecontent!=null and sharecontent!='' ">
+				share_content=#{sharecontent},
+			</if>
+			<if test="sharepicture!=null and sharepicture!='' ">
+				share_picture=#{sharepicture},
+			</if>
+		</set>
+		 WHERE share_id = #{shareid}
 	</update>
 	
 	<insert id="insert">
@@ -45,10 +54,19 @@
 			#{sharetitle},
 			#{sharephone},
 			#{sharecontent},
-			#{sharepicture},
+			#{sharepicture}
 		)
 	</insert>
 	
+	<select id="selectAll" resultMap="BaseResultMap">
+		SELECT 
+    		share_id,
+			share_title,
+			share_phone,
+			share_content,
+			share_picture
+    	FROM share
+	</select>
 	<select id="selectPage" resultMap="BaseResultMap">
 		SELECT 
     		share_id,

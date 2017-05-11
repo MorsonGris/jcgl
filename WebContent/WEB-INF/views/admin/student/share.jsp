@@ -153,7 +153,7 @@
     </div>
 </div>
 <div id="ShareToolbar" style="display: none;">
-    <shiro:hasPermission name="/Share/addpage">
+    <shiro:hasPermission name="/share/add">
         <a onclick="addShareFun();" href="javascript:void(0);" class="easyui-linkbutton" data-options="plain:true,iconCls:'fi-plus icon-green'">添加</a>
     </shiro:hasPermission>
 </div>

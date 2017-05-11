@@ -116,7 +116,7 @@
 					);
 		          }  
 		     });
-		    },fields: {
+		    }/* ,fields: {
 		    	sstuId: {
 					  validators: {
 					   notEmpty: {
@@ -124,7 +124,7 @@
 					   }
 					}
 				}
-		    }
+		    } */
 		})
 	})
 	

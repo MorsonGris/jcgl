@@ -24,8 +24,8 @@ public class ShareServiceImpl implements ShareService{
 	}
 
 	@Override
-	public List<Share> queryall(int id) {
-		return ShareMapper.queryall(id);
+	public Share queryById(int id) {
+		return ShareMapper.queryById(id);
 	}
 
 	@Override
@@ -41,6 +41,11 @@ public class ShareServiceImpl implements ShareService{
 	@Override
 	public int delete(int id) {
 		return ShareMapper.delete(id);
+	}
+
+	@Override
+	public List<Share> selectAll() {
+		return ShareMapper.selectAll();
 	}
 
 }

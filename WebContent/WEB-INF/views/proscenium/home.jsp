@@ -71,7 +71,7 @@
                 </a>
             </div>
             <div class="col-xs-4 column">
-            	<c:choose>
+            	<%-- <c:choose>
             		<c:when test="${stu.SId != null}">
             			<a href="index/upload">
 		                   <img alt="80x80" src="${path }/static/proscenium/icon/arrow-up.png" class="img-circle home-ico" />
@@ -86,8 +86,12 @@
 		                   <span class="home_operation">上传文件</span>
 		               </a>
             		</c:otherwise>
-            	</c:choose>
-                
+            	</c:choose> --%>
+                <a href="index/upload">
+                   <img alt="80x80" src="${path }/static/proscenium/icon/arrow-up.png" class="img-circle home-ico" />
+                   <br>
+                   <span class="home_operation">上传文件</span>
+		        </a>
             </div>
         </div>
         <div class="row clearfix" style="text-align: center;margin-top: 20px;">

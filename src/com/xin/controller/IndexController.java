@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.xin.bean.Relation;
+import com.xin.bean.Share;
 import com.xin.bean.Student;
 import com.xin.bean.vo.UserVo;
 import com.xin.commons.base.BaseController;
@@ -27,13 +28,14 @@ import com.xin.commons.utils.StringUtils;
 import com.xin.service.IRelationService;
 import com.xin.service.IStudentService;
 import com.xin.service.IUserService;
+import com.xin.service.ShareService;
 
 @Controller
 @RequestMapping("/index")
 public class IndexController extends BaseController{
 	@Autowired private IUserService userService;
 	@Autowired private IStudentService studentService;
-	
+	@Autowired private ShareService shareservice;
 	
 	@Autowired private IRelationService relationService;
 	/**
@@ -392,6 +394,8 @@ public class IndexController extends BaseController{
 	 */ 
 	@GetMapping("/train")
 	public String train(Model model){
+		List<Share> listShare = shareservice.selectAll();
+		model.addAttribute("listShare", listShare);
 		model.addAttribute("homeContent", homeContent());
 		PageInfo pi = new PageInfo(0, 4, "r_id", "desc");
     	List<Relation> relation = relationService.selectDataGrid(pi);
@@ -568,4 +572,18 @@ public class IndexController extends BaseController{
    	model.addAttribute("homeContent", homeContent());
    	return "proscenium/work_assistant";
    }
+   
+   /**
+	 *共享合作内容
+	 */
+	@GetMapping("/share_content")
+	public String share_content(String id,Model model){
+		Share list = shareservice.queryById(Integer.parseInt(id));
+		model.addAttribute("share",list);
+		model.addAttribute("homeContent", homeContent());
+		PageInfo pi = new PageInfo(0, 4, "r_id", "desc");
+	   	List<Relation> relation = relationService.selectDataGrid(pi);
+	   	model.addAttribute("relation", relation);
+		return "proscenium/share";
+	}
 }

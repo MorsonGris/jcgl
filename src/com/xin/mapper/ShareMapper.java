@@ -7,7 +7,8 @@ import com.xin.bean.Share;
 
 public interface ShareMapper {
 	List<Share> selectPage(Pagination page, Map<String, Object> params);
-	List<Share> queryall(int id);
+	List<Share> selectAll();
+	Share queryById(int id);
 	int insert(Share share);
 	int update(Share share);
 	int delete(int id);

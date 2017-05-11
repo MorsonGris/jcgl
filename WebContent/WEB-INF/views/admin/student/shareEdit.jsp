@@ -49,13 +49,14 @@
                 <tr>
                     <td>共享图标</td>
                     <td>
+                    	<input name="shareid" type="hidden" value="${sharelist.shareid }"/>
                     	<input name="sharephone" type="file" placeholder="请选择共享图标"  value="">
                     </td>
                 </tr>
                 <tr>
                     <td>共享标题</td>
                     <td>
-						<input name="sharetitle" type="text" placeholder="请输入标题" missingMessage="必须输入标题" class="easyui-validatebox" data-options="required:true,novalidate:true" readonly="readonly" value="" />
+						<input name="sharetitle" type="text" placeholder="请输入标题" missingMessage="必须输入标题" class="easyui-validatebox" data-options="required:true,novalidate:true" readonly="readonly" value="${sharelist.sharetitle }" />
                     </td>
                 </tr>
                 <tr>
@@ -67,7 +68,7 @@
                 <tr>
                     <td>页面内容</td>
                     <td colspan="3">
-						<textarea name="sharecontent" cols="" rows="5" style="width:98%;" class="easyui-validatebox textarea " validtype="length[0,500]"  invalidMessage="最大长度500位" placeholder="这里输入页面内容"></textarea>
+						<textarea name="sharecontent" cols="" rows="5" style="width:98%;" class="easyui-validatebox textarea " validtype="length[0,500]"  invalidMessage="最大长度500位" placeholder="这里输入页面内容">${sharelist.sharecontent }</textarea>
                     </td>
                 </tr>
             </table>

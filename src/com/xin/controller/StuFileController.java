@@ -104,10 +104,10 @@ public class StuFileController extends BaseController{
     		@RequestParam(value="sfVoucher",required=false)MultipartFile sfVoucher,
     		@RequestParam(value="sfPaper",required=false)MultipartFile sfPaper,
     		@RequestParam(value="sstuId")String id,HttpServletRequest request,HttpServletResponse response) throws IllegalStateException, IOException {
-    	if(id!=null&&!id.equals("")) {
+    	/*if(id!=null&&!id.equals("")) {*/
     		FileUpload.pictureUpload(request, response,id+"",PathUtil.getClasspath()+"uploadFile/");
         	StuFile stuFile = new StuFile();
-        	if(id!=null) {
+        	if(id!=null && !id.equals("")) {
         		stuFile.setStuId(Integer.parseInt(id));
         	}
         	if(sfPhoto!=null) {
@@ -126,9 +126,9 @@ public class StuFileController extends BaseController{
         	}else {
         		return renderError("添加失败");
         	}
-    	}else {
+    	/*}else {
     		return renderError("请先登录！");
-    	}
+    	}*/
     	
     }
     
