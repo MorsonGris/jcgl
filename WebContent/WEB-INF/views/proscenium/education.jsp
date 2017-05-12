@@ -24,7 +24,8 @@
 			<c:forEach items="${listShare}" var="share" varStatus="status">
 	        <div class="col-xs-4">
 			<a href="share_content?id=${share.shareid }">
-				<img alt="" style="width: 100%;" src="${path }/uploadFile/share/${share.sharephone}">
+				<%-- <img alt="" style="width: 100%;" src="${path }/uploadFile/share/${share.sharephone}"> --%>
+				<img alt="" style="width: 100%;" src="${path }/static/proscenium/images/share/${share.sharephone}">
 				<br>
 				<span>${share.sharetitle}</span>
 			</a>

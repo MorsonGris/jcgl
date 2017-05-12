@@ -17,7 +17,7 @@
 <body>
 	<jsp:include page="/static/proscenium/commons/head.jsp"></jsp:include>
 	<div>
-		<img alt="" src="${path }/uploadFile/share/${share.sharepicture }" width="100%">
+		<img alt="" src="${path }/static/proscenium/images/share/${share.sharepicture }" width="100%">
 	</div>
 	<div class="container">
 		<div class="row clearfix" style="text-align: center;margin:20px;">

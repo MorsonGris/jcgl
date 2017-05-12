@@ -51,7 +51,7 @@ public class ShareController extends BaseController{
 		@RequestParam(value="sharepicture",required=false)MultipartFile sharepicture,
 		@RequestParam(value="sharetitle")String sharetitle,
 		@RequestParam(value="sharecontent")String sharecontent,HttpServletRequest request,HttpServletResponse response) throws IllegalStateException, IOException {
-		FileUpload.pictureUpload(request, response,"",PathUtil.getClasspath()+"uploadFile/share/");
+		FileUpload.pictureUpload(request, response,"",PathUtil.getClasspath()+"static/proscenium/images/share/");
 		Share s = new Share();
 		if(sharephone!=null) {
 			s.setSharephone(sharephone.getOriginalFilename());
@@ -86,7 +86,7 @@ public class ShareController extends BaseController{
 			@RequestParam(value="shareid")String shareid,
 			@RequestParam(value="sharetitle")String sharetitle,
 			@RequestParam(value="sharecontent")String sharecontent,HttpServletRequest request,HttpServletResponse response) throws IllegalStateException, IOException {
-		FileUpload.pictureUpload(request, response,"",PathUtil.getClasspath()+"uploadFile/share/");
+		FileUpload.pictureUpload(request, response,"",PathUtil.getClasspath()+"static/proscenium/images/share/");
 		Share s = new Share();
 		if(sharephone!=null) {
 			s.setSharephone(sharephone.getOriginalFilename());
