@@ -26,8 +26,8 @@
 				       data-locale="zh-CN"
 				       data-side-pagination="server"
 				       data-page-number="1"
-				       data-page-size="10"
-				       data-page-list="[10, 25, 50, 100]"
+				       data-page-size="5"
+				       data-page-list="[5, 10, 15, 20, 25, 30]"
 				       data-toolbar="#toolbar"
 				       data-show-refresh="true"
 				       data-show-toggle="false"
@@ -52,7 +52,6 @@
 				    </tr>
 				    </thead>
 				</table>
-				
 			</div>
 			<div>
 				<!-- <span>总金额:2342</span> -->

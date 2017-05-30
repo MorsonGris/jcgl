@@ -413,25 +413,27 @@ public class FinanceController extends BaseController{
 			List<Map<String,Object>> listm = (List)ObjectExcelRead.readExcel(filePath, fileName, 2, 0, 0);  //执行读EXCEL操作,读出的数据导入List 2:从第3行开始；0:从第A列开始；0:第0个sheet
 			for(int i=0; i<listm.size(); i++) {
 				if(!listm.isEmpty()) {
-					String studentNo = listm.get(i).get("var0").toString();
+					String studentNname = listm.get(i).get("var0").toString();
 					Student s = new Student();
-					s.setStudentNo(studentNo);
+					s.setSName(studentNname);
 					if(stype.equals("1")) {
 						s.setStypeone(1);
 						s.setStypetwo(2);
 						s.setStypethree(6);
-						if(studentNo!=null && !studentNo.equals("")) {
+						s.setSName(listm.get(i).get("var1").toString());
+						if(studentNname!=null && !studentNname.equals("")) {
 							if(studentService.selectByStuNo(s)==null){
-								return renderError("上传错误！学号"+studentNo+"不存在该表类型(成考,国考,远程)！,请核对后上传！！！");
+								return renderError("上传错误！学生姓名错误,该学生不存在该表类型(成考,国考,远程)！,请核对后上传！！！");
 							}
 						}
 					}else {
 						s.setStypeone(3);
 						s.setStypetwo(4);
 						s.setStypethree(5);
-						if(studentNo!=null && !studentNo.equals("")) {
+						s.setSName(listm.get(i).get("var1").toString());
+						if(studentNname!=null && !studentNname.equals("")) {
 							if(studentService.selectByStuNo(s)==null){
-								return renderError("上传错误！学号"+studentNo+"不存在该表类型(会计,艺考,职培)！,请核对后上传！！！");
+								return renderError("上传错误！学生姓名错误,该学生不存在该表类型(会计,艺考,职培)！,请核对后上传！！！");
 							}
 						}
 					}
@@ -440,41 +442,54 @@ public class FinanceController extends BaseController{
 			}
 			for(int i=0; i<listm.size(); i++) {
 				if(listm.get(i).get("var3") != null && !listm.get(i).get("var3").equals("")) {
-					finance.setStuNo(listm.get(i).get("var0").toString());	//学号
-					finance.setTeaClass(listm.get(i).get("var1").toString());	//班主任
-					finance.setNeedMoney(new BigDecimal(listm.get(i).get("var2").toString()));	//需交金额
-					finance.setPracticalMoney(new BigDecimal(listm.get(i).get("var3").toString()));	//实缴金额
-					finance.setFDate(sdf.parse(listm.get(i).get("var4").toString()));	//缴费日期
-					if(listm.get(i).get("var5").equals("支付宝")) {
+					Student s = new Student();
+					if(stype.equals("1")) {
+						s.setStypeone(1);
+						s.setStypetwo(2);
+						s.setStypethree(6);
+						s.setSName(listm.get(i).get("var0").toString());
+						s.setIdNumber(listm.get(i).get("var1").toString());
+					}else{
+						s.setStypeone(3);
+						s.setStypetwo(4);
+						s.setStypethree(5);
+						s.setSName(listm.get(i).get("var0").toString());
+					}
+					Student stuNo = studentService.selectByStuNo(s);
+					finance.setStuNo(stuNo.getStudentNo());	//学号
+					finance.setTeaClass(listm.get(i).get("var2").toString());	//班主任
+					finance.setNeedMoney(new BigDecimal(listm.get(i).get("var3").toString()));	//需交金额
+					finance.setPracticalMoney(new BigDecimal(listm.get(i).get("var4").toString()));	//实缴金额
+					finance.setFDate(sdf.parse(listm.get(i).get("var5").toString()));	//缴费日期
+					if(listm.get(i).get("var6").equals("支付宝")) {
 						way = 1;
-					}else if(listm.get(i).get("var5").equals("微信")) {
+					}else if(listm.get(i).get("var6").equals("微信")) {
 						way = 2;
-					}else if(listm.get(i).get("var5").equals("银行转账")) {
+					}else if(listm.get(i).get("var6").equals("银行转账")) {
 						way = 3;
-					}else if(listm.get(i).get("var5").equals("现金")) {
+					}else if(listm.get(i).get("var6").equals("现金")) {
 						way = 4;
 					}else {
 						way = 0;
 					}
 					finance.setFWay(way);	//缴费方式
-					finance.setFAccumulative(new BigDecimal(listm.get(i).get("var6").toString()));	//缴费总额
-					if(listm.get(i).get("var7").equals("未缴费")) {
+					finance.setFAccumulative(new BigDecimal(listm.get(i).get("var7").toString()));	//缴费总额
+					if(listm.get(i).get("var8").equals("未缴费")) {
 						state = 1;
-					}else if(listm.get(i).get("var7").equals("已缴费")) {
+					}else if(listm.get(i).get("var8").equals("已缴费")) {
 						state = 2;
-					}else if(listm.get(i).get("var7").equals("已兑账")) {
+					}else if(listm.get(i).get("var8").equals("已兑账")) {
 						state = 3;
 					}else {
 						state = 0;
 					}
 					finance.setFState(state);	//缴费状态
-					finance.setFObligate(listm.get(i).get("var8").toString());//学期
+					finance.setFObligate(listm.get(i).get("var9").toString());//学期
 					result += financeService.financeInsert(finance);
 				}
 			}
 		}
 		/*存入数据库操作======================================*/
-		System.out.println(result+"/////////////////");
 		return renderSuccess("上传成功");
 	}
 }

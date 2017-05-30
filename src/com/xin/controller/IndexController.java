@@ -1,20 +1,22 @@
 package com.xin.controller;
 
+import java.io.IOException;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-
+import org.springframework.web.multipart.MultipartFile;
+import com.xin.bean.Eguide;
 import com.xin.bean.Relation;
 import com.xin.bean.Share;
 import com.xin.bean.Student;
@@ -23,8 +25,11 @@ import com.xin.commons.base.BaseController;
 import com.xin.commons.csrf.CsrfToken;
 import com.xin.commons.utils.CaptchaUtils;
 import com.xin.commons.utils.DigestUtils;
+import com.xin.commons.utils.FileUpload;
 import com.xin.commons.utils.PageInfo;
+import com.xin.commons.utils.PathUtil;
 import com.xin.commons.utils.StringUtils;
+import com.xin.service.EguideService;
 import com.xin.service.IRelationService;
 import com.xin.service.IStudentService;
 import com.xin.service.IUserService;
@@ -36,7 +41,7 @@ public class IndexController extends BaseController{
 	@Autowired private IUserService userService;
 	@Autowired private IStudentService studentService;
 	@Autowired private ShareService shareservice;
-	
+	@Autowired private EguideService eguideservice;
 	@Autowired private IRelationService relationService;
 	/**
 	 * 前台登录
@@ -173,6 +178,133 @@ public class IndexController extends BaseController{
     	List<Relation> relation = relationService.selectDataGrid(pi);
     	model.addAttribute("relation", relation);
 		return "proscenium/eguide";
+	}
+	
+	@RequestMapping("/Eguidepage")
+	public String Eguidepage(){
+		return "admin/eguide";
+	}
+	/**
+	 * 招生简章添加
+	 * @param eguide
+	 * @return
+	 * @throws IOException 
+	 * @throws IllegalStateException 
+	 */
+	@RequestMapping("/Eguideadd")
+	@ResponseBody
+	public Object Eguideadd(
+			@RequestParam(value="title",required=false)String title,
+			@RequestParam(value="type",required=false)String type,
+			@RequestParam(value="log",required=false)MultipartFile log,
+			@RequestParam(value="picture1",required=false)MultipartFile picture1,
+			@RequestParam(value="picture2",required=false)MultipartFile picture2,
+			@RequestParam(value="picture3",required=false)MultipartFile picture3,
+			HttpServletRequest request,HttpServletResponse response) throws IllegalStateException, IOException{
+		FileUpload.pictureUpload(request, response,"",PathUtil.getClasspath()+"static/proscenium/images/");
+		Eguide eguide = new Eguide();
+		if(log.getOriginalFilename() != null){
+			eguide.setLog(log.getOriginalFilename());
+		}
+		if(picture1.getOriginalFilename() !=null){
+			eguide.setPicture1(picture1.getOriginalFilename());
+		}
+		if(picture2.getOriginalFilename() !=null){
+			eguide.setPicture2(picture2.getOriginalFilename());
+		}
+		if(picture3.getOriginalFilename() !=null){
+			eguide.setPicture3(picture3.getOriginalFilename());
+		}
+		eguide.setTitle(title);
+		eguide.setType(type);
+		String result =  eguideservice.add(eguide);
+		if(result.equals("添加成功")){
+			return renderSuccess();
+		}
+		return renderError("添加失败");
+	}
+	
+	@RequestMapping("/Eguideaddpage")
+	public String Eguideaddpage(){
+		return "admin/eguideadd";
+	}
+	
+	/**
+	 * 招生简章删除
+	 * @param id
+	 * @return
+	 */
+	@RequestMapping("/Eguidedelete")
+	@ResponseBody
+	public Object Eguidedelete(int id){
+		String result = eguideservice.delete(id);
+		if(result.equals("删除成功")){
+			return renderSuccess("删除成功");
+		}
+		return renderError("删除失败");
+	}
+	
+	/**
+	 * 招生简章修改
+	 * @param eguide
+	 * @return
+	 * @throws IOException 
+	 * @throws IllegalStateException 
+	 */
+	@RequestMapping("/Eguideupdate")
+	@ResponseBody
+	public Object Eguideupdate(@RequestParam(value="title",required=false)String title,
+			@RequestParam(value="id",required=false)int id,
+			@RequestParam(value="type",required=false)String type,
+			@RequestParam(value="log",required=false)MultipartFile log,
+			@RequestParam(value="picture1",required=false)MultipartFile picture1,
+			@RequestParam(value="picture2",required=false)MultipartFile picture2,
+			@RequestParam(value="picture3",required=false)MultipartFile picture3,
+			HttpServletRequest request,HttpServletResponse response) throws IllegalStateException, IOException{
+		FileUpload.pictureUpload(request, response,"",PathUtil.getClasspath()+"static/proscenium/images/");
+		Eguide eguide = new Eguide();
+		if(log.getOriginalFilename() != null){
+			eguide.setLog(log.getOriginalFilename());
+		}
+		if(picture1.getOriginalFilename() !=null){
+			eguide.setPicture1(picture1.getOriginalFilename());
+		}
+		if(picture2.getOriginalFilename() !=null){
+			eguide.setPicture2(picture2.getOriginalFilename());
+		}
+		if(picture3.getOriginalFilename() !=null){
+			eguide.setPicture3(picture3.getOriginalFilename());
+		}
+		eguide.setTitle(title);
+		eguide.setType(type);
+		eguide.setId(id);
+		String result = eguideservice.update(eguide);
+		if(result.equals("修改成功")){
+			return renderSuccess("修改成功");
+		}
+		return renderError("修改失败");
+	}
+	
+	@RequestMapping("/Eguideupdatepage")
+	public String Eguideupdatepage(int id,Model model){
+		Eguide eguide = eguideservice.selectById(id);
+		model.addAttribute("eguide",eguide);
+		return "admin/eguideupdate";
+	}
+	
+	/**
+	 * 招生简章分页查询
+	 * @param eguide
+	 * @param rows
+	 * @param page
+	 * @return
+	 */
+	@RequestMapping("/selectPage")
+	@ResponseBody
+	public Object selectPage(Eguide eguide,Integer rows,Integer page){
+		PageInfo pageInfo = new PageInfo(rows,page);
+		eguideservice.selectPage(pageInfo);
+		return pageInfo;
 	}
 	
 	/**

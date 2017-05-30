@@ -77,7 +77,7 @@
 	</select>
 	
 	<select id="selectByStuNo" resultMap="BaseResultMap">
-		select s_studentno from student where s_studentno=#{studentNo} and (s_type = #{stypeone} or s_type = #{stypetwo} or s_type = #{stypethree})
+		select s_studentno from student where s_name=#{sName} and id_number=#{idNumber} and (s_type = #{stypeone} or s_type = #{stypetwo} or s_type = #{stypethree})
 	</select>
 
 	<insert id="insertByid">

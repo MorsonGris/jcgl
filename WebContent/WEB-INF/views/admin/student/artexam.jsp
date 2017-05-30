@@ -231,7 +231,7 @@
                    </td>
                    <th>手机号码:</th>
                    <td>
-                   	<input name="sPhone" style="width:110px;" placeholder="请输入学生手机号码"/>
+                   	<input name="sPhone" style="width:90px;" placeholder="请输入手机号码"/>
                    </td>
                    <th>老师姓名:</th>
                    <td>

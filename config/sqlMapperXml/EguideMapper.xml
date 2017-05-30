@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xin.mapper.EguideMapper">
+
+	<!-- 通用查询映射结果 -->
+	<resultMap id="BaseResultMap" type="com.xin.bean.Eguide">
+		<id column="id" property="id" />
+		<result column="log" property="log" />
+		<result column="picture1" property="picture1" />
+		<result column="title" property="title" />
+		<result column="picture2" property="picture2" />
+		<result column="picture3" property="picture3" />
+		<result column="type" property="type" />
+	</resultMap>
+	
+	<insert id="add">
+		INSERT INTO eguide(log,picture1,title,picture2,picture3,type)
+			VALUES(#{log},#{picture1},#{title},#{picture2},#{picture3},#{type})
+	</insert>
+	
+	<update id="update">
+		UPDATE eguide SET log = #{log},picture1 = #{picture1},title = #{title},
+		picture2 = #{picture2},picture3 = #{picture3},type = #{type}
+		WHERE id=#{id} 
+	</update>
+	
+	<delete id="delete">
+		DELETE FROM eguide WHERE id=#{id}
+	</delete>
+	
+	<select id="selectpage" resultMap="BaseResultMap">
+		SELECT * FROM eguide
+	</select>
+	
+	<select id="selectById" resultMap="BaseResultMap">
+		SELECT * FROM eguide WHERE id=#{id}
+	</select>
+</mapper>

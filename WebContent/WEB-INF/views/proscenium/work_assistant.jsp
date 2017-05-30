@@ -33,19 +33,19 @@
 			       data-show-columns="true"
 			       data-show-export="true" 
 			       data-minimum-count-columns="2" 
-			       data-id-field="id" 
+			       data-id-field="sid" 
 			       data-show-footer="false"
-			       data-row-style="rowStyle"
-			       >
+			       data-row-style="rowStyle">
 			    <thead>
 			    <tr>
-			    	<th data-field="sTitle" data-align="left" data-sortable="false" >计划标题</th>
-			    	<th data-field="scontent" data-align="left" data-sortable="false" >计划内容</th>
+			    	<th data-field="sTitle" data-align="center" data-sortable="false" >计划标题</th>
+			    	<th data-field="scontent" data-align="center" data-sortable="false" >计划内容</th>
 			    	<th data-field="sdate" data-align="center" data-formatter="dateFormatter" data-sortable="false" >创建时间</th>
-			    	<th data-field="sFlag" data-align="left" data-formatter="stateFormatter" data-sortable="false" >是否完成</th>
-			    	<th data-field="sFinishdate" data-align="left" data-formatter="dateFormatter" data-sortable="false" >完成时间</th>
-			    	<th data-align="center"  data-formatter="actionFormatteradd" data-events="actionadd" data-sortable="false">操作</th>
-			    	<th data-field="sid" data-align="center"  data-formatter="actionFormatter" data-events="actionEvents" data-sortable="false">操作</th>
+			    	<th data-field="sFlag" data-align="center" data-formatter="stateFormatter" data-sortable="false" >是否完成</th>
+			    	<th data-field="sFinishdate" data-align="center" data-formatter="dateFormatter" data-sortable="false" >完成时间</th>
+			    	<th data-align="center" data-formatter="actionFormatteradd" data-events="actionadd" data-sortable="false">操作</th>
+			    	<th data-field="sid" data-align="center" data-formatter="actionFormatteredit" data-events="actionedit" data-sortable="false">操作</th>
+			    	<th data-field="sid" data-align="center" data-formatter="actionFormatter" data-events="actionEvents" data-sortable="false">操作</th>
 			    </tr>
 			    </thead>
 			</table>
@@ -68,6 +68,13 @@
 function actionFormatteradd(value, row, index) {
     return [
         '<a class="open ml10" href="javascript:void(0)" title="添加">',
+        '<i class="glyphicon glyphicon-save"></i>',
+        '</a>'
+    ].join('');
+}
+function actionFormatteredit(value, row, index) {
+    return [
+        '<a class="open ml10" href="javascript:void(0)" title="修改">',
         '<i class="glyphicon glyphicon-edit"></i>',
         '</a>'
     ].join('');
@@ -95,38 +102,39 @@ function stateFormatter(value) {
 }
 
 window.actionadd = {
-	'click .open': function (e, value, row, index) {
-		swal({
-	    	  title: '',
-	    	  html:
-	    	    '标题<input id="sTitle" name="sTitle" type="text" class="swal2-input">' +
-	    	    '内容 <textarea id="scontent" name ="scontent" class="form-control" rows="3"></textarea>',
-	    	  preConfirm: function() {
-	    		  var sTitle = $('#sTitle').val();
-		          var scontent = $('#scontent').val();
-		          var id = ${user.id};
-	    	      return new Promise(function(resolve) {
-    	   			$.post("${path }/schedule/add1",{"sTitle":sTitle,"scontent":scontent,"id":id},function(data) {
-    	   				data = $.parseJSON(data);
-    	   				if(data.success == true){
-							sweetAlert(
-								data.msg,
-		   	   				  	'',
-		   	   				  	'success'
-		     	   			)
-						}else{
-							sweetAlert(
-								data.msg,
-		   	   				  	'',
-		   	   				  	'error'
-		     	   			)
-						}
-					});
-	    	    });
-	    	  }
-	    	})
-	    }
-	}
+'click .open': function (e, value, row, index) {
+	swal({
+    	  title: '',
+    	  html:
+    	    '标题<input id="sTitle" name="sTitle" type="text" class="swal2-input">' +
+    	    '内容 <textarea id="scontent" name ="scontent" class="form-control" rows="3"></textarea>',
+    	  preConfirm: function() {
+    		  var sTitle = $('#sTitle').val();
+	          var scontent = $('#scontent').val();
+	          var id = ${user.id};
+    	      return new Promise(function(resolve) {
+   	   			$.post("${path }/schedule/add1",{"sTitle":sTitle,"scontent":scontent,"id":id},function(data) {
+   	   				data = $.parseJSON(data);
+   	   				if(data.success == true){
+						sweetAlert(
+							data.msg,
+	   	   				  	'',
+	   	   				  	'success'
+	     	   			)
+	     	   			$('#scheduleTable').bootstrapTable('refresh');
+					}else{
+						sweetAlert(
+							data.msg,
+	   	   				  	'',
+	   	   				  	'error'
+	     	   			)
+					}
+				});
+    	    });
+    	  }
+    	})
+    }
+}
 
 window.actionEvents = {
 	'click .open': function (e, value, row, index) {
