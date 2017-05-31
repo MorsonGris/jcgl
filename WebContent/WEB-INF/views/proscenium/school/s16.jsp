@@ -16,27 +16,29 @@
 <body>
 <div class="wrapper">
     <jsp:include page="/static/proscenium/commons/head.jsp"></jsp:include>
-    <div class="container">
+     <div class="container">
 	    <div class="row">
 			<div class="col-md-12">
-	    		<div style="margin-top: 20px;margin-bottom: 10px;">
-					<img style="width: 100%;" alt="" src="${path }/static/proscenium/images/school/16/school.jpg">
-                    <h3>四川农业大学</h3>
-                    <p style="text-indent: 20px;">是四川省人民政府主管的一所以生物科技为特色、农业科技为优势，农、理、工、经、管、医、文、教、法、艺多学科协调发展的省部共建重点大学，是国家“211工程”建设院校之一</p>
-                </div>
-                <div style="margin-bottom: 40px;">
-                    <h3>学校简介</h3>
-                    <p style="text-indent: 20px;">
-                   		 四川农业大学是四川省人民政府主管的一所以生物科技为特色、农业科技为优势，农、理、工、经、管、医、文、教、法、艺多学科协调发展的省部共建重点大学，是国家“211工程”建设院校之一，四川省“2011协同创新中心”高校，是全国首批高等学校新农村发展研究院试点单位，具有自主招生资格。
-                    </p>
-                    <img style="width: 100%;height: 150%;" alt="" src="${path }/static/proscenium/images/school/16/zy.png">
-                	
-                </div>
-                <div style="margin-bottom: 20px;">
-                    <h4 style="text-align: center;color: red;"> 国家承认学历   教育部网上可查</h4>
-                    <h4>毕业证样本：</h4>
-                    <img style="width: 100%;" alt="" src="${path }/static/proscenium/images/school/16/byz.jpg">
-                </div>
+	    		<div>
+					<div id="s1" style="margin-top: 20px;margin-bottom: 10px;">
+						<img style="width: 100%;" alt="" src="${path }/static/proscenium/images/${eguidie.picture1}">
+	                    <h3>${eguidie.type}</h3>
+	                    <p style="text-indent: 20px;"><span>${eguidie.school}</span></p>
+	                </div>
+	                <div style="margin-bottom: 40px;">
+	                    <h3>学校简介</h3>
+	                    <p style="text-indent: 20px;">
+	                   		<span>${eguidie.title}</span>
+	                    </p>
+	                    <img style="width: 100%;height: 150%;" alt="" src="${path }/static/proscenium/images/${eguidie.picture2}">
+	                	
+	                </div>
+	                <div style="margin-bottom: 20px;">
+	                    <h4 style="text-align: center;color: red;"> 国家承认学历   教育部网上可查</h4>
+	                    <h4>毕业证样本：</h4>
+	                    <img style="width: 100%;" alt="" src="${path }/static/proscenium/images/${eguidie.picture3}">
+	                </div>
+				</div>
 			</div>
 		</div>
 	</div>

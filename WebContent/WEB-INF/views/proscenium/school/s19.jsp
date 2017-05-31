@@ -16,27 +16,29 @@
 <body>
 <div class="wrapper">
     <jsp:include page="/static/proscenium/commons/head.jsp"></jsp:include>
-    <div class="container">
+     <div class="container">
 	    <div class="row">
 			<div class="col-md-12">
-	    		<div style="margin-top: 20px;margin-bottom: 10px;">
-					<img style="width: 100%;" alt="" src="${path }/static/proscenium/images/school/19/school.jpg">
-                    <h3>郑州大学</h3>
-                    <p style="text-indent: 20px;">郑州大学（Zhengzhou University），简称郑大，是中华人民共和国教育部与河南省人民政府共建高校，国家“211工程”重点建设高校</p>
-                </div>
-                <div style="margin-bottom: 40px;">
-                    <h3>学校简介</h3>
-                    <p style="text-indent: 20px;">
-                   		 郑州大学（Zhengzhou University），简称郑大，是中华人民共和国教育部与河南省人民政府共建高校，国家“211工程”重点建设高校，“中西部高校综合实力提升工程”入选高校，也是“卓越工程师教育培养计划”、“卓越法律人才教育培养计划”和“卓越医生教育培养划”入选高校。
-                    </p>
-                    <img style="width: 100%;height: 150%;" alt="" src="${path }/static/proscenium/images/school/19/zy.png">
-                	
-                </div>
-                <div style="margin-bottom: 20px;">
-                    <h4 style="text-align: center;color: red;"> 国家承认学历   教育部网上可查</h4>
-                    <h4>毕业证样本：</h4>
-                    <img style="width: 100%;" alt="" src="${path }/static/proscenium/images/school/19/byz.jpg">
-                </div>
+	    		<div>
+					<div id="s1" style="margin-top: 20px;margin-bottom: 10px;">
+						<img style="width: 100%;" alt="" src="${path }/static/proscenium/images/${eguidie.picture1}">
+	                    <h3>${eguidie.type}</h3>
+	                    <p style="text-indent: 20px;"><span>${eguidie.school}</span></p>
+	                </div>
+	                <div style="margin-bottom: 40px;">
+	                    <h3>学校简介</h3>
+	                    <p style="text-indent: 20px;">
+	                   		<span>${eguidie.title}</span>
+	                    </p>
+	                    <img style="width: 100%;height: 150%;" alt="" src="${path }/static/proscenium/images/${eguidie.picture2}">
+	                	
+	                </div>
+	                <div style="margin-bottom: 20px;">
+	                    <h4 style="text-align: center;color: red;"> 国家承认学历   教育部网上可查</h4>
+	                    <h4>毕业证样本：</h4>
+	                    <img style="width: 100%;" alt="" src="${path }/static/proscenium/images/${eguidie.picture3}">
+	                </div>
+				</div>
 			</div>
 		</div>
 	</div>

@@ -48,13 +48,19 @@
                     </td>
                 </tr>
                 <tr>
-                    <td>标题</td>
+                    <td>介绍标题</td>
                     <td>
                     	<textarea rows="3" name="title" style="width: 180px;" placeholder="请输入标题" class="easyui-validatebox" data-options="required:true,novalidate:true"></textarea>
                     </td>
                     <td>学校名称</td>
                     <td>
                         <input type="text" name="type" placeholder="请输入学校名称" class="easyui-validatebox" data-options="required:true,novalidate:true">
+                    </td>
+                </tr>
+                <tr>
+                	<td>学校简介</td>
+                    <td>
+                    	<textarea rows="2" name="school" style="width: 180px;" placeholder="请输入学校介绍" class="easyui-validatebox" data-options="required:true,novalidate:true"></textarea>
                     </td>
                 </tr>
             </table>

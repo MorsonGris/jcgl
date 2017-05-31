@@ -16,27 +16,29 @@
 <body>
 <div class="wrapper">
     <jsp:include page="/static/proscenium/commons/head.jsp"></jsp:include>
-    <div class="container">
+     <div class="container">
 	    <div class="row">
 			<div class="col-md-12">
-	    		<div style="margin-top: 20px;margin-bottom: 10px;">
-					<img style="width: 100%;" alt="" src="${path }/static/proscenium/images/school/17/school.jpg">
-                    <h3>天津大学</h3>
-                    <p style="text-indent: 20px;">天津大学坐落于历史文化名城、中国北方经济中心天津，始建于1895年10月2日，是中国第一所现代大学，开中国现代高等教育之先河，素以“实事求是”的校训、“严谨治学”的校风和“爱国奉献”的传统享誉海内外。</p>
-                </div>
-                <div style="margin-bottom: 40px;">
-                    <h3>学校简介</h3>
-                    <p style="text-indent: 20px;">
-                   		 天津大学坐落于历史文化名城、中国北方经济中心天津，始建于1895年10月2日，是中国第一所现代大学，开中国现代高等教育之先河，素以“实事求是”的校训、“严谨治学”的校风和“爱国奉献”的传统享誉海内外。1951年经国家院系调整定名为“天津大学”，沿用至今。
-                    </p>
-                    <img style="width: 100%;height: 150%;" alt="" src="${path }/static/proscenium/images/school/17/zy.png">
-                	
-                </div>
-                <div style="margin-bottom: 20px;">
-                    <h4 style="text-align: center;color: red;"> 国家承认学历   教育部网上可查</h4>
-                    <h4>毕业证样本：</h4>
-                    <img style="width: 100%;" alt="" src="${path }/static/proscenium/images/school/17/byz.jpg">
-                </div>
+	    		<div>
+					<div id="s1" style="margin-top: 20px;margin-bottom: 10px;">
+						<img style="width: 100%;" alt="" src="${path }/static/proscenium/images/${eguidie.picture1}">
+	                    <h3>${eguidie.type}</h3>
+	                    <p style="text-indent: 20px;"><span>${eguidie.school}</span></p>
+	                </div>
+	                <div style="margin-bottom: 40px;">
+	                    <h3>学校简介</h3>
+	                    <p style="text-indent: 20px;">
+	                   		<span>${eguidie.title}</span>
+	                    </p>
+	                    <img style="width: 100%;height: 150%;" alt="" src="${path }/static/proscenium/images/${eguidie.picture2}">
+	                	
+	                </div>
+	                <div style="margin-bottom: 20px;">
+	                    <h4 style="text-align: center;color: red;"> 国家承认学历   教育部网上可查</h4>
+	                    <h4>毕业证样本：</h4>
+	                    <img style="width: 100%;" alt="" src="${path }/static/proscenium/images/${eguidie.picture3}">
+	                </div>
+				</div>
 			</div>
 		</div>
 	</div>

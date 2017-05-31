@@ -16,27 +16,29 @@
 <body>
 <div class="wrapper">
     <jsp:include page="/static/proscenium/commons/head.jsp"></jsp:include>
-    <div class="container">
+     <div class="container">
 	    <div class="row">
 			<div class="col-md-12">
-	    		<div style="margin-top: 20px;margin-bottom: 10px;">
-					<img style="width: 100%;" alt="" src="${path }/static/proscenium/images/school/6/school.jpg">
-                    <h3>国家开放大学</h3>
-                    <p style="text-indent: 20px;">国家开放大学直属教育部，以现代信息技术为支撑，学历教育与非学历教育并举，实施远程开放教育的新型高等学校。</p>
-                </div>
-                <div style="margin-bottom: 40px;">
-                    <h3>学校简介</h3>
-                    <p style="text-indent: 20px;">
-                   		 国家开放大学是教育部直属的，以现代信息技术为支撑，学历教育与非学历教育并举，实施远程开放教育的新型高等学校。学校在广播电视大学基础上组建，面向全体社会成员，强调优质教育资源的集聚、整合和共享，强调以现代信息技术为支撑，探索现代信息技术与教育的深度融合。
-                    </p>
-                    <img style="width: 100%;height: 150%;" alt="" src="${path }/static/proscenium/images/school/6/zy.png">
-                	
-                </div>
-                <div style="margin-bottom: 20px;">
-                    <h4 style="text-align: center;color: red;"> 国家承认学历   教育部网上可查</h4>
-                    <h4>毕业证样本：</h4>
-                    <img style="width: 100%;" alt="" src="${path }/static/proscenium/images/school/6/byz.jpg">
-                </div>
+	    		<div>
+					<div id="s1" style="margin-top: 20px;margin-bottom: 10px;">
+						<img style="width: 100%;" alt="" src="${path }/static/proscenium/images/${eguidie.picture1}">
+	                    <h3>${eguidie.type}</h3>
+	                    <p style="text-indent: 20px;"><span>${eguidie.school}</span></p>
+	                </div>
+	                <div style="margin-bottom: 40px;">
+	                    <h3>学校简介</h3>
+	                    <p style="text-indent: 20px;">
+	                   		<span>${eguidie.title}</span>
+	                    </p>
+	                    <img style="width: 100%;height: 150%;" alt="" src="${path }/static/proscenium/images/${eguidie.picture2}">
+	                	
+	                </div>
+	                <div style="margin-bottom: 20px;">
+	                    <h4 style="text-align: center;color: red;"> 国家承认学历   教育部网上可查</h4>
+	                    <h4>毕业证样本：</h4>
+	                    <img style="width: 100%;" alt="" src="${path }/static/proscenium/images/${eguidie.picture3}">
+	                </div>
+				</div>
 			</div>
 		</div>
 	</div>

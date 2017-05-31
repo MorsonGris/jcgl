@@ -6,6 +6,7 @@
 	<resultMap id="BaseResultMap" type="com.xin.bean.Eguide">
 		<id column="id" property="id" />
 		<result column="log" property="log" />
+		<result column="school" property="school" />
 		<result column="picture1" property="picture1" />
 		<result column="title" property="title" />
 		<result column="picture2" property="picture2" />
@@ -14,12 +15,12 @@
 	</resultMap>
 	
 	<insert id="add">
-		INSERT INTO eguide(log,picture1,title,picture2,picture3,type)
-			VALUES(#{log},#{picture1},#{title},#{picture2},#{picture3},#{type})
+		INSERT INTO eguide(log,school,picture1,title,picture2,picture3,type)
+			VALUES(#{log},#{school},#{picture1},#{title},#{picture2},#{picture3},#{type})
 	</insert>
 	
 	<update id="update">
-		UPDATE eguide SET log = #{log},picture1 = #{picture1},title = #{title},
+		UPDATE eguide SET log = #{log},school = #{school},picture1 = #{picture1},title = #{title},
 		picture2 = #{picture2},picture3 = #{picture3},type = #{type}
 		WHERE id=#{id} 
 	</update>
@@ -29,6 +30,10 @@
 	</delete>
 	
 	<select id="selectpage" resultMap="BaseResultMap">
+		SELECT * FROM eguide
+	</select>
+	
+	<select id="selectlist" resultMap="BaseResultMap">
 		SELECT * FROM eguide
 	</select>
 	

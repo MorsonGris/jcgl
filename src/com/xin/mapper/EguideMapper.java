@@ -11,4 +11,5 @@ public interface EguideMapper {
 	int delete(int id);
 	Eguide selectById(int id);
 	List<Eguide> selectpage(Pagination page, Map<String, Object> params);
+	List<Eguide> selectlist();
 }

@@ -16,30 +16,29 @@
 <body>
 <div class="wrapper">
     <jsp:include page="/static/proscenium/commons/head.jsp"></jsp:include>
-    <div class="container">
+     <div class="container">
 	    <div class="row">
 			<div class="col-md-12">
-	    		<div style="margin-top: 20px;margin-bottom: 10px;">
-					<img style="width: 100%;" alt="" src="${path }/static/proscenium/images/school/7/school.jpg">
-                    <h3>华南师范大学</h3>
-                    <p style="text-indent: 20px;">华南师范大学（South China Normal University），简称“华师”，坐落于南方名城广州市，由中华人民共和国教育部和广东省人民政府共建，入选中国首批“211工程”、“卓越教师培养计划”，为广东省省属重点大学、中国100 所首批联入CERNET和INTERNET网的高等院校之一。</p>
-                </div>
-                <div style="margin-bottom: 40px;">
-                    <h3>学校简介</h3>
-                    <p style="text-indent: 20px;">
-                   		 华南师范大学（South China Normal University），简称“华师”，坐落于南方名城广州市，由中华人民共和国教育部和广东省人民政府共建，入选中国首批“211工程”、“卓越教师培养计划”，为广东省省属重点大学、中国100 所首批联入CERNET和INTERNET网的高等院校之一。
-					</p>
-					<p style="text-indent: 20px;">	
-						华南师范大学始建于1933年，前身是当代著名教育家林砺儒先生创建的广东省立勷勤大学师范学院；1982年10月，易名为华南师范大学；2006年，学校通过“十五”“211工程”建设整体验收。2004年，原中共中央总书记、国家主席胡锦涛出席澳门回归五周年庆典期间，称该校是中国数家名牌师范大学之一。
-                    </p>
-                    <img style="width: 100%;height: 150%;" alt="" src="${path }/static/proscenium/images/school/7/zy.png">
-                	
-                </div>
-                <div style="margin-bottom: 20px;">
-                    <h4 style="text-align: center;color: red;"> 国家承认学历   教育部网上可查</h4>
-                    <h4>毕业证样本：</h4>
-                    <img style="width: 100%;" alt="" src="${path }/static/proscenium/images/school/7/byz.jpg">
-                </div>
+	    		<div>
+					<div id="s1" style="margin-top: 20px;margin-bottom: 10px;">
+						<img style="width: 100%;" alt="" src="${path }/static/proscenium/images/${eguidie.picture1}">
+	                    <h3>${eguidie.type}</h3>
+	                    <p style="text-indent: 20px;"><span>${eguidie.school}</span></p>
+	                </div>
+	                <div style="margin-bottom: 40px;">
+	                    <h3>学校简介</h3>
+	                    <p style="text-indent: 20px;">
+	                   		<span>${eguidie.title}</span>
+	                    </p>
+	                    <img style="width: 100%;height: 150%;" alt="" src="${path }/static/proscenium/images/${eguidie.picture2}">
+	                	
+	                </div>
+	                <div style="margin-bottom: 20px;">
+	                    <h4 style="text-align: center;color: red;"> 国家承认学历   教育部网上可查</h4>
+	                    <h4>毕业证样本：</h4>
+	                    <img style="width: 100%;" alt="" src="${path }/static/proscenium/images/${eguidie.picture3}">
+	                </div>
+				</div>
 			</div>
 		</div>
 	</div>

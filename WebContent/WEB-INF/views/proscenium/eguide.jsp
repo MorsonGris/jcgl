@@ -23,130 +23,23 @@
 					<li class="active">
 						 <a href="#panel-friends" data-toggle="tab">合作院校</a>
 					</li>
-					
 				</ul>
 				<div class="tab-content">
 					<div class="tab-pane active" id="panel-friends" style="margin-top: 20px;">
 						<div class="row" style="text-align: center;">
-							<div class="col-xs-4">
-							<a href="s1">
-							<img alt="" style="width: 100%;" src="${path }/static/proscenium/images/school/s1.png">
-							</a>
-							</div>
-							<div class="col-xs-4">
-							<a href="s2">
-							<img alt="" style="width: 100%;" src="${path }/static/proscenium/images/school/s2.png">
-							</a>
-							</div>
-							<div class="col-xs-4">
-							<a href="s3">
-							<img alt="" style="width: 100%;" src="${path }/static/proscenium/images/school/s3.png">
-							</a>
-							</div>
-						</div>
-						<div class="row" style="text-align: center;">
-							<div class="col-xs-4">
-							<a href="s4">
-							<img alt="" style="width: 100%;" src="${path }/static/proscenium/images/school/s4.png">
-							</a>
-							</div>
-							<div class="col-xs-4">
-							<a href="s5">
-							<img alt="" style="width: 100%;" src="${path }/static/proscenium/images/school/s5.png">
-							</a>
-							</div>
-							<div class="col-xs-4">
-							<a href="s6">
-							<img alt="" style="width: 100%;" src="${path }/static/proscenium/images/school/s6.png">
-							</a>
-							</div>
-						</div>
-						<div class="row" style="text-align: center;">
-							<div class="col-xs-4">
-							<a href="s7">
-							<img alt="" style="width: 100%;" src="${path }/static/proscenium/images/school/s7.png">
-							</a>
-							</div>
-							<div class="col-xs-4">
-							<a href="s8">
-							<img alt="" style="width: 100%;" src="${path }/static/proscenium/images/school/s8.png">
-							</a>
-							</div>
-							<div class="col-xs-4">
-							<a href="s9">
-							<img alt="" style="width: 100%;" src="${path }/static/proscenium/images/school/s9.png">
-							</a>
-							</div>
-						</div>
-						<div class="row" style="text-align: center;">
-							<div class="col-xs-4">
-							<a href="s10">
-							<img alt="" style="width: 100%;" src="${path }/static/proscenium/images/school/s10.png">
-							</a>
-							</div>
-							<div class="col-xs-4">
-							<a href="s11">
-							<img alt="" style="width: 100%;" src="${path }/static/proscenium/images/school/s11.png">
-							</a>
-							</div>
-							<div class="col-xs-4">
-							<a href="s12">
-							<img alt="" style="width: 100%;" src="${path }/static/proscenium/images/school/s12.png">
-							</a>
-							</div>
-						</div>
-						<div class="row" style="text-align: center;">
-							<div class="col-xs-4">
-							<a href="s13">
-							<img alt="" style="width: 100%;" src="${path }/static/proscenium/images/school/s13.png">
-							</a>
-							</div>
-							<div class="col-xs-4">
-							<a href="s14">
-							<img alt="" style="width: 100%;" src="${path }/static/proscenium/images/school/s14.png">
-							</a>
-							</div>
-							<div class="col-xs-4">
-							<a href="s15">
-							<img alt="" style="width: 100%;" src="${path }/static/proscenium/images/school/s15.png">
-							</a>
-							</div>
-						</div>
-						<div class="row" style="text-align: center;">
-							<div class="col-xs-4">
-							<a href="s16">
-							<img alt="" style="width: 100%;" src="${path }/static/proscenium/images/school/s16.png">
-							</a>
-							</div>
-							<div class="col-xs-4">
-							<a href="s17">
-							<img alt="" style="width: 100%;" src="${path }/static/proscenium/images/school/s17.png">
-							</a>
-							</div>
-							<div class="col-xs-4">
-							<a href="s18">
-							<img alt="" style="width: 100%;" src="${path }/static/proscenium/images/school/s18.png">
-							</a>
-							</div>
-						</div>
-						<div class="row" style="text-align: center;">
-							<div class="col-xs-4">
-							<a href="s19">
-							<img alt="" style="width: 100%;" src="${path }/static/proscenium/images/school/s19.png">
-							</a>
-							</div>
-							<div class="col-xs-4">
-							<a href="s20">
-							<img alt="" style="width: 100%;" src="${path }/static/proscenium/images/school/s20.png">
-							</a>
-							</div>
-							<div class="col-xs-4">
+							<div class="col-xs-12">
+								<c:forEach var="eguidelist" items="${eguidelist}" varStatus="status">
+									<p style="float:left;width: 220px;height: 220px;">
+										<a href="s${status.count}?id=${eguidelist.id}">
+											<img alt="" style="width: 100%" src="${path }/static/proscenium/images/${eguidelist.log}">
+										</a>
+									</p>
+								</c:forEach>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-			
 		</div>
 	</div>
 </div>

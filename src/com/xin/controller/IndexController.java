@@ -177,6 +177,8 @@ public class IndexController extends BaseController{
 		PageInfo pi = new PageInfo(0, 4, "r_id", "desc");
     	List<Relation> relation = relationService.selectDataGrid(pi);
     	model.addAttribute("relation", relation);
+    	List<Eguide> eguidelist = eguideservice.selectlist();
+    	model.addAttribute("eguidelist",eguidelist);
 		return "proscenium/eguide";
 	}
 	
@@ -195,6 +197,7 @@ public class IndexController extends BaseController{
 	@ResponseBody
 	public Object Eguideadd(
 			@RequestParam(value="title",required=false)String title,
+			@RequestParam(value="school",required=false)String school,
 			@RequestParam(value="type",required=false)String type,
 			@RequestParam(value="log",required=false)MultipartFile log,
 			@RequestParam(value="picture1",required=false)MultipartFile picture1,
@@ -215,6 +218,7 @@ public class IndexController extends BaseController{
 		if(picture3.getOriginalFilename() !=null){
 			eguide.setPicture3(picture3.getOriginalFilename());
 		}
+		eguide.setSchool(school);
 		eguide.setTitle(title);
 		eguide.setType(type);
 		String result =  eguideservice.add(eguide);
@@ -255,6 +259,7 @@ public class IndexController extends BaseController{
 	@ResponseBody
 	public Object Eguideupdate(@RequestParam(value="title",required=false)String title,
 			@RequestParam(value="id",required=false)int id,
+			@RequestParam(value="school",required=false)String school,
 			@RequestParam(value="type",required=false)String type,
 			@RequestParam(value="log",required=false)MultipartFile log,
 			@RequestParam(value="picture1",required=false)MultipartFile picture1,
@@ -275,6 +280,7 @@ public class IndexController extends BaseController{
 		if(picture3.getOriginalFilename() !=null){
 			eguide.setPicture3(picture3.getOriginalFilename());
 		}
+		eguide.setSchool(school);
 		eguide.setTitle(title);
 		eguide.setType(type);
 		eguide.setId(id);
@@ -311,104 +317,144 @@ public class IndexController extends BaseController{
 	 * 学院简介
 	 */
 	@RequestMapping("/s1")
-	public String s1(Model model){
+	public String s1(Model model,int id){
 		model.addAttribute("homeContent", homeContent());
+		Eguide eguidie = eguideservice.selectById(id);
+		model.addAttribute("eguidie",eguidie);
 		return "proscenium/school/s1";
 	}
 	@RequestMapping("/s2")
-	public String s2(Model model){
+	public String s2(Model model,int id){
 		model.addAttribute("homeContent", homeContent());
+		Eguide eguidie = eguideservice.selectById(id);
+		model.addAttribute("eguidie",eguidie);
 		return "proscenium/school/s2";
 	}
 	@RequestMapping("/s3")
-	public String s3(Model model){
+	public String s3(Model model,int id){
 		model.addAttribute("homeContent", homeContent());
+		Eguide eguidie = eguideservice.selectById(id);
+		model.addAttribute("eguidie",eguidie);
 		return "proscenium/school/s3";
 	}
 	@RequestMapping("/s4")
-	public String s4(Model model){
+	public String s4(Model model,int id){
 		model.addAttribute("homeContent", homeContent());
+		Eguide eguidie = eguideservice.selectById(id);
+		model.addAttribute("eguidie",eguidie);
 		return "proscenium/school/s4";
 	}
 	@RequestMapping("/s5")
-	public String s5(Model model){
+	public String s5(Model model,int id){
 		model.addAttribute("homeContent", homeContent());
+		Eguide eguidie = eguideservice.selectById(id);
+		model.addAttribute("eguidie",eguidie);
 		return "proscenium/school/s5";
 	}
 	
 	@RequestMapping("/s6")
-	public String s6(Model model){
+	public String s6(Model model,int id){
 		model.addAttribute("homeContent", homeContent());
+		Eguide eguidie = eguideservice.selectById(id);
+		model.addAttribute("eguidie",eguidie);
 		return "proscenium/school/s6";
 	}
 	@RequestMapping("/s7")
-	public String s7(Model model){
+	public String s7(Model model,int id){
 		model.addAttribute("homeContent", homeContent());
+		Eguide eguidie = eguideservice.selectById(id);
+		model.addAttribute("eguidie",eguidie);
 		return "proscenium/school/s7";
 	}
 	@RequestMapping("/s8")
-	public String s8(Model model){
+	public String s8(Model model,int id){
 		model.addAttribute("homeContent", homeContent());
+		Eguide eguidie = eguideservice.selectById(id);
+		model.addAttribute("eguidie",eguidie);
 		return "proscenium/school/s8";
 	}
 	@RequestMapping("/s9")
-	public String s9(Model model){
+	public String s9(Model model,int id){
 		model.addAttribute("homeContent", homeContent());
+		Eguide eguidie = eguideservice.selectById(id);
+		model.addAttribute("eguidie",eguidie);
 		return "proscenium/school/s9";
 	}
 	@RequestMapping("/s10")
-	public String s10(Model model){
+	public String s10(Model model,int id){
 		model.addAttribute("homeContent", homeContent());
+		Eguide eguidie = eguideservice.selectById(id);
+		model.addAttribute("eguidie",eguidie);
 		return "proscenium/school/s10";
 	}
 	@RequestMapping("/s11")
-	public String s11(Model model){
+	public String s11(Model model,int id){
 		model.addAttribute("homeContent", homeContent());
+		Eguide eguidie = eguideservice.selectById(id);
+		model.addAttribute("eguidie",eguidie);
 		return "proscenium/school/s11";
 	}
 	@RequestMapping("/s12")
-	public String s12(Model model){
+	public String s12(Model model,int id){
 		model.addAttribute("homeContent", homeContent());
+		Eguide eguidie = eguideservice.selectById(id);
+		model.addAttribute("eguidie",eguidie);
 		return "proscenium/school/s12";
 	}
 	@RequestMapping("/s13")
-	public String s13(Model model){
+	public String s13(Model model,int id){
 		model.addAttribute("homeContent", homeContent());
+		Eguide eguidie = eguideservice.selectById(id);
+		model.addAttribute("eguidie",eguidie);
 		return "proscenium/school/s13";
 	}
 	@RequestMapping("/s14")
-	public String s14(Model model){
+	public String s14(Model model,int id){
 		model.addAttribute("homeContent", homeContent());
+		Eguide eguidie = eguideservice.selectById(id);
+		model.addAttribute("eguidie",eguidie);
 		return "proscenium/school/s14";
 	}
 	@RequestMapping("/s15")
-	public String s15(Model model){
+	public String s15(Model model,int id){
 		model.addAttribute("homeContent", homeContent());
+		Eguide eguidie = eguideservice.selectById(id);
+		model.addAttribute("eguidie",eguidie);
 		return "proscenium/school/s15";
 	}
 	@RequestMapping("/s16")
-	public String s16(Model model){
+	public String s16(Model model,int id){
 		model.addAttribute("homeContent", homeContent());
+		Eguide eguidie = eguideservice.selectById(id);
+		model.addAttribute("eguidie",eguidie);
 		return "proscenium/school/s16";
 	}
 	@RequestMapping("/s17")
-	public String s17(Model model){
+	public String s17(Model model,int id){
 		model.addAttribute("homeContent", homeContent());
+		Eguide eguidie = eguideservice.selectById(id);
+		model.addAttribute("eguidie",eguidie);
 		return "proscenium/school/s17";
 	}
 	@RequestMapping("/s18")
-	public String s18(Model model){
+	public String s18(Model model,int id){
 		model.addAttribute("homeContent", homeContent());
+		Eguide eguidie = eguideservice.selectById(id);
+		model.addAttribute("eguidie",eguidie);
 		return "proscenium/school/s18";
 	}
 	@RequestMapping("/s19")
-	public String s19(Model model){
+	public String s19(Model model,int id){
 		model.addAttribute("homeContent", homeContent());
+		Eguide eguidie = eguideservice.selectById(id);
+		model.addAttribute("eguidie",eguidie);
 		return "proscenium/school/s19";
 	}
 	@RequestMapping("/s20")
-	public String s20(Model model){
+	public String s20(Model model,int id){
 		model.addAttribute("homeContent", homeContent());
+		Eguide eguidie = eguideservice.selectById(id);
+		model.addAttribute("eguidie",eguidie);
 		return "proscenium/school/s20";
 	}
 	

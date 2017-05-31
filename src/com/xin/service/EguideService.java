@@ -1,5 +1,7 @@
 package com.xin.service;
 
+import java.util.List;
+
 import com.xin.bean.Eguide;
 import com.xin.commons.utils.PageInfo;
 
@@ -9,4 +11,5 @@ public interface EguideService {
 	String delete(int id);
 	Eguide selectById(int id);
 	void selectPage(PageInfo pageInfo);
+	List<Eguide> selectlist();
 }

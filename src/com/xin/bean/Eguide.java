@@ -12,6 +12,9 @@ public class Eguide {
 	@TableField("log")
 	private String log;
 	
+	@TableField("school")
+	private String school;
+	
 	@TableField("picture1")
 	private String picture1;
 	
@@ -38,6 +41,12 @@ public class Eguide {
 	}
 	public void setLog(String log) {
 		this.log = log;
+	}
+	public String getSchool() {
+		return school;
+	}
+	public void setSchool(String school) {
+		this.school = school;
 	}
 	public String getPicture1() {
 		return picture1;

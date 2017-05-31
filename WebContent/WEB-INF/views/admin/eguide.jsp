@@ -22,12 +22,17 @@
                 sortable : true
             },{
                 width : '120',
+                title : '学校简介',
+                field : 'school',
+                sortable : true
+            },{
+                width : '120',
                 title : '院校图片',
                 field : 'picture1',
                 sortable : true
             },{
                 width : '200',
-                title : '标题',
+                title : '介绍标题',
                 field : 'title',
                 sortable : true
             },{
@@ -74,7 +79,7 @@
         parent.$.modalDialog({
             title : '添加',
             width : 600,
-            height : 250,
+            height : 300,
             href : '${path }/index/Eguideaddpage',
             buttons : [ {
                 text : '添加',

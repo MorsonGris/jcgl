@@ -55,4 +55,9 @@ public class EguideServiceImpl implements EguideService{
 		pageInfo.setTotal(page.getTotal());
 	}
 
+	@Override
+	public List<Eguide> selectlist() {
+		return eguidemapper.selectlist();
+	}
+
 }
