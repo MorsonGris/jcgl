@@ -20,9 +20,35 @@
 	</insert>
 	
 	<update id="update">
-		UPDATE eguide SET log = #{log},school = #{school},picture1 = #{picture1},title = #{title},
-		picture2 = #{picture2},picture3 = #{picture3},type = #{type}
-		WHERE id=#{id} 
+		UPDATE eguide 
+		<set>
+			<if test="log != null and log != ''">
+				log = #{log},
+			</if>
+			<if test="school != null and school !=''">
+				school = #{school},
+			</if>
+			<if test="picture1 != null and picture1 !=''">
+				picture1 = #{picture1},
+			</if>
+			<if test="title != null and title !=''">
+				title = #{title},
+			</if>
+			<if test="picture2 != null and picture2 !=''">
+				picture2 = #{picture2},
+			</if>
+			<if test="picture3 != null and picture3 !=''">
+				picture3 = #{picture3},
+			</if>
+			<if test="type != null and type !=''">
+				type = #{type}
+			</if>
+		</set>
+		<where>
+			<if test="id != null and id !=''">
+				id = #{id}
+			</if>
+		</where>
 	</update>
 	
 	<delete id="delete">

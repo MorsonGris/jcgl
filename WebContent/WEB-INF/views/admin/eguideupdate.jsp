@@ -31,7 +31,7 @@
                     <td>图标</td>
                     <td>
                     	<input type="hidden" name="id" value="${eguide.id}"/> 
-                    	<input type="file" name="log" value="${eguide.log}"/>
+                    	<input type="file" name="log" id="log"/>
                     </td>
                     <td>院校图片</td>
                     <td>
@@ -51,7 +51,7 @@
                 <tr>
                     <td>介绍标题</td>
                     <td>
-                    	<textarea rows="3" name="title" style="width: 180px;" placeholder="请输入标题" class="easyui-validatebox" data-options="required:true,novalidate:true"></textarea>
+                    	<textarea rows="3" name="title" style="width: 180px;" placeholder="请输入标题" class="easyui-validatebox" data-options="required:true,novalidate:true"><c:out value="${eguide.title}"></c:out></textarea>
                     </td>
                     <td>学校名称</td>
                     <td>
@@ -61,7 +61,7 @@
                 <tr>
                 	<td>学校简介</td>
                     <td>
-                    	<textarea rows="2" name="school" style="width: 180px;" placeholder="请输入学校介绍" class="easyui-validatebox" data-options="required:true,novalidate:true"></textarea>
+                    	<textarea rows="2" name="school" style="width: 180px;" placeholder="请输入学校介绍"  class="easyui-validatebox" data-options="required:true,novalidate:true"><c:out value="${eguide.school}"></c:out></textarea>
                     </td>
                 </tr>
             </table>

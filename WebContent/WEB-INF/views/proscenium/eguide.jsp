@@ -29,9 +29,9 @@
 						<div class="row" style="text-align: center;">
 							<div class="col-xs-12">
 								<c:forEach var="eguidelist" items="${eguidelist}" varStatus="status">
-									<p style="float:left;width: 220px;height: 220px;">
-										<a href="s${status.count}?id=${eguidelist.id}">
-											<img alt="" style="width: 100%" src="${path }/static/proscenium/images/${eguidelist.log}">
+									<p style="float:left;width: 33%;">
+										<a href="s1?id=${eguidelist.id}">
+											<img alt="" style="width: 90%" src="${path }/static/proscenium/images/${eguidelist.log}">
 										</a>
 									</p>
 								</c:forEach>
